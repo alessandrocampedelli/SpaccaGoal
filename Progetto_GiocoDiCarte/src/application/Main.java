@@ -14,7 +14,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Prova");
-			char carattere = 'a';
+			String cimpe = "prix";
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
