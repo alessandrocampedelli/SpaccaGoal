@@ -16,7 +16,6 @@ public class Main extends Application {
 			primaryStage.setTitle("Ciao mondo!");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			int caaa = 5;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
