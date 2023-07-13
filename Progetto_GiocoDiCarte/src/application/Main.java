@@ -15,6 +15,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Prova");
 			char c = '2';
+			int voglia = 0;
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
