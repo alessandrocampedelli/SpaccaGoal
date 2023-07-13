@@ -14,7 +14,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("provaForm.fxml"));
 			Scene scene = new Scene(root);
 			
-			primaryStage.setTitle("Ciao Mondo");
+			primaryStage.setTitle("Ciao Mondo!");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
