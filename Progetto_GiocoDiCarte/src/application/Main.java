@@ -13,9 +13,7 @@ public class Main extends Application {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("Prova");
-			char c = '2';
-			int voglia = 0;
+			primaryStage.setTitle("Ciao mondo");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
