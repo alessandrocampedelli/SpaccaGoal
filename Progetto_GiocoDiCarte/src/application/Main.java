@@ -13,7 +13,7 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("provaForm.fxml"));
 			Scene scene = new Scene(root);
-			int seNonVaMuoio = 1;
+			int cimpeFunzionaBeneGodoTantoESonoFeliceSborrando = 10;
 			primaryStage.setTitle("Ciao Mondo!");
 			primaryStage.setScene(scene);
 			primaryStage.show();
