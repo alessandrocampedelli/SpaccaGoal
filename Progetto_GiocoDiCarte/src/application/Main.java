@@ -7,22 +7,28 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 
 
-public class Main extends Application {
+public class Main extends Application 
+{
 	@Override
-	public void start(Stage primaryStage) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("provaForm.fxml"));
+	public void start(Stage primaryStage) 
+	{
+		try 
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("FormPrincipale.fxml"));
 			Scene scene = new Scene(root);
-			int cimpeFunzionaBeneGodoTantoESonoFeliceSborrando = 10;
-			primaryStage.setTitle("Ciao Mondo!");
+			
+			primaryStage.setTitle("Form Principale");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch(Exception e) {
+		} 
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		launch(args);
 	}
 }
