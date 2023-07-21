@@ -23,7 +23,6 @@ public class FormPrincipaleController
 	@FXML
 	public void btnModalitaGiocatore(ActionEvent event) 
 	{
-		/*FormModalitaGiocatoreController finestra = new FormModalitaGiocatoreController();
-		finestra.show();*/
+		stage.show();
 	}
 }
