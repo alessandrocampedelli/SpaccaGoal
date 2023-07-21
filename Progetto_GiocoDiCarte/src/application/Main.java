@@ -17,7 +17,7 @@ public class Main extends Application
 			Parent root = FXMLLoader.load(getClass().getResource("FormPrincipale.fxml"));
 			Scene scene = new Scene(root);
 
-			primaryStage.setTitle("Form Principale");
+			primaryStage.setTitle("DIECI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} 
