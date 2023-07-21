@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import classi.Amministratore;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
@@ -8,9 +9,11 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class FormModalitaAmministratoreController {
@@ -34,7 +37,14 @@ public class FormModalitaAmministratoreController {
 		    stage.show();
 		}
 		else {
-			System.out.println("ERRORE");
+			AlertType message = AlertType.INFORMATION;
+			Alert alert = new Alert(message, "");
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+			alert.getDialogPane().setContentText("Username o password inseriti non validi. Riprova!");
+			alert.getDialogPane().setHeaderText("ACCESSO NEGATO");
+			alert.showAndWait();
+			
 		}
 	}
 }
