@@ -14,7 +14,7 @@
       <Button defaultButton="true" layoutX="216.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnTorneo" prefHeight="63.0" prefWidth="188.0" text="TORNEO" />
       <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="440.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../mazzo_di_carte/indicatoreGoal.jpg" />
+            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
          </image>
       </ImageView>
       <Label layoutX="198.0" layoutY="40.0" text="STIAMO PER GIOCARE!" textAlignment="CENTER" textFill="RED">
@@ -24,17 +24,17 @@
       </Label>
       <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="440.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../mazzo_di_carte/indicatoreGoal.jpg" />
+            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="7.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../mazzo_di_carte/indicatoreGoal.jpg" />
+            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="7.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../mazzo_di_carte/indicatoreGoal.jpg" />
+            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
          </image>
       </ImageView>
    </children>
