@@ -16,7 +16,7 @@ public class Main extends Application
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("FormPrincipale.fxml"));
 			Scene scene = new Scene(root);
-
+			int dieci = 10;
 			primaryStage.setTitle("DIECI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
