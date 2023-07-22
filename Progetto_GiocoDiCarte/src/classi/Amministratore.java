@@ -5,9 +5,9 @@ public class Amministratore {
 	private String password = "password";
 	
 	public String getUserName() {
-		return username;
+		return this.username;
 	}
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 }
