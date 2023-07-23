@@ -44,7 +44,6 @@ public class FormModalitaAmministratoreController {
 			alert.getDialogPane().setContentText("Username o password inseriti non validi. Riprova!");
 			alert.getDialogPane().setHeaderText("ACCESSO NEGATO");
 			alert.showAndWait();
-			
 		}
 	}
 }
