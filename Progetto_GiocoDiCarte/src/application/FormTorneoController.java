@@ -1,0 +1,38 @@
+package application;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
+
+public class FormTorneoController 
+{
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
+	
+	@FXML
+	private TextField txtCodiceTorneo;
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void btnGiocaTorneo(ActionEvent event) 
+	{
+		//da fare
+	}
+	// Event Listener on Button.onAction
+	@FXML
+	public void btnTornaFormModalitaGiocatore(ActionEvent event) throws IOException
+	{
+		root = FXMLLoader.load(getClass().getResource("FormModalitaGiocatore.fxml"));
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	}
+}
