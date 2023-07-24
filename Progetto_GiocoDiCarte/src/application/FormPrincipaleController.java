@@ -14,6 +14,13 @@ public class FormPrincipaleController
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	public void passaAlForm(ActionEvent event, String form) throws IOException {
+		root = FXMLLoader.load(getClass().getResource(form));
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event)
@@ -24,20 +31,12 @@ public class FormPrincipaleController
 	@FXML
 	public void btnModalitaAmministratore(ActionEvent event) throws IOException
 	{
-		root = FXMLLoader.load(getClass().getResource("FormModalitaAmministratore.fxml"));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
+		passaAlForm(event,"FormModalitaAmministratore.fxml");
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnModalitaGiocatore(ActionEvent event) throws IOException 
 	{
-		root = FXMLLoader.load(getClass().getResource("FormModalitaGiocatore.fxml"));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
+		passaAlForm(event,"FormModalitaGiocatore.fxml");
 	}
 }

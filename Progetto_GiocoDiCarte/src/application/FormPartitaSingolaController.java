@@ -28,7 +28,7 @@ public class FormPartitaSingolaController
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
-		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
+		/*String codiceInseritoUtente = txtCodicePartitaSingola.getText();
 		if() 
 		{			
 			//Controllare se era un vecchio codice o un codice appena inserito (variabile booleana true or false)
@@ -53,7 +53,7 @@ public class FormPartitaSingolaController
 		    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		    scene = new Scene(root);
 		    stage.setScene(scene);
-		    stage.show();*/
+		    stage.show();
 		}
 		else 
 		{
@@ -64,7 +64,7 @@ public class FormPartitaSingolaController
 			alert.getDialogPane().setContentText("Codice della partita singola errata!");
 			alert.getDialogPane().setHeaderText("CODICE PARTITA ERRATO");
 			alert.showAndWait();
-		}	
+		}*/
 	}
 	// Event Listener on Button.onAction
 	@FXML
