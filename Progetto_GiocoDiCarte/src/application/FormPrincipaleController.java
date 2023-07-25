@@ -8,19 +8,10 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
-
+import classi.Alert_cambiaForm;
 public class FormPrincipaleController 
 {
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
-	public void passaAlForm(ActionEvent event, String form) throws IOException {
-		root = FXMLLoader.load(getClass().getResource(form));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
-	}
+	Alert_cambiaForm alert = new Alert_cambiaForm();
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event)
@@ -31,12 +22,12 @@ public class FormPrincipaleController
 	@FXML
 	public void btnModalitaAmministratore(ActionEvent event) throws IOException
 	{
-		passaAlForm(event,"FormModalitaAmministratore.fxml");
+		alert.passaAlForm("/application/FormModalitaAmministratore.fxml",event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnModalitaGiocatore(ActionEvent event) throws IOException 
 	{
-		passaAlForm(event,"FormModalitaGiocatore.fxml");
+		alert.passaAlForm("/application/FormModalitaGiocatore.fxml",event);
 	}
 }

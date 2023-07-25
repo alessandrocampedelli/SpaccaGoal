@@ -12,8 +12,9 @@
 		<Label layoutX="112.0" layoutY="109.0" text="Inserisci username e password per accedere alla modalità amministratore" />
 		<Label layoutX="149.0" layoutY="165.0" text="Username" />
 		<Label layoutX="150.0" layoutY="196.0" text="Password" />
-		<TextField fx:id="txtUsername" layoutX="231.0" layoutY="161.0" />
-      <PasswordField fx:id="txtPassword" layoutX="232.0" layoutY="192.0" />
-      <Button layoutX="231.0" layoutY="242.0" mnemonicParsing="false" onAction="#btnAccedi" onMouseClicked="#btnAccedi" prefHeight="26.0" prefWidth="150.0" text="ACCEDI" />
+		<TextField fx:id="txtUsername" layoutX="220.0" layoutY="160.0" prefHeight="26.0" prefWidth="186.0" />
+      <PasswordField fx:id="txtPassword" layoutX="220.0" layoutY="191.0" prefHeight="26.0" prefWidth="186.0" />
+      <Button layoutX="222.0" layoutY="242.0" mnemonicParsing="false" onAction="#btnAccedi" onMouseClicked="#btnAccedi" prefHeight="26.0" prefWidth="186.0" text="ACCEDI" />
+      <Button layoutX="222.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnFormPrincipale" onMouseClicked="#btnAccedi" prefHeight="42.0" prefWidth="185.0" text="TORNA AL FORM PRINCIPALE" />
 	</children>
 </AnchorPane>
