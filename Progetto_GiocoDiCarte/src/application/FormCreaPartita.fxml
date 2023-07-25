@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="625.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController.java">
+<AnchorPane prefHeight="625.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController">
    <children>
       <AnchorPane layoutX="-91.0" layoutY="-136.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="262.0" layoutY="106.0" text="CREA UNA NUOVA PARTITA" />

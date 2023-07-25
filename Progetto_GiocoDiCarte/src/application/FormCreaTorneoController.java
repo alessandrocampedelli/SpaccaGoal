@@ -20,7 +20,7 @@ public class FormCreaTorneoController {
 	@FXML
 	private RadioButton rdbGiocatori2;
 	@FXML
-	private ToggleGroup numeroGiocatori;
+	private ToggleGroup numGiocatori;
 	@FXML
 	private RadioButton rdbGiocatori8;
 	@FXML
