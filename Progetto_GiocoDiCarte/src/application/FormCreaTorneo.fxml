@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rdbGiocatori4" prefHeight="566.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaTorneoController">
    <children>
@@ -22,5 +23,10 @@
       <RadioButton fx:id="rdbGiocatori8" graphicTextGap="0.0" layoutX="339.0" layoutY="270.0" mnemonicParsing="false" text="8 (quarti di finale)" toggleGroup="$numGiocatori" />
       <RadioButton fx:id="rdbGiocatori16" graphicTextGap="0.0" layoutX="339.0" layoutY="314.0" mnemonicParsing="false" text="16 (ottavi di finale)" toggleGroup="$numGiocatori" />
       <Button layoutX="253.0" layoutY="372.0" mnemonicParsing="false" onAction="#btnAvanti" prefHeight="67.0" prefWidth="200.0" text="AVANTI" />
+      <Button layoutX="254.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnVaiIndietro2" prefHeight="67.0" prefWidth="200.0" text="TORNA ALLA PAGINA PRECEDENTE">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -9,12 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-
+import classi.Alert_cambiaForm;
 public class FormTorneoController 
 {
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+	Alert_cambiaForm alert = new Alert_cambiaForm();
 	
 	@FXML
 	private TextField txtCodiceTorneo;
@@ -29,10 +27,6 @@ public class FormTorneoController
 	@FXML
 	public void btnTornaFormModalitaGiocatore(ActionEvent event) throws IOException
 	{
-		root = FXMLLoader.load(getClass().getResource("FormModalitaGiocatore.fxml"));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
+		alert.passaAlForm("/application/FormModalitaGiocatore.fxml", event);
 	}
 }
