@@ -10,11 +10,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import classi.Alert_cambiaForm;
@@ -42,11 +39,8 @@ public class FormCreaPartitaController {
 		}
 	}
 	@FXML
-	public void btnVaiIndietro1(ActionEvent event){
-		try {
-			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-		}catch (IOException e) {
-			alert.mostraErrore();
-		}
+	public void btnVaiIndietro1(MouseEvent event) throws IOException
+	{
+		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 	}
 }

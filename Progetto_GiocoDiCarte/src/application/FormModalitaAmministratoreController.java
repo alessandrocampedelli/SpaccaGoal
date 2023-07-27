@@ -8,11 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,11 +31,8 @@ public class FormModalitaAmministratoreController {
 			alert.mostraErrore();
 		}
 	}
-	public void btnFormPrincipale(ActionEvent event){
-		try {
-			alert.passaAlForm("/application/FormPrincipale.fxml",event);
-		}catch (IOException e) {
-			alert.mostraErrore();
-		}
+	public void btnTornaFormPrincipale(MouseEvent event) throws IOException
+	{
+		alert.passaAlForm("/application/FormPrincipale.fxml", event);
 	}
 }

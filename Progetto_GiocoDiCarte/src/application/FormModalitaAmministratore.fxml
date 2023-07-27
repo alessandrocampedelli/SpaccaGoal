@@ -4,17 +4,25 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane onMouseClicked="#btnAccedi" prefHeight="510.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaAmministratoreController">
+<AnchorPane onMouseClicked="#btnAccedi" prefHeight="354.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaAmministratoreController">
 	<children>
-		<AnchorPane layoutX="-162.0" layoutY="-138.0" prefHeight="200.0" prefWidth="200.0" />
+		<AnchorPane layoutX="-12.0" layoutY="-50.0" prefHeight="145.0" prefWidth="78.0">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="63.0" layoutX="14.0" layoutY="47.0" onMouseClicked="#btnTornaFormPrincipale" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../frecciaTornaIndietro.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
 		<Label layoutX="112.0" layoutY="109.0" text="Inserisci username e password per accedere alla modalità amministratore" />
 		<Label layoutX="149.0" layoutY="165.0" text="Username" />
 		<Label layoutX="150.0" layoutY="196.0" text="Password" />
 		<TextField fx:id="txtUsername" layoutX="220.0" layoutY="160.0" prefHeight="26.0" prefWidth="186.0" />
       <PasswordField fx:id="txtPassword" layoutX="220.0" layoutY="191.0" prefHeight="26.0" prefWidth="186.0" />
       <Button layoutX="222.0" layoutY="242.0" mnemonicParsing="false" onAction="#btnAccedi" onMouseClicked="#btnAccedi" prefHeight="26.0" prefWidth="186.0" text="ACCEDI" />
-      <Button layoutX="222.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnFormPrincipale" onMouseClicked="#btnAccedi" prefHeight="42.0" prefWidth="185.0" text="TORNA AL FORM PRINCIPALE" />
 	</children>
 </AnchorPane>
