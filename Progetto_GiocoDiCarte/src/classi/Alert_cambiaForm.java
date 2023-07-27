@@ -1,7 +1,7 @@
 package classi;
 
 import java.io.IOException;
-
+import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +17,13 @@ public class Alert_cambiaForm {
 	private Scene scene;
 	private Parent root;
 	public void passaAlForm(String form, ActionEvent event)  throws IOException{
+		root = FXMLLoader.load(getClass().getResource(form));
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	}
+	public void passaAlForm(String form, MouseEvent event)  throws IOException{
 		root = FXMLLoader.load(getClass().getResource(form));
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);

@@ -2,25 +2,16 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
-import classi.Amministratore;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import classi.Alert_cambiaForm;
 public class FormPartitaSingolaController 
 
 {
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
 	@FXML
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
@@ -68,7 +59,7 @@ public class FormPartitaSingolaController
 	}
 	// Event Listener on Button.onAction
 	@FXML
-	public void btnTornaFormModalitaGiocatore(ActionEvent event) throws IOException
+	public void btnTornaFormModalitaGiocatore(MouseEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormModalitaGiocatore.fxml", event);
 	}

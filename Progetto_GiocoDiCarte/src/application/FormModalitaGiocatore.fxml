@@ -7,34 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaGiocatoreController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaGiocatoreController">
    <children>
-      <Button defaultButton="true" layoutX="216.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnTornaFormPrincipale" prefHeight="63.0" prefWidth="188.0" text="TORNA AL FORM PRINCIPALE" />
-      <Button defaultButton="true" layoutX="216.0" layoutY="100.0" mnemonicParsing="false" onAction="#btnPartitaSingola" prefHeight="63.0" prefWidth="188.0" text="PARTITA SINGOLA" />
-      <Button defaultButton="true" layoutX="216.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnTorneo" prefHeight="63.0" prefWidth="188.0" text="TORNEO" />
-      <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="440.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="198.0" layoutY="40.0" text="STIAMO PER GIOCARE!" textAlignment="CENTER" textFill="RED">
+      <Button defaultButton="true" layoutX="144.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnPartitaSingola" prefHeight="88.0" prefWidth="204.0" text="PARTITA SINGOLA" />
+      <Button defaultButton="true" layoutX="144.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnTorneo" prefHeight="88.0" prefWidth="204.0" text="TORNEO" />
+      <Label layoutX="144.0" layoutY="36.0" text="STIAMO PER GIOCARE!" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="440.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnTornaModalitaPrincipale" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="7.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="253.0" fitWidth="154.0" layoutX="7.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
+            <Image url="@../../frecciaTornaIndietro.jpg" />
          </image>
       </ImageView>
    </children>
