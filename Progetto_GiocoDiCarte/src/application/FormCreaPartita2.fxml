@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="509.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+   <children>
+      <AnchorPane layoutX="-79.0" layoutY="-157.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="153.0" layoutY="88.0" text="Inserisci gli alias dei giocatori che giocheranno la partita." />
+      <Label layoutX="227.0" layoutY="106.0" text="Oppure segnali come robot" />
+      <CheckBox fx:id="chbRobot1" layoutX="374.0" layoutY="166.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" />
+      <Label layoutX="365.0" layoutY="148.0" text="Robot" />
+      <CheckBox fx:id="chbRobot2" layoutX="374.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" />
+      <TextField fx:id="txtAlias1" layoutX="192.0" layoutY="167.0" />
+      <TextField fx:id="txtAlias2" layoutX="192.0" layoutY="218.0" />
+   </children>
+</AnchorPane>
