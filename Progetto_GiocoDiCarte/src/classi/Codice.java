@@ -5,10 +5,10 @@ public class Codice
 	private String codice;
 	private boolean nuovoCarica;
 	
-	public Codice(String codice, boolean nuovoCarica)
+	public Codice(String codice)
 	{
 		this.codice = codice;
-		this.nuovoCarica = nuovoCarica;
+		this.nuovoCarica = true;
 	}
 	
 	public String getCodice() 
