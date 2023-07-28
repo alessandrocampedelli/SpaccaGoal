@@ -11,4 +11,10 @@ public class Giocatore {
 	public String getAlias() {
 		return alias;
 	}
+	public int getNVittorie() {
+		return nVittorie;
+	}
+	public void aggiungiVittoria() {
+		nVittorie++;
+	}
 }
