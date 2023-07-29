@@ -28,7 +28,7 @@ public class FormModalitaAmministratoreController {
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
 		else {
-			alert.mostraErrore();
+			alert.mostraErroreAccessoAmministratore();
 		}
 	}
 	public void btnTornaFormPrincipale(MouseEvent event) throws IOException

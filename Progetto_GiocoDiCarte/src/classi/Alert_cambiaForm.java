@@ -30,6 +30,7 @@ public class Alert_cambiaForm {
 	    stage.setScene(scene);
 	    stage.show();
 	}
+	
 	public void mostraErrore() {
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
@@ -37,6 +38,44 @@ public class Alert_cambiaForm {
 		alert.initOwner(stage);
 		alert.getDialogPane().setContentText("Errore di Input/Output");
 		alert.getDialogPane().setHeaderText("ERRORE");
+		alert.showAndWait();
+	}
+	
+	public void mostraErroreAccessoAmministratore() {
+		AlertType message = AlertType.ERROR;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setContentText("Username e/o password errati!");
+		alert.getDialogPane().setHeaderText("ERRORE");
+		alert.showAndWait();
+	}
+	
+	public void mostraErroreCodicePartitaSingola() {
+		AlertType message = AlertType.ERROR;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setContentText("Codice della partita singola errata!");
+		alert.getDialogPane().setHeaderText("CODICE PARTITA ERRATO");
+		alert.showAndWait();
+	}
+	
+	public void mostraConfermaCodicePartitaSingola(Partite p, String codiceUtente) 
+	{
+		AlertType message = AlertType.CONFIRMATION;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setHeaderText("AVVIO IN CORSO");
+		if(p.partitaNuovaRicominciata(codiceUtente))
+		{
+			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di una nuova partita...");
+		}
+		else
+		{
+			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso il riavvio della partita non terminata...");
+		}
 		alert.showAndWait();
 	}
 }

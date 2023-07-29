@@ -11,4 +11,9 @@ public abstract class Gara {
 		}
 		this.codice = new Codice(codice);
 	}
+	
+	protected Codice getCodiceGara()
+	{
+		return this.codice;
+	}
 }
