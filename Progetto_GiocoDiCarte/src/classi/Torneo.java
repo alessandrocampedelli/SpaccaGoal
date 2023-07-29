@@ -1,5 +1,5 @@
 package classi;
 
-public class Torneo {
+public class Torneo extends Gara{
 
 }
