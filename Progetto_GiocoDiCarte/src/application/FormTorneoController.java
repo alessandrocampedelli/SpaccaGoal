@@ -1,26 +1,34 @@
 package application;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
-
 import classi.Alert_cambiaForm;
 import javafx.event.ActionEvent;
-
 import javafx.scene.input.MouseEvent;
+import classi.Tornei;
 
 public class FormTorneoController {
 	@FXML
 	private TextField txtCodiceTorneo;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
+	Tornei tornei = new Tornei();
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void btnGiocaTorneo(ActionEvent event) 
+	public void btnGiocaTorneo(ActionEvent event) throws IOException
 	{
-		//da fare
+		String codiceInseritoUtente = txtCodiceTorneo.getText();
+		//controllo se il codice inserito dall'utente è funzionante
+		if(tornei.cercaCodice(codiceInseritoUtente)) 
+		{			
+			alert.mostraConfermaCodiceTorneo(tornei, codiceInseritoUtente);
+			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		}
+		else 
+		{
+			alert.mostraErroreCodiceTorneo();
+		}
 	}
 	// Event Listener on ImageView.onMouseClicked
 	@FXML

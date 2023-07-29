@@ -16,6 +16,7 @@ public class Alert_cambiaForm {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
 	public void passaAlForm(String form, ActionEvent event)  throws IOException{
 		root = FXMLLoader.load(getClass().getResource(form));
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -32,7 +33,7 @@ public class Alert_cambiaForm {
 	}
 	
 	public void mostraErrore() {
-		AlertType message = AlertType.INFORMATION;
+		AlertType message = AlertType.ERROR;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
@@ -63,11 +64,11 @@ public class Alert_cambiaForm {
 	
 	public void mostraConfermaCodicePartitaSingola(Partite p, String codiceUtente) 
 	{
-		AlertType message = AlertType.CONFIRMATION;
+		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText("AVVIO IN CORSO");
+		alert.getDialogPane().setHeaderText("AVVIO PARTITA IN CORSO");
 		if(p.partitaNuovaRicominciata(codiceUtente))
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di una nuova partita...");
@@ -75,6 +76,34 @@ public class Alert_cambiaForm {
 		else
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso il riavvio della partita non terminata...");
+		}
+		alert.showAndWait();
+	}
+	
+	public void mostraErroreCodiceTorneo() {
+		AlertType message = AlertType.ERROR;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setContentText("Codice del torneo errato!");
+		alert.getDialogPane().setHeaderText("CODICE TORNEO ERRATO");
+		alert.showAndWait();
+	}
+	
+	public void mostraConfermaCodiceTorneo(Tornei t, String codiceUtente) 
+	{
+		AlertType message = AlertType.INFORMATION;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setHeaderText("AVVIO TORNEO IN CORSO");
+		if(t.partitaNuovaRicominciata(codiceUtente))
+		{
+			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...");
+		}
+		else
+		{
+			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso il riavvio del torneo non terminato...");
 		}
 		alert.showAndWait();
 	}
