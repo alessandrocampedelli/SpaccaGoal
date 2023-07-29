@@ -1,28 +1,28 @@
 package classi;
 import java.util.ArrayList;
 
-public class Partite 
+public class Tornei 
 {
-	private ArrayList<Partita> partite;
+	private ArrayList<Torneo> tornei;
 	
-	public Partite()
+	public Tornei()
 	{
-		partite = new ArrayList<Partita>();
+		tornei = new ArrayList<Torneo>();
 	}
 	
-	public void aggiungiPartita(Partita p)
+	public void aggiungiTorneo(Torneo t)
 	{
-		partite.add(p);
+		tornei.add(t);
 	}
 	
 	//ricerco se è presente il codice inserito dall'utente 
 	public boolean cercaCodice(String codiceUtente)
 	{
 		boolean codicePresente = false;
-		for(Partita p: partite)
+		for(Torneo t: tornei)
 		{
 			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
-			if(p.getCodiceGara().getCodice().equals(codiceUtente))
+			if(t.getCodiceGara().getCodice().equals(codiceUtente))
 			{
 				codicePresente = true;
 				break;
@@ -34,11 +34,11 @@ public class Partite
 	public boolean partitaNuovaRicominciata(String codiceUtente)
 	{
 		boolean partitaCodice = false;
-		for(Partita p: partite)
+		for(Torneo t: tornei)
 		{
-			if(p.getCodiceGara().getCodice().equals(codiceUtente))
+			if(t.getCodiceGara().getCodice().equals(codiceUtente))
 			{
-				partitaCodice = p.getCodiceGara().getNuovoCarica();
+				partitaCodice = t.getCodiceGara().getNuovoCarica();
 			}
 		}
 		return partitaCodice;

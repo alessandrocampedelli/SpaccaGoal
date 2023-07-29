@@ -15,6 +15,7 @@ public class Codice
 	{
 		return this.codice;
 	}
+	
 	public boolean getNuovoCarica() 
 	{
 		return this.nuovoCarica;

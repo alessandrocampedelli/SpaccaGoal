@@ -15,6 +15,6 @@ public class Giocatore {
 		return nVittorie;
 	}
 	public void aggiungiVittoria() {
-		nVittorie++;
+		nVittorie = nVittorie + 1;
 	}
 }
