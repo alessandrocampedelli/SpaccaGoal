@@ -2,60 +2,69 @@ package application;
 
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
 import classi.Codice;
+import classi.Giocatore;
 public class FormCreaPartitaController {
 	@FXML
 	private TextField txtCodice;
 	@FXML
-	private RadioButton rdbGiocatori2;
+	private TextField txtAlias;
 	@FXML
-	private ToggleGroup numeroGiocatori;
+	private CheckBox chbRobot;
 	@FXML
-	private RadioButton rdbGiocatori3;
+	private TextArea txtGiocatoriInseriti = new TextArea();
 	@FXML
-	private RadioButton rdbGiocatori4;
+	private Label lblGiocatoriInseriti;
 	@FXML
-	private RadioButton rdbGiocatori5;
-	private int numGiocatori;
-	Alert_cambiaForm alert = new Alert_cambiaForm();
+	private Label lblGiocatoriDaInserire;
+
+	
+	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	// Event Listener on Button.onAction
 	@FXML
-	public void btnAvanti(ActionEvent event) {
+	public void btnAggiungiGiocatore(ActionEvent event) {
 		try {
-			Codice codice = new Codice(txtCodice.getText());
-			
-			if(rdbGiocatori2.isSelected())
-				numGiocatori = 2;
-			else if(rdbGiocatori3.isSelected())
-				numGiocatori = 3;
-			else if(rdbGiocatori4.isSelected())
-				numGiocatori = 4;
-			else
-				numGiocatori = 5;
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/FormCreaPartita2.fxml"));
-			Parent root = loader.load();
-			FormCreaPartita2Controller controller = loader.getController();
-			controller.creaForm();
-			System.out.println(codice.getCodice()+" "+numeroGiocatori);
-			alert.passaAlForm("/application/FormCreaPartita2.fxml",event);
-		}catch (IOException e) {
+			boolean robot = false;
+			String nome = txtAlias.getText();
+			if(chbRobot.isSelected()) {
+				robot = true;
+				txtGiocatoriInseriti.appendText(nome+" (robot)\n");
+			}else
+				txtGiocatoriInseriti.appendText(nome+"\n");
+			giocatori.add(new Giocatore(nome,robot));
+			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+			txtAlias.clear();
+		}catch (Exception e) {
 			alert.mostraErrore();
 		}
+	}
+	@FXML
+	public void btnCreaPartita(MouseEvent event) throws IOException
+	{
+		
 	}
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
@@ -63,6 +72,6 @@ public class FormCreaPartitaController {
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 	}
 	public int getNumGiocatori() {
-		return numGiocatori;
+		return giocatori.size();
 	}
 }
