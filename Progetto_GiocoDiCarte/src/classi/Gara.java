@@ -1,14 +1,12 @@
 package classi;
 
+import java.util.ArrayList;
 public abstract class Gara {
 	protected Giocatore[] giocatori;
 	protected Codice codice;
 	protected Mazzo carte;
-	protected void aggiungiGiocatori(String[] alias, String codice) {
-		this.giocatori = new Giocatore[alias.length];
-		for(int i = 0; i < giocatori.length; i++) {
-			giocatori[i] = new Giocatore(alias[i]);
-		}
+	protected void aggiungiGiocatori(ArrayList<Giocatore> giocatori, String codice) {
+		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 	}
 	
