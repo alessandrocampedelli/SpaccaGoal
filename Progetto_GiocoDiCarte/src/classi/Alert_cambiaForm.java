@@ -62,14 +62,14 @@ public class Alert_cambiaForm {
 		alert.showAndWait();
 	}
 	
-	public void mostraConfermaCodicePartitaSingola(Partite p, String codiceUtente) 
+	public void mostraConfermaCodicePartitaSingola(Gare g, String codiceUtente) 
 	{
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText("AVVIO PARTITA IN CORSO");
-		if(p.partitaNuovaRicominciata(codiceUtente))
+		if(g.partitaNuovaRicominciata(codiceUtente))
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di una nuova partita...");
 		}
@@ -90,14 +90,14 @@ public class Alert_cambiaForm {
 		alert.showAndWait();
 	}
 	
-	public void mostraConfermaCodiceTorneo(Tornei t, String codiceUtente) 
+	public void mostraConfermaCodiceTorneo(Gare g, String codiceUtente) 
 	{
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText("AVVIO TORNEO IN CORSO");
-		if(t.partitaNuovaRicominciata(codiceUtente))
+		if(g.partitaNuovaRicominciata(codiceUtente))
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...");
 		}

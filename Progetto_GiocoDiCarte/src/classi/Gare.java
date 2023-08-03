@@ -1,28 +1,28 @@
 package classi;
-import java.util.ArrayList;
 
-public class Tornei 
-{
-	private ArrayList<Torneo> tornei;
-	
-	public Tornei()
+import java.util.ArrayList;
+public class Gare {
+
+	private ArrayList<Gara> gare;
+ 
+	public Gare()
 	{
-		tornei = new ArrayList<Torneo>();
+		gare = new ArrayList<Gara>();
 	}
 	
-	public void aggiungiTorneo(Torneo t)
+	public void aggiungiGara(Gara g)
 	{
-		tornei.add(t);
+		gare.add(g);
 	}
 	
 	//ricerco se è presente il codice inserito dall'utente 
 	public boolean cercaCodice(String codiceUtente)
 	{
 		boolean codicePresente = false;
-		for(Torneo t: tornei)
+		for(Gara g: gare)
 		{
 			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
-			if(t.getCodiceGara().getCodice().equals(codiceUtente))
+			if(g.getCodiceGara().getCodice().equals(codiceUtente))
 			{
 				codicePresente = true;
 				break;
@@ -34,11 +34,11 @@ public class Tornei
 	public boolean partitaNuovaRicominciata(String codiceUtente)
 	{
 		boolean partitaCodice = false;
-		for(Torneo t: tornei)
+		for(Gara g: gare)
 		{
-			if(t.getCodiceGara().getCodice().equals(codiceUtente))
+			if(g.getCodiceGara().getCodice().equals(codiceUtente))
 			{
-				partitaCodice = t.getCodiceGara().getNuovoCarica();
+				partitaCodice = g.getCodiceGara().getNuovoCarica();
 			}
 		}
 		return partitaCodice;
