@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,17 +19,17 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <Label layoutX="262.0" layoutY="106.0" text="CREA UNA NUOVA PARTITA" />
-      <Label layoutX="204.0" layoutY="166.0" text="Codice partita" />
-      <TextField fx:id="txtCodice" layoutX="337.0" layoutY="162.0" />
-      <Label layoutX="204.0" layoutY="280.0" text="Numero di giocatori" />
-      <RadioButton fx:id="rdbGiocatori2" layoutX="337.0" layoutY="232.0" mnemonicParsing="false" selected="true" text="2">
-         <toggleGroup>
-            <ToggleGroup fx:id="numeroGiocatori" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="rdbGiocatori3" layoutX="337.0" layoutY="263.0" mnemonicParsing="false" text="3" toggleGroup="$numeroGiocatori" />
-      <RadioButton fx:id="rdbGiocatori4" layoutX="337.0" layoutY="297.0" mnemonicParsing="false" text="4" toggleGroup="$numeroGiocatori" />
-      <RadioButton fx:id="rdbGiocatori5" layoutX="337.0" layoutY="330.0" mnemonicParsing="false" text="5" toggleGroup="$numeroGiocatori" />
-      <Button layoutX="244.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnAvanti" prefHeight="67.0" prefWidth="200.0" text="AVANTI" />
+      <Label layoutX="257.0" layoutY="36.0" text="CREA UNA NUOVA PARTITA" />
+      <Label layoutX="198.0" layoutY="71.0" text="Codice partita" />
+      <TextField fx:id="txtCodice" layoutX="331.0" layoutY="67.0" />
+      <CheckBox fx:id="chbRobot" layoutX="400.0" layoutY="147.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
+      <Label layoutX="391.0" layoutY="130.0" text="Robot" />
+      <TextField fx:id="txtAlias" layoutX="230.0" layoutY="147.0" />
+      <Button fx:id="btnAggiungiGiocatore" layoutX="254.0" layoutY="186.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
+      <Label fx:id="lblGiocatoriInseriti" layoutX="221.0" layoutY="232.0" text="Giocatori inseriti: 0 " />
+      <Label layoutX="250.0" layoutY="113.0" text="Inserisci gli alias dei giocatori" />
+      <Label fx:id="lblGiocatoriDaInserire" layoutX="221.0" layoutY="249.0" text="Giocatori che puoi ancora inserire: 5" />
+      <Button fx:id="btnCreaPartita" layoutX="285.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
+      <ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="224.0" layoutY="277.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

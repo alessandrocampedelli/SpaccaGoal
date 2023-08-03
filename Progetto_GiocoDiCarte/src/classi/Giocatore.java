@@ -4,7 +4,7 @@ public class Giocatore {
 	private String alias;
 	private int nVittorie;
 	private boolean robot;
-	
+
 	public Giocatore(String alias, boolean robot) {
 		this.alias = alias;
 		this.nVittorie = 0;
@@ -15,6 +15,10 @@ public class Giocatore {
 	}
 	public int getNVittorie() {
 		return nVittorie;
+	}
+	public boolean getRobot()
+	{
+		return robot;
 	}
 	public void aggiungiVittoria() {
 		nVittorie = nVittorie + 1;
