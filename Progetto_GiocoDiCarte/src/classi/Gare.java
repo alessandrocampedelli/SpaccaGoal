@@ -4,17 +4,17 @@ import java.util.ArrayList;
 public class Gare {
 
 	private ArrayList<Gara> gare;
- 
+
 	public Gare()
 	{
 		gare = new ArrayList<Gara>();
 	}
-	
+
 	public void aggiungiGara(Gara g)
 	{
 		gare.add(g);
 	}
-	
+
 	//ricerco se è presente il codice inserito dall'utente 
 	public boolean cercaCodice(String codiceUtente)
 	{
@@ -30,7 +30,7 @@ public class Gare {
 		}
 		return codicePresente;
 	}
-	
+
 	public boolean partitaNuovaRicominciata(String codiceUtente)
 	{
 		boolean partitaCodice = false;
