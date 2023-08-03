@@ -6,13 +6,13 @@ import java.io.IOException;
 import classi.Alert_cambiaForm;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-import classi.Tornei;
+import classi.Gare;
 
 public class FormTorneoController {
 	@FXML
 	private TextField txtCodiceTorneo;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	Tornei tornei = new Tornei();
+	Gare gare = new Gare();
 
 	// Event Listener on Button.onAction
 	@FXML
@@ -20,9 +20,9 @@ public class FormTorneoController {
 	{
 		String codiceInseritoUtente = txtCodiceTorneo.getText();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(tornei.cercaCodice(codiceInseritoUtente)) 
+		if(gare.cercaCodice(codiceInseritoUtente)) 
 		{			
-			alert.mostraConfermaCodiceTorneo(tornei, codiceInseritoUtente);
+			alert.mostraConfermaCodiceTorneo(gare, codiceInseritoUtente);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}
 		else 

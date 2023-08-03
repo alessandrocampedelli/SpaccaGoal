@@ -10,7 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import classi.Alert_cambiaForm;
-import classi.Partite;
+import classi.Gare;
 
 public class FormPartitaSingolaController 
 
@@ -18,16 +18,16 @@ public class FormPartitaSingolaController
 	@FXML
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	Partite partite = new Partite();
+	Gare gare = new Gare();
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
 		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(partite.cercaCodice(codiceInseritoUtente)) 
+		if(gare.cercaCodice(codiceInseritoUtente)) 
 		{			
-			alert.mostraConfermaCodicePartitaSingola(partite, codiceInseritoUtente);
+			alert.mostraConfermaCodicePartitaSingola(gare, codiceInseritoUtente);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}
 		else 
