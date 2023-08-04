@@ -69,7 +69,8 @@ public class Alert_cambiaForm {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText("AVVIO PARTITA IN CORSO");
-		if(g.partitaNuovaRicominciata(codiceUtente))
+		boolean nuovaPartita = g.cercaCodice(codiceUtente)[1];
+		if(nuovaPartita)
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di una nuova partita...");
 		}
@@ -97,7 +98,8 @@ public class Alert_cambiaForm {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText("AVVIO TORNEO IN CORSO");
-		if(g.partitaNuovaRicominciata(codiceUtente))
+		boolean nuovoTorneo = g.cercaCodice(codiceUtente)[1];
+		if(nuovoTorneo)
 		{
 			alert.getDialogPane().setContentText("Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...");
 		}

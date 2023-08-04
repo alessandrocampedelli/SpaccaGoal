@@ -20,7 +20,7 @@ public class FormTorneoController {
 	{
 		String codiceInseritoUtente = txtCodiceTorneo.getText();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceInseritoUtente)) 
+		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
 		{			
 			alert.mostraConfermaCodiceTorneo(gare, codiceInseritoUtente);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
