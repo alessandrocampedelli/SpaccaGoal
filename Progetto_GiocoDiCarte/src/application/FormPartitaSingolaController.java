@@ -25,7 +25,7 @@ public class FormPartitaSingolaController
 	{
 		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceInseritoUtente)) 
+		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
 		{			
 			alert.mostraConfermaCodicePartitaSingola(gare, codiceInseritoUtente);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
