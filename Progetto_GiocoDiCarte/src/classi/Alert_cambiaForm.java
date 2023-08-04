@@ -109,4 +109,13 @@ public class Alert_cambiaForm {
 		}
 		alert.showAndWait();
 	}
+	public void mostraConfermaCreazionePartita() 
+	{
+		AlertType message = AlertType.INFORMATION;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setHeaderText("PARTITA CREATA CON SUCCESSO");
+		alert.showAndWait();
+	}
 }

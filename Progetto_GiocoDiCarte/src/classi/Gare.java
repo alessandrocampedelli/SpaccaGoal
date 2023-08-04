@@ -18,7 +18,6 @@ public class Gare {
 	}
 	public Boolean[] cercaCodice(String codiceUtente)
 	{
-		Gare
 		//posizione 0 = true se il codice esiste, false se non esiste
 		//posizione 1 = indica se la partita è già iniziata oppure no
 		Boolean[] infoCodice = new Boolean[2];

@@ -3,6 +3,8 @@ package application;
 import javafx.fxml.FXML;
 
 
+
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -29,6 +31,8 @@ import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
 import classi.Codice;
 import classi.Giocatore;
+import classi.Partita;
+import classi.Gare;
 public class FormCreaPartitaController implements Initializable{
 	@FXML
 	private TextField txtCodice;
@@ -81,17 +85,20 @@ public class FormCreaPartitaController implements Initializable{
 		}
 	}
 	@FXML
-	public void btnCreaPartita(MouseEvent event) throws IOException
-	{
-		
+	public void btnCreaPartita(ActionEvent event) throws IOException
+	{	
+		Partita p = new Partita(giocatori,txtCodice.getText());
+		Gare g = new Gare();
+		g.aggiungiGara(p);
+		alert.mostraConfermaCreazionePartita();
+		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+		giocatori.clear();
 	}
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
 	{
+		giocatori.clear();
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-	}
-	public int getNumGiocatori() {
-		return giocatori.size();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
