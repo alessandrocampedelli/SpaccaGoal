@@ -1,6 +1,8 @@
 package classi;
 
 import java.io.IOException;
+import java.util.Optional;
+
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,7 +34,6 @@ public class Alert_cambiaForm {
 	    stage.setScene(scene);
 	    stage.show();
 	}
-	///////
 	public void mostraErrore(String setContent, String setHeader) {
 		AlertType message = AlertType.ERROR;
 		Alert alert = new Alert(message, "");
@@ -41,7 +43,6 @@ public class Alert_cambiaForm {
 		alert.getDialogPane().setHeaderText(setHeader);
 		alert.showAndWait();
 	}
-	///////
 	public void mostraInformazione(Gare g, String setContent, String[] setHeader,String codiceUtente) {
 
 		AlertType message = AlertType.INFORMATION;
@@ -60,13 +61,28 @@ public class Alert_cambiaForm {
 		}
 		alert.showAndWait();
 	}
-	public void mostraConfermaCreazionePartita() 
+	public void mostraInformazione(String setContent, String setHeader) 
 	{
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText("PARTITA CREATA CON SUCCESSO");
+		alert.getDialogPane().setHeaderText(setHeader);
+		alert.getDialogPane().setContentText(setContent);
 		alert.showAndWait();
+	}
+	public boolean chiediConferma(String setContent, String setHeader) {
+		AlertType message = AlertType.CONFIRMATION;
+		Alert alert = new Alert(message, "");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.initOwner(stage);
+		alert.getDialogPane().setHeaderText(setHeader);
+		alert.getDialogPane().setContentText(setContent);
+		alert.showAndWait();
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.get() == ButtonType.OK)
+			return true;
+		else
+			return false;
 	}
 }
