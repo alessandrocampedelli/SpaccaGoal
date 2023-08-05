@@ -23,7 +23,7 @@ public class FormModalitaAdminMenuController {
 		try {
 			alert.passaAlForm("/application/FormCreaPartita.fxml",event);
 		}catch (IOException e){
-			alert.mostraErrore();
+			alert.mostraErrore("Si è verificato un errore!","ERRORE");
 		}
 	}
 	// Event Listener on Button.onAction
@@ -32,7 +32,7 @@ public class FormModalitaAdminMenuController {
 		try {
 			alert.passaAlForm("/application/FormCreaTorneo.fxml",event);
 		}catch (IOException e){
-			alert.mostraErrore();
+			alert.mostraErrore("Si è verificato un errore!","ERRORE");
 		}
 	}
 	// Event Listener on Button.onAction
@@ -41,7 +41,7 @@ public class FormModalitaAdminMenuController {
 		try {
 			alert.passaAlForm("/application/FormPrincipale.fxml",event);
 		}catch (IOException e){
-			alert.mostraErrore();
+			alert.mostraErrore("Si è verificato un errore!","ERRORE");
 		}
 	}
 }

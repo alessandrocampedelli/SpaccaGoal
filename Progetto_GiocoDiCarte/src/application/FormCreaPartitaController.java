@@ -81,7 +81,7 @@ public class FormCreaPartitaController implements Initializable{
 				btnCreaPartita.setVisible(false);
 			}
 		}catch (Exception e) {
-			alert.mostraErrore();
+			alert.mostraErrore("Errore di Input/Output","ERRORE");
 		}
 	}
 	@FXML

@@ -28,7 +28,7 @@ public class FormModalitaAmministratoreController {
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
 		else {
-			alert.mostraErroreAccessoAmministratore();
+			alert.mostraErrore("Username e/o password errati","ERRORE");
 		}
 	}
 	public void btnTornaFormPrincipale(MouseEvent event) throws IOException
