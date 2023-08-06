@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 
 
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.scene.input.MouseEvent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -56,6 +59,13 @@ public class FormCreaPartitaController implements Initializable{
 			output += g.getAlias() + "\n";
 		}
 		return output;
+	}
+	public String[] nomiGiocatori() {
+		String[] g = new String[giocatori.size()];
+		for(int i = 0; i < g.length; i++) {
+			g[i] = giocatori.get(i).getAlias();
+		}
+		return g;
 	}
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	// Event Listener on Button.onAction
@@ -123,5 +133,21 @@ public class FormCreaPartitaController implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		txtGiocatoriInseriti.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				// TODO Auto-generated method stub
+				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+				
+				giocatori.remove(indiceEliminato);
+				txtGiocatoriInseriti.getItems().clear();
+				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+				
+				lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+				lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+			}
+			
+		});
 	}
 }
