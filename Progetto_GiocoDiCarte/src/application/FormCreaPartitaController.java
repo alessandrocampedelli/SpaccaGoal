@@ -63,7 +63,9 @@ public class FormCreaPartitaController implements Initializable{
 	public void btnAggiungiGiocatore(ActionEvent event) {
 		try {
 			boolean robot = false;
-			if(txtAlias.getText().equals("")) {
+			if(txtAlias.getText().trim().equals("")) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
 				throw new IOException();
 			}
 			String nome = txtAlias.getText();
@@ -96,7 +98,7 @@ public class FormCreaPartitaController implements Initializable{
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
-		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori: "+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
+		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
 			String codice = getRandomString(5,'!', '~');
 			codice = "p_"+codice;
 			Partita p = new Partita(giocatori,codice);

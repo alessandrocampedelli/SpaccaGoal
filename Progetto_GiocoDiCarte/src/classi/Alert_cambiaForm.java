@@ -78,7 +78,6 @@ public class Alert_cambiaForm {
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText(setHeader);
 		alert.getDialogPane().setContentText(setContent);
-		alert.showAndWait();
 		Optional<ButtonType> result = alert.showAndWait();
 		if(result.get() == ButtonType.OK)
 			return true;
