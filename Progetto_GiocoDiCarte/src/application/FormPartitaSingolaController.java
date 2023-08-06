@@ -27,12 +27,14 @@ public class FormPartitaSingolaController
 		//controllo se il codice inserito dall'utente è funzionante
 		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
 		{			
-			alert.mostraConfermaCodicePartitaSingola(gare, codiceInseritoUtente);
+			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
+					"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
+			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceInseritoUtente);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}
 		else 
 		{
-			alert.mostraErroreCodicePartitaSingola();
+			alert.mostraErrore("Codice della partita singola errata!","CODICE PARTITA ERRATO");
 		}
 	}
 	// Event Listener on Button.onAction

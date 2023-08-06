@@ -35,8 +35,6 @@ import classi.Partita;
 import classi.Gare;
 public class FormCreaPartitaController implements Initializable{
 	@FXML
-	private TextField txtCodice;
-	@FXML
 	private TextField txtAlias;
 	@FXML
 	private CheckBox chbRobot;
@@ -52,12 +50,24 @@ public class FormCreaPartitaController implements Initializable{
 	private Button btnCreaPartita = new Button();
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+	public String getGiocatori() {
+		String output = "";
+		for(Giocatore g: giocatori) {
+			output += g.getAlias() + "\n";
+		}
+		return output;
+	}
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnAggiungiGiocatore(ActionEvent event) {
 		try {
 			boolean robot = false;
+			if(txtAlias.getText().trim().equals("")) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
+				throw new IOException();
+			}
 			String nome = txtAlias.getText();
 			if(chbRobot.isSelected()) {
 				robot = true;
@@ -72,6 +82,7 @@ public class FormCreaPartitaController implements Initializable{
 			
 			txtAlias.clear();
 			chbRobot.setSelected(false);
+			
 			if(giocatori.size() == 5) {
 				btnAggiungiGiocatore.setVisible(false);
 			}
@@ -80,20 +91,30 @@ public class FormCreaPartitaController implements Initializable{
 			}else {
 				btnCreaPartita.setVisible(false);
 			}
-		}catch (Exception e) {
-			alert.mostraErrore();
+		}catch (IOException e) {
+			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
 		}
 	}
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
-		Partita p = new Partita(giocatori,txtCodice.getText());
-		Gare g = new Gare();
-		g.aggiungiGara(p);
-		alert.mostraConfermaCreazionePartita();
-		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-		giocatori.clear();
+		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
+			String codice = getRandomString(5,'!', '~');
+			codice = "p_"+codice;
+			Partita p = new Partita(giocatori,codice);
+			Gare g = new Gare();
+			g.aggiungiGara(p);
+			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
+			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+			giocatori.clear();
+		}
 	}
+	private String getRandomString(int len, char minChar, char maxChar) {
+	    String s = "";
+	    for (int i = 0; i < len; ++i)
+	      s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
+	    return s;
+	  }
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
 	{

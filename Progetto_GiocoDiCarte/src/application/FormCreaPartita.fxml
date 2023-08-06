@@ -20,16 +20,14 @@
             </ImageView>
          </children></AnchorPane>
       <Label layoutX="257.0" layoutY="36.0" text="CREA UNA NUOVA PARTITA" />
-      <Label layoutX="198.0" layoutY="71.0" text="Codice partita" />
-      <TextField fx:id="txtCodice" layoutX="331.0" layoutY="67.0" />
-      <CheckBox fx:id="chbRobot" layoutX="400.0" layoutY="147.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
-      <Label layoutX="391.0" layoutY="130.0" text="Robot" />
-      <TextField fx:id="txtAlias" layoutX="230.0" layoutY="147.0" />
-      <Button fx:id="btnAggiungiGiocatore" layoutX="254.0" layoutY="186.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
-      <Label fx:id="lblGiocatoriInseriti" layoutX="221.0" layoutY="232.0" text="Giocatori inseriti: 0 " />
-      <Label layoutX="250.0" layoutY="113.0" text="Inserisci gli alias dei giocatori" />
-      <Label fx:id="lblGiocatoriDaInserire" layoutX="221.0" layoutY="249.0" text="Giocatori che puoi ancora inserire: 5" />
-      <Button fx:id="btnCreaPartita" layoutX="285.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
-      <ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="224.0" layoutY="277.0" prefHeight="200.0" prefWidth="200.0" />
+      <CheckBox fx:id="chbRobot" layoutX="405.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
+      <Label layoutX="396.0" layoutY="88.0" text="Robot" />
+      <TextField fx:id="txtAlias" layoutX="235.0" layoutY="105.0" />
+      <Button fx:id="btnAggiungiGiocatore" layoutX="259.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
+      <Label fx:id="lblGiocatoriInseriti" layoutX="226.0" layoutY="190.0" text="Giocatori inseriti: 0 " />
+      <Label layoutX="255.0" layoutY="71.0" text="Inserisci gli alias dei giocatori" />
+      <Label fx:id="lblGiocatoriDaInserire" layoutX="226.0" layoutY="207.0" text="Giocatori che puoi ancora inserire: 5" />
+      <Button fx:id="btnCreaPartita" layoutX="290.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
+      <ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="229.0" layoutY="235.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
