@@ -19,13 +19,14 @@ public class FormTorneoController {
 	public void btnGiocaTorneo(ActionEvent event) throws IOException
 	{
 		String codiceInseritoUtente = txtCodiceTorneo.getText();
+		codiceInseritoUtente = codiceInseritoUtente.trim();
 		//controllo se il codice inserito dall'utente è funzionante
 		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
 		{		
 			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
 					"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
 			alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
-			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 		}
 		else 
 		{

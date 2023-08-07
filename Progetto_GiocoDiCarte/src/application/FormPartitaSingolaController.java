@@ -24,13 +24,14 @@ public class FormPartitaSingolaController
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
 		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
+		codiceInseritoUtente = codiceInseritoUtente.trim();
 		//controllo se il codice inserito dall'utente è funzionante
 		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
 		{			
 			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
 					"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
 			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceInseritoUtente);
-			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 		}
 		else 
 		{
