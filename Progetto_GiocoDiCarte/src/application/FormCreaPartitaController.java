@@ -2,10 +2,6 @@ package application;
 
 import javafx.fxml.FXML;
 
-
-
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -35,6 +31,7 @@ import classi.Alert_cambiaForm;
 import classi.Codice;
 import classi.Giocatore;
 import classi.Partita;
+import classi.Gara;
 import classi.Gare;
 public class FormCreaPartitaController implements Initializable{
 	@FXML
@@ -109,11 +106,11 @@ public class FormCreaPartitaController implements Initializable{
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
 		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
-			String codice = getRandomString(5,'!', '~');
-			codice = "p_"+codice;
-			Partita p = new Partita(giocatori,codice);
-			Gare g = new Gare();
-			g.aggiungiGara(p);
+			String codice = getRandomString(6,'a', 'z');
+			codice = "p"+codice;
+			Gara g = new Partita(giocatori,codice);
+			Gare gare = new Gare();
+			gare.aggiungiGara(g);
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
