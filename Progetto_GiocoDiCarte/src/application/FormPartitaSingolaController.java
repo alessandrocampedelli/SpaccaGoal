@@ -16,28 +16,30 @@ import classi.Alert_cambiaForm;
 import classi.Gare;
 
 public class FormPartitaSingolaController 
-
 {
 	@FXML
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
+	Gare gare = new Gare();
+	String codiceUtente;
+	
+	public String getCodiceUtente() 
+	{
+		return codiceUtente;
+	}
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
-
-		FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
-		Parent root = loader.load();
-		FormPrincipaleController formPrincipale = loader.getController();
-		Gare gare = formPrincipale.getGare();
-		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
-		codiceInseritoUtente = codiceInseritoUtente.trim();
+		codiceUtente = txtCodicePartitaSingola.getText();
+		codiceUtente = codiceUtente.trim();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
+		if(gare.cercaCodice(codiceUtente)[0]) 
 		{			
 			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
 					"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
-			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceInseritoUtente);
+			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
 			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 		}
 		else 
