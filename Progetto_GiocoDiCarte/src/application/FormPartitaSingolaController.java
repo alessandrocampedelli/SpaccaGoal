@@ -2,8 +2,11 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+
 import java.io.IOException;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -18,11 +21,15 @@ public class FormPartitaSingolaController
 	@FXML
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	Gare gare = new Gare();
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
+
+		FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
+		Parent root = loader.load();
+		FormPrincipaleController formPrincipale = loader.getController();
+		Gare gare = formPrincipale.getGare();
 		String codiceInseritoUtente = txtCodicePartitaSingola.getText();
 		codiceInseritoUtente = codiceInseritoUtente.trim();
 		//controllo se il codice inserito dall'utente è funzionante
@@ -37,6 +44,7 @@ public class FormPartitaSingolaController
 		{
 			alert.mostraErrore("Codice della partita singola errata!","CODICE PARTITA ERRATO");
 		}
+		System.out.println(gare);
 	}
 	// Event Listener on Button.onAction
 	@FXML

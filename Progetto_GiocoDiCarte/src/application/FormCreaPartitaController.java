@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.sun.tools.javac.Main;
+
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -109,11 +111,16 @@ public class FormCreaPartitaController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
 			Gara g = new Partita(giocatori,codice);
-			Gare gare = new Gare();
+			
+			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
+			Parent root = loader.load();
+			FormPrincipaleController formPrincipale = loader.getController();
+			Gare gare = formPrincipale.getGare();
 			gare.aggiungiGara(g);
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
+			System.out.println(gare);
 		}
 	}
 	private String getRandomString(int len, char minChar, char maxChar) {
@@ -136,13 +143,15 @@ public class FormCreaPartitaController implements Initializable{
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				// TODO Auto-generated method stub
 				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
-				
-				giocatori.remove(indiceEliminato);
-				txtGiocatoriInseriti.getItems().clear();
-				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
-				
-				lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-				lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+				String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
+				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome "+alias, "MESSAGGIO DI CONFERMA")){
+					giocatori.remove(indiceEliminato);
+					txtGiocatoriInseriti.getItems().clear();
+					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+					
+					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+					lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+				}
 			}
 			
 		});

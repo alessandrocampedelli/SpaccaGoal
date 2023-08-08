@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -9,9 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import classi.Alert_cambiaForm;
+import classi.Gara;
+import classi.Gare;
 public class FormPrincipaleController 
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
+	Gare gare = new Gare();
+	public Gare getGare() {
+		return gare;
+	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event)
