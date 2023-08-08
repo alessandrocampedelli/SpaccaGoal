@@ -36,4 +36,11 @@ public class Gare {
 		}
 		return infoCodice;
 	}
+	public String toString() {
+		String nomi = "";
+		for(int i = 0; i < gare.size();i++) {
+			nomi += gare.get(i).codice.getCodice()+"\n";
+		}
+		return nomi;
+	}
 }
