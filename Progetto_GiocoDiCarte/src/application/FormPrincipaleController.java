@@ -16,6 +16,7 @@ public class FormPrincipaleController
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
+	
 	public Gare getGare() {
 		return gare;
 	}

@@ -116,6 +116,7 @@ public class FormCreaPartitaController implements Initializable{
 			Parent root = loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			Gare gare = formPrincipale.getGare();
+			
 			gare.aggiungiGara(g);
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);

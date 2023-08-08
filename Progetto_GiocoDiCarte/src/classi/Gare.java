@@ -36,7 +36,23 @@ public class Gare {
 		}
 		return infoCodice;
 	}
-	public String toString() {
+	
+	public String[] restituisciDoppiGiocatori(String codiceUtente)
+	{
+		String[] giocatori = new String[2];
+		for(Gara g : gare)
+		{
+			if(g.getCodiceGara().getCodice().equals(codiceUtente))
+			{
+				for(int i = 0; i < g.getGiocatori().length; i++)
+				{
+					giocatori[i] = g.getGiocatori()[i].getAlias();
+				}
+			}
+		}
+		return giocatori;
+	}
+ 	public String toString() {
 		String nomi = "";
 		for(int i = 0; i < gare.size();i++) {
 			nomi += gare.get(i).codice.getCodice()+"\n";
