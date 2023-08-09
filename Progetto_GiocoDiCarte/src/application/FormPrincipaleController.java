@@ -17,9 +17,11 @@ public class FormPrincipaleController
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 	
-	public Gare getGare() {
-		return gare;
+	public void aggiungiGara(Gara g) {
+		gare.aggiungiGara(g);
+		System.out.println(gare);
 	}
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event)

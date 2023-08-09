@@ -21,19 +21,12 @@ public class FormPartitaSingolaController
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
-	String codiceUtente;
-	
-	public String getCodiceUtente() 
-	{
-		return codiceUtente;
-	}
-	
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
-		codiceUtente = txtCodicePartitaSingola.getText();
-		codiceUtente = codiceUtente.trim();
+		System.out.println(gare);
+		String codiceUtente = txtCodicePartitaSingola.getText().trim();
 		//controllo se il codice inserito dall'utente è funzionante
 		if(gare.cercaCodice(codiceUtente)[0]) 
 		{			
@@ -41,12 +34,17 @@ public class FormPartitaSingolaController
 					"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
 			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
 			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
+			
+			//classe da cui partono i dati
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
+			Parent root = loader.load();
+			FormIniziaPartitaController form = loader.getController();
+			form.copiaInfo(codiceUtente);
 		}
 		else 
 		{
 			alert.mostraErrore("Codice della partita singola errata!","CODICE PARTITA ERRATO");
 		}
-		System.out.println(gare);
 	}
 	// Event Listener on Button.onAction
 	@FXML

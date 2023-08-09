@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormIniziaPartitaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#mostraNomi" prefHeight="535.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormIniziaPartitaController">
    <children>
       <ImageView fitHeight="373.0" fitWidth="378.0" layoutX="118.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,6 +29,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="241.0" layoutY="451.0" mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="56.0" prefWidth="126.0" text="AVVIA PARTITA" />
+      <Button layoutX="255.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnAvviaPartita" text="AVVIA PARTITA" />
    </children>
 </AnchorPane>

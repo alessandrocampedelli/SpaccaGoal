@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -15,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import classi.Salvataggio;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,6 +54,9 @@ public class FormCreaPartitaController implements Initializable{
 	private Button btnCreaPartita = new Button();
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+	private Salvataggio salvaPartita;
+	static Gara g;
+	
 	public String getGiocatori() {
 		String output = "";
 		for(Giocatore g: giocatori) {
@@ -110,18 +115,19 @@ public class FormCreaPartitaController implements Initializable{
 		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
-			Gara g = new Partita(giocatori,codice);
+			g = new Partita(giocatori,codice);
 			
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			Parent root = loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
-			Gare gare = formPrincipale.getGare();
+			formPrincipale.aggiungiGara(g);
 			
-			gare.aggiungiGara(g);
+			salvaPartita = new Salvataggio(g);
+			salvaPartita.salvaGara();
+			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
-			System.out.println(gare);
 		}
 	}
 	private String getRandomString(int len, char minChar, char maxChar) {

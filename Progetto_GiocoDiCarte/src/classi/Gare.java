@@ -11,7 +11,13 @@ public class Gare {
 		ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
 		giocatori.add(new Giocatore("Matteo",true));
 		giocatori.add(new Giocatore("Alessandro",true));
+		
+		ArrayList<Giocatore> giocatori2 = new ArrayList<Giocatore>();
+		giocatori2.add(new Giocatore("Porco",true));
+		giocatori2.add(new Giocatore("Dio",true));
+		
 		gare.add(new Partita(giocatori, "abcd"));
+		gare.add(new Partita(giocatori2, "efgh"));
 	}
 
 	public void aggiungiGara(Gara g)
