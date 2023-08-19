@@ -11,13 +11,9 @@ public class Gare {
 		ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
 		giocatori.add(new Giocatore("Matteo",true));
 		giocatori.add(new Giocatore("Alessandro",true));
-		
-		ArrayList<Giocatore> giocatori2 = new ArrayList<Giocatore>();
-		giocatori2.add(new Giocatore("Porco",true));
-		giocatori2.add(new Giocatore("Dio",true));
-		
+		giocatori.add(new Giocatore("Massimo",true));
+
 		gare.add(new Partita(giocatori, "abcd"));
-		gare.add(new Partita(giocatori2, "efgh"));
 	}
 
 	public void aggiungiGara(Gara g)
@@ -43,22 +39,24 @@ public class Gare {
 		return infoCodice;
 	}
 	
-	public String[] restituisciDoppiGiocatori(String codiceUtente)
+	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{
-		String[] giocatori = new String[2];
+		ArrayList<String> giocatori = new ArrayList<String>();
 		for(Gara g : gare)
 		{
 			if(g.getCodiceGara().getCodice().equals(codiceUtente))
 			{
 				for(int i = 0; i < g.getGiocatori().length; i++)
 				{
-					giocatori[i] = g.getGiocatori()[i].getAlias();
+					giocatori.add(g.getGiocatori()[i].getAlias());
 				}
 			}
 		}
 		return giocatori;
 	}
- 	public String toString() {
+	
+ 	public String toString() 
+ 	{
 		String nomi = "";
 		for(int i = 0; i < gare.size();i++) {
 			nomi += gare.get(i).codice.getCodice()+"\n";
