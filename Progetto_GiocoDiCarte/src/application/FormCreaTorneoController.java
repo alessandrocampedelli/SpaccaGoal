@@ -100,9 +100,12 @@ public class FormCreaTorneoController implements Initializable{
 			if(giocatori.size() == 8) {
 				btnAggiungiGiocatore.setVisible(false);
 			}
-			if(giocatori.size() >= 4) {
+			if(giocatori.size() == 4 || giocatori.size() == 8) 
+			{
 				btnCreaTorneo.setVisible(true);
-			}else {
+			}
+			else 
+			{
 				btnCreaTorneo.setVisible(false);
 			}
 		}catch (IOException e) {
@@ -161,9 +164,11 @@ public class FormCreaTorneoController implements Initializable{
 					if(giocatori.size() != 8) {
 						btnAggiungiGiocatore.setVisible(true);
 					}
-					if(giocatori.size() >= 4) {
+					if(giocatori.size() == 4 || giocatori.size() == 8) 
+					{
 						btnCreaTorneo.setVisible(true);
-					}else {
+					}else 
+					{
 						btnCreaTorneo.setVisible(false);
 					}
 				}
