@@ -9,25 +9,42 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="524.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController">
-   <children>
-      <AnchorPane layoutX="-91.0" layoutY="-136.0" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <ImageView fitHeight="70.0" fitWidth="63.0" layoutX="100.0" layoutY="137.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../frecciaTornaIndietro.jpg" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
-      <Label layoutX="257.0" layoutY="36.0" text="CREA UNA NUOVA PARTITA" />
-      <CheckBox fx:id="chbRobot" layoutX="405.0" layoutY="105.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
-      <Label layoutX="396.0" layoutY="88.0" text="Robot" />
-      <TextField fx:id="txtAlias" layoutX="235.0" layoutY="105.0" />
-      <Button fx:id="btnAggiungiGiocatore" layoutX="259.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
-      <Label fx:id="lblGiocatoriInseriti" layoutX="226.0" layoutY="190.0" text="Giocatori inseriti: 0 " />
-      <Label layoutX="255.0" layoutY="71.0" text="Inserisci gli alias dei giocatori" />
-      <Label fx:id="lblGiocatoriDaInserire" layoutX="226.0" layoutY="207.0" text="Giocatori che puoi ancora inserire: 5" />
-      <Button fx:id="btnCreaPartita" layoutX="290.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
-      <ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="229.0" layoutY="235.0" prefHeight="200.0" prefWidth="200.0" />
-   </children>
+<AnchorPane prefHeight="524.0" prefWidth="654.0"
+	xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormCreaPartitaController">
+	<children>
+		<AnchorPane layoutX="-91.0" layoutY="-136.0"
+			prefHeight="200.0" prefWidth="200.0">
+			<children>
+				<ImageView fitHeight="70.0" fitWidth="63.0"
+					layoutX="100.0" layoutY="137.0" onMouseClicked="#btnVaiIndietro1"
+					pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../frecciaTornaIndietro.jpg" />
+					</image>
+				</ImageView>
+			</children>
+		</AnchorPane>
+		<Label layoutX="257.0" layoutY="36.0"
+			text="CREA UNA NUOVA PARTITA" />
+		<CheckBox fx:id="chbRobot" layoutX="405.0" layoutY="105.0"
+			mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
+		<Label layoutX="396.0" layoutY="88.0" text="Robot" />
+		<TextField fx:id="txtAlias" layoutX="235.0" layoutY="105.0" />
+		<Button fx:id="btnAggiungiGiocatore" layoutX="259.0"
+			layoutY="144.0" mnemonicParsing="false"
+			onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
+		<Label fx:id="lblGiocatoriInseriti" layoutX="226.0"
+			layoutY="190.0" text="Giocatori inseriti: 0 " />
+		<Label layoutX="255.0" layoutY="71.0"
+			text="Inserisci gli alias dei giocatori" />
+		<Label fx:id="lblGiocatoriDaInserire" layoutX="226.0"
+			layoutY="207.0" text="Giocatori che puoi ancora inserire: 5" />
+		<Button fx:id="btnCreaPartita" layoutX="290.0" layoutY="443.0"
+			mnemonicParsing="false" onAction="#btnCreaPartita"
+			text="CREA PARTITA" visible="false" />
+		<ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0"
+			layoutX="229.0" layoutY="235.0" prefHeight="200.0" prefWidth="200.0" />
+	</children>
 </AnchorPane>

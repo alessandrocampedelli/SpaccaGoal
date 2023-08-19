@@ -54,7 +54,7 @@ public class FormCreaPartitaController implements Initializable{
 	private Button btnCreaPartita = new Button();
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
-	private Salvataggio salvaPartita;
+	private Salvataggio salvaGara;
 	static Gara g;
 	
 	public String getGiocatori() {
@@ -122,8 +122,8 @@ public class FormCreaPartitaController implements Initializable{
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
 			
-			salvaPartita = new Salvataggio(g);
-			salvaPartita.salvaGara();
+			salvaGara = new Salvataggio(g);
+			salvaGara.salvaPartita();
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
@@ -158,6 +158,18 @@ public class FormCreaPartitaController implements Initializable{
 					
 					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 					lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+					if(giocatori.size() != 5) 
+					{
+						btnAggiungiGiocatore.setVisible(true);
+					}
+					if(giocatori.size() >= 2) 
+					{
+						btnCreaPartita.setVisible(true);
+					}
+					else 
+					{
+						btnCreaPartita.setVisible(false);
+					}
 				}
 			}
 			

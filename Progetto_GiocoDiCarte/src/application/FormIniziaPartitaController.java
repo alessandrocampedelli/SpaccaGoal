@@ -1,11 +1,11 @@
 package application;
 
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
-
 import java.io.IOException;
 import java.lang.InterruptedException;
+import java.util.ArrayList;
+
 import classi.Alert_cambiaForm;
 import javafx.event.ActionEvent;
 import classi.Gare;
@@ -17,20 +17,29 @@ public class FormIniziaPartitaController
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
+
 	@FXML
-	private Label lblGiocatore1;
+	private Label lblNomeGiocatore1;
 	@FXML
-	private Label lblGiocatore2;
+	private Label lblNomeGiocatore2;
+	@FXML
+	private Label lblNomeGiocatore3;
+	@FXML
+	private Label lblNomeGiocatore4;
+	@FXML
+	private Label lblNomeGiocatore44;
+	@FXML
+	private Label lblNomeGiocatore55;
+	
+	private ArrayList<String> giocatori;
+
 	static String codiceUtente;
-	//classe in cui voglio che arrivino i dati
-	public void copiaInfo(String codice) {
-		this.codiceUtente = codice;
-	}
-	String[] giocatori;
-	public static void main(String[] args)
+	
+	public void copiaInfo(String codice) 
 	{
-		
-	}@FXML
+		codiceUtente = codice;
+	}
+	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
@@ -38,10 +47,27 @@ public class FormIniziaPartitaController
 	@FXML
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
 	{
-		giocatori = gare.restituisciDoppiGiocatori(codiceUtente);
-		if(!lblGiocatore1.getText().equals(giocatori[0])) {
-			lblGiocatore1.setText(giocatori[0]);
-			lblGiocatore2.setText(giocatori[1]);
+		giocatori = gare.restituisciGiocatori(codiceUtente);
+		if(!lblNomeGiocatore1.getText().equals(giocatori.get(0))) 
+		{
+			if(giocatori.size() >= 2)
+			{
+				lblNomeGiocatore1.setText(giocatori.get(0));
+				lblNomeGiocatore2.setText(giocatori.get(1));
+			}
+			if(giocatori.size() >= 3)
+			{
+				lblNomeGiocatore3.setText(giocatori.get(2));
+			}
+			if(giocatori.size() == 4)
+			{
+				lblNomeGiocatore4.setText(giocatori.get(3));
+			}
+			if(giocatori.size() == 5)
+			{
+				lblNomeGiocatore44.setText(giocatori.get(3));
+				lblNomeGiocatore55.setText(giocatori.get(4));
+			}
 		}
 	}
 }
