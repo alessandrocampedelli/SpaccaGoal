@@ -1,19 +1,26 @@
 package classi;
 
 import java.util.ArrayList;
+import classi.Salvataggio;
+import java.io.*;
 public class Gare {
 	
 	private ArrayList<Gara> gare;
 
 	public Gare()
 	{
-		gare = new ArrayList<Gara>();
+		/*gare = new ArrayList<Gara>();
 		ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
 		giocatori.add(new Giocatore("Matteo",true));
 		giocatori.add(new Giocatore("Alessandro",true));
 		giocatori.add(new Giocatore("Massimo",true));
-
-		gare.add(new Partita(giocatori, "abcd"));
+		gare.add(new Partita(giocatori, "abcd"));*/
+		try {
+			Salvataggio caricaPartite = new Salvataggio();
+			gare = caricaPartite.leggiPartite();
+		}catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void aggiungiGara(Gara g)
