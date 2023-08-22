@@ -27,9 +27,6 @@ public class FormIniziaPartitaController
 	@FXML
 	private Label lblNomeGiocatore4;
 	@FXML
-	private Label lblNomeGiocatore44;
-	@FXML
-	private Label lblNomeGiocatore55;
 	
 	private ArrayList<String> giocatori;
 
@@ -62,11 +59,6 @@ public class FormIniziaPartitaController
 			if(giocatori.size() == 4)
 			{
 				lblNomeGiocatore4.setText(giocatori.get(3));
-			}
-			if(giocatori.size() == 5)
-			{
-				lblNomeGiocatore44.setText(giocatori.get(3));
-				lblNomeGiocatore55.setText(giocatori.get(4));
 			}
 		}
 	}
