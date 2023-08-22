@@ -19,7 +19,6 @@ public class FormPrincipaleController
 	
 	public void aggiungiGara(Gara g) {
 		gare.aggiungiGara(g);
-		System.out.println(gare);
 	}
 	
 	// Event Listener on Button.onAction

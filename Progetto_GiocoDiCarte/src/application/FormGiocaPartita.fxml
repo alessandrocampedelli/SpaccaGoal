@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormGiocaPartitaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormGiocaPartitaController">
 	<children>
-		<Button layoutX="258.0" layoutY="176.0" mnemonicParsing="false"
-			onAction="#btnPartita" prefHeight="48.0" prefWidth="83.0"
-			text="PARTITA" />
+		<Button layoutX="258.0" layoutY="176.0" mnemonicParsing="false" onAction="#btnPartita" prefHeight="48.0" prefWidth="83.0" text="PARTITA" />
+      <ImageView fitHeight="128.0" fitWidth="83.0" layoutX="44.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="128.0" fitWidth="83.0" layoutX="155.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="128.0" fitWidth="83.0" layoutX="258.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="128.0" fitWidth="83.0" layoutX="376.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="128.0" fitWidth="83.0" layoutX="489.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />
 	</children>
 </AnchorPane>

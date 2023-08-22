@@ -17,20 +17,19 @@ public class Salvataggio {
 		ArrayList<Gara> partite = new ArrayList<>();
 		//ottengo il percorso della cartella contenente tutti i file
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite";
+		String relativePath = "src\\partite";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		
 		File f = new File(absolutePath);
 		//ottengo il vettore di file
 		File[] file = f.listFiles();
 		for(int i = 0; i < file.length; i++) {
-			partite.add(leggiPartita(file[i].getName()));
+			partite.add(leggiPartita(file[i]));
 		}
 		return partite;
 	}
-	private Gara leggiPartita(String codice) throws FileNotFoundException{
+	private Gara leggiPartita(File f) throws FileNotFoundException{
 		ArrayList<Giocatore> giocatori = new ArrayList<>();
-		Scanner scan = new Scanner(new File(codice));
+		Scanner scan = new Scanner(f);
 		while(scan.hasNextLine()) {
 			String idGiocatore = scan.nextLine();
 			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
@@ -41,6 +40,7 @@ public class Salvataggio {
 			}else
 				giocatori.add(new Giocatore(idGiocatore,false));
 		}
+		String codice = f.getName().substring(0,f.getName().length() - 4);
 		return new Partita(giocatori,codice);
 	}
 	public void salvaPartita() throws IOException

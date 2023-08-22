@@ -9,8 +9,8 @@ public class Gare {
 
 	public Gare()
 	{
-		/*gare = new ArrayList<Gara>();
-		ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
+		gare = new ArrayList<Gara>();
+		/*ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
 		giocatori.add(new Giocatore("Matteo",true));
 		giocatori.add(new Giocatore("Alessandro",true));
 		giocatori.add(new Giocatore("Massimo",true));

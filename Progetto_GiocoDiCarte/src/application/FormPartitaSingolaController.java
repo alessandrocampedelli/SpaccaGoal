@@ -25,7 +25,6 @@ public class FormPartitaSingolaController
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
-		System.out.println(gare);
 		String codiceUtente = txtCodicePartitaSingola.getText().trim();
 		//controllo se il codice inserito dall'utente è funzionante
 		if(gare.cercaCodice(codiceUtente)[0]) 
