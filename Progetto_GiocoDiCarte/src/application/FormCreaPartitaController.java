@@ -92,12 +92,12 @@ public class FormCreaPartitaController implements Initializable{
 			giocatori.add(new Giocatore(nome,robot));
 			
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
+			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
 			
 			txtAlias.clear();
 			chbRobot.setSelected(false);
 			
-			if(giocatori.size() == 5) {
+			if(giocatori.size() == 4) {
 				btnAggiungiGiocatore.setVisible(false);
 			}
 			if(giocatori.size() >= 2) {
@@ -157,8 +157,8 @@ public class FormCreaPartitaController implements Initializable{
 					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
 					
 					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-					lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(5 - giocatori.size()));
-					if(giocatori.size() != 5) 
+					lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
+					if(giocatori.size() != 4) 
 					{
 						btnAggiungiGiocatore.setVisible(true);
 					}

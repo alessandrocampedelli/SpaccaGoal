@@ -1,8 +1,6 @@
 package application;
 
 import javafx.fxml.FXML;
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -15,15 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import classi.Salvataggio;
+
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import com.sun.tools.javac.Main;
-
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,6 +34,7 @@ import classi.Giocatore;
 import classi.Torneo;
 import classi.Gara;
 import classi.Gare;
+
 public class FormCreaTorneoController implements Initializable{
 	@FXML
 	private TextField txtAlias;
@@ -47,16 +45,18 @@ public class FormCreaTorneoController implements Initializable{
 	@FXML
 	private Label lblGiocatoriInseriti;
 	@FXML
-	private Label lblGiocatoriDaInserire;
+	private Label lblSemifinale;
+	@FXML
+	private Label lblQuartiDiFinale;
 	@FXML
 	private Button btnAggiungiGiocatore = new Button();
 	@FXML
 	private Button btnCreaTorneo = new Button();
-	
+
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
 	static Gara g;
-	
+
 	public String getGiocatori() {
 		String output = "";
 		for(Giocatore g: giocatori) {
@@ -88,15 +88,15 @@ public class FormCreaTorneoController implements Initializable{
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
 			}else
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-			
+
 			giocatori.add(new Giocatore(nome,robot));
-			
+
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+ (4 - giocatori.size()) + "/" + (8 - giocatori.size()));
-			
+			lblSemifinale.setText("" + (4 - giocatori.size()));
+			lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
 			txtAlias.clear();
 			chbRobot.setSelected(false);
-			
+
 			if(giocatori.size() == 8) {
 				btnAggiungiGiocatore.setVisible(false);
 			}
@@ -119,26 +119,26 @@ public class FormCreaTorneoController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "t"+codice;
 			g = new Torneo(giocatori,codice);
-			
+
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			Parent root = loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
-			
+
 			salvaGara = new Salvataggio(g);
 			salvaGara.salvaTorneo();
-			
+
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
 		}
 	}
 	private String getRandomString(int len, char minChar, char maxChar) {
-	    String s = "";
-	    for (int i = 0; i < len; ++i)
-	      s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
-	    return s;
-	  }
+		String s = "";
+		for (int i = 0; i < len; ++i)
+			s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
+		return s;
+	}
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
 	{
@@ -158,10 +158,13 @@ public class FormCreaTorneoController implements Initializable{
 					giocatori.remove(indiceEliminato);
 					txtGiocatoriInseriti.getItems().clear();
 					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
-					
+
 					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-					lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+ (4 - giocatori.size()) + "/" + (8 - giocatori.size()));
-					if(giocatori.size() != 8) {
+					lblSemifinale.setText("" + (4 - giocatori.size()));
+					lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
+
+					if(giocatori.size() != 8) 
+					{
 						btnAggiungiGiocatore.setVisible(true);
 					}
 					if(giocatori.size() == 4 || giocatori.size() == 8) 
@@ -173,7 +176,7 @@ public class FormCreaTorneoController implements Initializable{
 					}
 				}
 			}
-			
+
 		});
 	}
 }

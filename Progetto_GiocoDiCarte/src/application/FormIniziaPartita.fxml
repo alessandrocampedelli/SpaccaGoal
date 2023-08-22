@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#mostraNomi"
-	prefHeight="535.0" prefWidth="600.0"
+	prefHeight="510.0" prefWidth="600.0"
 	xmlns="http://javafx.com/javafx/20.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.FormIniziaPartitaController">
@@ -32,19 +32,6 @@
 				<Font size="24.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblNomeGiocatore44" layoutX="86.0" layoutY="313.0"
-			prefHeight="47.0" prefWidth="143.0" textAlignment="CENTER">
-			<font>
-				<Font size="24.0" />
-			</font>
-		</Label>
-		<Label fx:id="lblNomeGiocatore55" layoutX="371.0"
-			layoutY="313.0" prefHeight="47.0" prefWidth="143.0"
-			textAlignment="CENTER">
-			<font>
-				<Font size="24.0" />
-			</font>
-		</Label>
 		<Label fx:id="lblNomeGiocatore4" layoutX="227.0" layoutY="313.0"
 			prefHeight="47.0" prefWidth="143.0" textAlignment="CENTER">
 			<font>
@@ -58,7 +45,7 @@
 				<Image url="@../../immagine_iniziale_VS.png" />
 			</image>
 		</ImageView>
-		<Button defaultButton="true" layoutX="230.0" layoutY="436.0"
+		<Button defaultButton="true" layoutX="230.0" layoutY="418.0"
 			mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="57.0"
 			prefWidth="137.0" text="AVVIA PARTITA" />
 	</children>

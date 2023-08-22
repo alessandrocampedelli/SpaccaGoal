@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0"
+	prefWidth="656.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormTabelloneTorneoController">
+	<children>
+		<ImageView fitHeight="412.0" fitWidth="632.0" layoutX="93.0"
+			layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../../griglia_torneo.png" />
+			</image>
+		</ImageView>
+		<Button defaultButton="true" layoutX="259.0" layoutY="472.0"
+			mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="50.0"
+			prefWidth="137.0" text="AVVIA PARTITA" />
+		<Label fx:id="lblQuarto1" layoutX="93.0" layoutY="46.0"
+			prefHeight="18.0" prefWidth="72.0" />
+	</children>
+</AnchorPane>
