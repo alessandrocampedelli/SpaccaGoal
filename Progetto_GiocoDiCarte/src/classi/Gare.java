@@ -45,6 +45,18 @@ public class Gare {
 		}
 		return infoCodice;
 	}
+	//metodo che mi restituisce la gara dato il suo codice
+	public Gara getGara(String codice) {
+		int pos = -1;
+		for(int i = 0; i < this.gare.size(); i++) {
+			if(gare.get(i).getCodiceGara().getCodice().equals(codice))
+			{
+				pos = i;
+				break;
+			}
+		}
+		return this.gare.get(pos);
+	}
 	
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{

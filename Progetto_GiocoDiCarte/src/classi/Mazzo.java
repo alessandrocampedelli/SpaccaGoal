@@ -29,4 +29,8 @@ public class Mazzo
             carte[posizioneCasuale] = tmp;
          }
 	}
+	//metodo di prova
+	public Carta getCarta() {
+		return carte[0];
+	}
 }

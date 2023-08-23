@@ -7,19 +7,22 @@ public abstract class Gara
 	protected Codice codice;
 	protected Mazzo carte;
 	
-	protected Gara(ArrayList<Giocatore> giocatori, String codice) 
+	public Gara(ArrayList<Giocatore> giocatori, String codice) 
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 	}
 	
-	protected Codice getCodiceGara()
+	public Codice getCodiceGara()
 	{
 		return this.codice;
 	}
 	
-	protected Giocatore[] getGiocatori()
+	public Giocatore[] getGiocatori()
 	{
 		return this.giocatori;
+	}
+	public Mazzo getMazzo() {
+		return carte;
 	}
 }
