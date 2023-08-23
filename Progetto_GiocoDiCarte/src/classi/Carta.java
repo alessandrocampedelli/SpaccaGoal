@@ -14,8 +14,8 @@ public enum Carta {
 	FUORIGIOCO(Tipologia.SPECIALE, new Image("/mazzo_di_carte/speciale_fuorigioco.jpg")),
 	GOAL(Tipologia.SPECIALE, new Image("/mazzo_di_carte/speciale_goal.jpg")),
 	MISTER(Tipologia.SPECIALE, new Image("/mazzo_di_carte/speciale_mister.JPG")),
-	VAR(Tipologia.SPECIALE, new Image("/mazzo_di_carte/speciale_var.JPG"));
-	
+	VAR(Tipologia.SPECIALE, new Image("/mazzo_di_carte/speciale_var.JPG")),
+	INDICATORE_GOAL(null,new Image("/mazzo_di_carte/indicatoreGoal.jpg"));
 	private Tipologia tipo;
 	private Image img;
 	private Carta(Tipologia tipo, Image img) {

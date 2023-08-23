@@ -9,57 +9,75 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.HBox;
+import classi.Carta;
 import classi.Gara;
 import classi.Gare;
+import classi.Giocatore;
 import classi.Partita;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-
+import classi.Mazzo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class FormGiocaPartitaController implements Initializable
 {	
-	static Gare g = new Gare();
-	static String codicePartita;
-	static Partita partita = (Partita) g.getGara(codicePartita);
+	Gare g = new Gare();
+	String codicePartita;
+	
+	Partita partita = (Partita) g.getGara(codicePartita);
+	Mazzo mazzo = partita.getMazzo();
+	Giocatore[] players = partita.getGiocatori();
+	
 	public void copiaInfo(String codice) 
 	{
 		codicePartita = codice;
 	}
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
-	// Event Listener on Button.onAction
-	@FXML
-	public void btnPartita(ActionEvent event) 
-	{
-		System.out.println("OK");
-	}
+	//carte inseribili
+	ObservableList<String> items =FXCollections.observableArrayList (
+            "ATTACCANTE", "BOMBER", "RIGORE", "ROVESCIATA", "DOMENICA", "CAMBIO_SCHEMA", "DIFENSORE", "DIF_ROCCIA", "PORTIERE", 
+            "INDICATORE_GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		GridPane pane = new GridPane();
-		listCarte.setCellFactory(param -> new Cell());
-	}
-	//classe che identifica la singola carta nella listBox
-	static class Cell extends ListCell<String>{
-		HBox hBox = new HBox();
-		Pane pane = new Pane();
-		Image carta = new Image(partita.getMazzo().getCarta().getImmagine().getUrl());
-		ImageView img = new ImageView(carta);
-		
-		public Cell() {
-			super();
-			hBox.getChildren().addAll(img,pane);
-			hBox.setHgrow(pane, Priority.ALWAYS);
-		}
-		public void updateItem(String name, boolean empty) {
-			super.updateItem(name, empty);
-			setText(null);
-			setGraphic(null);
-			if(name != null && !empty) {
-				setGraphic(hBox);
-			}
-		}
+		listCarte.setItems(items);
+		listCarte.setCellFactory(param -> {
+	        return new ListCell<String>() {
+	            private ImageView imageView = new ImageView();
+	             
+	                    @Override
+	                    public void updateItem(String name, boolean empty) {
+	                        super.updateItem(name, empty);
+	                        if (empty) {
+	                            setText(null);
+	                            setGraphic(null);
+	                        } else {
+	                        	switch(name) {
+	                        		case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
+	                        		case "BOMBER": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
+	                        		case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
+	                        		case "ROVESCIATA": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
+	                        		case "DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
+	                        		case "CAMBIO_SCHEMA": imageView.setImage(Carta.CAMBIO_SCHEMA.getImmagine()); break;
+	                        		case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
+	                        		case "DIF_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
+	                        		case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
+	                        		case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
+	                        		case "AUTOGOAL": imageView.setImage(Carta.AUTOGOAL.getImmagine()); break;
+	                        		case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
+	                        		case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
+	                        		case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
+	                        		case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
+	                        	}
+	                            setText(name);
+	                            setGraphic(imageView);
+	                        }
+	                    }
+	        };
+	    });
 	}
 }
