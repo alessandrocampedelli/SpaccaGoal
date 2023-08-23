@@ -22,4 +22,7 @@ public enum Carta {
 		this.tipo = tipo;
 		this.img = img;
 	}
+	public Image getImmagine() {
+		return img;
+	}
 }

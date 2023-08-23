@@ -40,6 +40,12 @@ public class FormIniziaPartitaController
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		
+		//passo il codice al controller GiocaPartita
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
+		Parent root = loader.load();
+		FormGiocaPartitaController form = loader.getController();
+		form.copiaInfo(codiceUtente);
 	}
 	@FXML
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
