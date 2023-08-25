@@ -30,6 +30,7 @@ public class FormGiocaPartitaController implements Initializable
 	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
+		System.out.println(codicePartita);
 	}
 	Partita partita = (Partita) g.getGara(codicePartita);
 	Mazzo mazzo = partita.getMazzo();
