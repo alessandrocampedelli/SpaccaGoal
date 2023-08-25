@@ -45,7 +45,7 @@ public class FormIniziaPartitaController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
 		Parent root = loader.load();
 		FormGiocaPartitaController form = loader.getController();
-		form.copiaInfo(codiceUtente);
+		form.copiaCodice(codiceUtente);
 	}
 	@FXML
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException

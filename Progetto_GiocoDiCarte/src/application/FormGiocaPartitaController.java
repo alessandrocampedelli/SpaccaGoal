@@ -25,16 +25,15 @@ import javafx.collections.ObservableList;
 public class FormGiocaPartitaController implements Initializable
 {	
 	Gare g = new Gare();
-	String codicePartita;
+	static String codicePartita;
 	
-	Partita partita = (Partita) g.getGara(codicePartita);
-	Mazzo mazzo = partita.getMazzo();
-	Giocatore[] players = partita.getGiocatori();
-	
-	public void copiaInfo(String codice) 
+	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
 	}
+	Partita partita = (Partita) g.getGara(codicePartita);
+	Mazzo mazzo = partita.getMazzo();
+	Giocatore[] players = partita.getGiocatori();
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
 	//carte inseribili

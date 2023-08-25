@@ -52,6 +52,7 @@ public class Gare {
 			if(gare.get(i).getCodiceGara().getCodice().equals(codice))
 			{
 				pos = i;
+				System.out.println(this.gare.get(pos));
 				break;
 			}
 		}
