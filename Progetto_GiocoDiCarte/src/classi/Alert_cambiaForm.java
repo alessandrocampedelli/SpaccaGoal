@@ -50,7 +50,7 @@ public class Alert_cambiaForm {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText(setContent);
-		boolean nuovoTorneo = g.cercaCodice(codiceUtente)[1];
+		boolean nuovoTorneo = g.cercaCodice(codiceUtente);
 		if(nuovoTorneo)
 		{
 			alert.getDialogPane().setContentText(setHeader[0]);

@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0"
@@ -23,6 +23,41 @@
 			mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="50.0"
 			prefWidth="137.0" text="AVVIA PARTITA" />
 		<Label fx:id="lblQuarto1" layoutX="93.0" layoutY="46.0"
-			prefHeight="18.0" prefWidth="72.0" />
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto2" layoutX="93.0" layoutY="171.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto3" layoutX="93.0" layoutY="292.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto4" layoutX="93.0" layoutY="415.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto5" layoutX="484.0" layoutY="46.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto6" layoutX="484.0" layoutY="171.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto7" layoutX="484.0" layoutY="292.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto8" layoutX="484.0" layoutY="415.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale1" layoutX="172.0" layoutY="111.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale2" layoutX="172.0" layoutY="354.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale3" layoutX="410.0" layoutY="111.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale4" layoutX="410.0" layoutY="354.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblFinale2" layoutX="328.0" layoutY="232.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblFinale1" layoutX="251.0" layoutY="232.0"
+			prefHeight="20.0" prefWidth="79.0" />
+		<Label layoutX="288.0" layoutY="75.0" prefHeight="20.0"
+			prefWidth="79.0" text="VINCITORE" textAlignment="CENTER"
+			textFill="RED" underline="true">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<Label fx:id="lblVincitore" layoutX="288.0" layoutY="101.0"
+			prefHeight="20.0" prefWidth="79.0" />
 	</children>
 </AnchorPane>
