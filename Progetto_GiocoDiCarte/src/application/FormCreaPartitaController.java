@@ -151,7 +151,7 @@ public class FormCreaPartitaController implements Initializable{
 				// TODO Auto-generated method stub
 				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
 				String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome "+alias, "MESSAGGIO DI CONFERMA")){
+				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
 					giocatori.remove(indiceEliminato);
 					txtGiocatoriInseriti.getItems().clear();
 					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
