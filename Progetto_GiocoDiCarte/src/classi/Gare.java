@@ -3,22 +3,20 @@ package classi;
 import java.util.ArrayList;
 import classi.Salvataggio;
 import java.io.*;
-public class Gare {
-	
+public class Gare 
+{	
 	private ArrayList<Gara> gare;
 
 	public Gare()
 	{
 		gare = new ArrayList<Gara>();
-		/*ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
-		giocatori.add(new Giocatore("Matteo",true));
-		giocatori.add(new Giocatore("Alessandro",true));
-		giocatori.add(new Giocatore("Massimo",true));
-		gare.add(new Partita(giocatori, "abcd"));*/
-		try {
-			Salvataggio caricaPartite = new Salvataggio();
-			gare = caricaPartite.leggiPartite();
-		}catch(FileNotFoundException e) {
+		try 
+		{
+			Salvataggio caricaGare = new Salvataggio();
+			gare = caricaGare.leggiGare();
+		}
+		catch(FileNotFoundException e) 
+		{
 			System.out.println(e.getMessage());
 		}
 	}
@@ -28,13 +26,17 @@ public class Gare {
 		gare.add(g);
 	}
 	
-	public boolean[] cercaCodice(String codiceUtente)
+	public boolean[] cercaCodice(String codiceUtente, char partitaTorneo)
 	{
 		//posizione 0 = true se il codice esiste, false se non esiste
 		//posizione 1 = indica se la partita è già iniziata oppure no
 		boolean[] infoCodice = new boolean[2];
 		for(Gara g : gare)
 		{
+			if(codiceUtente.charAt(0) == partitaTorneo)
+			{
+				
+			}
 			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
 			if(g.getCodiceGara().getCodice().equals(codiceUtente))
 			{
@@ -45,6 +47,7 @@ public class Gare {
 		}
 		return infoCodice;
 	}
+	
 	//metodo che mi restituisce la gara dato il suo codice
 	public Gara getGara(String codice) {
 		int pos = -1;

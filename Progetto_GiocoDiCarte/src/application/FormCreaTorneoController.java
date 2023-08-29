@@ -92,8 +92,17 @@ public class FormCreaTorneoController implements Initializable{
 			giocatori.add(new Giocatore(nome,robot));
 
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-			lblSemifinale.setText("" + (4 - giocatori.size()));
+
+			if(giocatori.size() <= 4)
+			{
+				lblSemifinale.setText("" + (4 - giocatori.size()));
+			}
+			else
+			{
+				lblSemifinale.setText("");
+			}
 			lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
+
 			txtAlias.clear();
 			chbRobot.setSelected(false);
 
@@ -154,13 +163,22 @@ public class FormCreaTorneoController implements Initializable{
 				// TODO Auto-generated method stub
 				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
 				String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome "+alias, "MESSAGGIO DI CONFERMA")){
+				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
 					giocatori.remove(indiceEliminato);
 					txtGiocatoriInseriti.getItems().clear();
 					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
 
 					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-					lblSemifinale.setText("" + (4 - giocatori.size()));
+
+					if(giocatori.size() <= 4)
+					{
+						lblSemifinale.setText("" + (4 - giocatori.size()));
+					}
+					else
+					{
+						lblSemifinale.setText("");
+					}
+
 					lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
 
 					if(giocatori.size() != 8) 

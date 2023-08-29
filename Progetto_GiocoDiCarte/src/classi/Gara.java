@@ -24,7 +24,9 @@ public abstract class Gara
 	{
 		return this.giocatori;
 	}
-	public Mazzo getMazzo() {
+	
+	public Mazzo getMazzo() 
+	{
 		return carte;
 	}
 }

@@ -21,7 +21,7 @@ public class FormTorneoController {
 		String codiceInseritoUtente = txtCodiceTorneo.getText();
 		codiceInseritoUtente = codiceInseritoUtente.trim();
 		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceInseritoUtente)[0]) 
+		if(gare.cercaCodice(codiceInseritoUtente, 't')[0]) 
 		{		
 			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
 					"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};

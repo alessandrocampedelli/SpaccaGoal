@@ -6,15 +6,25 @@ import java.util.ArrayList;
 import java.io.*;
 public class Salvataggio {
 	Gara eventoDaSalvare;
+	ArrayList<Gara> gareLette;
 	public Salvataggio(Gara g) 
 	{
 		eventoDaSalvare = g;
 	}
 	public Salvataggio() 
 	{
+		gareLette = new ArrayList<Gara>();
 	}
-	public ArrayList<Gara> leggiPartite() throws FileNotFoundException{
-		ArrayList<Gara> partite = new ArrayList<>();
+	
+	public ArrayList<Gara> leggiGare() throws FileNotFoundException
+	{
+		leggiPartite();
+		leggiTornei();
+		return gareLette;
+	}
+	
+	public void leggiPartite() throws FileNotFoundException
+	{
 		//ottengo il percorso della cartella contenente tutti i file
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src\\partite";
@@ -22,12 +32,49 @@ public class Salvataggio {
 		File f = new File(absolutePath);
 		//ottengo il vettore di file
 		File[] file = f.listFiles();
-		for(int i = 0; i < file.length; i++) {
-			partite.add(leggiPartita(file[i]));
+		for(int i = 0; i < file.length; i++) 
+		{
+			gareLette.add(leggiPartita(file[i]));
 		}
-		return partite;
 	}
-	private Gara leggiPartita(File f) throws FileNotFoundException{
+	
+	private Gara leggiPartita(File f) throws FileNotFoundException
+	{
+		ArrayList<Giocatore> giocatori = new ArrayList<>();
+		Scanner scan = new Scanner(f);
+		while(scan.hasNextLine()) 
+		{
+			String idGiocatore = scan.nextLine();
+			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
+			//carattere robot
+			if(robot == '*') 
+			{
+				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
+				giocatori.add(new Giocatore(idGiocatore,true));
+			}
+			else
+				giocatori.add(new Giocatore(idGiocatore,false));
+		}
+		String codice = f.getName().substring(0,f.getName().length() - 4);
+		return new Partita(giocatori,codice);
+	}
+	
+	public void leggiTornei() throws FileNotFoundException
+	{
+		//ottengo il percorso della cartella contenente tutti i file
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src\\tornei";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		//ottengo il vettore di file
+		File[] file = f.listFiles();
+		for(int i = 0; i < file.length; i++) 
+		{
+			gareLette.add(leggiTorneo(file[i]));
+		}
+	}
+	private Gara leggiTorneo(File f) throws FileNotFoundException
+	{
 		ArrayList<Giocatore> giocatori = new ArrayList<>();
 		Scanner scan = new Scanner(f);
 		while(scan.hasNextLine()) {
@@ -41,8 +88,9 @@ public class Salvataggio {
 				giocatori.add(new Giocatore(idGiocatore,false));
 		}
 		String codice = f.getName().substring(0,f.getName().length() - 4);
-		return new Partita(giocatori,codice);
+		return new Torneo(giocatori,codice);
 	}
+	
 	public void salvaPartita() throws IOException
 	{
 		// Ottieni il percorso assoluto della directory di lavoro corrente
@@ -76,7 +124,11 @@ public class Salvataggio {
         String absolutePath = currentDirectory + File.separator + relativePath;
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(Giocatore player : eventoDaSalvare.giocatori) {
-			fw.println(player.getAlias());
+			//controllo se il giocatore da salvare è un robot oppure no
+			if(player.getRobot())
+				fw.println(player.getAlias()+"*");
+			else
+				fw.println(player.getAlias());
 		}
 		fw.close();
 	}
