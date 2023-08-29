@@ -1,6 +1,8 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import classi.Alert_cambiaForm;
@@ -18,17 +20,30 @@ public class FormTorneoController {
 	@FXML
 	public void btnGiocaTorneo(ActionEvent event) throws IOException
 	{
-		String codiceInseritoUtente = txtCodiceTorneo.getText();
-		codiceInseritoUtente = codiceInseritoUtente.trim();
-		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceInseritoUtente, 't')[0]) 
-		{		
-			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
-					"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
-			alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
-			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
+		try
+		{
+			if(txtCodiceTorneo.getText().trim().equals("")) 
+			{
+				txtCodiceTorneo.clear();
+				throw new IOException();
+			}
+			
+			String codiceInseritoUtente = txtCodiceTorneo.getText();
+			codiceInseritoUtente = codiceInseritoUtente.trim();
+			//controllo se il codice inserito dall'utente è funzionante
+			if(gare.cercaCodice(codiceInseritoUtente, 't')) 
+			{		
+				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
+						"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
+				alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
+				alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
+			}
+			else 
+			{
+				alert.mostraErrore("Codice del torneo errato!","CODICE TORNEO ERRATO");
+			}
 		}
-		else 
+		catch(IOException e) 
 		{
 			alert.mostraErrore("Codice del torneo errato!","CODICE TORNEO ERRATO");
 		}

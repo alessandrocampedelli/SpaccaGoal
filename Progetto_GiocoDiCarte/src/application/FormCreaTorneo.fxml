@@ -62,7 +62,7 @@
 				<Font size="30.0" />
 			</font>
 		</Label>
-		<Label layoutX="370.0" layoutY="256.0"
+		<Label layoutX="369.0" layoutY="256.0"
 			text="QUARTI DI FINALE (8)">
 			<font>
 				<Font size="14.0" />
@@ -74,7 +74,7 @@
 			</font>
 		</Label>
 		<ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0"
-			layoutX="230.0" layoutY="339.0" prefHeight="233.0" prefWidth="200.0" />
+			layoutX="229.0" layoutY="344.0" prefHeight="222.0" prefWidth="200.0" />
 		<Button fx:id="btnCreaTorneo" layoutX="290.0" layoutY="582.0"
 			mnemonicParsing="false" onAction="#btnCreaTorneo" prefHeight="10.0"
 			prefWidth="94.0" text="CREA TORNEO" visible="false" />

@@ -25,29 +25,42 @@ public class Gare
 	{
 		gare.add(g);
 	}
-	
-	public boolean[] cercaCodice(String codiceUtente, char partitaTorneo)
+
+	public boolean cercaCodice(String codiceUtente, char partitaTorneo)
 	{
-		//posizione 0 = true se il codice esiste, false se non esiste
-		//posizione 1 = indica se la partita è già iniziata oppure no
-		boolean[] infoCodice = new boolean[2];
+		//true se il codice esiste, false se non esiste
+		boolean infoCodice = false;
 		for(Gara g : gare)
 		{
 			if(codiceUtente.charAt(0) == partitaTorneo)
 			{
-				
-			}
-			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
-			if(g.getCodiceGara().getCodice().equals(codiceUtente))
-			{
-				infoCodice[0] = true;
-				infoCodice[1] = g.getCodiceGara().getNuovoCarica();
-				break;
+				//ricerco all'interno delle partite se è presente il codice inserito dall'utente
+				if(g.getCodiceGara().getCodice().equals(codiceUtente))
+				{
+					infoCodice = true;
+					break;
+				}
 			}
 		}
 		return infoCodice;
 	}
-	
+
+	public boolean cercaCodice(String codiceUtente)
+	{
+		//indica se la partita è già iniziata oppure no
+		boolean infoCodice = false;
+		for(Gara g : gare)
+		{
+			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
+			if(g.getCodiceGara().getCodice().equals(codiceUtente))
+			{
+				infoCodice = g.getCodiceGara().getNuovoCarica();
+				break;
+			}
+		}		
+		return infoCodice;
+	}
+
 	//metodo che mi restituisce la gara dato il suo codice
 	public Gara getGara(String codice) {
 		int pos = -1;
@@ -60,7 +73,7 @@ public class Gare
 		}
 		return this.gare.get(pos);
 	}
-	
+
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{
 		ArrayList<String> giocatori = new ArrayList<String>();
@@ -76,9 +89,9 @@ public class Gare
 		}
 		return giocatori;
 	}
-	
- 	public String toString() 
- 	{
+
+	public String toString() 
+	{
 		String nomi = "";
 		for(int i = 0; i < gare.size();i++) {
 			nomi += gare.get(i).codice.getCodice()+"\n";

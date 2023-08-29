@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import classi.Alert_cambiaForm;
 import classi.Gare;
+import classi.Giocatore;
 
 public class FormPartitaSingolaController 
 {
@@ -25,26 +26,41 @@ public class FormPartitaSingolaController
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
-		String codiceUtente = txtCodicePartitaSingola.getText().trim();
-		//controllo se il codice inserito dall'utente è funzionante
-		if(gare.cercaCodice(codiceUtente, 'p')[0]) 
-		{			
-			String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
-					"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
-			alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
-			alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
+		try
+		{
+			if(txtCodicePartitaSingola.getText().trim().equals("")) 
+			{
+				txtCodicePartitaSingola.clear();
+				throw new IOException();
+			}
 			
-			//classe da cui partono i dati
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
-			Parent root = loader.load();
-			FormIniziaPartitaController form = loader.getController();
-			form.copiaInfo(codiceUtente);
+			String codiceUtente = txtCodicePartitaSingola.getText().trim();
+
+			//controllo se il codice inserito dall'utente è funzionante
+			if(gare.cercaCodice(codiceUtente, 'p')) 
+			{			
+				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
+				"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
+				alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
+				alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
+
+				//classe da cui partono i dati
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
+				Parent root = loader.load();
+				FormIniziaPartitaController form = loader.getController();
+				form.copiaInfo(codiceUtente);
+			}
+			else 
+			{
+				alert.mostraErrore("Codice della partita singola errata!","CODICE PARTITA ERRATO");
+			}
 		}
-		else 
+		catch(IOException e) 
 		{
 			alert.mostraErrore("Codice della partita singola errata!","CODICE PARTITA ERRATO");
 		}
 	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnTornaFormModalitaGiocatore(MouseEvent event) throws IOException
