@@ -5,6 +5,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormGiocaPartitaController">
 	<children>
-      <ListView fx:id="listCarte" layoutX="50.0" layoutY="175.0" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="500.0" />
+      <ListView fx:id="listCarte" layoutX="11.0" layoutY="175.0" orientation="HORIZONTAL" prefHeight="200.0" prefWidth="581.0" />
 	</children>
 </AnchorPane>

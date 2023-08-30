@@ -6,6 +6,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.HBox;
@@ -30,17 +33,16 @@ public class FormGiocaPartitaController implements Initializable
 	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
-		System.out.println(codicePartita);
 	}
-	Partita partita = (Partita) g.getGara(codicePartita);
-	Mazzo mazzo = partita.getMazzo();
-	Giocatore[] players = partita.getGiocatori();
+	Partita partita;
+	Mazzo mazzo;
+	Giocatore[] players;
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
 	//carte inseribili
 	ObservableList<String> items =FXCollections.observableArrayList (
-            "ATTACCANTE", "BOMBER", "RIGORE", "ROVESCIATA", "DOMENICA", "CAMBIO_SCHEMA", "DIFENSORE", "DIF_ROCCIA", "PORTIERE", 
-            "INDICATORE_GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
+            "ATTACCANTE", "BOMBER", "RIGORE", "ROVESCIATA", "DOMENICA", "CAMBIO SCHEMA", "DIFENSORE", "DIFENSORE ROCCIA", "PORTIERE", 
+            "INDICATORE GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -73,7 +75,7 @@ public class FormGiocaPartitaController implements Initializable
 	                        		case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
 	                        		case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 	                        	}
-	                            setText(name);
+	                            //setText(name);
 	                            setGraphic(imageView);
 	                        }
 	                    }
