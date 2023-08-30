@@ -71,17 +71,20 @@ public class FormTabelloneTorneoController
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
 	{
 		giocatori = gare.restituisciGiocatori(codiceUtente);
-		
-		if(!lblQuarto1.getText().equals(giocatori.get(0)) || !lblSemifinale1.getText().equals(giocatori.get(0))) 
+		System.out.println(giocatori);
+		if(giocatori.size() == 4)
 		{
-			if(giocatori.size() == 4)
+			if(!lblSemifinale1.getText().equals(giocatori.get(0)))
 			{
 				lblSemifinale1.setText(giocatori.get(0));
 				lblSemifinale2.setText(giocatori.get(1));
 				lblSemifinale3.setText(giocatori.get(2));
 				lblSemifinale4.setText(giocatori.get(3));
-			}	
-			if(giocatori.size() == 8)
+			}
+		}
+		else if(giocatori.size() == 8) 
+		{
+			if(!lblQuarto1.getText().equals(giocatori.get(0)))
 			{
 				lblQuarto1.setText(giocatori.get(0));
 				lblQuarto2.setText(giocatori.get(1));
