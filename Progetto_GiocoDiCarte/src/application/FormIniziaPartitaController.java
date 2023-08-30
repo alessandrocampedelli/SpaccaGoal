@@ -1,12 +1,14 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.lang.InterruptedException;
 import java.util.ArrayList;
 
 import classi.Alert_cambiaForm;
+import classi.Partita;
 import javafx.event.ActionEvent;
 import classi.Gare;
 import javafx.scene.Parent;
@@ -39,13 +41,14 @@ public class FormIniziaPartitaController
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-		
 		//passo il codice al controller GiocaPartita
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
 		Parent root = loader.load();
 		FormGiocaPartitaController form = loader.getController();
-		form.copiaCodice(codiceUtente);
+		form.partita = (Partita) gare.getGara(codiceUtente);
+		form.mazzo = form.partita.getMazzo();
+		form.players = form.partita.getGiocatori();
+		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	@FXML
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
