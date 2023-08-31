@@ -75,7 +75,6 @@ public class FormGiocaPartitaController implements Initializable
 	                        		case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
 	                        		case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 	                        	}
-	                            //setText(name);
 	                            setGraphic(imageView);
 	                        }
 	                    }

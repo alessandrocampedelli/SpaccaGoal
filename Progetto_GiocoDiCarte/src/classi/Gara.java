@@ -12,6 +12,7 @@ public abstract class Gara
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
+		this.mano = new ArrayList<>(); 
 	}
 	//public void dareCarteInizio()
 	
@@ -28,5 +29,8 @@ public abstract class Gara
 	public Mazzo getMazzo() 
 	{
 		return carte;
+	}
+	public ArrayList<Carta> getMano(){
+		return mano;
 	}
 }
