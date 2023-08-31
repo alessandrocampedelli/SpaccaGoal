@@ -60,18 +60,16 @@ public class FormTabelloneTorneoController
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-		//passo il codice al controller GiocaPartita
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
+		alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
 		Parent root = loader.load();
-		FormGiocaPartitaController form = loader.getController();
-		form.copiaCodice(codiceUtente);
+		FormIniziaPartitaController form = loader.getController();
+		form.copiaInfo(codiceUtente);
 	}
 
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
 	{
 		giocatori = gare.restituisciGiocatori(codiceUtente);
-		System.out.println(giocatori);
 		if(giocatori.size() == 4)
 		{
 			if(!lblSemifinale1.getText().equals(giocatori.get(0)))

@@ -40,7 +40,7 @@
 		<Label layoutX="255.0" layoutY="71.0"
 			text="Inserisci gli alias dei giocatori" />
 		<Label fx:id="lblGiocatoriDaInserire" layoutX="226.0"
-			layoutY="207.0" text="Giocatori che puoi ancora inserire: 5" />
+			layoutY="207.0" text="Giocatori che puoi ancora inserire: 4" />
 		<Button fx:id="btnCreaPartita" layoutX="290.0" layoutY="443.0"
 			mnemonicParsing="false" onAction="#btnCreaPartita"
 			text="CREA PARTITA" visible="false" />

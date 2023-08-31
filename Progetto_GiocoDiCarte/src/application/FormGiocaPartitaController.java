@@ -34,6 +34,7 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		codicePartita = codice;
 	}
+	
 	Partita partita;
 	Mazzo mazzo;
 	Giocatore[] players;

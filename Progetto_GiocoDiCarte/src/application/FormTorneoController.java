@@ -37,6 +37,11 @@ public class FormTorneoController {
 						"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
 				alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
 				alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
+				//classe da cui partono i dati
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormTabelloneTorneo.fxml"));
+				Parent root = loader.load();
+				FormTabelloneTorneoController form = loader.getController();
+				form.copiaInfo(codiceInseritoUtente);
 			}
 			else 
 			{
