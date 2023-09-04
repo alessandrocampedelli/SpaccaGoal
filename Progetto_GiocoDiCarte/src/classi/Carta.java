@@ -27,6 +27,9 @@ public enum Carta {
 	public Image getImmagine() {
 		return img;
 	}
+	public Tipologia getTipologia() {
+		return tipo;
+	}
 	private static String getUrl(String nomeCarta) {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "mazzo_di_carte";

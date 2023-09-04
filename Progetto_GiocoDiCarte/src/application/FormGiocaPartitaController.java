@@ -1,13 +1,13 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,14 +38,23 @@ public class FormGiocaPartitaController implements Initializable
 	Partita partita;
 	Mazzo mazzo;
 	Giocatore[] players;
+	String[] nomiCarte;
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
-	//carte inseribili
-	ObservableList<String> items =FXCollections.observableArrayList (
-            "ATTACCANTE", "BOMBER", "RIGORE", "ROVESCIATA", "DOMENICA", "CAMBIO SCHEMA", "DIFENSORE", "DIFENSORE ROCCIA", "PORTIERE", 
-            "INDICATORE GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
+
+	/*ObservableList<String> items =FXCollections.observableArrayList (
+            "ATTACCANTE", "BOMBER_VERO", "RIGORE", "ROVESCIATA_DELLANNO", "TIRO_DOMENICA", "CAMBIO_SCHEMA", "DIFENSORE", "DIFENSORE_ROCCIA", "PORTIERE", 
+            "INDICATORE_GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
+	//ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);*/
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1){
+		System.out.println(codicePartita + " gioca");
+		partita = (Partita) g.getGara("pabcdef");
+		partita.distribuzioneCarte();
+		mazzo = partita.getMazzo();
+		players = partita.getGiocatori();
+		nomiCarte = players[0].getManoNomi();
+		ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
 		// TODO Auto-generated method stub
 		listCarte.setItems(items);
 		listCarte.setCellFactory(param -> {
@@ -61,13 +70,13 @@ public class FormGiocaPartitaController implements Initializable
 	                        } else {
 	                        	switch(name) {
 	                        		case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
-	                        		case "BOMBER": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
+	                        		case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
 	                        		case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
-	                        		case "ROVESCIATA": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
-	                        		case "DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
+	                        		case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
+	                        		case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
 	                        		case "CAMBIO_SCHEMA": imageView.setImage(Carta.CAMBIO_SCHEMA.getImmagine()); break;
 	                        		case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
-	                        		case "DIF_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
+	                        		case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
 	                        		case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
 	                        		case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
 	                        		case "AUTOGOAL": imageView.setImage(Carta.AUTOGOAL.getImmagine()); break;

@@ -1,16 +1,20 @@
 package classi;
 
+import java.util.ArrayList;
+
 public class Giocatore 
 {
 	private String alias;
 	private int nVittorie;
 	private boolean robot;
-
+	private ArrayList<Carta> mano;
+	
 	public Giocatore(String alias, boolean robot) 
 	{
 		this.alias = alias;
-		this.nVittorie = 0;
 		this.robot = robot;
+		this.nVittorie = 0;
+		this.mano = new ArrayList<>(); 
 	}
 	public String getAlias() 
 	{
@@ -23,6 +27,17 @@ public class Giocatore
 	public boolean getRobot()
 	{
 		return robot;
+	}
+	public ArrayList<Carta> getMano(){
+		return mano;
+	}
+	//metodo che restituisce un vettore di stringhe contenenti i nomi delle carte della mano
+	public String[] getManoNomi(){
+		String[] nomiCarte = new String[mano.size()];
+		for(int i = 0; i < nomiCarte.length; i++) {
+			nomiCarte[i] = mano.get(i).name();
+		}
+		return nomiCarte;
 	}
 	public void aggiungiVittoria() 
 	{

@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.lang.InterruptedException;
@@ -43,11 +44,10 @@ public class FormIniziaPartitaController
 	{	
 		//passo il codice al controller GiocaPartita
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
-		Parent root = loader.load();
+		loader.load();
 		FormGiocaPartitaController form = loader.getController();
-		form.partita = (Partita) gare.getGara(codiceUtente);
-		form.mazzo = form.partita.getMazzo();
-		form.players = form.partita.getGiocatori();
+		System.out.println(codiceUtente + " inizia");
+		form.copiaCodice(codiceUtente);
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	@FXML

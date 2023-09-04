@@ -1,36 +1,35 @@
 package classi;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 
 public class Mazzo 
 {
-	private Carta[] carte;
-	
+	private LinkedList<Carta> carte;
+	private Carta[] _carte = new Carta[] {Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,
+			Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,
+			Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.RIGORE,Carta.RIGORE,Carta.RIGORE,Carta.RIGORE
+			,Carta.ROVESCIATA_DELLANNO,Carta.TIRO_DOMENICA,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE
+			,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE
+			,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.PORTIERE,Carta.PORTIERE
+			,Carta.PORTIERE,Carta.PORTIERE,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.VAR,Carta.VAR,Carta.VAR
+			,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.MISTER,Carta.MISTER};
 	public Mazzo()
 	{
-		carte = new Carta[] {Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,
-				Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,Carta.ATTACCANTE,
-				Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.BOMBER_VERO,Carta.RIGORE,Carta.RIGORE,Carta.RIGORE,Carta.RIGORE
-				,Carta.ROVESCIATA_DELLANNO,Carta.TIRO_DOMENICA,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE
-				,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE,Carta.DIFENSORE
-				,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.PORTIERE,Carta.PORTIERE
-				,Carta.PORTIERE,Carta.PORTIERE,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.VAR,Carta.VAR,Carta.VAR
-				,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.MISTER,Carta.MISTER,null,null};
+		carte = new LinkedList<Carta>(Arrays.asList(_carte));
 	}
 	public void aggiungiBonusMalus() {
-		carte[carte.length-2] = Carta.CAMBIO_SCHEMA;
-		carte[carte.length-1] = Carta.AUTOGOAL;
+		carte.add(Carta.CAMBIO_SCHEMA);
+		carte.add(Carta.AUTOGOAL);
 	}
 	public void mischia() {
-		for(int i = 0; i<carte.length; i++) {
-            int posizioneCasuale = (int)Math.floor(Math.random() * i); 
-            // scambia a[k] con a[posizioneCasuale]
-            Carta tmp = carte[i];
-            carte[i] = carte[posizioneCasuale];
-            carte[posizioneCasuale] = tmp;
-         }
+		Collections.shuffle(carte);
 	}
-	//metodo di prova
-	public Carta getCarta() {
-		return carte[0];
+
+	public Carta pesca() {
+		return carte.removeFirst();
+	}
+	public void scarta(Carta c) {
+		carte.addLast(c);
 	}
 }
