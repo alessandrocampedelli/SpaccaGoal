@@ -39,7 +39,7 @@ public class FormTorneoController {
 				alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormTabelloneTorneo.fxml"));
-				Parent root = loader.load();
+				loader.load();
 				FormTabelloneTorneoController form = loader.getController();
 				form.copiaInfo(codiceInseritoUtente);
 			}

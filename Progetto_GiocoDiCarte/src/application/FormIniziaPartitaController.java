@@ -30,25 +30,27 @@ public class FormIniziaPartitaController
 	@FXML
 	private Label lblNomeGiocatore4;
 	@FXML
-	
+
 	private ArrayList<String> giocatori;
 
 	static String codiceUtente;
-	
+
 	public void copiaInfo(String codice) 
 	{
 		codiceUtente = codice;
 	}
+
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
-		//passo il codice al controller GiocaPartita
+		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
 		loader.load();
 		FormGiocaPartitaController form = loader.getController();
-		form.copiaCodice(codiceUtente);
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		form.copiaInfo(codiceUtente);
 	}
+
 	@FXML
 	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
 	{
