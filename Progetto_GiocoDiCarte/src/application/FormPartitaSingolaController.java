@@ -22,6 +22,7 @@ public class FormPartitaSingolaController
 	private TextField txtCodicePartitaSingola;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
@@ -46,7 +47,7 @@ public class FormPartitaSingolaController
 
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
-				Parent root = loader.load();
+				loader.load();
 				FormIniziaPartitaController form = loader.getController();
 				form.copiaInfo(codiceUtente);
 			}
