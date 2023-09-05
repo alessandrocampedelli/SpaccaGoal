@@ -44,7 +44,7 @@ public class FormIniziaPartitaController
 	{	
 		//passo il codice al controller GiocaPartita
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
-		Parent root = loader.load();
+		loader.load();
 		FormGiocaPartitaController form = loader.getController();
 		form.copiaCodice(codiceUtente);
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
