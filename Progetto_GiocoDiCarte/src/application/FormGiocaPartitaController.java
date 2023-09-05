@@ -46,14 +46,16 @@ public class FormGiocaPartitaController implements Initializable
             "ATTACCANTE", "BOMBER_VERO", "RIGORE", "ROVESCIATA_DELLANNO", "TIRO_DOMENICA", "CAMBIO_SCHEMA", "DIFENSORE", "DIFENSORE_ROCCIA", "PORTIERE", 
             "INDICATORE_GOAL", "AUTOGOAL", "FUORIGIOCO", "GOAL", "MISTER", "VAR");
 	//ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);*/
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1){
+	public FormGiocaPartitaController() {
 		System.out.println(codicePartita + " gioca");
 		partita = (Partita) g.getGara("pabcdef");
 		partita.distribuzioneCarte();
 		mazzo = partita.getMazzo();
 		players = partita.getGiocatori();
 		nomiCarte = players[0].getManoNomi();
+	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1){
 		ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
 		// TODO Auto-generated method stub
 		listCarte.setItems(items);
