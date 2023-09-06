@@ -48,7 +48,8 @@ public class FormGiocaPartitaController implements Initializable
 	
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
-		if(!(codicePartita == null)) {
+		if(!(codicePartita == null)) 
+		{
 			partita = (Partita) g.getGara(codicePartita);
 			partita.distribuzioneCarte();
 			mazzo = partita.getMazzo();
