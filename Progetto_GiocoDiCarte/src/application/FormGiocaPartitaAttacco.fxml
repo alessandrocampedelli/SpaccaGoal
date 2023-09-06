@@ -19,7 +19,7 @@
 			</font>
 		</Label>
 		<Label layoutX="23.0" layoutY="70.0" text="SCORE:"
-			textFill="RED">
+			textFill="#00ff1b">
 			<font>
 				<Font size="20.0" />
 			</font>
