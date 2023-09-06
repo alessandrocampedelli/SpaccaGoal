@@ -46,9 +46,9 @@ public class FormIniziaPartitaController
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
 		//classe da cui partono i dati
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartitaAttacco.fxml"));
 		loader.load();
-		FormGiocaPartitaController form = loader.getController();
+		FormGiocaPartitaAttaccoController form = loader.getController();
 		form.copiaCodice(codiceUtente);
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
