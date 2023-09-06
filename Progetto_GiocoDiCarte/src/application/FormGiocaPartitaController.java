@@ -33,7 +33,7 @@ public class FormGiocaPartitaController implements Initializable
 
 	static String codicePartita;
 
-	public void copiaInfo(String codice) 
+	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
 	}
@@ -45,51 +45,50 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
 
-	public FormGiocaPartitaController()
-	{
-		partita = (Partita) g.getGara(codicePartita);
-		partita.distribuzioneCarte();
-		mazzo = partita.getMazzo();
-		players = partita.getGiocatori();
-		nomiCarte = players[0].getManoNomi();
-	}
 	
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
-		ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
-		// TODO Auto-generated method stub
-		listCarte.setItems(items);
-		listCarte.setCellFactory(param -> {
-			return new ListCell<String>() {
-				private ImageView imageView = new ImageView();
-
-				@Override
-				public void updateItem(String name, boolean empty) {
-					super.updateItem(name, empty);
-					if (empty) {
-						setText(null);
-						setGraphic(null);
-					} else {
-						switch(name) {
-						case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
-						case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
-						case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
-						case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
-						case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
-						case "CAMBIO_SCHEMA": imageView.setImage(Carta.CAMBIO_SCHEMA.getImmagine()); break;
-						case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
-						case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
-						case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
-						case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
-						case "AUTOGOAL": imageView.setImage(Carta.AUTOGOAL.getImmagine()); break;
-						case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
-						case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
-						case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
-						case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
+		if(!(codicePartita == null)) {
+			partita = (Partita) g.getGara(codicePartita);
+			partita.distribuzioneCarte();
+			mazzo = partita.getMazzo();
+			players = partita.getGiocatori();
+			nomiCarte = players[0].getManoNomi();
+			ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
+			// TODO Auto-generated method stub
+			listCarte.setItems(items);
+			listCarte.setCellFactory(param -> {
+				return new ListCell<String>() {
+					private ImageView imageView = new ImageView();
+	
+					@Override
+					public void updateItem(String name, boolean empty) {
+						super.updateItem(name, empty);
+						if (empty) {
+							setText(null);
+							setGraphic(null);
+						} else {
+							switch(name) {
+							case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
+							case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
+							case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
+							case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
+							case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
+							case "CAMBIO_SCHEMA": imageView.setImage(Carta.CAMBIO_SCHEMA.getImmagine()); break;
+							case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
+							case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
+							case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
+							case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
+							case "AUTOGOAL": imageView.setImage(Carta.AUTOGOAL.getImmagine()); break;
+							case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
+							case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
+							case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
+							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
+							}
+							setGraphic(imageView);
 						}
-						setGraphic(imageView);
 					}
-				}
-			};
-		});
+				};
+			});
+		}
 	}}
