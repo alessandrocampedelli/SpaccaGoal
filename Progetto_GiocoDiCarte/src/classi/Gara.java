@@ -12,6 +12,7 @@ public abstract class Gara
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 		this.carte = new Mazzo();
+		distribuzioneCarte();
 	}
 	public void distribuzioneCarte() {
 		//pulisco le mani dei giocatori da eventuali partite precedenti
@@ -20,7 +21,6 @@ public abstract class Gara
 		//distribuzione delle carte
 		for(int j = 0; j < this.giocatori.length; j++) {
 			for(int i = 0; i < N_CARTE_INIZIO; i++) {
-				System.out.println(i);
 				giocatori[j].getMano().add(carte.pesca());
 				//il primo giocatore deve pescare una carta in più
 				if(i == 4 && j == 0)

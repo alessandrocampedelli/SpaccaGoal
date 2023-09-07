@@ -120,7 +120,6 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		if(!(codicePartita == null)) 
 		{
 			partita = (Partita) g.getGara(codicePartita);
-			partita.distribuzioneCarte();
 			
 			mazzo = partita.getMazzo();
 			
@@ -163,7 +162,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 					}
 				};
 			});
-			alert.mostraCartaPescata();
+			//alert.mostraCartaPescata();
 		}
 	}
 }
