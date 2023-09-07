@@ -43,13 +43,14 @@ public class FormPartitaSingolaController
 				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
 				"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
 				alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
-				alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
 				loader.load();
 				FormIniziaPartitaController form = loader.getController();
 				form.copiaInfo(codiceUtente);
+				
+				alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 			}
 			else 
 			{

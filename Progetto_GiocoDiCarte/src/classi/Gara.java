@@ -18,9 +18,14 @@ public abstract class Gara
 		pulisciMani();
 		carte.mischia();
 		//distribuzione delle carte
-		for(Giocatore g : giocatori) {
-			for(int i = 0; i < N_CARTE_INIZIO; i++)
-				g.getMano().add(carte.pesca());
+		for(int j = 0; j < this.giocatori.length; j++) {
+			for(int i = 0; i < N_CARTE_INIZIO; i++) {
+				System.out.println(i);
+				giocatori[j].getMano().add(carte.pesca());
+				//il primo giocatore deve pescare una carta in più
+				if(i == 4 && j == 0)
+					giocatori[j].getMano().add(carte.pesca());
+			}
 		}
 	}
 	
