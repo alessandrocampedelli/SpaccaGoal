@@ -1,6 +1,5 @@
 package classi;
 import java.io.File;
-
 import javafx.scene.image.Image;
 public enum Carta {
 	ATTACCANTE(Tipologia.ATTACCO, new Image(getUrl("attacco_attaccante.jpg"))),
@@ -30,7 +29,7 @@ public enum Carta {
 	public Tipologia getTipologia() {
 		return tipo;
 	}
-	private static String getUrl(String nomeCarta) {
+	public static String getUrl(String nomeCarta) {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "mazzo_di_carte";
 		String absolutePath = currentDirectory + File.separator + relativePath + "\\"+nomeCarta;

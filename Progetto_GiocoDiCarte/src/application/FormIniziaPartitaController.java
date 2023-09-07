@@ -2,16 +2,27 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+
 import java.io.IOException;
 import java.lang.InterruptedException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import classi.Alert_cambiaForm;
+import classi.Carta;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import classi.Gare;
+import classi.Partita;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class FormIniziaPartitaController
+public class FormIniziaPartitaController implements Initializable
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
@@ -42,27 +53,36 @@ public class FormIniziaPartitaController
 		loader.load();
 		FormGiocaPartitaAttaccoController form = loader.getController();
 		form.copiaCodice(codiceUtente);
+		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
 		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
 	}
-	@FXML
-	public void mostraNomi(MouseEvent event) throws IOException, InterruptedException
-	{
-		giocatori = gare.restituisciGiocatori(codiceUtente);
-		if(!lblNomeGiocatore1.getText().equals(giocatori.get(0))) 
-		{
-			if(giocatori.size() >= 2)
+	public void initialize(URL arg0, ResourceBundle arg1)
+	{	
+		if(!(codiceUtente == null)) {
+			giocatori = gare.restituisciGiocatori(codiceUtente);
+			if(!lblNomeGiocatore1.getText().equals(giocatori.get(0))) 
 			{
-				lblNomeGiocatore1.setText(giocatori.get(0));
-				lblNomeGiocatore2.setText(giocatori.get(1));
-			}
-			if(giocatori.size() >= 3)
-			{
-				lblNomeGiocatore3.setText(giocatori.get(2));
-			}
-			if(giocatori.size() == 4)
-			{
-				lblNomeGiocatore4.setText(giocatori.get(3));
+				if(giocatori.size() >= 2)
+				{
+					lblNomeGiocatore1.setText(giocatori.get(0));
+					lblNomeGiocatore2.setText(giocatori.get(1));
+				}
+				if(giocatori.size() >= 3)
+				{
+					lblNomeGiocatore3.setText(giocatori.get(2));
+				}
+				if(giocatori.size() == 4)
+				{
+					lblNomeGiocatore4.setText(giocatori.get(3));
+				}
 			}
 		}
+	}
+	public String getGiocatoriString() {
+		String output = "";
+		for(int i = 0; i < this.giocatori.size(); i++) {
+			output += (i+1) +") "+giocatori.get(i)+"\n";
+		}
+		return output;
 	}
 }
