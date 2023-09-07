@@ -6,14 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormGiocaPartitaAttaccoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0"
+	prefWidth="875.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormGiocaPartitaAttaccoController">
 	<children>
-		<Label fx:id="lblTurnoAttacco" layoutX="341.0" layoutY="14.0" text="TURNO DI ATTACCO: " textAlignment="CENTER" textFill="#0006ff">
+		<Label fx:id="lblTurnoAttacco" layoutX="341.0" layoutY="14.0"
+			text="TURNO DI ATTACCO: " textAlignment="CENTER" textFill="#0006ff">
 			<font>
 				<Font size="20.0" />
 			</font>
 		</Label>
-		<Label layoutX="23.0" layoutY="70.0" text="SCORE:" textFill="#00ff1b">
+		<Label layoutX="23.0" layoutY="70.0" text="SCORE:"
+			textFill="#00ff1b">
 			<font>
 				<Font size="20.0" />
 			</font>
@@ -38,8 +44,15 @@
 				<Font size="14.0" />
 			</font>
 		</Label>
-		<ListView fx:id="listCarte" layoutX="23.0" layoutY="296.0" onMouseClicked="#selezionaCarta" orientation="HORIZONTAL" prefHeight="266.0" prefWidth="829.0" />
-		<Button fx:id="btnGiocaCarta" alignment="CENTER" defaultButton="true" layoutX="374.0" layoutY="573.0" mnemonicParsing="false" onAction="#btnGiocaCarta" prefHeight="43.0" prefWidth="127.0" text="GIOCA CARTA" visible="false" />
-		<Button defaultButton="true" layoutX="707.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnSospendiGara" prefHeight="43.0" prefWidth="127.0" text="SOSPENDI GARA" textAlignment="RIGHT" />
+		<ListView fx:id="listCarte" layoutX="22.0" layoutY="338.0"
+			onMouseClicked="#selezionaCarta" orientation="HORIZONTAL"
+			prefHeight="190.0" prefWidth="830.0" />
+		<Button fx:id="btnGiocaCarta" alignment="CENTER"
+			defaultButton="true" layoutX="374.0" layoutY="573.0"
+			mnemonicParsing="false" onAction="#btnGiocaCarta" prefHeight="43.0"
+			prefWidth="127.0" text="GIOCA CARTA" visible="false" />
+		<Button defaultButton="true" layoutX="707.0" layoutY="147.0"
+			mnemonicParsing="false" onAction="#btnSospendiGara" prefHeight="43.0"
+			prefWidth="127.0" text="SOSPENDI GARA" textAlignment="RIGHT" />
 	</children>
 </AnchorPane>
