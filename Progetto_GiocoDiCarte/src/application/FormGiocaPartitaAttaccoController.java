@@ -124,6 +124,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		{
 			partita = (Partita) g.getGara(codicePartita);
 			
+			//********carica mazzo
+			
 			mazzo = partita.getMazzo();
 			
 			players = partita.getGiocatori();

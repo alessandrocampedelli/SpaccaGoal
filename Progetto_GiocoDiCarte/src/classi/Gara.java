@@ -52,4 +52,7 @@ public abstract class Gara
 	{
 		return carte;
 	}
+	public void setMazzo(Mazzo m) {
+		this.carte = m;
+	}
 }
