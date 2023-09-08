@@ -3,6 +3,7 @@ import classi.Gara;
 import classi.Giocatore;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -37,6 +38,7 @@ public class Salvataggio {
 		for(int i = 0; i < cartelle.length; i++) 
 		{
 			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
+			//gareLette.get(i).setMazzo(leggiMazzo());
 		}
 	}
 
@@ -90,6 +92,14 @@ public class Salvataggio {
 		}
 		return new Torneo(giocatori,codice);
 	} 
+	public void leggiMazzo(File f, String codice) throws FileNotFoundException {
+		Scanner scan = new Scanner(f);
+		while(scan.hasNextLine()) {
+			ArrayList<String> mazzoNomi = new ArrayList<String>();
+			mazzoNomi.addAll(Arrays.asList(scan.nextLine()));
+			System.out.println(mazzoNomi);
+		}
+	}
 
 	//diventa salvaGiocatori()
 	public void salvaNomiPartita() throws IOException
