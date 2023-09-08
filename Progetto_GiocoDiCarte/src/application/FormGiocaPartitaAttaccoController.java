@@ -123,11 +123,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		if(!(codicePartita == null)) 
 		{
 			partita = (Partita) g.getGara(codicePartita);
-			
-			//********carica mazzo
-			
+						
 			mazzo = partita.getMazzo();
-			
 			players = partita.getGiocatori();
 			nomiCarte = players[0].getManoNomi();
 			stampaGiocatoriLabel();

@@ -3,6 +3,7 @@ import classi.Gara;
 import classi.Giocatore;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Arrays;
 import java.io.*;
 import java.nio.file.Files;
@@ -38,7 +39,7 @@ public class Salvataggio {
 		for(int i = 0; i < cartelle.length; i++) 
 		{
 			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
-			//gareLette.get(i).setMazzo(leggiMazzo());
+			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzoPartita.txt"), cartelle[i].getName()));
 		}
 	}
 
@@ -92,13 +93,16 @@ public class Salvataggio {
 		}
 		return new Torneo(giocatori,codice);
 	} 
-	public void leggiMazzo(File f, String codice) throws FileNotFoundException {
+
+	private Mazzo leggiMazzo(File f, String codice) throws FileNotFoundException 
+	{
 		Scanner scan = new Scanner(f);
-		while(scan.hasNextLine()) {
-			ArrayList<String> mazzoNomi = new ArrayList<String>();
-			mazzoNomi.addAll(Arrays.asList(scan.nextLine()));
-			System.out.println(mazzoNomi);
+		LinkedList<Carta> carte = new LinkedList<Carta>();
+		while(scan.hasNextLine()) 
+		{
+			carte.add(Carta.valueOf(scan.nextLine()));
 		}
+		return new Mazzo(carte);
 	}
 
 	//diventa salvaGiocatori()
@@ -161,7 +165,11 @@ public class Salvataggio {
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
-		fw.println(eventoDaSalvare.getMazzo().getCarte());
+
+		for(int i = 0; i < eventoDaSalvare.getMazzo().getCarte().size(); i++)
+		{
+			fw.println(eventoDaSalvare.getMazzo().getCarte().get(i));
+		}
 		fw.close();
 	}
 }
