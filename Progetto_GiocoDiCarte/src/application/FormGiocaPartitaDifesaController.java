@@ -100,7 +100,6 @@ public class FormGiocaPartitaDifesaController implements Initializable
 		if(!(codicePartita == null)) 
 		{
 			partita = (Partita) g.getGara(codicePartita);
-			partita.distribuzioneCarte();
 			mazzo = partita.getMazzo();
 			players = partita.getGiocatori();
 			nomiCarte = players[0].getManoNomi();
