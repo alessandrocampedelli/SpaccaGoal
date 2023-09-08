@@ -1,20 +1,24 @@
 package classi;
 
 import java.util.ArrayList;
+import java.io.IOException;
 public abstract class Gara 
 {
 	protected Giocatore[] giocatori;
 	protected Codice codice;
 	protected Mazzo carte;
 	protected final int N_CARTE_INIZIO = 5;
-	public Gara(ArrayList<Giocatore> giocatori, String codice) 
+	protected Salvataggio salvaMazzoGara;
+
+	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 		this.carte = new Mazzo();
-		distribuzioneCarte();
 	}
-	public void distribuzioneCarte() {
+
+	public void distribuzioneCarte() throws IOException
+	{
 		//pulisco le mani dei giocatori da eventuali partite precedenti
 		pulisciMani();
 		carte.mischia();
@@ -27,23 +31,25 @@ public abstract class Gara
 					giocatori[j].getMano().add(carte.pesca());
 			}
 		}
+		salvaMazzoGara = new Salvataggio(carte);
+		salvaMazzoGara.salvaMazzo();
 	}
-	
+
 	private void pulisciMani() {
 		for(Giocatore g : giocatori)
 			g.getMano().clear();
 	}
-	
+
 	public Codice getCodiceGara()
 	{
 		return this.codice;
 	}
-	
+
 	public Giocatore[] getGiocatori()
 	{
 		return this.giocatori;
 	}
-	
+
 	public Mazzo getMazzo() 
 	{
 		return carte;

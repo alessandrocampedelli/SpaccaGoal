@@ -8,23 +8,28 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 public class Salvataggio {
 	Gara eventoDaSalvare;
+	Mazzo mazzoGara;
 	ArrayList<Gara> gareLette;
 	public Salvataggio(Gara g) 
 	{
-		eventoDaSalvare = g;
+		this.eventoDaSalvare = g;
+	}
+	public Salvataggio(Mazzo c) 
+	{
+		this.mazzoGara = c;
 	}
 	public Salvataggio() 
 	{
-		gareLette = new ArrayList<Gara>();
+		this.gareLette = new ArrayList<Gara>();
 	}
-	
+
 	public ArrayList<Gara> leggiGare() throws FileNotFoundException
 	{
 		leggiPartite();
 		leggiTornei();
 		return gareLette;
 	}
-	
+
 	public void leggiPartite() throws FileNotFoundException
 	{
 		//ottengo il percorso della cartella contenente tutti i file
@@ -39,7 +44,7 @@ public class Salvataggio {
 			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
 		}
 	}
-	
+
 	private Gara leggiNomiPartita(File f, String codice) throws FileNotFoundException
 	{
 		ArrayList<Giocatore> giocatori = new ArrayList<>();
@@ -59,7 +64,7 @@ public class Salvataggio {
 		}
 		return new Partita(giocatori,codice);
 	}
-	
+
 	public void leggiTornei() throws FileNotFoundException
 	{
 		//ottengo il percorso della cartella contenente tutti i file
@@ -90,21 +95,21 @@ public class Salvataggio {
 		}
 		return new Torneo(giocatori,codice);
 	} 
-	
+
 	//diventa salvaGiocatori()
 	public void salvaNomiPartita() throws IOException
 	{
 		String path = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice();
 		Files.createDirectory(Paths.get(path));
-		
-		// Ottieni il percorso assoluto della directory di lavoro corrente
-        String currentDirectory = System.getProperty("user.dir");
 
-        // Costruisci il percorso relativo al file
-        String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
-     
-        // Costruisci il percorso assoluto al file
-        String absolutePath = currentDirectory + File.separator + relativePath;
+		// Ottieni il percorso assoluto della directory di lavoro corrente
+		String currentDirectory = System.getProperty("user.dir");
+
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
+
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(Giocatore player : eventoDaSalvare.giocatori) {
 			//controllo se il giocatore da salvare è un robot oppure no
@@ -115,19 +120,19 @@ public class Salvataggio {
 		}
 		fw.close();
 	}
-	
+
 	public void salvaTorneo() throws IOException
 	{
 		String path = "src/tornei/"+eventoDaSalvare.getCodiceGara().getCodice();
 		Files.createDirectory(Paths.get(path));
 		// Ottieni il percorso assoluto della directory di lavoro corrente
-        String currentDirectory = System.getProperty("user.dir");
+		String currentDirectory = System.getProperty("user.dir");
 
-        // Costruisci il percorso relativo al file
-        String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
-     
-        // Costruisci il percorso assoluto al file
-        String absolutePath = currentDirectory + File.separator + relativePath;
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
+
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(Giocatore player : eventoDaSalvare.giocatori) {
 			//controllo se il giocatore da salvare è un robot oppure no
@@ -136,6 +141,21 @@ public class Salvataggio {
 			else
 				fw.println(player.getAlias());
 		}
+		fw.close();
+	}
+
+	public void salvaMazzo() throws IOException
+	{
+		// Ottieni il percorso assoluto della directory di lavoro corrente
+		String currentDirectory = System.getProperty("user.dir");
+
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/mazzoPartita.txt";
+
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		PrintWriter fw = new PrintWriter(absolutePath);
+
 		fw.close();
 	}
 }
