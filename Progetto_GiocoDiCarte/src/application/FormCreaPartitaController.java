@@ -123,7 +123,7 @@ public class FormCreaPartitaController implements Initializable{
 			formPrincipale.aggiungiGara(g);
 			
 			salvaGara = new Salvataggio(g);
-			salvaGara.salvaPartita();
+			salvaGara.salvaNomiPartita();
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
