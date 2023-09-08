@@ -70,7 +70,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+		//alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
