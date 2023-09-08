@@ -14,9 +14,15 @@ public class Mazzo
 			,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.DIFENSORE_ROCCIA,Carta.PORTIERE,Carta.PORTIERE
 			,Carta.PORTIERE,Carta.PORTIERE,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.GOAL,Carta.VAR,Carta.VAR,Carta.VAR
 			,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.FUORIGIOCO,Carta.MISTER,Carta.MISTER};
+	
 	public Mazzo()
 	{
 		carte = new LinkedList<Carta>(Arrays.asList(_carte));
+	}
+	
+	public Mazzo(LinkedList<Carta> carteMazzo)
+	{
+		carte = new LinkedList<Carta>(carteMazzo);
 	}
 	
 	public LinkedList<Carta> getCarte()
