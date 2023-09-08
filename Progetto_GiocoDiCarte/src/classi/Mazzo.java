@@ -18,6 +18,12 @@ public class Mazzo
 	{
 		carte = new LinkedList<Carta>(Arrays.asList(_carte));
 	}
+	
+	public LinkedList<Carta> getCarte()
+	{
+		return this.carte;
+	}
+	
 	public void aggiungiBonusMalus() {
 		carte.add(Carta.CAMBIO_SCHEMA);
 		carte.add(Carta.AUTOGOAL);

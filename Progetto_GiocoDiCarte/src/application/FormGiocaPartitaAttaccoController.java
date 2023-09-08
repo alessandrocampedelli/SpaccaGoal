@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import classi.Alert_cambiaForm;
 import classi.Carta;
 import classi.Gara;
+import classi.Salvataggio;
 import classi.Gare;
 import classi.Giocatore;
 import classi.Partita;
@@ -35,9 +36,9 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 {
 	Gare g = new Gare();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-
+	Salvataggio s;
 	static String codicePartita;
-
+	
 	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
@@ -70,6 +71,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
+		s = new Salvataggio(g.getGara(codicePartita));
+		s.salvaMazzo();
 		//alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
 	}
 	// Event Listener on Button.onAction
