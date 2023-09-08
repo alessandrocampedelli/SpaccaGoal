@@ -8,16 +8,16 @@ public abstract class Gara
 	protected Codice codice;
 	protected Mazzo carte;
 	protected final int N_CARTE_INIZIO = 5;
-	protected Salvataggio salvaMazzoGara;
 
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 		this.carte = new Mazzo();
+		distribuzioneCarte();
 	}
 
-	public void distribuzioneCarte() throws IOException
+	public void distribuzioneCarte()
 	{
 		//pulisco le mani dei giocatori da eventuali partite precedenti
 		pulisciMani();
@@ -31,8 +31,6 @@ public abstract class Gara
 					giocatori[j].getMano().add(carte.pesca());
 			}
 		}
-		salvaMazzoGara = new Salvataggio(carte);
-		salvaMazzoGara.salvaMazzo();
 	}
 
 	private void pulisciMani() {

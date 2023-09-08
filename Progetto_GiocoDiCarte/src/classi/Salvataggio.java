@@ -8,15 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 public class Salvataggio {
 	Gara eventoDaSalvare;
-	Mazzo mazzoGara;
 	ArrayList<Gara> gareLette;
 	public Salvataggio(Gara g) 
 	{
 		this.eventoDaSalvare = g;
-	}
-	public Salvataggio(Mazzo c) 
-	{
-		this.mazzoGara = c;
 	}
 	public Salvataggio() 
 	{
@@ -154,8 +149,9 @@ public class Salvataggio {
 
 		// Costruisci il percorso assoluto al file
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter fw = new PrintWriter(absolutePath);
 
+		PrintWriter fw = new PrintWriter(absolutePath);
+		fw.println(eventoDaSalvare.getMazzo().getCarte());
 		fw.close();
 	}
 }

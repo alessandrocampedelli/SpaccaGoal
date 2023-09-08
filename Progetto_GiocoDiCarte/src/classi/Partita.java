@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Partita extends Gara{
 	
-	public Partita(ArrayList<Giocatore> giocatori, String codice) {
+	public Partita(ArrayList<Giocatore> giocatori, String codice)
+	{
 		super(giocatori, codice);
 	}
 	public String toString() {
