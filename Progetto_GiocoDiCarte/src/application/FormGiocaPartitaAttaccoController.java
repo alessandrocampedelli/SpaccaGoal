@@ -73,7 +73,9 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMazzo();
-		//alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+		s.salvaMani();
+		s.salvaPunteggio();
+		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -103,16 +105,16 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		{
 			if(giocatori.size() >= 2)
 			{
-				lblGiocatore1.setText(giocatori.get(0) + ": 0 GOAL");
-				lblGiocatore2.setText(giocatori.get(1) + ": 0 GOAL");
+				lblGiocatore1.setText(giocatori.get(0) + ": "+players[0].getPunteggio()+" GOAL");
+				lblGiocatore2.setText(giocatori.get(1) + ": "+players[1].getPunteggio()+" GOAL");
 			}
 			if(giocatori.size() >= 3)
 			{
-				lblGiocatore3.setText(giocatori.get(2) + ": 0 GOAL");
+				lblGiocatore3.setText(giocatori.get(2) + ": "+players[2].getPunteggio()+" GOAL");
 			}
 			if(giocatori.size() == 4)
 			{
-				lblGiocatore4.setText(giocatori.get(3) + ": 0 GOAL");
+				lblGiocatore4.setText(giocatori.get(3) + ": "+players[3].getPunteggio()+" GOAL");
 			}
 		}
 		lblTurnoAttacco.setText("TURNO DI ATTACCO: " + giocatori.get(0));
@@ -123,7 +125,6 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		if(!(codicePartita == null)) 
 		{
 			partita = (Partita) g.getGara(codicePartita);
-						
 			mazzo = partita.getMazzo();
 			players = partita.getGiocatori();
 			nomiCarte = players[0].getManoNomi();

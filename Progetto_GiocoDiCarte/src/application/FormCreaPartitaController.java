@@ -116,15 +116,17 @@ public class FormCreaPartitaController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
 			g = new Partita(giocatori,codice);
-			//g.distribuzioneCarte();
+			g.distribuzioneCarte();
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			Parent root = loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
 			
 			salvaGara = new Salvataggio(g);
-			//salvaGara.salvaNomiPartita();
-			//salvaGara.salvaMazzo();
+			salvaGara.salvaNomiPartita();
+			salvaGara.salvaMazzo();
+			salvaGara.salvaMani();
+			salvaGara.salvaPunteggio();
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
