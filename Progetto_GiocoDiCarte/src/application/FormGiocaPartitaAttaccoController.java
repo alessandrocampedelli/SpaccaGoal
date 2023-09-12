@@ -12,10 +12,15 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
 import javafx.scene.layout.HBox;
 import classi.Alert_cambiaForm;
 import classi.Carta;
@@ -38,7 +43,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Salvataggio s;
 	static String codicePartita;
-	
+
 	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
@@ -56,6 +61,10 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
 
+	String turno;
+	int posizioneGiocatoreAttaccante;
+	int posizioneGiocatoreDifensore;
+	String nomeCarta = "";
 	@FXML
 	Gara partita;
 	Mazzo mazzo;
@@ -65,7 +74,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	@FXML
 	Button btnGiocaCarta = new Button();
 	private ArrayList<String> giocatori;
-	
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
@@ -87,7 +96,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	public void selezionaCarta(MouseEvent event) {
 		//ottengo la carta selezionata
 		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		
+
 		//se è una carta di attacco la rendo cliccabile e viceversa
 		if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER)) {
 			if(!btnGiocaCarta.isVisible())
@@ -96,7 +105,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			listCarte.getSelectionModel().clearSelection();
 			btnGiocaCarta.setVisible(false);
 		}
-			
+
 	}
 	public void stampaGiocatoriLabel()
 	{
@@ -119,11 +128,19 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		}
 		lblTurnoAttacco.setText("TURNO DI ATTACCO: " + giocatori.get(0));
 	}
-	
+
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
 		if(!(codicePartita == null)) 
 		{
+			try
+			{
+				leggiTurno();
+			}
+			catch(IOException e)
+			{
+				System.out.println(e.getMessage());
+			}
 			partita = (Partita) g.getGara(codicePartita);
 			mazzo = partita.getMazzo();
 			players = partita.getGiocatori();
@@ -135,7 +152,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			listCarte.setCellFactory(param -> {
 				return new ListCell<String>() {
 					private ImageView imageView = new ImageView();
-	
+
 					@Override
 					public void updateItem(String name, boolean empty) {
 						super.updateItem(name, empty);
@@ -168,7 +185,22 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			//alert.mostraCartaPescata();
 		}
 	}
-	private void leggiTurno() {
-		
+	private void leggiTurno() throws IOException
+	{
+		// Ottieni il percorso assoluto della directory di lavoro corrente
+		String currentDirectory = System.getProperty("user.dir");
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/partite/"+codicePartita+"/turnoPartita.txt";
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		Scanner scan = new Scanner(f);
+		turno = scan.nextLine();
+		posizioneGiocatoreAttaccante = scan.nextInt();
+		posizioneGiocatoreDifensore = scan.nextInt();
+		if(turno.equals("d"))
+		{
+			nomeCarta = scan.nextLine();
+		}
 	}
 }
