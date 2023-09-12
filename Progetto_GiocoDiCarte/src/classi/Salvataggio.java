@@ -129,6 +129,9 @@ public class Salvataggio {
 			g.giocatori[i].setPunteggio(Integer.parseInt(punteggio));
 		}
 	}
+	/*private String getPercorso(String nomeFile, boolean partita) {
+		
+	}*/
 	public void salvaNomiPartita() throws IOException
 	{
 		String path = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice();
@@ -233,6 +236,20 @@ public class Salvataggio {
 		{
 			fw.println(eventoDaSalvare.getGiocatori()[i].getPunteggio());
 		}
+		fw.close();
+	}
+	public void salvaTurno() throws IOException{
+		// Ottieni il percorso assoluto della directory di lavoro corrente
+		String currentDirectory = System.getProperty("user.dir");
+
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/turnoPartita.txt";
+
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+		
 		fw.close();
 	}
 }

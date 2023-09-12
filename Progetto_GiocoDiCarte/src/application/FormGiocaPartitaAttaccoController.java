@@ -57,7 +57,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	private ListView<String> listCarte = new ListView<String>();
 
 	@FXML
-	Partita partita;
+	Gara partita;
 	Mazzo mazzo;
 	Giocatore[] players;
 	String[] nomiCarte;
@@ -167,5 +167,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			});
 			//alert.mostraCartaPescata();
 		}
+	}
+	private void leggiTurno() {
+		
 	}
 }
