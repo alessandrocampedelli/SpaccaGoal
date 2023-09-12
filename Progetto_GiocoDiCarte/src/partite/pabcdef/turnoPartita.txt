@@ -1,3 +1,4 @@
-a
+d
 0
 1
+BOMBER_VERO

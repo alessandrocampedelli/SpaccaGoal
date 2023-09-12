@@ -33,6 +33,7 @@ import classi.Tipologia;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import classi.Mazzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,11 +61,13 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	private Label lblGiocatore4;
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
+	@FXML
+	ImageView imgGiocata = new ImageView();
 
 	String turno;
 	int posizioneGiocatoreAttaccante;
 	int posizioneGiocatoreDifensore;
-	String nomeCarta = "";
+	String nomeCarta;
 	@FXML
 	Gara partita;
 	Mazzo mazzo;
@@ -84,6 +87,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		s.salvaMazzo();
 		s.salvaMani();
 		s.salvaPunteggio();
+		salvaTurno();
 		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
 	}
 	// Event Listener on Button.onAction
@@ -96,14 +100,24 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	public void selezionaCarta(MouseEvent event) {
 		//ottengo la carta selezionata
 		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-
-		//se è una carta di attacco la rendo cliccabile e viceversa
-		if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER)) {
-			if(!btnGiocaCarta.isVisible())
-				btnGiocaCarta.setVisible(true);
+		if(turno.equals("a")) {
+			//se è una carta di attacco la rendo cliccabile e viceversa
+			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER)) {
+				if(!btnGiocaCarta.isVisible())
+					btnGiocaCarta.setVisible(true);
+			}else {
+				listCarte.getSelectionModel().clearSelection();
+				btnGiocaCarta.setVisible(false);
+			}
 		}else {
-			listCarte.getSelectionModel().clearSelection();
-			btnGiocaCarta.setVisible(false);
+			//se è una carta di difesa la rendo cliccabile e viceversa
+			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR)) {
+				if(!btnGiocaCarta.isVisible())
+					btnGiocaCarta.setVisible(true);
+			}else {
+				listCarte.getSelectionModel().clearSelection();
+				btnGiocaCarta.setVisible(false);
+			}
 		}
 
 	}
@@ -126,7 +140,6 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 				lblGiocatore4.setText(giocatori.get(3) + ": "+players[3].getPunteggio()+" GOAL");
 			}
 		}
-		lblTurnoAttacco.setText("TURNO DI ATTACCO: " + giocatori.get(0));
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1)
@@ -136,15 +149,24 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			try
 			{
 				leggiTurno();
+				partita = (Partita) g.getGara(codicePartita);
+				mazzo = partita.getMazzo();
+				players = partita.getGiocatori();
+				if(turno.equals("a")) {
+					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
+					lblTurnoAttacco.setTextFill(Color.BLUE);
+					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+				}else {
+					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
+					lblTurnoAttacco.setTextFill(Color.RED);
+					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
+					imgGiocata.setImage(Carta.valueOf(nomeCarta).getImmagine());
+				}
 			}
 			catch(IOException e)
 			{
 				System.out.println(e.getMessage());
 			}
-			partita = (Partita) g.getGara(codicePartita);
-			mazzo = partita.getMazzo();
-			players = partita.getGiocatori();
-			nomiCarte = players[0].getManoNomi();
 			stampaGiocatoriLabel();
 			ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
 			// TODO Auto-generated method stub
@@ -200,7 +222,39 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		posizioneGiocatoreDifensore = scan.nextInt();
 		if(turno.equals("d"))
 		{
-			nomeCarta = scan.nextLine();
+			nomeCarta = scan.next();
 		}
+	}
+	private void salvaTurno() throws IOException{
+		// Ottieni il percorso assoluto della directory di lavoro corrente
+		String currentDirectory = System.getProperty("user.dir");
+
+		// Costruisci il percorso relativo al file
+		String relativePath = "src/partite/"+codicePartita+"/turnoPartita.txt";
+
+		// Costruisci il percorso assoluto al file
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+		if(turno.equals("a")) {
+			fw.println("d");
+			fw.println(posizioneGiocatoreAttaccante);
+			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartaGiocata.name());
+		}else {
+			fw.println("a");
+			if((players.length-1) != posizioneGiocatoreAttaccante)
+				fw.println(posizioneGiocatoreAttaccante+1);
+			else
+				fw.println(0);
+			
+			
+			if((players.length-1) != posizioneGiocatoreDifensore)
+				fw.println(posizioneGiocatoreDifensore+1);
+			else
+				fw.println(0);
+		}
+		
+		fw.close();
 	}
 }
