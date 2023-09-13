@@ -55,4 +55,31 @@ public abstract class Gara
 	public void setMazzo(Mazzo m) {
 		this.carte = m;
 	}
+	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) {
+		//attaccante
+		if(cartaAtt.equals(Carta.ATTACCANTE)) {
+			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA))){
+				att.aggiungiGoal();
+			}
+		}else {
+			//bomber vero
+			if(cartaAtt.equals(Carta.BOMBER_VERO)) {
+				if(!cartaDif.equals(Carta.DIFENSORE_ROCCIA)) {
+					att.aggiungiGoal();
+				}
+			}else {
+				//rovesciata dell'anno e tiro della domenica
+				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA)) {
+					att.aggiungiGoal();
+				}else {
+					//goal
+					if(cartaAtt.equals(Carta.GOAL)) {
+						if((cartaDif.equals(Carta.VAR) || cartaDif.equals(Carta.FUORIGIOCO))) {
+							att.aggiungiGoal();
+						}
+					}
+				}
+			}
+		}
+	}
 }
