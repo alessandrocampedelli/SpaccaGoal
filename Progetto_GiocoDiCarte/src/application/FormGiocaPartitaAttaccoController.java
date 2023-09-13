@@ -76,13 +76,18 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	Carta cartaGiocata;
 	@FXML
 	Button btnGiocaCarta = new Button();
-	private ArrayList<String> giocatori;
 
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
+		if(turno.equals("a"))
+			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
+		else
+			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
+		mazzo.scarta(cartaGiocata);
+		//salvo tutte le informazioni della partita
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMazzo();
 		s.salvaMani();
@@ -123,21 +128,20 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	}
 	public void stampaGiocatoriLabel()
 	{
-		giocatori = g.restituisciGiocatori(codicePartita);
-		if(!lblGiocatore1.getText().equals(giocatori.get(0))) 
+		if(!lblGiocatore1.getText().equals(players[0].getAlias())) 
 		{
-			if(giocatori.size() >= 2)
+			if(players.length >= 2)
 			{
-				lblGiocatore1.setText(giocatori.get(0) + ": "+players[0].getPunteggio()+" GOAL");
-				lblGiocatore2.setText(giocatori.get(1) + ": "+players[1].getPunteggio()+" GOAL");
+				lblGiocatore1.setText(players[0].getAlias() + ": "+players[0].getPunteggio()+" GOAL");
+				lblGiocatore2.setText(players[1].getAlias() + ": "+players[1].getPunteggio()+" GOAL");
 			}
-			if(giocatori.size() >= 3)
+			if(players.length >= 3)
 			{
-				lblGiocatore3.setText(giocatori.get(2) + ": "+players[2].getPunteggio()+" GOAL");
+				lblGiocatore3.setText(players[2].getAlias() + ": "+players[2].getPunteggio()+" GOAL");
 			}
-			if(giocatori.size() == 4)
+			if(players.length == 4)
 			{
-				lblGiocatore4.setText(giocatori.get(3) + ": "+players[3].getPunteggio()+" GOAL");
+				lblGiocatore4.setText(players[3].getAlias() + ": "+players[3].getPunteggio()+" GOAL");
 			}
 		}
 	}
