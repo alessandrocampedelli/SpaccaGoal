@@ -87,7 +87,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		if(turno.equals("a"))
 			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
 		else {
-			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], cartaGiocata, Carta.valueOf(nomeCarta));
+			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
 		mazzo.scarta(cartaGiocata);
