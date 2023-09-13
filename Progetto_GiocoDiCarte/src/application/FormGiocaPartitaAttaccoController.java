@@ -81,14 +81,16 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
+		//salvo tutte le informazioni della partita
+		s = new Salvataggio(g.getGara(codicePartita));
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		if(turno.equals("a"))
 			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
-		else
+		else {
+			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], cartaGiocata, Carta.valueOf(nomeCarta));
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
+		}
 		mazzo.scarta(cartaGiocata);
-		//salvo tutte le informazioni della partita
-		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMazzo();
 		s.salvaMani();
 		s.salvaPunteggio();
