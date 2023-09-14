@@ -51,41 +51,59 @@ public abstract class Gara
 	{
 		return carte;
 	}
-	
+
 	public void setMazzo(Mazzo m) {
 		this.carte = m;
 	}
-	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) {
+	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) 
+	{
 		dif.getMano().add(this.carte.pesca());
 		//attaccante
-		if(cartaAtt.equals(Carta.ATTACCANTE)) {
-			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA))){
+		if(cartaAtt.equals(Carta.ATTACCANTE)) 
+		{
+			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA)))
+			{
 				att.aggiungiGoal();
-			}else {
+			}else 
+			{
 				dif.getMano().add(this.carte.pesca());
 			}
 		}else {
 			//bomber vero
-			if(cartaAtt.equals(Carta.BOMBER_VERO)) {
-				if(!cartaDif.equals(Carta.DIFENSORE_ROCCIA)) {
+			if(cartaAtt.equals(Carta.BOMBER_VERO)) 
+			{
+				if(!cartaDif.equals(Carta.DIFENSORE_ROCCIA)) 
+				{
 					att.aggiungiGoal();
-				}else {
+				}else 
+				{
 					dif.getMano().add(this.carte.pesca());
 				}
-			}else {
+			}
+			else 
+			{
 				//rovesciata dell'anno e tiro della domenica
-				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA)) {
+				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA))
+				{
 					att.aggiungiGoal();
-				}else {
+				}
+				else 
+				{
 					//goal
-					if(cartaAtt.equals(Carta.GOAL)) {
-						if(!(cartaDif.equals(Carta.VAR) || cartaDif.equals(Carta.FUORIGIOCO))) {
+					if(cartaAtt.equals(Carta.GOAL)) 
+					{
+						if(!(cartaDif.equals(Carta.VAR) || cartaDif.equals(Carta.FUORIGIOCO))) 
+						{
 							att.aggiungiGoal();
-						}else {
+						}else 
+						{
 							dif.getMano().add(this.carte.pesca());
 						}
-					}else {
-						if(cartaAtt.equals(Carta.MISTER)) {
+					}
+					else 
+					{
+						if(cartaAtt.equals(Carta.MISTER)) 
+						{
 							att.getMano().add(this.carte.pesca());
 							att.getMano().add(this.carte.pesca());
 						}
@@ -94,30 +112,32 @@ public abstract class Gara
 			}
 		}
 	}
-	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) {
+	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) 
+	{
 		boolean giocaTurno = true;
-		if(cartaGiocata.equals(Carta.ATTACCANTE)) {
+		if(cartaGiocata.equals(Carta.ATTACCANTE)) 
+		{
 			giocaTurno = manoAvversario.contains(Carta.DIFENSORE) || manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
-		}else {
-			if(cartaGiocata.equals(Carta.BOMBER_VERO)) {
-				giocaTurno = manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
-			}else {
-				if(cartaGiocata.equals(Carta.RIGORE)) {
-					giocaTurno = manoAvversario.contains(Carta.PORTIERE);
-				}else {
-					if(cartaGiocata.equals(Carta.ROVESCIATA_DELLANNO) || cartaGiocata.equals(Carta.TIRO_DOMENICA)) {
-						giocaTurno = false;
-					}else {
-						if(cartaGiocata.equals(Carta.GOAL)) {
-							giocaTurno = manoAvversario.contains(Carta.VAR) || manoAvversario.contains(Carta.FUORIGIOCO);
-						}else {
-							if(cartaGiocata.equals(Carta.MISTER)) {
-								giocaTurno = false;
-							}
-						}
-					}
-				}
-			}
+		}
+		else if(cartaGiocata.equals(Carta.BOMBER_VERO)) 
+		{
+			giocaTurno = manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
+		}
+		else if(cartaGiocata.equals(Carta.RIGORE)) 
+		{
+			giocaTurno = manoAvversario.contains(Carta.PORTIERE);
+		}
+		else if(cartaGiocata.equals(Carta.ROVESCIATA_DELLANNO) || cartaGiocata.equals(Carta.TIRO_DOMENICA)) 
+		{
+			giocaTurno = false;
+		}
+		else if(cartaGiocata.equals(Carta.GOAL)) 
+		{
+			giocaTurno = manoAvversario.contains(Carta.VAR) || manoAvversario.contains(Carta.FUORIGIOCO);
+		}
+		else if(cartaGiocata.equals(Carta.MISTER)) 
+		{
+			giocaTurno = false;
 		}
 		return giocaTurno;
 	}

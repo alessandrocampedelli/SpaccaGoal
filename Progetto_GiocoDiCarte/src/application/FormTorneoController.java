@@ -36,12 +36,12 @@ public class FormTorneoController {
 				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
 						"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
 				alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
-				alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormTabelloneTorneo.fxml"));
 				loader.load();
 				FormTabelloneTorneoController form = loader.getController();
 				form.copiaInfo(codiceInseritoUtente);
+				alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 			}
 			else 
 			{

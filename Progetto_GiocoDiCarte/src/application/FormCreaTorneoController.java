@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 import classi.Salvataggio;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -128,20 +130,39 @@ public class FormCreaTorneoController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "t"+codice;
 			g = new Torneo(giocatori,codice);
+			g.distribuzioneCarte();
 
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
-			Parent root = loader.load();
+			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
 
 			salvaGara = new Salvataggio(g);
-			salvaGara.salvaTorneo();
+			salvaGara.salvaNomiGiocatori("tornei");
+			salvaGara.salvaMazzo("tornei");
+			salvaGara.salvaMani("tornei");
+			salvaGara.salvaPunteggio("tornei");
+			salvaTurno(codice);
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
 		}
 	}
+	
+	private void salvaTurno(String codice) throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/tornei/"+codice+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		PrintWriter pw = new PrintWriter(absolutePath);
+		
+		pw.println("a");
+		pw.println(0);
+		pw.println(1);
+		pw.close();
+	}
+	
 	private String getRandomString(int len, char minChar, char maxChar) {
 		String s = "";
 		for (int i = 0; i < len; ++i)
