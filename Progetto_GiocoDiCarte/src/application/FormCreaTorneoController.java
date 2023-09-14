@@ -130,6 +130,7 @@ public class FormCreaTorneoController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "t"+codice;
 			g = new Torneo(giocatori,codice);
+			g.distribuzioneCarte();
 
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			loader.load();

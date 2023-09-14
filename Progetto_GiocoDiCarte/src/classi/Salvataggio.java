@@ -37,7 +37,7 @@ public class Salvataggio {
 		File[] cartelle = f.listFiles();
 		for(int i = 0; i < cartelle.length; i++) 
 		{
-			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
+			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomi.txt"), cartelle[i].getName()));
 			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName()));
 			leggiMani(new File(cartelle[i].getPath()+"/mani.txt"),cartelle[i].getName(), gareLette.get(i));
 			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggi.txt"),cartelle[i].getName(), gareLette.get(i));
@@ -63,40 +63,13 @@ public class Salvataggio {
 	
 	private Gara leggiNomiPartita(File f, String codice) throws FileNotFoundException
 	{
-		ArrayList<Giocatore> giocatori = new ArrayList<>();
-		Scanner scan = new Scanner(f);
-		while(scan.hasNextLine()) 
-		{
-			String idGiocatore = scan.nextLine();
-			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
-			//carattere robot
-			if(robot == '*') 
-			{
-				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
-				giocatori.add(new Giocatore(idGiocatore,true));
-			}
-			else
-				giocatori.add(new Giocatore(idGiocatore,false));
-		}
-		scan.close();
+		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
 		return new Partita(giocatori,codice);
 	}
 	
 	private Gara leggiNomiTorneo(File f, String codice) throws FileNotFoundException
 	{
-		ArrayList<Giocatore> giocatori = new ArrayList<>();
-		Scanner scan = new Scanner(f);
-		while(scan.hasNextLine()) {
-			String idGiocatore = scan.nextLine();
-			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
-			//carattere robot
-			if(robot == '*') {
-				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
-				giocatori.add(new Giocatore(idGiocatore,true));
-			}else
-				giocatori.add(new Giocatore(idGiocatore,false));
-		}
-		scan.close();
+		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
 		return new Torneo(giocatori,codice);
 	}
 	
@@ -115,7 +88,7 @@ public class Salvataggio {
 	private void leggiMani(File f, String codice, Gara g) throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(f);
-		for(int i = 0; scan.hasNextLine(); i++) 
+		for(int i = 0; scan.hasNextLine(); i++)
 		{
 			String mano = scan.nextLine();
 			g.giocatori[i].setMano(leggiManoGiocatore(mano));
@@ -148,7 +121,7 @@ public class Salvataggio {
 		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice();
 		Files.createDirectory(Paths.get(path));
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
+		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomi.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -212,5 +185,26 @@ public class Salvataggio {
 			fw.println(eventoDaSalvare.getGiocatori()[i].getPunteggio());
 		}
 		fw.close();
+	}
+	
+	private ArrayList<Giocatore> leggiGiocatori(File f) throws FileNotFoundException
+	{
+		ArrayList<Giocatore> giocatori = new ArrayList<>();
+		Scanner scan = new Scanner(f);
+		while(scan.hasNextLine()) 
+		{
+			String idGiocatore = scan.nextLine();
+			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
+			//carattere robot
+			if(robot == '*') 
+			{
+				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
+				giocatori.add(new Giocatore(idGiocatore,true));
+			}
+			else
+				giocatori.add(new Giocatore(idGiocatore,false));
+		}
+		scan.close();
+		return giocatori;
 	}
 }
