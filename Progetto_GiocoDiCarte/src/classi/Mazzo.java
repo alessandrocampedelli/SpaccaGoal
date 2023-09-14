@@ -30,10 +30,6 @@ public class Mazzo
 		return this.carte;
 	}
 	
-	public void aggiungiBonusMalus() {
-		carte.add(Carta.CAMBIO_SCHEMA);
-		carte.add(Carta.AUTOGOAL);
-	}
 	public void mischia() {
 		Collections.shuffle(carte);
 	}

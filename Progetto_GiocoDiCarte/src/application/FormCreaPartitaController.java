@@ -123,15 +123,15 @@ public class FormCreaPartitaController implements Initializable{
 			g = new Partita(giocatori,codice);
 			g.distribuzioneCarte();
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
-			Parent root = loader.load();
+			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
 			
 			salvaGara = new Salvataggio(g);
-			salvaGara.salvaNomiPartita();
-			salvaGara.salvaMazzo();
-			salvaGara.salvaMani();
-			salvaGara.salvaPunteggio();
+			salvaGara.salvaNomiGiocatori("partite");
+			salvaGara.salvaMazzo("partite");
+			salvaGara.salvaMani("partite");
+			salvaGara.salvaPunteggio("partite");
 			salvaTurno(codice);
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
@@ -139,16 +139,11 @@ public class FormCreaPartitaController implements Initializable{
 			giocatori.clear();
 		}
 	}
-	private void salvaTurno(String codice) throws IOException{
-		String path = "src/partite/"+codice;
-
-		// Ottieni il percorso assoluto della directory di lavoro corrente
+	
+	private void salvaTurno(String codice) throws IOException
+	{
 		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+codice+"/turnoPartita.txt";
-
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/partite/"+codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		PrintWriter pw = new PrintWriter(absolutePath);
 		
@@ -157,6 +152,7 @@ public class FormCreaPartitaController implements Initializable{
 		pw.println(1);
 		pw.close();
 	}
+	
 	private String getRandomString(int len, char minChar, char maxChar) {
 	    String s = "";
 	    for (int i = 0; i < len; ++i)

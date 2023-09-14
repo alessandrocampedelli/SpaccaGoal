@@ -49,12 +49,12 @@ public class FormIniziaPartitaController implements Initializable
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
 		//classe da cui partono i dati
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartitaAttacco.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
 		loader.load();
-		FormGiocaPartitaAttaccoController form = loader.getController();
+		FormGiocaPartitaController form = loader.getController();
 		form.copiaCodice(codiceUtente);
 		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
-		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	

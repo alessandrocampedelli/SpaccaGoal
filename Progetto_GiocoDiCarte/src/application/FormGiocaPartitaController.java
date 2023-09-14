@@ -12,7 +12,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +19,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import javafx.scene.layout.HBox;
 import classi.Alert_cambiaForm;
 import classi.Carta;
@@ -38,7 +36,7 @@ import classi.Mazzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class FormGiocaPartitaAttaccoController implements Initializable
+public class FormGiocaPartitaController implements Initializable
 {
 	Gare g = new Gare();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
@@ -74,6 +72,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	Giocatore[] players;
 	String[] nomiCarte;
 	Carta cartaGiocata;
+	Carta cartaAtt;
 	@FXML
 	Button btnGiocaCarta = new Button();
 	@FXML
@@ -93,29 +92,29 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
 		mazzo.scarta(cartaGiocata);
-		s.salvaMazzo();
-		s.salvaMani();
-		s.salvaPunteggio();
+		s.salvaMazzo("partite");
+		s.salvaMani("partite");
+		s.salvaPunteggio("partite");
 		salvaTurno();
-		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	@FXML
-	public void btnPassaTurno(ActionEvent event) throws IOException {
-		
+	public void btnPassaTurno(ActionEvent event) throws IOException 
+	{
 		players[posizioneGiocatoreAttaccante].aggiungiGoal();
-		if(!cartaGiocata.equals(Carta.MISTER)) {
-			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
-		}else {
+		players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
+		if(cartaAtt.equals(Carta.MISTER)) 
+		{
 			players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 			players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 		}
 		//salvo tutte le informazioni della partita
 		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMazzo();
-		s.salvaMani();
-		s.salvaPunteggio();
+		s.salvaMazzo("partite");
+		s.salvaMani("partite");
+		s.salvaPunteggio("partite");
 		salvaTurno();
-		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -186,7 +185,7 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					Carta cartaAtt = Carta.valueOf(nomeCarta);
+					cartaAtt = Carta.valueOf(nomeCarta);
 					//controllo se il giocatore ha carte con le quali può difendersi
 					if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano())) {
 						btnPassaTurno.setVisible(false);
@@ -243,11 +242,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	}
 	private void leggiTurno() throws IOException
 	{
-		// Ottieni il percorso assoluto della directory di lavoro corrente
 		String currentDirectory = System.getProperty("user.dir");
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+codicePartita+"/turnoPartita.txt";
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		File f = new File(absolutePath);
 		Scanner scan = new Scanner(f);
@@ -258,37 +254,33 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 		{
 			nomeCarta = scan.next();
 		}
+		scan.close();
 	}
 	private void salvaTurno() throws IOException{
-		// Ottieni il percorso assoluto della directory di lavoro corrente
 		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+codicePartita+"/turnoPartita.txt";
-
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
-		if(turno.equals("a")) {
+		if(turno.equals("a")) 
+		{
 			fw.println("d");
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
 			fw.println(cartaGiocata.name());
-		}else {
+		}else 
+		{
 			fw.println("a");
 			if((players.length-1) != posizioneGiocatoreAttaccante)
 				fw.println(posizioneGiocatoreAttaccante+1);
 			else
 				fw.println(0);
-			
-			
+
 			if((players.length-1) != posizioneGiocatoreDifensore)
 				fw.println(posizioneGiocatoreDifensore+1);
 			else
 				fw.println(0);
 		}
-		
 		fw.close();
 	}
 }

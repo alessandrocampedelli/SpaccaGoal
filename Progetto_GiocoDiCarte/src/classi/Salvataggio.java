@@ -29,22 +29,38 @@ public class Salvataggio {
 
 	public void leggiPartite() throws FileNotFoundException
 	{
-		//ottengo il percorso della cartella contenente tutti i file
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src\\partite";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		File f = new File(absolutePath);
-		//ottengo il vettore di file
+		//ottengo il vettore di file con tutti i file presenti nella cartella
 		File[] cartelle = f.listFiles();
 		for(int i = 0; i < cartelle.length; i++) 
 		{
 			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
-			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzoPartita.txt"), cartelle[i].getName()));
-			leggiMani(new File(cartelle[i].getPath()+"/maniPartita.txt"),cartelle[i].getName(), gareLette.get(i));
-			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggiPartita.txt"),cartelle[i].getName(), gareLette.get(i));
+			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName()));
+			leggiMani(new File(cartelle[i].getPath()+"/mani.txt"),cartelle[i].getName(), gareLette.get(i));
+			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggi.txt"),cartelle[i].getName(), gareLette.get(i));
 		}
 	}
 
+	public void leggiTornei() throws FileNotFoundException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src\\tornei";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		//ottengo il vettore di file con tutti i file presenti nella cartella
+		File[] cartelle = f.listFiles();
+		for(int i = 0; i < cartelle.length; i++) 
+		{
+			gareLette.add(leggiNomiTorneo(new File(cartelle[i].getPath()+"/nomi.txt"), cartelle[i].getName()));
+			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName()));
+			leggiMani(new File(cartelle[i].getPath()+"/mani.txt"),cartelle[i].getName(), gareLette.get(i));
+			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggi.txt"),cartelle[i].getName(), gareLette.get(i));
+		}
+	}
+	
 	private Gara leggiNomiPartita(File f, String codice) throws FileNotFoundException
 	{
 		ArrayList<Giocatore> giocatori = new ArrayList<>();
@@ -62,23 +78,10 @@ public class Salvataggio {
 			else
 				giocatori.add(new Giocatore(idGiocatore,false));
 		}
+		scan.close();
 		return new Partita(giocatori,codice);
 	}
-
-	public void leggiTornei() throws FileNotFoundException
-	{
-		//ottengo il percorso della cartella contenente tutti i file
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src\\tornei";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		File f = new File(absolutePath);
-		//ottengo il vettore di file
-		File[] cartelle = f.listFiles();
-		for(int i = 0; i < cartelle.length; i++) 
-		{
-			gareLette.add(leggiNomiTorneo(new File(cartelle[i].getPath()+"/nomiGiocatori.txt"), cartelle[i].getName()));
-		}
-	}
+	
 	private Gara leggiNomiTorneo(File f, String codice) throws FileNotFoundException
 	{
 		ArrayList<Giocatore> giocatori = new ArrayList<>();
@@ -93,9 +96,10 @@ public class Salvataggio {
 			}else
 				giocatori.add(new Giocatore(idGiocatore,false));
 		}
+		scan.close();
 		return new Torneo(giocatori,codice);
-	} 
-
+	}
+	
 	private Mazzo leggiMazzo(File f, String codice) throws FileNotFoundException 
 	{
 		Scanner scan = new Scanner(f);
@@ -104,49 +108,52 @@ public class Salvataggio {
 		{
 			carte.add(Carta.valueOf(scan.nextLine()));
 		}
+		scan.close();
 		return new Mazzo(carte);
 	}
-	private void leggiMani(File f, String codice, Gara g) throws FileNotFoundException{
+
+	private void leggiMani(File f, String codice, Gara g) throws FileNotFoundException
+	{
 		Scanner scan = new Scanner(f);
 		for(int i = 0; scan.hasNextLine(); i++) 
 		{
 			String mano = scan.nextLine();
 			g.giocatori[i].setMano(leggiManoGiocatore(mano));
 		}
+		scan.close();
 	}
-	private ArrayList<Carta> leggiManoGiocatore(String mano){
+	
+	private ArrayList<Carta> leggiManoGiocatore(String mano)
+	{
 		ArrayList<Carta> _mano = new ArrayList<>();
 		String[] nomiCarte = mano.split(",");
 		for(int i = 0; i < nomiCarte.length; i++)
 			_mano.add(Carta.valueOf(nomiCarte[i]));
 		return _mano;
 	}
-	private void leggiPunteggi(File f, String codice, Gara g) throws FileNotFoundException{
+	
+	private void leggiPunteggi(File f, String codice, Gara g) throws FileNotFoundException
+	{
 		Scanner scan = new Scanner(f);
 		for(int i = 0; scan.hasNextLine(); i++) 
 		{
 			String punteggio = scan.nextLine();
 			g.giocatori[i].setPunteggio(Integer.parseInt(punteggio));
 		}
+		scan.close();
 	}
-	/*private String getPercorso(String nomeFile, boolean partita) {
+	
+	public void salvaNomiGiocatori(String partitaTorneo) throws IOException
+	{
+		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice();
+		Files.createDirectory(Paths.get(path));
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
 		
-	}*/
-	public void salvaNomiPartita() throws IOException
-	{
-		String path = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice();
-		Files.createDirectory(Paths.get(path));
-
-		// Ottieni il percorso assoluto della directory di lavoro corrente
-		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
-
-		// Costruisci il percorso assoluto al file
-		String absolutePath = currentDirectory + File.separator + relativePath;
 		PrintWriter fw = new PrintWriter(absolutePath);
-		for(Giocatore player : eventoDaSalvare.giocatori) {
+		for(Giocatore player : eventoDaSalvare.giocatori) 
+		{
 			//controllo se il giocatore da salvare è un robot oppure no
 			if(player.getRobot())
 				fw.println(player.getAlias()+"*");
@@ -155,39 +162,11 @@ public class Salvataggio {
 		}
 		fw.close();
 	}
-
-	public void salvaTorneo() throws IOException
+	
+	public void salvaMazzo(String partitaTorneo) throws IOException
 	{
-		String path = "src/tornei/"+eventoDaSalvare.getCodiceGara().getCodice();
-		Files.createDirectory(Paths.get(path));
-		// Ottieni il percorso assoluto della directory di lavoro corrente
 		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().getCodice()+"/nomiGiocatori.txt";
-
-		// Costruisci il percorso assoluto al file
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter fw = new PrintWriter(absolutePath);
-		for(Giocatore player : eventoDaSalvare.giocatori) {
-			//controllo se il giocatore da salvare è un robot oppure no
-			if(player.getRobot())
-				fw.println(player.getAlias()+"*");
-			else
-				fw.println(player.getAlias());
-		}
-		fw.close();
-	}
-
-	public void salvaMazzo() throws IOException
-	{
-		// Ottieni il percorso assoluto della directory di lavoro corrente
-		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/mazzoPartita.txt";
-
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/mazzo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -198,14 +177,11 @@ public class Salvataggio {
 		}
 		fw.close();
 	}
-	public void salvaMani() throws IOException{
-		// Ottieni il percorso assoluto della directory di lavoro corrente
+	
+	public void salvaMani(String partitaTorneo) throws IOException
+	{
 		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/maniPartita.txt";
-
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/mani.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -213,22 +189,21 @@ public class Salvataggio {
 		{
 			ArrayList<Carta> mano = eventoDaSalvare.getGiocatori()[i].getMano();
 			String riga = "";
-			for(Carta c: mano) {
+			for(Carta c: mano) 
+			{
 				riga += c.name()+",";
 			}
+			//cancello l'ultima virgola
 			riga = riga.substring(0, riga.length() - 1);
 			fw.println(riga);
 		}
 		fw.close();
 	}
-	public void salvaPunteggio() throws IOException{
-		// Ottieni il percorso assoluto della directory di lavoro corrente
+	
+	public void salvaPunteggio(String partitaTorneo) throws IOException
+	{
 		String currentDirectory = System.getProperty("user.dir");
-
-		// Costruisci il percorso relativo al file
-		String relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara().getCodice()+"/punteggiPartita.txt";
-
-		// Costruisci il percorso assoluto al file
+		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice()+"/punteggi.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
