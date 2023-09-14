@@ -43,5 +43,6 @@
 		<Button fx:id="btnGiocaCarta" alignment="CENTER" defaultButton="true" layoutX="374.0" layoutY="573.0" mnemonicParsing="false" onAction="#btnGiocaCarta" prefHeight="43.0" prefWidth="127.0" text="GIOCA CARTA" visible="false" />
 		<Button defaultButton="true" layoutX="707.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnSospendiGara" prefHeight="43.0" prefWidth="127.0" text="SOSPENDI GARA" textAlignment="RIGHT" />
       <ImageView fx:id="imgGiocata" fitHeight="217.0" fitWidth="184.0" layoutX="346.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnPassaTurno" alignment="CENTER" defaultButton="true" layoutX="384.0" layoutY="583.0" mnemonicParsing="false" onAction="#btnPassaTurno" prefHeight="43.0" prefWidth="127.0" text="PASSA TURNO" visible="false" />
 	</children>
 </AnchorPane>

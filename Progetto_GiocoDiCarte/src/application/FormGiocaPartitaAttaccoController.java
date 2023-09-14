@@ -76,6 +76,8 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 	Carta cartaGiocata;
 	@FXML
 	Button btnGiocaCarta = new Button();
+	@FXML
+	Button btnPassaTurno = new Button();
 
 	// Event Listener on Button.onAction
 	@FXML
@@ -91,6 +93,24 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
 		mazzo.scarta(cartaGiocata);
+		s.salvaMazzo();
+		s.salvaMani();
+		s.salvaPunteggio();
+		salvaTurno();
+		alert.passaAlForm("/application/FormGiocaPartitaAttacco.fxml", event);
+	}
+	@FXML
+	public void btnPassaTurno(ActionEvent event) throws IOException {
+		
+		players[posizioneGiocatoreAttaccante].aggiungiGoal();
+		if(!cartaGiocata.equals(Carta.MISTER)) {
+			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
+		}else {
+			players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
+			players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
+		}
+		//salvo tutte le informazioni della partita
+		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMazzo();
 		s.salvaMani();
 		s.salvaPunteggio();
@@ -166,7 +186,15 @@ public class FormGiocaPartitaAttaccoController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					imgGiocata.setImage(Carta.valueOf(nomeCarta).getImmagine());
+					Carta cartaAtt = Carta.valueOf(nomeCarta);
+					//controllo se il giocatore ha carte con le quali può difendersi
+					if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano())) {
+						btnPassaTurno.setVisible(false);
+					}else {
+						btnPassaTurno.setVisible(true);
+						listCarte.setDisable(true);
+					}
+					imgGiocata.setImage(cartaAtt.getImmagine());
 				}
 			}
 			catch(IOException e)
