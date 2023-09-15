@@ -85,9 +85,15 @@ public class FormGiocaPartitaController implements Initializable
 		//salvo tutte le informazioni della partita
 		s = new Salvataggio(g.getGara(codicePartita));
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		if(turno.equals("a"))
+		if(turno.equals("a")) {
 			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
-		else {
+			if(cartaGiocata.equals(Carta.RIGORE)) {
+				alert.passaAlForm("/application/FormRigore.fxml", event);
+			}
+		}else {
+			if(cartaGiocata.equals(Carta.RIGORE)) {
+				alert.passaAlForm("/application/FormRigore.fxml", event);
+			}
 			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
@@ -189,13 +195,13 @@ public class FormGiocaPartitaController implements Initializable
 				partita = (Partita) g.getGara(codicePartita);
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
-				boolean passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+				boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
 				if(turno.equals("a")) {
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
 					//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-					if(passaTurnoAtt) {
+					if(giocaTurnoAtt) {
 						btnPassaTurno.setVisible(false);
 					}else {
 						btnPassaTurno.setVisible(true);
@@ -207,7 +213,7 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(passaTurnoAtt) {
+					if(giocaTurnoAtt) {
 						cartaAtt = Carta.valueOf(nomeCarta);
 						//controllo se il giocatore ha carte con le quali può difendersi
 						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano())) {
