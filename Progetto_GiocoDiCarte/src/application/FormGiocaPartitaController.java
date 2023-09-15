@@ -91,7 +91,8 @@ public class FormGiocaPartitaController implements Initializable
 			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
-		if(!finePartita()) {
+		if(!finePartita()) 
+		{
 			mazzo.scarta(cartaGiocata);
 			s.salvaMazzo("partite");
 			s.salvaMani("partite");
@@ -104,17 +105,17 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void btnPassaTurno(ActionEvent event) throws IOException 
 	{
-		boolean passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-		if(passaTurnoAtt) {
+		players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
+		if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) {
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
-			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 			if(cartaAtt.equals(Carta.MISTER)) 
 			{
 				players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 				players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 			}
 		}
-		if(!finePartita()) {
+		if(!finePartita()) 
+		{
 			//salvo tutte le informazioni della partita
 			s = new Salvataggio(g.getGara(codicePartita));
 			s.salvaMazzo("partite");
@@ -122,7 +123,8 @@ public class FormGiocaPartitaController implements Initializable
 			s.salvaPunteggio("partite");
 			salvaTurno();
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-		}else {
+		}else 
+		{
 			System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante].getAlias()+" ha vinto");
 		}
 	}
@@ -198,8 +200,10 @@ public class FormGiocaPartitaController implements Initializable
 					}else {
 						btnPassaTurno.setVisible(true);
 						listCarte.setDisable(true);
+						cartaGiocata = Carta.INDICATORE_GOAL;
 					}
-				}else {
+				}else 
+				{
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
@@ -208,13 +212,20 @@ public class FormGiocaPartitaController implements Initializable
 						//controllo se il giocatore ha carte con le quali può difendersi
 						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano())) {
 							btnPassaTurno.setVisible(false);
-						}else {
+						}
+						else 
+						{
 							btnPassaTurno.setVisible(true);
 							listCarte.setDisable(true);
 						}
-						imgGiocata.setImage(cartaAtt.getImmagine());
-					}else
+					}
+					else
+					{
+						btnPassaTurno.setVisible(true);
+						listCarte.setDisable(true);
 						cartaAtt = Carta.INDICATORE_GOAL;
+					}
+					imgGiocata.setImage(cartaAtt.getImmagine());
 				}
 			}
 			catch(IOException e)
