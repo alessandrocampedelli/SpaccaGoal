@@ -141,4 +141,11 @@ public abstract class Gara
 		}
 		return giocaTurno;
 	}
+	public boolean checkGiocaTurno(Giocatore att) {
+		for(Carta c : att.getMano()) {
+			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
+				return true;
+		}
+		return false;
+	}
 }
