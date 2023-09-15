@@ -88,6 +88,11 @@ public class FormCreaPartitaController implements Initializable{
 				throw new IOException();
 			}
 			String nome = txtAlias.getText();
+			if(nomeGiaUsato(nome)) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
+				throw new IllegalArgumentException();
+			}
 			if(chbRobot.isSelected()) {
 				robot = true;
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
@@ -112,7 +117,16 @@ public class FormCreaPartitaController implements Initializable{
 			}
 		}catch (IOException e) {
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
+		}catch (IllegalArgumentException e) {
+			alert.mostraErrore("Nome già utilizzato. Non sono ammessi omonimi","ERRORE");
 		}
+	}
+	private boolean nomeGiaUsato(String nome) {
+		for(Giocatore g : giocatori) {
+			if(g.getAlias().equals(nome))	
+				return true;
+		}
+		return false;
 	}
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
