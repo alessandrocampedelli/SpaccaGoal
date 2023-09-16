@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormRigoreController">
+   <children>
+      <ImageView cache="true" fitHeight="600.0" fitWidth="877.0">
+         <image>
+            <Image url="@../../portaDaCalcio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgPortiere" fitHeight="208.0" fitWidth="206.0" layoutX="344.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../portiere.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="-124.0" layoutY="-111.0" prefHeight="200.0" prefWidth="200.0" />
+      <ImageView fx:id="imgPallone" fitHeight="82.0" fitWidth="127.0" layoutX="377.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pallone.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="185.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnSinistra" text="SINISTRA" />
+      <Button layoutX="416.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnCentro" text="CENTRO" />
+      <Button layoutX="650.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnDestra" text="DESTRA" />
+      <Label alignment="CENTER" layoutX="297.0" layoutY="67.0" prefHeight="43.0" prefWidth="284.0" text="DOVE VUOI TIRARE IL RIGORE?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
