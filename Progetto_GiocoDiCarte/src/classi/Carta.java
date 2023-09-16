@@ -5,12 +5,18 @@ public enum Carta {
 	ATTACCANTE(Tipologia.ATTACCO, new Image(getUrl("attacco_attaccante.jpg"))),
 	BOMBER_VERO(Tipologia.ATTACCO, new Image(getUrl("attacco_bomberVero.jpg"))),
 	RIGORE(Tipologia.ATTACCO, new Image(getUrl("attacco_rigore.JPG"))),
+	RIGORE_DX(Tipologia.ATTACCO, null,Direzione.DESTRA),
+	RIGORE_C(Tipologia.ATTACCO, null,Direzione.CENTRO),
+	RIGORE_SX(Tipologia.ATTACCO, null,Direzione.SINISTRA),
 	ROVESCIATA_DELLANNO(Tipologia.ATTACCO,new Image(getUrl("attacco_rovesciataDellAnno.jpg"))),
 	TIRO_DOMENICA(Tipologia.ATTACCO, new Image(getUrl("attacco_tiroDellaDomenica.jpg"))),
 	CAMBIO_SCHEMA(Tipologia.BONUS_MALUS, new Image(getUrl("bonus_cambioSchema.JPG"))),
 	DIFENSORE(Tipologia.DIFESA, new Image(getUrl("difesa_difensore.jpg"))),
 	DIFENSORE_ROCCIA(Tipologia.DIFESA, new Image(getUrl("difesa_difensoreRoccia.jpg"))),
 	PORTIERE(Tipologia.DIFESA, new Image(getUrl("difesa_portiere.JPG"))),
+	PORTIERE_DX(Tipologia.DIFESA, null, Direzione.DESTRA),
+	PORTIERE_C(Tipologia.DIFESA, null, Direzione.CENTRO),
+	PORTIERE_SX(Tipologia.DIFESA, null, Direzione.SINISTRA),
 	AUTOGOAL(Tipologia.BONUS_MALUS, new Image(getUrl("malus_autogoal.jpg"))),
 	FUORIGIOCO(Tipologia.SPECIALE, new Image(getUrl("speciale_fuorigioco.jpg"))),
 	GOAL(Tipologia.SPECIALE, new Image(getUrl("speciale_goal.jpg"))),
@@ -19,9 +25,18 @@ public enum Carta {
 	INDICATORE_GOAL(null,new Image(getUrl("indicatoreGoal.jpg")));
 	private Tipologia tipo;
 	private Image img;
+	private Direzione d;
 	private Carta(Tipologia tipo, Image img) {
 		this.tipo = tipo;
 		this.img = img;
+	}
+	private Carta(Tipologia tipo, Image img, Direzione d) {
+		this.tipo = tipo;
+		this.img = img;
+		this.d = d;
+	}
+	private Direzione getDirezione() {
+		return d;
 	}
 	public Image getImmagine() {
 		return img;
