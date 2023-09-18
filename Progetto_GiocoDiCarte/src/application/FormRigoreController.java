@@ -17,7 +17,6 @@ import java.io.IOException;
 
 public class FormRigoreController implements Initializable
 {
-	
 	String turno;
 	int posizioneGiocatoreAttaccante;
 	int posizioneGiocatoreDifensore;
@@ -80,6 +79,7 @@ public class FormRigoreController implements Initializable
 			}
 		}
 	}
+	
 	private void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -96,6 +96,7 @@ public class FormRigoreController implements Initializable
 		}
 		scan.close();
 	}
+	
 	private void salvaTurno() throws IOException{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/partite/"+codicePartita+"/turno.txt";

@@ -319,9 +319,12 @@ public class FormGiocaPartitaController implements Initializable
 		PrintWriter fw = new PrintWriter(absolutePath);
 		if(turno.equals("a")) 
 		{
-			if(cartaGiocata.equals(Carta.RIGORE)) {
+			if(cartaGiocata.equals(Carta.RIGORE)) 
+			{
 				fw.println("a");
-			}else {
+			}
+			else 
+			{
 				fw.println("d");
 			}
 			fw.println(posizioneGiocatoreAttaccante);
@@ -329,9 +332,12 @@ public class FormGiocaPartitaController implements Initializable
 			fw.println(cartaGiocata.name());
 		}else 
 		{
-			if(cartaGiocata.equals(Carta.PORTIERE)) {
+			if(cartaGiocata.equals(Carta.PORTIERE)) 
+			{
 				fw.println("d");
-			}else {
+			}
+			else 
+			{
 				fw.println("a");
 			}
 			if((players.length-1) != posizioneGiocatoreAttaccante)
