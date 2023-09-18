@@ -17,6 +17,12 @@ import java.io.IOException;
 
 public class FormRigoreController implements Initializable
 {
+	
+	String turno;
+	int posizioneGiocatoreAttaccante;
+	int posizioneGiocatoreDifensore;
+	String nomeCarta;
+	
 	@FXML
 	private ImageView imgPortiere;
 	@FXML
@@ -28,8 +34,6 @@ public class FormRigoreController implements Initializable
 	{
 		codicePartita = codice;
 	}
-	
-	String turno;
 
 	// Event Listener on Button.onAction
 	@FXML
@@ -56,14 +60,18 @@ public class FormRigoreController implements Initializable
 		{
 			try
 			{
-				leggiTurnoAttaccoDifesa();
+				leggiTurno();
 				if(turno.equals("a"))
 				{
 					//visualizzare pallone ma non portiere
+					imgPallone.setVisible(true);
+					imgPortiere.setVisible(false);
 				}
 				else
 				{
 					//visualizzare portiere ma non pallone
+					imgPallone.setVisible(false);
+					imgPortiere.setVisible(true);
 				}
 			}
 			catch(IOException e)
@@ -72,8 +80,7 @@ public class FormRigoreController implements Initializable
 			}
 		}
 	}
-	
-	private void leggiTurnoAttaccoDifesa() throws IOException
+	private void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
@@ -81,6 +88,39 @@ public class FormRigoreController implements Initializable
 		File f = new File(absolutePath);
 		Scanner scan = new Scanner(f);
 		turno = scan.nextLine();
+		posizioneGiocatoreAttaccante = scan.nextInt();
+		posizioneGiocatoreDifensore = scan.nextInt();
+		if(turno.equals("d"))
+		{
+			nomeCarta = scan.next();
+		}
 		scan.close();
+	}
+	private void salvaTurno() throws IOException{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+		if(turno.equals("a")) 
+		{
+			fw.println("d");
+			fw.println(posizioneGiocatoreAttaccante);
+			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartaGiocata.name());
+		}else 
+		{
+			fw.println("a");
+			if((players.length-1) != posizioneGiocatoreAttaccante)
+				fw.println(posizioneGiocatoreAttaccante+1);
+			else
+				fw.println(0);
+
+			if((players.length-1) != posizioneGiocatoreDifensore)
+				fw.println(posizioneGiocatoreDifensore+1);
+			else
+				fw.println(0);
+		}
+		fw.close();
 	}
 }
