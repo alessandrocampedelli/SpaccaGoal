@@ -66,6 +66,7 @@ public class FormGiocaPartitaController implements Initializable
 	int posizioneGiocatoreAttaccante;
 	int posizioneGiocatoreDifensore;
 	String nomeCarta;
+	
 	@FXML
 	Gara partita;
 	Mazzo mazzo;
@@ -318,13 +319,21 @@ public class FormGiocaPartitaController implements Initializable
 		PrintWriter fw = new PrintWriter(absolutePath);
 		if(turno.equals("a")) 
 		{
-			fw.println("d");
+			if(cartaGiocata.equals(Carta.RIGORE)) {
+				fw.println("a");
+			}else {
+				fw.println("d");
+			}
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
 			fw.println(cartaGiocata.name());
 		}else 
 		{
-			fw.println("a");
+			if(cartaGiocata.equals(Carta.PORTIERE)) {
+				fw.println("d");
+			}else {
+				fw.println("a");
+			}
 			if((players.length-1) != posizioneGiocatoreAttaccante)
 				fw.println(posizioneGiocatoreAttaccante+1);
 			else
