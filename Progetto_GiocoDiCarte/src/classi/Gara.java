@@ -123,7 +123,7 @@ public abstract class Gara
 		{
 			giocaTurno = manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
 		}
-		else if(cartaGiocata.equals(Carta.RIGORE)) 
+		else if(cartaGiocata.equals(Carta.RIGORE_DX) || cartaGiocata.equals(Carta.RIGORE_SX) || cartaGiocata.equals(Carta.RIGORE_C)) 
 		{
 			giocaTurno = manoAvversario.contains(Carta.PORTIERE);
 		}

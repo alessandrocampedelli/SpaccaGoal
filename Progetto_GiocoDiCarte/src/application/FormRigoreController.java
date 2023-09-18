@@ -3,7 +3,7 @@ package application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
-
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.fxml.Initializable;
 
@@ -43,7 +43,8 @@ public class FormRigoreController implements Initializable
 	private ImageView imgPortiere;
 	@FXML
 	private ImageView imgPallone;
-	
+	@FXML
+	private Label lblRigore;
 	static String codicePartita;
 	
 	public void copiaCodice(String codice) 
@@ -124,12 +125,14 @@ public class FormRigoreController implements Initializable
 					//visualizzare pallone ma non portiere
 					imgPallone.setVisible(true);
 					imgPortiere.setVisible(false);
+					lblRigore.setText(players[posizioneGiocatoreAttaccante].getAlias() +" dove vuoi tirare il rigore?");
 				}
 				else
 				{
 					//visualizzare portiere ma non pallone
 					imgPallone.setVisible(false);
 					imgPortiere.setVisible(true);
+					lblRigore.setText(players[posizioneGiocatoreDifensore].getAlias() +" dove ti vuoi buttare per parare il rigore?");
 				}
 			}
 			catch(IOException e)

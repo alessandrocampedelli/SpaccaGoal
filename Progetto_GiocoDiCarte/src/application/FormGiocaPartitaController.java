@@ -346,8 +346,10 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			if(cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) 
+			if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX))/* &&
+					((cartaGiocata.equals(Carta.PORTIERE_C) || cartaGiocata.equals(Carta.PORTIERE_DX) || cartaGiocata.equals(Carta.PORTIERE_SX)))*/)
 			{
+				
 				fw.println("d");
 				fw.println(posizioneGiocatoreAttaccante);
 				fw.println(posizioneGiocatoreDifensore);
