@@ -35,7 +35,7 @@ public enum Carta {
 		this.img = img;
 		this.d = d;
 	}
-	private Direzione getDirezione() {
+	public Direzione getDirezione() {
 		return d;
 	}
 	public Image getImmagine() {
