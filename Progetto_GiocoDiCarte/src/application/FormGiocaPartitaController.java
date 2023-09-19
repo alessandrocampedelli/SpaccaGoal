@@ -66,7 +66,7 @@ public class FormGiocaPartitaController implements Initializable
 	int posizioneGiocatoreAttaccante;
 	int posizioneGiocatoreDifensore;
 	String nomeCarta;
-	
+
 	@FXML
 	Gara partita;
 	Mazzo mazzo;
@@ -141,7 +141,16 @@ public class FormGiocaPartitaController implements Initializable
 			s.salvaMazzo("partite");
 			s.salvaMani("partite");
 			s.salvaPunteggio("partite");
+			/*if(cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX))			
+			{
+				salvaTurnoRigore();
+			}
+			else
+			{
+				salvaTurno();
+			}*/
 			salvaTurno();
+
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}else 
 		{
@@ -346,10 +355,9 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX))/* &&
-					((cartaGiocata.equals(Carta.PORTIERE_C) || cartaGiocata.equals(Carta.PORTIERE_DX) || cartaGiocata.equals(Carta.PORTIERE_SX)))*/)
+			//System.out.println(players[posizioneGiocatoreDifensore].getMano().contains(Carta.PORTIERE));
+			if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)))
 			{
-				
 				fw.println("d");
 				fw.println(posizioneGiocatoreAttaccante);
 				fw.println(posizioneGiocatoreDifensore);
@@ -377,4 +385,27 @@ public class FormGiocaPartitaController implements Initializable
 			fine = true;
 		return fine;
 	}
+
+	/*private void salvaTurnoRigore() throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+
+		fw.println("a");
+		if((players.length-1) != posizioneGiocatoreAttaccante)
+			fw.println(posizioneGiocatoreAttaccante+1);
+		else
+			fw.println(0);
+
+		if((players.length-1) != posizioneGiocatoreDifensore)
+			fw.println(posizioneGiocatoreDifensore+1);
+		else
+			fw.println(0);
+
+		fw.close();
+	}*/
+
 }
