@@ -95,7 +95,8 @@ public abstract class Gara
 						if(!(cartaDif.equals(Carta.VAR) || cartaDif.equals(Carta.FUORIGIOCO))) 
 						{
 							att.aggiungiGoal();
-						}else 
+						}
+						else 
 						{
 							dif.getMano().add(this.carte.pesca());
 						}
@@ -112,6 +113,7 @@ public abstract class Gara
 			}
 		}
 	}
+	
 	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) 
 	{
 		boolean giocaTurno = true;
@@ -141,8 +143,11 @@ public abstract class Gara
 		}
 		return giocaTurno;
 	}
-	public boolean checkGiocaTurno(Giocatore att) {
-		for(Carta c : att.getMano()) {
+	
+	public boolean checkGiocaTurno(Giocatore att) 
+	{
+		for(Carta c : att.getMano()) 
+		{
 			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
 				return true;
 		}

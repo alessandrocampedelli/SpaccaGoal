@@ -144,8 +144,8 @@ public class FormRigoreController implements Initializable
 	
 	private void rigoreSegnato(Carta rigore, Carta portiere) 
 	{
-		System.out.println(portiere.getDirezione());
-		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) {
+		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
+		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
 		}
 	}
