@@ -47,6 +47,7 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		codicePartita = codice;
 	}
+	
 	@FXML
 	private Label lblTurnoAttacco;
 	@FXML
@@ -101,8 +102,7 @@ public class FormGiocaPartitaController implements Initializable
 			salvaTurno();
 			System.out.println(cartaAtt);
 			System.out.println(cartaGiocata);
-			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) 
-					|| (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
+			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
@@ -124,16 +124,23 @@ public class FormGiocaPartitaController implements Initializable
 	public void btnPassaTurno(ActionEvent event) throws IOException 
 	{
 		players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
-		if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) {
-			players[posizioneGiocatoreAttaccante].aggiungiGoal();
+		if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
+		{
 			if(cartaAtt.equals(Carta.MISTER)) 
 			{
 				players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 				players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
 			}
-		}else {
-			if(turno.equals("d")) {
-				if(!cartaAtt.equals(Carta.INDICATORE_GOAL)) {
+			else
+			{
+				players[posizioneGiocatoreAttaccante].aggiungiGoal();
+			}
+		}else 
+		{
+			if(turno.equals("d")) 
+			{
+				if(!cartaAtt.equals(Carta.INDICATORE_GOAL)) 
+				{
 					players[posizioneGiocatoreAttaccante].aggiungiGoal();
 				}
 			}
@@ -145,18 +152,11 @@ public class FormGiocaPartitaController implements Initializable
 			s.salvaMazzo("partite");
 			s.salvaMani("partite");
 			s.salvaPunteggio("partite");
-			/*if(cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX))			
-			{
-				salvaTurnoRigore();
-			}
-			else
-			{
-				salvaTurno();
-			}*/
 			salvaTurno();
 
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-		}else 
+		}
+		else 
 		{
 			System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante].getAlias()+" ha vinto");
 		}
@@ -230,7 +230,9 @@ public class FormGiocaPartitaController implements Initializable
 					//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
 					if(giocaTurnoAtt) {
 						btnPassaTurno.setVisible(false);
-					}else {
+					}
+					else 
+					{
 						btnPassaTurno.setVisible(true);
 						listCarte.setDisable(true);
 						cartaGiocata = Carta.INDICATORE_GOAL;
@@ -321,6 +323,7 @@ public class FormGiocaPartitaController implements Initializable
 			//alert.mostraCartaPescata();
 		}
 	}
+	
 	private void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -337,6 +340,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		scan.close();
 	}
+	
 	private void salvaTurno() throws IOException{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
@@ -359,7 +363,8 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			if(!(cartaGiocata == null)) {
+			if(!(cartaGiocata == null)) 
+			{
 				System.out.println("nome carta in salva turno: "+cartaGiocata);
 				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
 				{
@@ -382,33 +387,11 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		fw.close();
 	}
-	private boolean finePartita() {
+	private boolean finePartita() 
+	{
 		boolean fine = false;
 		if(players[posizioneGiocatoreAttaccante].getPunteggio() == 5)
 			fine = true;
 		return fine;
 	}
-
-	/*private void salvaTurnoRigore() throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-
-		PrintWriter fw = new PrintWriter(absolutePath);
-
-		fw.println("a");
-		if((players.length-1) != posizioneGiocatoreAttaccante)
-			fw.println(posizioneGiocatoreAttaccante+1);
-		else
-			fw.println(0);
-
-		if((players.length-1) != posizioneGiocatoreDifensore)
-			fw.println(posizioneGiocatoreDifensore+1);
-		else
-			fw.println(0);
-
-		fw.close();
-	}*/
-
 }
