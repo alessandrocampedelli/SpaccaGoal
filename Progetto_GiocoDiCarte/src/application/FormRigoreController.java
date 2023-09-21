@@ -38,7 +38,7 @@ public class FormRigoreController implements Initializable
 	Gara partita;
 	Mazzo mazzo;
 	Giocatore[] players;
-	Carta cartaGiocata;
+	static Carta cartaGiocata;
 	@FXML
 	private ImageView imgPortiere;
 	@FXML
@@ -51,7 +51,9 @@ public class FormRigoreController implements Initializable
 	{
 		codicePartita = codice;
 	}
-
+	public void copiaCartaGiocata(Carta c) {
+		cartaGiocata = c;
+	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnSinistra(ActionEvent event) throws IOException

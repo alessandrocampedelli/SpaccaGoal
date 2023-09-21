@@ -99,13 +99,17 @@ public class FormGiocaPartitaController implements Initializable
 			s.salvaMani("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
-			if(cartaGiocata.equals(Carta.RIGORE) || cartaGiocata.equals(Carta.PORTIERE))
+			System.out.println(cartaAtt);
+			System.out.println(cartaGiocata);
+			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) 
+					|| (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
 				loader.load();
 				FormRigoreController form = loader.getController();
 				form.copiaCodice(codicePartita);
+				form.copiaCartaGiocata(cartaAtt);
 				alert.passaAlForm("/application/FormRigore.fxml", event);
 			}
 			else
@@ -355,27 +359,26 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			//System.out.println(players[posizioneGiocatoreDifensore].getMano().contains(Carta.PORTIERE));
-			if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)))
-			{
-				fw.println("d");
-				fw.println(posizioneGiocatoreAttaccante);
-				fw.println(posizioneGiocatoreDifensore);
-				fw.println(cartaAtt.name());
+			if(!(cartaGiocata == null)) {
+				System.out.println("nome carta in salva turno: "+cartaGiocata);
+				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
+				{
+					fw.println("d");
+					fw.println(posizioneGiocatoreAttaccante);
+					fw.println(posizioneGiocatoreDifensore);
+					fw.println(cartaAtt.name());
+				}
 			}
-			else 
-			{
-				fw.println("a");
-				if((players.length-1) != posizioneGiocatoreAttaccante)
-					fw.println(posizioneGiocatoreAttaccante+1);
-				else
-					fw.println(0);
+			fw.println("a");
+			if((players.length-1) != posizioneGiocatoreAttaccante)
+				fw.println(posizioneGiocatoreAttaccante+1);
+			else
+				fw.println(0);
 
-				if((players.length-1) != posizioneGiocatoreDifensore)
-					fw.println(posizioneGiocatoreDifensore+1);
-				else
-					fw.println(0);
-			}
+			if((players.length-1) != posizioneGiocatoreDifensore)
+				fw.println(posizioneGiocatoreDifensore+1);
+			else
+				fw.println(0);
 		}
 		fw.close();
 	}

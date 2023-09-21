@@ -107,6 +107,12 @@ public abstract class Gara
 						{
 							att.getMano().add(this.carte.pesca());
 							att.getMano().add(this.carte.pesca());
+						}else {
+							//caso del rigore
+							if(!(cartaAtt.getDirezione().equals(cartaDif.getDirezione()))) 
+							{
+								att.aggiungiGoal();
+							}
 						}
 					}
 				}
