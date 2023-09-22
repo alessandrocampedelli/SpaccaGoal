@@ -100,8 +100,6 @@ public class FormGiocaPartitaController implements Initializable
 			s.salvaMani("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
-			System.out.println(cartaAtt);
-			System.out.println(cartaGiocata);
 			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
 				//classe da cui partono i dati
@@ -192,6 +190,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 
 	}
+	
 	public void stampaGiocatoriLabel()
 	{
 		if(!lblGiocatore1.getText().equals(players[0].getAlias())) 
@@ -222,47 +221,37 @@ public class FormGiocaPartitaController implements Initializable
 				partita = (Partita) g.getGara(codicePartita);
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
-				boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-				if(turno.equals("a")) {
-					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
-					lblTurnoAttacco.setTextFill(Color.BLUE);
-					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-					if(giocaTurnoAtt) {
-						btnPassaTurno.setVisible(false);
-					}
-					else 
-					{
-						btnPassaTurno.setVisible(true);
-						listCarte.setDisable(true);
-						cartaGiocata = Carta.INDICATORE_GOAL;
-					}
-				}
-				else 
+				
+				//da aggiustare. posizione errata nel caso di giocatore 0 (va negativo -1)
+				
+				if(finePartita())
 				{
-					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
-					lblTurnoAttacco.setTextFill(Color.RED);
-					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(giocaTurnoAtt) {
-						cartaAtt = Carta.valueOf(nomeCarta);
-						//controllo se il giocatore ha carte con le quali può difendersi
-						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
-						{
+					System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante - 1].getAlias()+" ha vinto");
+				}
+				else
+				{
+					boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+					if(turno.equals("a")) {
+						nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
+						lblTurnoAttacco.setTextFill(Color.BLUE);
+						lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+						//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+						if(giocaTurnoAtt) {
 							btnPassaTurno.setVisible(false);
 						}
 						else 
 						{
 							btnPassaTurno.setVisible(true);
 							listCarte.setDisable(true);
+							cartaGiocata = Carta.INDICATORE_GOAL;
 						}
 					}
-					else
+					else 
 					{
-						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
-							cartaAtt = Carta.INDICATORE_GOAL;
-							btnPassaTurno.setVisible(true);
-							listCarte.setDisable(true);
-						}else {
+						nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
+						lblTurnoAttacco.setTextFill(Color.RED);
+						lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
+						if(giocaTurnoAtt) {
 							cartaAtt = Carta.valueOf(nomeCarta);
 							//controllo se il giocatore ha carte con le quali può difendersi
 							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
@@ -275,8 +264,28 @@ public class FormGiocaPartitaController implements Initializable
 								listCarte.setDisable(true);
 							}
 						}
+						else
+						{
+							if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
+								cartaAtt = Carta.INDICATORE_GOAL;
+								btnPassaTurno.setVisible(true);
+								listCarte.setDisable(true);
+							}else {
+								cartaAtt = Carta.valueOf(nomeCarta);
+								//controllo se il giocatore ha carte con le quali può difendersi
+								if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
+								{
+									btnPassaTurno.setVisible(false);
+								}
+								else 
+								{
+									btnPassaTurno.setVisible(true);
+									listCarte.setDisable(true);
+								}
+							}
+						}
+						imgGiocata.setImage(cartaAtt.getImmagine());
 					}
-					imgGiocata.setImage(cartaAtt.getImmagine());
 				}
 			}
 			catch(IOException e)
@@ -365,7 +374,6 @@ public class FormGiocaPartitaController implements Initializable
 		{
 			if(!(cartaGiocata == null)) 
 			{
-				System.out.println("nome carta in salva turno: "+cartaGiocata);
 				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
 				{
 					fw.println("d");
