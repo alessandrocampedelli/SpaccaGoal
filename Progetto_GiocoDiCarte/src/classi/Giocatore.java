@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Giocatore 
 {
 	private String alias;
-	private int nVittorie;
+	private int nPartiteVinte;
+	private int nTorneiVinti;
 	private boolean robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
@@ -14,7 +15,8 @@ public class Giocatore
 	{
 		this.alias = alias;
 		this.robot = robot;
-		this.nVittorie = 0;
+		this.nPartiteVinte = 0;
+		this.nTorneiVinti = 0;
 		this.punteggio = 0;
 		this.mano = new ArrayList<>(); 
 	}
@@ -22,9 +24,13 @@ public class Giocatore
 	{
 		return alias;
 	}
-	public int getNVittorie() 
+	public int getNVittoriePartite() 
 	{
-		return nVittorie;
+		return nPartiteVinte;
+	}
+	public int getNVittorieTornei() 
+	{
+		return nTorneiVinti;
 	}
 	public boolean getRobot()
 	{
@@ -52,7 +58,7 @@ public class Giocatore
 	}
 	public void aggiungiVittoria() 
 	{
-		nVittorie = nVittorie + 1;
+		this.nPartiteVinte+=1;
 	}
 	public void aggiungiGoal() {
 		this.punteggio+=1;
