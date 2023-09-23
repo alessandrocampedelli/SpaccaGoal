@@ -40,7 +40,7 @@ public class FormPartitaSingolaController
 			//controllo se il codice inserito dall'utente è funzionante
 			if(gare.cercaCodice(codiceUtente, 'p')) 
 			{			
-				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una nuova partita...",
+				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una partita...",
 				"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
 				alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
 

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -42,6 +43,7 @@ import classi.Giocatore;
 import classi.Partita;
 import classi.Gara;
 import classi.Gare;
+import classi.Leaderboard;
 public class FormCreaPartitaController implements Initializable{
 	@FXML
 	private TextField txtAlias;
@@ -61,6 +63,7 @@ public class FormCreaPartitaController implements Initializable{
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
 	static Gara g;
+	Leaderboard leaderboard = new Leaderboard();
 	
 	public String getGiocatori() {
 		String output = "";
@@ -99,7 +102,13 @@ public class FormCreaPartitaController implements Initializable{
 			}else
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
 			
-			giocatori.add(new Giocatore(nome,robot));
+			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
+			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
+			if(nuovoGiocatore == null) 
+				leaderboard.addPlayers(new Giocatore(nome,robot));
+			
+			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
+			giocatori.add(leaderboard.getPlayers().get(i));
 			
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));

@@ -82,6 +82,7 @@ public class Alert_cambiaForm {
 		alert.getDialogPane().setContentText(setContent);
 		alert.showAndWait();
 	}
+	/*
 	public void mostraCartaPescata() {
 		Alert alert = new Alert(AlertType.WARNING);
 
@@ -121,7 +122,7 @@ public class Alert_cambiaForm {
 	    alert.showAndWait()
 	        .filter(response -> response == ButtonType.OK)
 	        .ifPresent(response -> System.out.println("The alert was approved"));
-	}
+	}*/
 	public boolean chiediConferma(String setContent, String setHeader) {
 		AlertType message = AlertType.CONFIRMATION;
 		Alert alert = new Alert(message, "");
