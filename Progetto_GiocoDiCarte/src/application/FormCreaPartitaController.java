@@ -104,9 +104,11 @@ public class FormCreaPartitaController implements Initializable{
 			
 			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
 			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
-			if(nuovoGiocatore == null) 
-				leaderboard.addPlayers(new Giocatore(nome,robot));
-			
+			if(nuovoGiocatore == null) {
+				nuovoGiocatore = new Giocatore(nome,robot);
+				//aggiungo il giocatore alla lista di giocatori globali
+				leaderboard.addPlayers(nuovoGiocatore);
+			}
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 			

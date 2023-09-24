@@ -207,4 +207,17 @@ public class Salvataggio {
 		scan.close();
 		return giocatori;
 	}
+	//metodo che elimina la cartella della partita terminata
+    public void deleteDirectory(String partitaTorneo)
+    {
+		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara().getCodice();
+		File file = new File(path);
+        for (File subfile : file.listFiles()) {
+            if (subfile.isDirectory()) {
+                deleteDirectory(partitaTorneo);
+            }
+            subfile.delete();
+        }
+		file.delete();
+    }
 }

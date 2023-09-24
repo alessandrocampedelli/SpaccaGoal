@@ -1,6 +1,8 @@
 package classi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.io.IOException;
 public abstract class Gara 
 {
@@ -158,5 +160,12 @@ public abstract class Gara
 				return true;
 		}
 		return false;
+	}
+	public String mostraRisultati() {
+		String output = "CLASSIFICA FINALE:\n";
+		for(Giocatore g : giocatori) {
+			output += g.getAlias()+": "+g.getPunteggio()+"\n";
+		}
+		return output;
 	}
 }

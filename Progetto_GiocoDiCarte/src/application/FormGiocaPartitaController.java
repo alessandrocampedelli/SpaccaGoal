@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -93,6 +94,11 @@ public class FormGiocaPartitaController implements Initializable
 			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
+		//classe da cui partono i dati
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
+		loader.load();
+		FormRigoreController form = loader.getController();
+		String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
 		if(!finePartita()) 
 		{
 			mazzo.scarta(cartaGiocata);
@@ -102,10 +108,6 @@ public class FormGiocaPartitaController implements Initializable
 			salvaTurno();
 			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
-				//classe da cui partono i dati
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
-				loader.load();
-				FormRigoreController form = loader.getController();
 				form.copiaCodice(codicePartita);
 				form.copiaCartaGiocata(cartaAtt);
 				alert.passaAlForm("/application/FormRigore.fxml", event);
@@ -115,8 +117,12 @@ public class FormGiocaPartitaController implements Initializable
 				alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 			}
 		}
-		else
-			System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante].getAlias()+" ha vinto");
+		else {
+			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
+			form.copiaCodice(codicePartita);
+			alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+			//s.deleteDirectory("partite");
+		}
 	}
 	@FXML
 	public void btnPassaTurno(ActionEvent event) throws IOException 
@@ -156,8 +162,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-			System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante].getAlias()+" ha vinto");
+			showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias());
 		}
 	}
 	// Event Listener on Button.onAction
@@ -225,37 +230,47 @@ public class FormGiocaPartitaController implements Initializable
 				partita = (Partita) g.getGara(codicePartita);
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
-				
-				//da aggiustare. posizione errata nel caso di giocatore 0 (va negativo -1)
-				
-				if(finePartita())
-				{
-					System.out.println("Partita finita. "+players[posizioneGiocatoreAttaccante - 1].getAlias()+" ha vinto");
+				boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+				if(turno.equals("a")) {
+					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
+					lblTurnoAttacco.setTextFill(Color.BLUE);
+					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+					//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+					if(giocaTurnoAtt) {
+						btnPassaTurno.setVisible(false);
+					}
+					else 
+					{
+						btnPassaTurno.setVisible(true);
+						listCarte.setDisable(true);
+						cartaGiocata = Carta.INDICATORE_GOAL;
+					}
 				}
-				else
+				else 
 				{
-					boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-					if(turno.equals("a")) {
-						nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
-						lblTurnoAttacco.setTextFill(Color.BLUE);
-						lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-						//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-						if(giocaTurnoAtt) {
+					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
+					lblTurnoAttacco.setTextFill(Color.RED);
+					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
+					if(giocaTurnoAtt) {
+						cartaAtt = Carta.valueOf(nomeCarta);
+						//controllo se il giocatore ha carte con le quali può difendersi
+						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
+						{
 							btnPassaTurno.setVisible(false);
 						}
 						else 
 						{
 							btnPassaTurno.setVisible(true);
 							listCarte.setDisable(true);
-							cartaGiocata = Carta.INDICATORE_GOAL;
 						}
 					}
-					else 
+					else
 					{
-						nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
-						lblTurnoAttacco.setTextFill(Color.RED);
-						lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-						if(giocaTurnoAtt) {
+						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
+							cartaAtt = Carta.INDICATORE_GOAL;
+							btnPassaTurno.setVisible(true);
+							listCarte.setDisable(true);
+						}else {
 							cartaAtt = Carta.valueOf(nomeCarta);
 							//controllo se il giocatore ha carte con le quali può difendersi
 							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
@@ -268,28 +283,8 @@ public class FormGiocaPartitaController implements Initializable
 								listCarte.setDisable(true);
 							}
 						}
-						else
-						{
-							if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
-								cartaAtt = Carta.INDICATORE_GOAL;
-								btnPassaTurno.setVisible(true);
-								listCarte.setDisable(true);
-							}else {
-								cartaAtt = Carta.valueOf(nomeCarta);
-								//controllo se il giocatore ha carte con le quali può difendersi
-								if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
-								{
-									btnPassaTurno.setVisible(false);
-								}
-								else 
-								{
-									btnPassaTurno.setVisible(true);
-									listCarte.setDisable(true);
-								}
-							}
-						}
-						imgGiocata.setImage(cartaAtt.getImmagine());
 					}
+					imgGiocata.setImage(cartaAtt.getImmagine());
 				}
 			}
 			catch(IOException e)
@@ -405,5 +400,16 @@ public class FormGiocaPartitaController implements Initializable
 		if(players[posizioneGiocatoreAttaccante].getPunteggio() == 5)
 			fine = true;
 		return fine;
+	}
+	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException{
+		//classe da cui partono i dati
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
+		loader.load();
+		FormLeaderboardController formRigore = loader.getController();
+		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+		formRigore.copiaCodice(codicePartita);
+		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+		s = new Salvataggio(g.getGara(codicePartita));
+		//s.deleteDirectory("partite");
 	}
 }
