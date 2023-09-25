@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -29,6 +30,7 @@ import classi.Gare;
 import classi.Giocatore;
 import classi.Partita;
 import classi.Tipologia;
+import classi.Leaderboard;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -40,6 +42,7 @@ import javafx.collections.ObservableList;
 public class FormGiocaPartitaController implements Initializable
 {
 	Gare g = new Gare();
+	Leaderboard leaderboard = new Leaderboard();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Salvataggio s;
 	static String codicePartita;
@@ -118,6 +121,12 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 		else {
+			for(Giocatore g: players) {
+				System.out.println(g.getNVittoriePartite());
+			}
+			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+			leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
+			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
 			form.copiaCodice(codicePartita);
 			alert.passaAlForm("/application/FormLeaderboard.fxml", event);
@@ -402,6 +411,12 @@ public class FormGiocaPartitaController implements Initializable
 		return fine;
 	}
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException{
+		for(Giocatore g: players) {
+			System.out.println(g.getNVittoriePartite());
+		}
+		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+		leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
+		leaderboard.salvaPlayers();
 		//classe da cui partono i dati
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
 		loader.load();

@@ -143,6 +143,8 @@ public class FormCreaPartitaController implements Initializable{
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
 		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
+			//salvo la leaderboard con gli eventuali nuovi giocatori creati
+			leaderboard.salvaPlayers();
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
 			g = new Partita(giocatori,codice);

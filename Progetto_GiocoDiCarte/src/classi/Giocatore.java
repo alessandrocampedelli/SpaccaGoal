@@ -48,6 +48,12 @@ public class Giocatore
 	public void setPunteggio(int p) {
 		this.punteggio = p;
 	}
+	public void setVittoriePartite(int v) {
+		this.nPartiteVinte = v;
+	}
+	public void setVittorieTornei(int v) {
+		this.nTorneiVinti = v;
+	}
 	//metodo che restituisce un vettore di stringhe contenenti i nomi delle carte della mano
 	public String[] getManoNomi(){
 		String[] nomiCarte = new String[mano.size()];
@@ -56,7 +62,7 @@ public class Giocatore
 		}
 		return nomiCarte;
 	}
-	public void aggiungiVittoria() 
+	public void aggiungiVittoriaPartita() 
 	{
 		this.nPartiteVinte+=1;
 	}
