@@ -170,7 +170,7 @@ public class FormGiocaPartitaController implements Initializable
 	public void btnSospendiGara(ActionEvent event) throws IOException
 	{
 		if(alert.chiediConferma("Sei sicuro di voler sospendere la partita?", "ATTENZIONE")) {
-			alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+" è stata sospesa", "OPERAZIONE COMPLETATA");
+			alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
 			alert.passaAlForm("/application/FormPrincipale.fxml", event);
 		}
 	}
