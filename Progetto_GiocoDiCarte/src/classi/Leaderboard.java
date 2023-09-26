@@ -22,7 +22,7 @@ public class Leaderboard {
 		}
 	}
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
-	private void caricaPlayers(String path) throws FileNotFoundException{
+	public void caricaPlayers(String path) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(path));
 		while(scan.hasNextLine()) 
 		{
@@ -35,7 +35,7 @@ public class Leaderboard {
 				g = new Giocatore(infoPlayer[0],true);
 			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
 			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
-			System.out.println("leggi "+g.getNVittoriePartite());
+			System.out.println("leggi " + g.getAlias()+ " " + g.getNVittoriePartite());
 			addPlayers(g);
 		}
 		scan.close();
@@ -44,7 +44,7 @@ public class Leaderboard {
 	public void salvaPlayers() throws FileNotFoundException{
 		PrintWriter fw = new PrintWriter(path);
 		for(Giocatore g: players) {
-			System.out.println("salva " +g.getNVittoriePartite());
+			System.out.println("salva " + g.getAlias()+ " " + g.getNVittoriePartite());
 			String riga = g.getAlias()+","+g.getNVittoriePartite()+","+g.getNVittorieTornei();
 			if(g.getRobot())
 				riga += ",r";

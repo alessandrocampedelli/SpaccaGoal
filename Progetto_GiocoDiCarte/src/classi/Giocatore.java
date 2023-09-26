@@ -1,6 +1,9 @@
 package classi;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Giocatore 
 {
@@ -15,10 +18,30 @@ public class Giocatore
 	{
 		this.alias = alias;
 		this.robot = robot;
-		this.nPartiteVinte = 0;
-		this.nTorneiVinti = 0;
 		this.punteggio = 0;
-		this.mano = new ArrayList<>(); 
+		
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/giocatori.txt";
+		String path = currentDirectory + File.separator + relativePath;
+		
+		try {
+			Scanner scan = new Scanner(new File(path));
+			while(scan.hasNextLine()) 
+			{
+				String riga = scan.nextLine();
+				String[] infoPlayer = riga.split(",");
+				if(infoPlayer[0].equals(alias)) {
+					setVittoriePartite(Integer.parseInt(infoPlayer[1]));
+					setVittorieTornei(Integer.parseInt(infoPlayer[2]));
+					break;
+				}
+			}
+			scan.close();
+			this.mano = new ArrayList<>();
+			System.out.println(alias + " "+nPartiteVinte);
+		}catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	public String getAlias() 
 	{
@@ -51,6 +74,7 @@ public class Giocatore
 	public void setVittoriePartite(int v) {
 		this.nPartiteVinte = v;
 	}
+	
 	public void setVittorieTornei(int v) {
 		this.nTorneiVinti = v;
 	}
@@ -64,6 +88,7 @@ public class Giocatore
 	}
 	public void aggiungiVittoriaPartita() 
 	{
+		System.out.println("AA" + this.nPartiteVinte);
 		this.nPartiteVinte+=1;
 	}
 	public void aggiungiGoal() {
