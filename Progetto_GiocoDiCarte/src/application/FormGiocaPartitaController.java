@@ -121,10 +121,8 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 		else {
-			for(Giocatore g: players) {
-				System.out.println(g.getNVittoriePartite());
-			}
 			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+			System.out.println("franco " + players[posizioneGiocatoreAttaccante].getNVittoriePartite());
 			leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
@@ -415,6 +413,7 @@ public class FormGiocaPartitaController implements Initializable
 			System.out.println(g.getNVittoriePartite());
 		}
 		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+		System.out.println("ale " + players[posizioneGiocatoreAttaccante].getNVittoriePartite());
 		leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
 		leaderboard.salvaPlayers();
 		//classe da cui partono i dati

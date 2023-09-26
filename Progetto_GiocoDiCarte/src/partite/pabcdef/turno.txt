@@ -1,4 +1,4 @@
 d
-0
-1
-RIGORE_C
+2
+3
+BOMBER_VERO
