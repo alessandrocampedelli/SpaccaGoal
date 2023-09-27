@@ -21,8 +21,12 @@ public class Leaderboard {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	//DUBBIO - ELIMINAZIONE METODO CARICAMENTO GIOCATORE -- INUTILE -- (utile per ricaricare leaderboard in grafica)
+	
+	
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
-	public void caricaPlayers(String path) throws FileNotFoundException{
+	private void caricaPlayers(String path) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(path));
 		while(scan.hasNextLine()) 
 		{
@@ -40,6 +44,7 @@ public class Leaderboard {
 		}
 		scan.close();
 	}
+	
 	//metodo che salva i giocatori (alias, numero vittorie torneo, numero vittorie partite, robot) su file
 	public void salvaPlayers() throws FileNotFoundException{
 		PrintWriter fw = new PrintWriter(path);
