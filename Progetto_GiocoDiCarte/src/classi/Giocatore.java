@@ -4,16 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import javafx.beans.property.SimpleIntegerProperty;
 public class Giocatore 
 {
 	private String alias;
-	private int nPartiteVinte;
-	private int nTorneiVinti;
+	private Integer nPartiteVinte;
+	private Integer nTorneiVinti;
 	private boolean robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
 
+	private final SimpleIntegerProperty numPartiteVinte;
+	private final SimpleIntegerProperty numTorneiVinti;
+	
 	public Giocatore(String alias, boolean robot) 
 	{
 		this.alias = alias;
@@ -21,8 +24,19 @@ public class Giocatore
 		this.punteggio = 0;
 		this.mano = new ArrayList<>();
 		caricaVittoriePartiteTorneo();
+		
+		numPartiteVinte = new SimpleIntegerProperty(nPartiteVinte);
+		numTorneiVinti = new SimpleIntegerProperty(nTorneiVinti);
 	}
 
+	public final SimpleIntegerProperty getNumPartiteVinte() {
+		   return numPartiteVinte;
+	}
+	
+	public final SimpleIntegerProperty getNumTorneiVinti() {
+		   return numTorneiVinti;
+		}
+	
 	public String getAlias() 
 	{
 		return alias;
