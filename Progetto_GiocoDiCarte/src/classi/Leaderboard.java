@@ -24,8 +24,6 @@ public class Leaderboard {
 		{
 			System.out.println(e.getMessage());
 		}
-	}	
-	
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
 	private void caricaPlayers(String path) throws FileNotFoundException
 	{
