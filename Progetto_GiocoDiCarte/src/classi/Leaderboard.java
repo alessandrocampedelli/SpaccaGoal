@@ -39,6 +39,8 @@ public class Leaderboard {
 				g = new Giocatore(infoPlayer[0],false);
 			else
 				g = new Giocatore(infoPlayer[0],true);
+			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
+			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
 			addPlayers(g);
 		}
 		scan.close();
@@ -48,8 +50,7 @@ public class Leaderboard {
 	public void salvaPlayers() throws FileNotFoundException
 	{
 		PrintWriter fw = new PrintWriter(path);
-		for(Giocatore g: players) 
-		{
+		for(Giocatore g: players) {
 			String riga = g.getAlias()+","+g.getNPartiteVinte()+","+g.getNTorneiVinti();
 			if(g.getRobot())
 				riga += ",r";
@@ -64,17 +65,13 @@ public class Leaderboard {
 	{
 		players.add(g);
 	}
-	
-	public void updatePlayers(Giocatore g) 
-	{
-		players.remove(indexPlayer(g.getAlias()));
-		players.add(g);
-	}
-	
 	private int indexPlayer(String alias) 
 	{
 		for(int i = 0; i < players.size(); i++) 
 		{
+	//metodo che mi ritorna l'indice del giocatore dato l'alias
+	public int indexPlayer(String alias) {
+		for(int i = 0; i < players.size(); i++) {
 			if(players.get(i).getAlias().equals(alias))
 				return i;
 		}
