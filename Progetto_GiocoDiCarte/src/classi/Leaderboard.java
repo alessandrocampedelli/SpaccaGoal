@@ -68,7 +68,7 @@ public class Leaderboard {
 	public ArrayList<Giocatore> getPlayers(){
 		return this.players;
 	}
-	//controllo se è gia stato creato un giocatore con quell'alias
+	//controllo se e' gia stato creato un giocatore con quell'alias
 	public Giocatore giocatoreGiaCreato(String alias) {
 		for(Giocatore g : players) {
 			if(g.getAlias().equals(alias))
