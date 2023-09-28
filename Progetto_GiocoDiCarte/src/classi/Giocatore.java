@@ -1,10 +1,10 @@
 package classi;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javafx.beans.property.SimpleIntegerProperty;
 public class Giocatore 
 {
 	private String alias;
@@ -13,9 +13,6 @@ public class Giocatore
 	private boolean robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
-
-	private final SimpleIntegerProperty numPartiteVinte;
-	private final SimpleIntegerProperty numTorneiVinti;
 	
 	public Giocatore(String alias, boolean robot) 
 	{
@@ -24,30 +21,18 @@ public class Giocatore
 		this.punteggio = 0;
 		this.mano = new ArrayList<>();
 		caricaVittoriePartiteTorneo();
-		
-		numPartiteVinte = new SimpleIntegerProperty(nPartiteVinte);
-		numTorneiVinti = new SimpleIntegerProperty(nTorneiVinti);
 	}
-
-	public final SimpleIntegerProperty getNumPartiteVinte() {
-		   return numPartiteVinte;
-	}
-	
-	public final SimpleIntegerProperty getNumTorneiVinti() {
-		   return numTorneiVinti;
-		}
-	
 	public String getAlias() 
 	{
 		return alias;
 	}
 	
-	public int getNVittoriePartite() 
+	public int getNPartiteVinte() 
 	{
 		return nPartiteVinte;
 	}
 	
-	public int getNVittorieTornei() 
+	public int getNTorneiVinti()
 	{
 		return nTorneiVinti;
 	}

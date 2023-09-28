@@ -122,7 +122,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else {
 			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-			System.out.println("franco " + players[posizioneGiocatoreAttaccante].getNVittoriePartite());
+			System.out.println("franco " + players[posizioneGiocatoreAttaccante].getNPartiteVinte());
 			leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
@@ -410,18 +410,16 @@ public class FormGiocaPartitaController implements Initializable
 	}
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException{
 		for(Giocatore g: players) {
-			System.out.println(g.getNVittoriePartite());
+			System.out.println(g.getNPartiteVinte());
 		}
 		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		System.out.println("ale " + players[posizioneGiocatoreAttaccante].getNVittoriePartite());
+		System.out.println("ale " + players[posizioneGiocatoreAttaccante].getNPartiteVinte());
 		leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
 		leaderboard.salvaPlayers();
 		//classe da cui partono i dati
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
 		loader.load();
-		FormLeaderboardController formRigore = loader.getController();
 		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
-		formRigore.copiaCodice(codicePartita);
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		s = new Salvataggio(g.getGara(codicePartita));
 		//s.deleteDirectory("partite");

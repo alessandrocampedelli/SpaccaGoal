@@ -24,12 +24,7 @@ import classi.Leaderboard;
 import classi.Giocatore;
 
 public class FormLeaderboardController implements Initializable{
-	static String codicePartita;
 	Leaderboard leaderboard = new Leaderboard();
-	public void copiaCodice(String codice) 
-	{
-		codicePartita = codice;
-	}
 	Gare gare = new Gare();
 	//Gara g = gare.getGara(null)
 	Alert_cambiaForm alert = new Alert_cambiaForm();
@@ -42,7 +37,9 @@ public class FormLeaderboardController implements Initializable{
 	}
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
+		//creo la colonna col nome
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
 		
@@ -54,9 +51,14 @@ public class FormLeaderboardController implements Initializable{
 		torneiVinti.setCellValueFactory(new PropertyValueFactory<Giocatore, Integer>("nTorneiVinti"));
 		torneiVinti.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 		
+		//aggiungo le colonne
 		table.getColumns().add(alias);
 		table.getColumns().add(partiteVinte);
 		table.getColumns().add(torneiVinti);
+		
+		alias.setStyle( "-fx-alignment: CENTER;");
+		partiteVinte.setStyle( "-fx-alignment: CENTER;");
+		torneiVinti.setStyle( "-fx-alignment: CENTER;");
 
 		for(Giocatore g : leaderboard.getPlayers()) {
 			table.getItems().add(g);

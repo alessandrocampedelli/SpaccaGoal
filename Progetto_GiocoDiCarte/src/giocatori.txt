@@ -5,4 +5,4 @@ d,0,0,p
 franco,0,0,p
 matteo,2,0,p
 paolo,4,0,p
-ale,18,0,p
+ale,1,0,p

@@ -39,7 +39,7 @@ public class Leaderboard {
 				g = new Giocatore(infoPlayer[0],true);
 			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
 			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
-			System.out.println("leggi " + g.getAlias()+ " " + g.getNVittoriePartite());
+			System.out.println("leggi " + g.getAlias()+ " " + g.getNPartiteVinte());
 			addPlayers(g);
 		}
 		scan.close();
@@ -49,8 +49,8 @@ public class Leaderboard {
 	public void salvaPlayers() throws FileNotFoundException{
 		PrintWriter fw = new PrintWriter(path);
 		for(Giocatore g: players) {
-			System.out.println("salva " + g.getAlias()+ " " + g.getNVittoriePartite());
-			String riga = g.getAlias()+","+g.getNVittoriePartite()+","+g.getNVittorieTornei();
+			System.out.println("salva " + g.getAlias()+ " " + g.getNPartiteVinte());
+			String riga = g.getAlias()+","+g.getNPartiteVinte()+","+g.getNTorneiVinti();
 			if(g.getRobot())
 				riga += ",r";
 			else
