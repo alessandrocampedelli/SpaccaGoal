@@ -81,7 +81,6 @@ public class Giocatore
 	public void aggiungiVittoriaPartita() 
 	{
 		this.nPartiteVinte = this.nPartiteVinte + 1;
-		System.out.println("AA" + this.nPartiteVinte);
 	}
 	
 	public void aggiungiGoal() {
