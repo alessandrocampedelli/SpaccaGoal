@@ -56,11 +56,12 @@ public class FormLeaderboardController implements Initializable{
 		table.getColumns().add(partiteVinte);
 		table.getColumns().add(torneiVinti);
 		
-		alias.setStyle( "-fx-alignment: CENTER;");
-		partiteVinte.setStyle( "-fx-alignment: CENTER;");
-		torneiVinti.setStyle( "-fx-alignment: CENTER;");
+		alias.setStyle("-fx-alignment: CENTER;");
+		partiteVinte.setStyle("-fx-alignment: CENTER;");
+		torneiVinti.setStyle("-fx-alignment: CENTER;");
 
-		for(Giocatore g : leaderboard.getPlayers()) {
+		for(Giocatore g : leaderboard.getPlayers()) 
+		{
 			table.getItems().add(g);
 		}
 	}

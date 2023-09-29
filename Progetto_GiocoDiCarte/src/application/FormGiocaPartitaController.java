@@ -121,6 +121,7 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 		else {
+			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
@@ -405,7 +406,9 @@ public class FormGiocaPartitaController implements Initializable
 			fine = true;
 		return fine;
 	}
-	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException{
+
+	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
+	{
 		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 		leaderboard.salvaPlayers();
 		//classe da cui partono i dati

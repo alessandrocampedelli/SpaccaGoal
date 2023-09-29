@@ -8,22 +8,27 @@ import java.io.FileNotFoundException;
 public class Leaderboard {
 	private ArrayList<Giocatore> players;
 	private String path;
-	
-	public Leaderboard() {
+
+	public Leaderboard() 
+	{	
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/giocatori.txt";
 		this.path = currentDirectory + File.separator + relativePath;
-		
-		players = new ArrayList<>();
-		try {
+
+		this.players = new ArrayList<>();
+		try 
+		{
 			caricaPlayers(this.path);
-		}catch(FileNotFoundException e) {
+		}
+		catch(FileNotFoundException e) 
+		{
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
-	private void caricaPlayers(String path) throws FileNotFoundException{
+	private void caricaPlayers(String path) throws FileNotFoundException
+	{
 		Scanner scan = new Scanner(new File(path));
 		while(scan.hasNextLine()) 
 		{
@@ -40,9 +45,10 @@ public class Leaderboard {
 		}
 		scan.close();
 	}
-	
+
 	//metodo che salva i giocatori (alias, numero vittorie torneo, numero vittorie partite, robot) su file
-	public void salvaPlayers() throws FileNotFoundException{
+	public void salvaPlayers() throws FileNotFoundException
+	{
 		PrintWriter fw = new PrintWriter(path);
 		for(Giocatore g: players) {
 			String riga = g.getAlias()+","+g.getNPartiteVinte()+","+g.getNTorneiVinti();
@@ -54,9 +60,12 @@ public class Leaderboard {
 		}
 		fw.close();
 	}
-	public void addPlayers(Giocatore g) {
+
+	public void addPlayers(Giocatore g) 
+	{
 		players.add(g);
 	}
+
 	//metodo che mi ritorna l'indice del giocatore dato l'alias
 	public int indexPlayer(String alias) {
 		for(int i = 0; i < players.size(); i++) {
@@ -65,9 +74,12 @@ public class Leaderboard {
 		}
 		return -1;
 	}
-	public ArrayList<Giocatore> getPlayers(){
+
+	public ArrayList<Giocatore> getPlayers()
+	{
 		return this.players;
 	}
+
 	//controllo se e' gia stato creato un giocatore con quell'alias
 	public Giocatore giocatoreGiaCreato(String alias) {
 		for(Giocatore g : players) {

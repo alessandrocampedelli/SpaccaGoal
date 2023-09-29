@@ -2,7 +2,7 @@ a,0,0,p
 b,0,0,p
 c,0,0,p
 d,0,0,p
-ale,1,0,p
 franco,0,0,p
-matteo,0,0,p
-paolo,0,0,p
+matteo,2,0,p
+paolo,3,0,p
+ale,7,0,p

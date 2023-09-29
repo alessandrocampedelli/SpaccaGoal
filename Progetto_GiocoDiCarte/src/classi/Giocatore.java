@@ -19,9 +19,12 @@ public class Giocatore
 		this.alias = alias;
 		this.robot = robot;
 		this.punteggio = 0;
+		this.nPartiteVinte = 0;
+		this.nTorneiVinti = 0;
 		this.mano = new ArrayList<>();
 		caricaVittoriePartiteTorneo();
 	}
+	
 	public String getAlias() 
 	{
 		return alias;
@@ -77,7 +80,7 @@ public class Giocatore
 	
 	public void aggiungiVittoriaPartita() 
 	{
-		this.nPartiteVinte+=1;
+		this.nPartiteVinte = this.nPartiteVinte + 1;
 	}
 	
 	public void aggiungiGoal() {
