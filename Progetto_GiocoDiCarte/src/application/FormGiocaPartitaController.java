@@ -122,7 +122,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else {
 			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-			//leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
+			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
 			form.copiaCodice(codicePartita);
@@ -241,7 +241,6 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					//passaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
 					if(giocaTurnoAtt) {
 						btnPassaTurno.setVisible(false);
 					}
@@ -407,11 +406,10 @@ public class FormGiocaPartitaController implements Initializable
 			fine = true;
 		return fine;
 	}
+
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
 	{
-		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		//CONTINUARE DA QUI -- SOLUZIONE VICINA!!!!
-		//leaderboard.updatePlayers(players[posizioneGiocatoreAttaccante]);
+		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 		leaderboard.salvaPlayers();
 		//classe da cui partono i dati
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
