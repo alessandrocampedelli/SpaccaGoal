@@ -317,7 +317,6 @@ public class FormGiocaPartitaController implements Initializable
 							case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
 							case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
 							case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
-							case "CAMBIO_SCHEMA": imageView.setImage(Carta.CAMBIO_SCHEMA.getImmagine()); break;
 							case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
 							case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
 							case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
