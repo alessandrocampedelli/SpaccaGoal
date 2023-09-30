@@ -32,6 +32,8 @@ public abstract class Gara
 					giocatori[j].getMano().add(carte.pesca());
 			}
 		}
+		carte.getCarte().add(Carta.AUTOGOAL);
+		carte.mischia();
 	}
 
 	private void pulisciMani() {
@@ -113,7 +115,7 @@ public abstract class Gara
 							//caso del rigore
 							if(!(cartaAtt.getDirezione().equals(cartaDif.getDirezione()))) 
 							{
-								att.aggiungiGoal();
+								//att.aggiungiGoal();
 							}
 						}
 					}
