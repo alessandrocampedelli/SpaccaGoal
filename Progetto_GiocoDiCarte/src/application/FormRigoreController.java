@@ -66,7 +66,6 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_SX;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaPunteggio("partite");
@@ -85,7 +84,6 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_C;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaPunteggio("partite");
@@ -104,7 +102,6 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_DX;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaPunteggio("partite");
@@ -141,14 +138,6 @@ public class FormRigoreController implements Initializable
 			{
 				System.out.println(e.getMessage());
 			}
-		}
-	}
-	
-	private void rigoreSegnato(Carta rigore, Carta portiere) 
-	{
-		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
-		{
-			players[posizioneGiocatoreAttaccante].aggiungiGoal();
 		}
 	}
 	

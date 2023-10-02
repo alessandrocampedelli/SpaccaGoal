@@ -55,9 +55,11 @@ public abstract class Gara
 		return carte;
 	}
 
-	public void setMazzo(Mazzo m) {
+	public void setMazzo(Mazzo m) 
+	{
 		this.carte = m;
 	}
+	
 	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) 
 	{
 		dif.getMano().add(this.carte.pesca());
@@ -67,18 +69,22 @@ public abstract class Gara
 			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA)))
 			{
 				att.aggiungiGoal();
-			}else 
+			}
+			else 
 			{
 				dif.getMano().add(this.carte.pesca());
 			}
-		}else {
+		}
+		else 
+		{
 			//bomber vero
 			if(cartaAtt.equals(Carta.BOMBER_VERO)) 
 			{
 				if(!cartaDif.equals(Carta.DIFENSORE_ROCCIA)) 
 				{
 					att.aggiungiGoal();
-				}else 
+				}
+				else 
 				{
 					dif.getMano().add(this.carte.pesca());
 				}
@@ -110,7 +116,9 @@ public abstract class Gara
 						{
 							att.getMano().add(this.carte.pesca());
 							att.getMano().add(this.carte.pesca());
-						}else {
+						}
+						else 
+						{
 							//caso del rigore
 							if(!(cartaAtt.getDirezione().equals(cartaDif.getDirezione()))) 
 							{

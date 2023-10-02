@@ -93,7 +93,8 @@ public class FormGiocaPartitaController implements Initializable
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		if(turno.equals("a"))
 			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
-		else {
+		else 
+		{
 			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
@@ -145,7 +146,8 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				players[posizioneGiocatoreAttaccante].aggiungiGoal();
 			}
-		}else 
+		}
+		else 
 		{
 			if(turno.equals("d")) 
 			{
@@ -181,7 +183,8 @@ public class FormGiocaPartitaController implements Initializable
 		}
 	}
 	@FXML
-	public void selezionaCarta(MouseEvent event) {
+	public void selezionaCarta(MouseEvent event) 
+	{
 		//ottengo la carta selezionata
 		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		if(turno.equals("a")) {
