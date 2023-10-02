@@ -10,6 +10,7 @@ public enum Carta {
 	RIGORE_SX(Tipologia.ATTACCO, new Image(getUrl("attacco_rigore.JPG")),Direzione.SINISTRA),
 	ROVESCIATA_DELLANNO(Tipologia.ATTACCO,new Image(getUrl("attacco_rovesciataDellAnno.jpg"))),
 	TIRO_DOMENICA(Tipologia.ATTACCO, new Image(getUrl("attacco_tiroDellaDomenica.jpg"))),
+	CAMBIO_SCHEMA(Tipologia.BONUS_MALUS, new Image(getUrl("bonus_cambioSchema.JPG"))),
 	DIFENSORE(Tipologia.DIFESA, new Image(getUrl("difesa_difensore.jpg"))),
 	DIFENSORE_ROCCIA(Tipologia.DIFESA, new Image(getUrl("difesa_difensoreRoccia.jpg"))),
 	PORTIERE(Tipologia.DIFESA, new Image(getUrl("difesa_portiere.JPG"))),
