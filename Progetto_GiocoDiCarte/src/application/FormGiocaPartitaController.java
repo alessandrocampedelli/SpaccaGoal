@@ -321,7 +321,6 @@ public class FormGiocaPartitaController implements Initializable
 							case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
 							case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
 							case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
-							case "AUTOGOAL": imageView.setImage(Carta.AUTOGOAL.getImmagine()); break;
 							case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
 							case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
 							case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;

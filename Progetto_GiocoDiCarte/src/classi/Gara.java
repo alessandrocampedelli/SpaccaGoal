@@ -32,7 +32,6 @@ public abstract class Gara
 					giocatori[j].getMano().add(carte.pesca());
 			}
 		}
-		carte.getCarte().add(Carta.AUTOGOAL);
 		carte.mischia();
 	}
 

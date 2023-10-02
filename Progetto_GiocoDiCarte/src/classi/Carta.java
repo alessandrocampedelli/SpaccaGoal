@@ -16,7 +16,6 @@ public enum Carta {
 	PORTIERE_DX(Tipologia.DIFESA, new Image(getUrl("difesa_portiere.JPG")), Direzione.DESTRA),
 	PORTIERE_C(Tipologia.DIFESA, new Image(getUrl("difesa_portiere.JPG")), Direzione.CENTRO),
 	PORTIERE_SX(Tipologia.DIFESA, new Image(getUrl("difesa_portiere.JPG")), Direzione.SINISTRA),
-	AUTOGOAL(Tipologia.BONUS_MALUS, new Image(getUrl("malus_autogoal.jpg"))),
 	FUORIGIOCO(Tipologia.SPECIALE, new Image(getUrl("speciale_fuorigioco.jpg"))),
 	GOAL(Tipologia.SPECIALE, new Image(getUrl("speciale_goal.jpg"))),
 	MISTER(Tipologia.SPECIALE, new Image(getUrl("speciale_mister.JPG"))),
