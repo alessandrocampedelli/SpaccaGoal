@@ -153,7 +153,7 @@ public class FormCreaPartitaController implements Initializable{
 			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
-			
+			//prova
 			salvaGara = new Salvataggio(g);
 			salvaGara.salvaNomiGiocatori("partite");
 			salvaGara.salvaMazzo("partite");
