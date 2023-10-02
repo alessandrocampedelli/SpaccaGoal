@@ -151,7 +151,7 @@ public abstract class Gara
 		}
 		return giocaTurno;
 	}
-	
+	//metodo che controlla il passaggio turno dell'attaccante
 	public boolean checkGiocaTurno(Giocatore att) 
 	{
 		for(Carta c : att.getMano()) 
