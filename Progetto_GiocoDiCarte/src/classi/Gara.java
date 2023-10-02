@@ -56,9 +56,11 @@ public abstract class Gara
 		return carte;
 	}
 
-	public void setMazzo(Mazzo m) {
+	public void setMazzo(Mazzo m) 
+	{
 		this.carte = m;
 	}
+	
 	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) 
 	{
 		dif.getMano().add(this.carte.pesca());
@@ -153,7 +155,7 @@ public abstract class Gara
 		}
 		return giocaTurno;
 	}
-	//metodo che controlla il passaggio turno dell'attaccante
+
 	public boolean checkGiocaTurno(Giocatore att) 
 	{
 		for(Carta c : att.getMano()) 
@@ -161,9 +163,12 @@ public abstract class Gara
 			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
 				return true;
 		}
+		
 		return false;
 	}
-	public String mostraRisultati() {
+	
+	public String mostraRisultati() 
+	{
 		String output = "CLASSIFICA FINALE:\n";
 		for(Giocatore g : giocatori) {
 			output += g.getAlias()+": "+g.getPunteggio()+"\n";
