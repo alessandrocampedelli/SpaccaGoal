@@ -35,6 +35,10 @@ public class FormModalitaAdminMenuController {
 			alert.mostraErrore("Si è verificato un errore!","ERRORE");
 		}
 	}
+	@FXML
+	public void btnEliminaEvento(ActionEvent event) throws IOException{
+		alert.passaAlForm("/application/FormEliminaEvento.fxml", event);
+	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnLogout(ActionEvent event) {
