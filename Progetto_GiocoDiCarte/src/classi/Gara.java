@@ -114,7 +114,7 @@ public abstract class Gara
 							//caso del rigore
 							if(!(cartaAtt.getDirezione().equals(cartaDif.getDirezione()))) 
 							{
-								//att.aggiungiGoal();
+								att.aggiungiGoal();
 							}
 						}
 					}
