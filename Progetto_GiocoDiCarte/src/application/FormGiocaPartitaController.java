@@ -407,6 +407,7 @@ public class FormGiocaPartitaController implements Initializable
 
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
 	{
+		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 		leaderboard.salvaPlayers();
 		//classe da cui partono i dati
