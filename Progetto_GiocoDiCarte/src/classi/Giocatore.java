@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Giocatore 
 {
 	private String alias;
-	private int nPartiteVinte;
-	private int nTorneiVinti;
+	private Integer nPartiteVinte;
+	private Integer nTorneiVinti;
 	private boolean robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
@@ -81,6 +81,7 @@ public class Giocatore
 	public void aggiungiVittoriaPartita() 
 	{
 		this.nPartiteVinte = this.nPartiteVinte + 1;
+		System.out.println("AA" + this.nPartiteVinte);
 	}
 	
 	public void aggiungiGoal() {

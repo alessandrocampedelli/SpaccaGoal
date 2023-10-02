@@ -8,13 +8,13 @@ import java.io.FileNotFoundException;
 public class Leaderboard {
 	private ArrayList<Giocatore> players;
 	private String path;
-
+	
 	public Leaderboard() 
 	{	
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/giocatori.txt";
 		this.path = currentDirectory + File.separator + relativePath;
-
+		
 		this.players = new ArrayList<>();
 		try 
 		{
@@ -24,8 +24,8 @@ public class Leaderboard {
 		{
 			System.out.println(e.getMessage());
 		}
-	}
-
+	}	
+	
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
 	private void caricaPlayers(String path) throws FileNotFoundException
 	{
@@ -39,18 +39,17 @@ public class Leaderboard {
 				g = new Giocatore(infoPlayer[0],false);
 			else
 				g = new Giocatore(infoPlayer[0],true);
-			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
-			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
 			addPlayers(g);
 		}
 		scan.close();
 	}
-
+	
 	//metodo che salva i giocatori (alias, numero vittorie torneo, numero vittorie partite, robot) su file
 	public void salvaPlayers() throws FileNotFoundException
 	{
 		PrintWriter fw = new PrintWriter(path);
-		for(Giocatore g: players) {
+		for(Giocatore g: players) 
+		{
 			String riga = g.getAlias()+","+g.getNPartiteVinte()+","+g.getNTorneiVinti();
 			if(g.getRobot())
 				riga += ",r";
@@ -60,29 +59,38 @@ public class Leaderboard {
 		}
 		fw.close();
 	}
-
+	
 	public void addPlayers(Giocatore g) 
 	{
 		players.add(g);
 	}
-
-	//metodo che mi ritorna l'indice del giocatore dato l'alias
-	public int indexPlayer(String alias) {
-		for(int i = 0; i < players.size(); i++) {
+	
+	public void updatePlayers(Giocatore g) 
+	{
+		players.remove(indexPlayer(g.getAlias()));
+		players.add(g);
+	}
+	
+	private int indexPlayer(String alias) 
+	{
+		for(int i = 0; i < players.size(); i++) 
+		{
 			if(players.get(i).getAlias().equals(alias))
 				return i;
 		}
 		return -1;
 	}
-
+	
 	public ArrayList<Giocatore> getPlayers()
 	{
 		return this.players;
 	}
-
-	//controllo se e' gia stato creato un giocatore con quell'alias
-	public Giocatore giocatoreGiaCreato(String alias) {
-		for(Giocatore g : players) {
+	
+	//controllo se è gia stato creato un giocatore con quell'alias
+	public Giocatore giocatoreGiaCreato(String alias) 
+	{
+		for(Giocatore g : players) 
+		{
 			if(g.getAlias().equals(alias))
 				return g;
 		}
