@@ -10,7 +10,7 @@ public abstract class Gara
 	protected Codice codice;
 	protected Mazzo carte;
 	protected final int N_CARTE_INIZIO = 5;
-
+	//aaa
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
