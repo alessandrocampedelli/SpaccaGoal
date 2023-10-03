@@ -166,6 +166,12 @@ public class Salvataggio {
 			{
 				riga += c.name()+",";
 			}
+			if(riga.length() == 0)
+			{
+				Carta c = eventoDaSalvare.getMazzo().pesca(); 
+				mano.add(c);
+				riga += c.name()+",";
+			}
 			//cancello l'ultima virgola
 			riga = riga.substring(0, riga.length() - 1);
 			fw.println(riga);
