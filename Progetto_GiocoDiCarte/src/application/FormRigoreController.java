@@ -69,6 +69,8 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
+		s.salvaMazzo("partite");
+		s.salvaMani("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
@@ -88,6 +90,8 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
+		s.salvaMazzo("partite");
+		s.salvaMani("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
@@ -107,6 +111,8 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
+		s.salvaMazzo("partite");
+		s.salvaMani("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
@@ -149,6 +155,10 @@ public class FormRigoreController implements Initializable
 		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
 		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
+		}
+		else
+		{
+			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 		}
 	}
 	
