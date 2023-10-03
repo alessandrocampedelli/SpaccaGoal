@@ -120,7 +120,7 @@ public abstract class Gara
 						else 
 						{
 							//caso del rigore
-							if(!(cartaAtt.getDirezione().equals(cartaDif.getDirezione()))) 
+							if(!cartaDif.equals(Carta.PORTIERE)) 
 							{
 								att.aggiungiGoal();
 							}
