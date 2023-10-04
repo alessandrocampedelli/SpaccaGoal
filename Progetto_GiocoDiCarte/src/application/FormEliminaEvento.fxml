@@ -11,10 +11,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormEliminaEventoController">
    <children>
       <Label layoutX="136.0" layoutY="56.0" text="CODICE EVENTO" />
-      <ListView fx:id="lblPartite" layoutX="119.0" layoutY="77.0" prefHeight="494.0" prefWidth="122.0" />
-      <TextArea fx:id="txtInfo" disable="true" layoutX="390.0" layoutY="146.0" prefHeight="285.0" prefWidth="409.0" />
-      <Label layoutX="390.0" layoutY="121.0" text="Informazioni evento selezionato" />
-      <Button fx:id="btnElimina" layoutX="509.0" layoutY="460.0" mnemonicParsing="false" onAction="#elimina" prefHeight="50.0" prefWidth="170.0" text="ELIMINA PARTITA" visible="false" />
+      <ListView fx:id="lblPartite" layoutX="119.0" layoutY="77.0" onMouseClicked="#cliccaGara" prefHeight="494.0" prefWidth="122.0" />
+      <TextArea fx:id="txtInfo" editable="false" layoutX="353.0" layoutY="139.0" prefHeight="332.0" prefWidth="447.0" />
+      <Label layoutX="353.0" layoutY="121.0" text="Informazioni evento selezionato" />
+      <Button fx:id="btnElimina" layoutX="509.0" layoutY="482.0" mnemonicParsing="false" onAction="#elimina" prefHeight="50.0" prefWidth="170.0" text="ELIMINA EVENTO" visible="false" />
       <ImageView fitHeight="70.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#tornaIndietro" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../frecciaTornaIndietro.jpg" />
