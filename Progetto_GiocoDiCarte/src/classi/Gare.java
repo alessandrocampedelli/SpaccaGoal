@@ -89,7 +89,9 @@ public class Gare
 		}
 		return giocatori;
 	}
-
+	public ArrayList<Gara> getGare(){
+		return this.gare;
+	}
 	public String toString() 
 	{
 		String nomi = "";
