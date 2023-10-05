@@ -51,7 +51,7 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		codicePartita = codice;
 	}
-	
+
 	@FXML
 	private Label lblTurnoAttacco;
 	@FXML
@@ -62,6 +62,8 @@ public class FormGiocaPartitaController implements Initializable
 	private Label lblGiocatore3;
 	@FXML
 	private Label lblGiocatore4;
+	@FXML
+	private Label lblInfoUtente;
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
 	@FXML
@@ -106,8 +108,8 @@ public class FormGiocaPartitaController implements Initializable
 		if(!finePartita()) 
 		{
 			mazzo.scarta(cartaGiocata);
-			s.salvaMazzo("partite");
 			s.salvaMani("partite");
+			s.salvaMazzo("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
 			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
@@ -121,7 +123,8 @@ public class FormGiocaPartitaController implements Initializable
 				alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 			}
 		}
-		else {
+		else 
+		{
 			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 			leaderboard.salvaPlayers();
@@ -131,6 +134,7 @@ public class FormGiocaPartitaController implements Initializable
 			//s.deleteDirectory("partite");
 		}
 	}
+
 	@FXML
 	public void btnPassaTurno(ActionEvent event) throws IOException 
 	{
@@ -161,8 +165,8 @@ public class FormGiocaPartitaController implements Initializable
 		{
 			//salvo tutte le informazioni della partita
 			s = new Salvataggio(g.getGara(codicePartita));
-			s.salvaMazzo("partite");
 			s.salvaMani("partite");
+			s.salvaMazzo("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
 
@@ -173,11 +177,13 @@ public class FormGiocaPartitaController implements Initializable
 			showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias());
 		}
 	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void btnSospendiGara(ActionEvent event) throws IOException
 	{
-		if(alert.chiediConferma("Sei sicuro di voler sospendere la partita?", "ATTENZIONE")) {
+		if(alert.chiediConferma("Sei sicuro di voler sospendere la partita?", "ATTENZIONE")) 
+		{
 			alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
 			alert.passaAlForm("/application/FormPrincipale.fxml", event);
 		}
@@ -187,28 +193,35 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		//ottengo la carta selezionata
 		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		if(turno.equals("a")) {
+		if(turno.equals("a")) 
+		{
 			//se è una carta di attacco la rendo cliccabile e viceversa
 			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER)) {
 				if(!btnGiocaCarta.isVisible())
 					btnGiocaCarta.setVisible(true);
-			}else {
-				listCarte.getSelectionModel().clearSelection();
-				btnGiocaCarta.setVisible(false);
 			}
-		}else {
-			//se è una carta di difesa la rendo cliccabile e viceversa
-			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR)) {
-				if(!btnGiocaCarta.isVisible())
-					btnGiocaCarta.setVisible(true);
-			}else {
+			else 
+			{
 				listCarte.getSelectionModel().clearSelection();
 				btnGiocaCarta.setVisible(false);
 			}
 		}
-
+		else 
+		{
+			//se è una carta di difesa la rendo cliccabile e viceversa
+			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR)) 
+			{
+				if(!btnGiocaCarta.isVisible())
+					btnGiocaCarta.setVisible(true);
+			}
+			else 
+			{
+				listCarte.getSelectionModel().clearSelection();
+				btnGiocaCarta.setVisible(false);
+			}
+		}
 	}
-	
+
 	public void stampaGiocatoriLabel()
 	{
 		if(!lblGiocatore1.getText().equals(players[0].getAlias())) 
@@ -240,11 +253,13 @@ public class FormGiocaPartitaController implements Initializable
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
 				boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
-				if(turno.equals("a")) {
+				if(turno.equals("a")) 
+				{
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					if(giocaTurnoAtt) {
+					if(giocaTurnoAtt) 
+					{
 						btnPassaTurno.setVisible(false);
 					}
 					else 
@@ -259,7 +274,8 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(giocaTurnoAtt) {
+					if(giocaTurnoAtt) 
+					{
 						cartaAtt = Carta.valueOf(nomeCarta);
 						//controllo se il giocatore ha carte con le quali può difendersi
 						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
@@ -278,7 +294,9 @@ public class FormGiocaPartitaController implements Initializable
 							cartaAtt = Carta.INDICATORE_GOAL;
 							btnPassaTurno.setVisible(true);
 							listCarte.setDisable(true);
-						}else {
+						}
+						else 
+						{
 							cartaAtt = Carta.valueOf(nomeCarta);
 							//controllo se il giocatore ha carte con le quali può difendersi
 							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
@@ -310,24 +328,28 @@ public class FormGiocaPartitaController implements Initializable
 					@Override
 					public void updateItem(String name, boolean empty) {
 						super.updateItem(name, empty);
-						if (empty) {
+						if (empty) 
+						{
 							setText(null);
 							setGraphic(null);
-						} else {
-							switch(name) {
-							case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
-							case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
-							case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
-							case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
-							case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
-							case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
-							case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
-							case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
-							case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
-							case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
-							case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
-							case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
-							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
+						} 
+						else 
+						{
+							switch(name) 
+							{
+								case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
+								case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
+								case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
+								case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
+								case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
+								case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
+								case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
+								case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
+								case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
+								case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
+								case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
+								case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
+								case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 							}
 							setGraphic(imageView);
 						}
@@ -337,7 +359,7 @@ public class FormGiocaPartitaController implements Initializable
 			//alert.mostraCartaPescata();
 		}
 	}
-	
+
 	private void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -354,8 +376,9 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		scan.close();
 	}
-	
-	private void salvaTurno() throws IOException{
+
+	private void salvaTurno() throws IOException
+	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
@@ -400,6 +423,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		fw.close();
 	}
+	
 	private boolean finePartita() 
 	{
 		boolean fine = false;

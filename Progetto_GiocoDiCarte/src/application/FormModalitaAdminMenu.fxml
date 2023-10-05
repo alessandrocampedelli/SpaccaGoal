@@ -4,12 +4,25 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaAdminMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormModalitaAdminMenuController">
 	<children>
-		<Button layoutX="194.0" layoutY="61.0" mnemonicParsing="false" onAction="#btnCreaNewPartita" prefHeight="54.0" prefWidth="210.0" text="CREA NUOVA PARTITA" />
-		<Button layoutX="194.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnCreaNewTorneo" prefHeight="54.0" prefWidth="210.0" text="CREA NUOVO TORNEO" />
-		<Button layoutX="194.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnLogout" prefHeight="54.0" prefWidth="210.0" text="LOGOUT" />
-		<Label layoutX="199.0" layoutY="37.0" text="Modalità di creazione di un contenuto" />
-      <Button layoutX="194.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnEliminaEvento" prefHeight="54.0" prefWidth="210.0" text="ELIMINA PARTITE E TORNEI SOSPESI" />
+		<Button layoutX="194.0" layoutY="61.0" mnemonicParsing="false"
+			onAction="#btnCreaNewPartita" prefHeight="54.0" prefWidth="210.0"
+			text="CREA NUOVA PARTITA" />
+		<Button layoutX="194.0" layoutY="137.0" mnemonicParsing="false"
+			onAction="#btnCreaNewTorneo" prefHeight="54.0" prefWidth="210.0"
+			text="CREA NUOVO TORNEO" />
+		<Button layoutX="194.0" layoutY="285.0" mnemonicParsing="false"
+			onAction="#btnLogout" prefHeight="54.0" prefWidth="210.0"
+			text="LOGOUT" />
+		<Label layoutX="199.0" layoutY="37.0"
+			text="Modalità di creazione di un contenuto" />
+		<Button layoutX="194.0" layoutY="209.0" mnemonicParsing="false"
+			onAction="#btnEliminaEvento" prefHeight="54.0" prefWidth="210.0"
+			text="ELIMINA PARTITE E TORNEI" />
 	</children>
 </AnchorPane>

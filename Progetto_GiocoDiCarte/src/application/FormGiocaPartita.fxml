@@ -49,7 +49,7 @@
 			onMouseClicked="#selezionaCarta" orientation="HORIZONTAL"
 			prefHeight="190.0" prefWidth="830.0" />
 		<Button fx:id="btnGiocaCarta" alignment="CENTER"
-			defaultButton="true" layoutX="374.0" layoutY="573.0"
+			defaultButton="true" layoutX="374.0" layoutY="561.0"
 			mnemonicParsing="false" onAction="#btnGiocaCarta" prefHeight="43.0"
 			prefWidth="127.0" text="GIOCA CARTA" visible="false" />
 		<Button defaultButton="true" layoutX="707.0" layoutY="147.0"
@@ -59,8 +59,13 @@
 			fitWidth="184.0" layoutX="346.0" layoutY="82.0" pickOnBounds="true"
 			preserveRatio="true" />
 		<Button fx:id="btnPassaTurno" alignment="CENTER"
-			defaultButton="true" layoutX="384.0" layoutY="583.0"
+			defaultButton="true" layoutX="374.0" layoutY="561.0"
 			mnemonicParsing="false" onAction="#btnPassaTurno" prefHeight="43.0"
 			prefWidth="127.0" text="PASSA TURNO" visible="false" />
+		<Label fx:id="lblInfoUtente" layoutX="23.0" layoutY="313.0">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
 	</children>
 </AnchorPane>
