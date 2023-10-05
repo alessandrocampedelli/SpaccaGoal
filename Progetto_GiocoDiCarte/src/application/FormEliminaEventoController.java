@@ -45,9 +45,9 @@ public class FormEliminaEventoController implements Initializable{
 				s.deleteDirectory("partite");
 			else
 				s.deleteDirectory("tornei");
+			alert.mostraInformazione("Eliminazione dell'evento '"+gara.getCodiceGara().getCodice()+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
+			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
-		alert.mostraInformazione("Eliminazione dell'evento '"+gara.getCodiceGara().getCodice()+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
-		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 	}
 	// Event Listener on ImageView.onMouseClicked
 	@FXML
