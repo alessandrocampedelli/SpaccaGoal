@@ -1,8 +1,6 @@
 package application;
 
 import javafx.fxml.FXML;
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -41,12 +39,21 @@ import javafx.collections.ObservableList;
 
 public class FormGiocaPartitaController implements Initializable
 {
+	//creo un oggetto delle classi "gara", "leaderboard" e "alert"
 	Gare g = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	Salvataggio s;
-	static String codicePartita;
 
+	Salvataggio s;
+	Gara partita;
+	Mazzo mazzo;
+	Giocatore[] players;
+	String[] nomiCarte;
+	Carta cartaGiocata;
+	Carta cartaAtt;
+
+	static String codicePartita;
+	//questo metodo permette di passare il codice della partita dal form precedente (FormIniziaPartitaController)
 	public void copiaCodice(String codice) 
 	{
 		codicePartita = codice;
@@ -64,54 +71,59 @@ public class FormGiocaPartitaController implements Initializable
 	private Label lblGiocatore4;
 	@FXML
 	private Label lblInfoUtente;
+	
+	//la lista dove stamperemo tutte le carte delle mani dei vari giocatori
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
-	@FXML
-	ImageView imgGiocata = new ImageView();
-
-	String turno;
-	int posizioneGiocatoreAttaccante;
-	int posizioneGiocatoreDifensore;
-	String nomeCarta;
-
-	@FXML
-	Gara partita;
-	Mazzo mazzo;
-	Giocatore[] players;
-	String[] nomiCarte;
-	Carta cartaGiocata;
-	Carta cartaAtt;
+	
+	//bottoni nel programma sovrapposti in quanto potrà esserne visibile uno solo contemporaneamente
 	@FXML
 	Button btnGiocaCarta = new Button();
 	@FXML
 	Button btnPassaTurno = new Button();
+	//l'immagine che sarà visibile solo in un turno di difesa con l'immagine giocata dal calciatore attaccante
+	@FXML
+	ImageView imgGiocata = new ImageView();
+	
+	//variabile che indica se ci stiamo riferendo ad un turno di attacco o un turno di difesa (prenderà il valore "d" per difesa e "a" per attacco)
+	String turno;
+	int posizioneGiocatoreAttaccante;
+	int posizioneGiocatoreDifensore;
+	//il nome della carta che è stato giocato dall'attaccante se ci troviamo in un turno di difesa
+	String nomeCarta;
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
-		//salvo tutte le informazioni della partita
-		s = new Salvataggio(g.getGara(codicePartita));
+		//la carta che è stata selezionata all'interno della listView
 		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		if(turno.equals("a"))
+		{
+			//se ci stiamo riferendo ad un turno di attacco rimuoverò la carta giocata dall'attaccante nella listView 
 			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
+		}
 		else 
 		{
+			//se ci stiamo riferendo ad un turno di difesa rimuoverò la carta giocata dal difensore nella listView e controllo se si è difeso correttamente 
 			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 		}
-		//classe da cui partono i dati
+		//il form del rigore che ci passerà nel caso in cui sia stata giocata una carta "rigore" o "portiere"
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
 		loader.load();
 		FormRigoreController form = loader.getController();
-		String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
+		//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
 		if(!finePartita()) 
 		{
+			//scarto dal mazzo la carta giocata (la rimetto in fondo al mazzo) e salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
 			mazzo.scarta(cartaGiocata);
+			//salvo tutte le informazioni utili della partita tramite il costruttore della classe "Salvataggio"
+			s = new Salvataggio(g.getGara(codicePartita));
 			s.salvaMani("partite");
 			s.salvaMazzo("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
+			//controllo se è stata giocata una di queste carte, se cosi fosse passeremo al form del rigore, altrimenti rimaremmo in questo form
 			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
 				form.copiaCodice(codicePartita);
@@ -125,11 +137,15 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
+			//mi salvo il giocatore vincente e gli aggiungo la vittoria della partita
+			String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
 			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
 			form.copiaCodice(codicePartita);
+			//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 			alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 			//s.deleteDirectory("partite");
 		}
@@ -138,9 +154,11 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void btnPassaTurno(ActionEvent event) throws IOException 
 	{
+		//in ogni turno di difesa si pesca una carta se si è subito goal, si pescano due carte se non si è subito goal
 		players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 		if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 		{
+			//caso particolare di carta speciale mister, l'attaccante scarta la carta e pesca altre due carte e passa il turno
 			if(cartaAtt.equals(Carta.MISTER)) 
 			{
 				players[posizioneGiocatoreAttaccante].getMano().add(this.mazzo.pesca());
@@ -148,6 +166,7 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			else
 			{
+				//non è stata pescata la carta mister, quindi il difensore non si è potuto difendere e per questo motivo esso ha subito goal
 				players[posizioneGiocatoreAttaccante].aggiungiGoal();
 			}
 		}
@@ -155,39 +174,42 @@ public class FormGiocaPartitaController implements Initializable
 		{
 			if(turno.equals("d")) 
 			{
+				//controllo l'unico caso in cui l'attaccante non sia riuscito ad attaccare, altrimenti il difensore ha subito goal
 				if(!cartaAtt.equals(Carta.INDICATORE_GOAL)) 
 				{
 					players[posizioneGiocatoreAttaccante].aggiungiGoal();
 				}
 			}
 		}
+		//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
 		if(!finePartita()) 
 		{
-			//salvo tutte le informazioni della partita
+			//salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
 			s = new Salvataggio(g.getGara(codicePartita));
 			s.salvaMani("partite");
 			s.salvaMazzo("partite");
 			s.salvaPunteggio("partite");
 			salvaTurno();
-
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}
 		else 
 		{
+			//se la partita è terminata eseguo il metodo che mi permetterà di chiudere la partita
 			showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias());
 		}
 	}
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void btnSospendiGara(ActionEvent event) throws IOException
 	{
+		//l'utente ha intenzione di sospendere la partita,lo richiedo per conferma con un alert, sospendo la partita e torno al form principale
 		if(alert.chiediConferma("Sei sicuro di voler sospendere la partita?", "ATTENZIONE")) 
 		{
 			alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
 			alert.passaAlForm("/application/FormPrincipale.fxml", event);
 		}
 	}
+	
 	@FXML
 	public void selezionaCarta(MouseEvent event) 
 	{
@@ -436,11 +458,12 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
-		//classe da cui partono i dati
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
 		loader.load();
 		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		s = new Salvataggio(g.getGara(codicePartita));
 		//s.deleteDirectory("partite");
