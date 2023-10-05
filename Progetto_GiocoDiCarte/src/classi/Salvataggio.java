@@ -166,6 +166,7 @@ public class Salvataggio {
 			{
 				riga += c.name()+",";
 			}
+			//nel caso estremo il giocatore finisca le carte il gioco prevede il pescaggio di una carta perchè nessun giocatore puo rimanere senza
 			if(riga.length() == 0)
 			{
 				Carta c = eventoDaSalvare.getMazzo().pesca(); 
