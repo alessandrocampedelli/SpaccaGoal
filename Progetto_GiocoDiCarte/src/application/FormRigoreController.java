@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -22,11 +23,13 @@ import classi.Giocatore;
 import classi.Mazzo;
 import classi.Partita;
 import classi.Salvataggio;
+import classi.Leaderboard;
 
 import java.io.IOException; 
 
 public class FormRigoreController implements Initializable
 {
+	Leaderboard leaderboard = new Leaderboard();
 	Gare g = new Gare();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Salvataggio s;
@@ -66,14 +69,15 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_SX;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
+			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -87,14 +91,15 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_C;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
+			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -108,14 +113,15 @@ public class FormRigoreController implements Initializable
 		else 
 		{
 			cartaGiocata = Carta.PORTIERE_DX;
-			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata);
+			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1)
@@ -150,11 +156,13 @@ public class FormRigoreController implements Initializable
 		}
 	}
 	
-	private void rigoreSegnato(Carta rigore, Carta portiere) 
+	private void rigoreSegnato(Carta rigore, Carta portiere,ActionEvent e) throws IOException
 	{
 		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
 		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
+			if(players[posizioneGiocatoreAttaccante].getPunteggio() == 5)
+				showFinePartita(e,players[posizioneGiocatoreAttaccante].getAlias());
 		}
 		else
 		{
@@ -206,5 +214,19 @@ public class FormRigoreController implements Initializable
 				fw.println(0);
 		}
 		fw.close();
+	}
+	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
+	{
+		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
+		leaderboard.salvaPlayers();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
+		loader.load();
+		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
+		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+		s = new Salvataggio(g.getGara(codicePartita));
+		//s.deleteDirectory("partite");
 	}
 }

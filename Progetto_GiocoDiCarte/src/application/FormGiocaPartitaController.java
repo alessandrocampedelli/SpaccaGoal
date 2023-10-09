@@ -95,60 +95,65 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
-		//la carta che è stata selezionata all'interno della listView
-		cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		if(turno.equals("a"))
-		{
-			//se ci stiamo riferendo ad un turno di attacco rimuoverò la carta giocata dall'attaccante nella listView 
-			players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
-		}
-		else 
-		{
-			//se ci stiamo riferendo ad un turno di difesa rimuoverò la carta giocata dal difensore nella listView e controllo se si è difeso correttamente 
-			partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
-			players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
-		}
-		//il form del rigore che ci passerà nel caso in cui sia stata giocata una carta "rigore" o "portiere"
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
-		loader.load();
-		FormRigoreController form = loader.getController();
-		//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
-		if(!finePartita()) 
-		{
-			//scarto dal mazzo la carta giocata (la rimetto in fondo al mazzo) e salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
-			mazzo.scarta(cartaGiocata);
-			//salvo tutte le informazioni utili della partita tramite il costruttore della classe "Salvataggio"
-			s = new Salvataggio(g.getGara(codicePartita));
-			s.salvaMani("partite");
-			s.salvaMazzo("partite");
-			s.salvaPunteggio("partite");
-			salvaTurno();
-			//controllo se è stata giocata una di queste carte, se cosi fosse passeremo al form del rigore, altrimenti rimaremmo in questo form
-			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
+		if(listCarte.getSelectionModel().getSelectedItem() != null) {
+			//la carta che è stata selezionata all'interno della listView
+			cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
+			if(turno.equals("a"))
 			{
+				//se ci stiamo riferendo ad un turno di attacco rimuoverò la carta giocata dall'attaccante nella listView 
+				players[posizioneGiocatoreAttaccante].getMano().remove(cartaGiocata);
+			}
+			else 
+			{
+				//se ci stiamo riferendo ad un turno di difesa rimuoverò la carta giocata dal difensore nella listView e controllo se si è difeso correttamente 
+				partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
+				players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
+			}
+			//il form del rigore che ci passerà nel caso in cui sia stata giocata una carta "rigore" o "portiere"
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
+			loader.load();
+			FormRigoreController form = loader.getController();
+			//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
+			if(!finePartita()) 
+			{
+				//scarto dal mazzo la carta giocata (la rimetto in fondo al mazzo) e salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
+				mazzo.scarta(cartaGiocata);
+				//salvo tutte le informazioni utili della partita tramite il costruttore della classe "Salvataggio"
+				s = new Salvataggio(g.getGara(codicePartita));
+				s.salvaMani("partite");
+				s.salvaMazzo("partite");
+				s.salvaPunteggio("partite");
+				salvaTurno();
+				//controllo se è stata giocata una di queste carte, se cosi fosse passeremo al form del rigore, altrimenti rimaremmo in questo form
+				if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
+				{
+					form.copiaCodice(codicePartita);
+					form.copiaCartaGiocata(cartaAtt);
+					alert.passaAlForm("/application/FormRigore.fxml", event);
+				}
+				else
+				{
+					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+				}
+			}
+			else 
+			{
+				//mi salvo il giocatore vincente e gli aggiungo la vittoria della partita
+				String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
+				players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+				leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+				//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
+				leaderboard.salvaPlayers();
+				alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
 				form.copiaCodice(codicePartita);
-				form.copiaCartaGiocata(cartaAtt);
-				alert.passaAlForm("/application/FormRigore.fxml", event);
+				//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
+				alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+				//s.deleteDirectory("partite");
 			}
-			else
-			{
-				alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-			}
+		}else {
+			alert.mostraErrore("Devi selezionare una carta prima di premere il bottone", "ERRORE!");
 		}
-		else 
-		{
-			//mi salvo il giocatore vincente e gli aggiungo la vittoria della partita
-			String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
-			players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
-			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
-			leaderboard.salvaPlayers();
-			alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
-			form.copiaCodice(codicePartita);
-			//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
-			alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-			//s.deleteDirectory("partite");
-		}
+		
 	}
 
 	@FXML
@@ -282,11 +287,15 @@ public class FormGiocaPartitaController implements Initializable
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
 					if(giocaTurnoAtt) 
 					{
-						btnPassaTurno.setVisible(false);
+						btnGiocaCarta.setVisible(true);
+						btnGiocaCarta.setLayoutX(374);
+						btnGiocaCarta.setLayoutY(554);
 					}
 					else 
 					{
 						btnPassaTurno.setVisible(true);
+						btnPassaTurno.setLayoutX(374);
+						btnPassaTurno.setLayoutY(554);
 						listCarte.setDisable(true);
 						cartaGiocata = Carta.INDICATORE_GOAL;
 					}
@@ -302,20 +311,25 @@ public class FormGiocaPartitaController implements Initializable
 						//controllo se il giocatore ha carte con le quali può difendersi
 						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 						{
-							btnPassaTurno.setVisible(false);
+							btnPassaTurno.setVisible(true);
+							btnGiocaCarta.setVisible(true);
 						}
 						else 
 						{
 							btnPassaTurno.setVisible(true);
+							btnPassaTurno.setLayoutX(374);
+							btnPassaTurno.setLayoutY(554);
 							listCarte.setDisable(true);
 						}
 					}
 					else
 					{
 						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
-							cartaAtt = Carta.INDICATORE_GOAL;
 							btnPassaTurno.setVisible(true);
+							btnPassaTurno.setLayoutX(374);
+							btnPassaTurno.setLayoutY(554);
 							listCarte.setDisable(true);
+							cartaAtt = Carta.INDICATORE_GOAL;
 						}
 						else 
 						{
@@ -323,11 +337,14 @@ public class FormGiocaPartitaController implements Initializable
 							//controllo se il giocatore ha carte con le quali può difendersi
 							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 							{
-								btnPassaTurno.setVisible(false);
+								btnPassaTurno.setVisible(true);
+								btnGiocaCarta.setVisible(true);
 							}
 							else 
 							{
 								btnPassaTurno.setVisible(true);
+								btnPassaTurno.setLayoutX(374);
+								btnPassaTurno.setLayoutY(554);
 								listCarte.setDisable(true);
 							}
 						}

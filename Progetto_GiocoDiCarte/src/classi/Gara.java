@@ -133,32 +133,19 @@ public abstract class Gara
 	
 	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) 
 	{
-		boolean giocaTurno = true;
-		if(cartaGiocata.equals(Carta.ATTACCANTE)) 
+		if(cartaGiocata.equals(Carta.ROVESCIATA_DELLANNO) || cartaGiocata.equals(Carta.TIRO_DOMENICA) || cartaGiocata.equals(Carta.MISTER)) 
 		{
-			giocaTurno = manoAvversario.contains(Carta.DIFENSORE) || manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
+			return false;
 		}
-		else if(cartaGiocata.equals(Carta.BOMBER_VERO)) 
+		else 
 		{
-			giocaTurno = manoAvversario.contains(Carta.DIFENSORE_ROCCIA);
+			for(Carta c : manoAvversario) 
+			{
+				if(c.getTipologia().equals(Tipologia.DIFESA))
+					return true;
+			}
+			return false;
 		}
-		else if(cartaGiocata.equals(Carta.RIGORE_DX) || cartaGiocata.equals(Carta.RIGORE_SX) || cartaGiocata.equals(Carta.RIGORE_C)) 
-		{
-			giocaTurno = manoAvversario.contains(Carta.PORTIERE);
-		}
-		else if(cartaGiocata.equals(Carta.ROVESCIATA_DELLANNO) || cartaGiocata.equals(Carta.TIRO_DOMENICA)) 
-		{
-			giocaTurno = false;
-		}
-		else if(cartaGiocata.equals(Carta.GOAL)) 
-		{
-			giocaTurno = manoAvversario.contains(Carta.VAR) || manoAvversario.contains(Carta.FUORIGIOCO);
-		}
-		else if(cartaGiocata.equals(Carta.MISTER)) 
-		{
-			giocaTurno = false;
-		}
-		return giocaTurno;
 	}
 	
 	public boolean checkGiocaTurno(Giocatore att) 
