@@ -215,6 +215,7 @@ public class FormRigoreController implements Initializable
 		}
 		fw.close();
 	}
+	
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
 	{
 		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
