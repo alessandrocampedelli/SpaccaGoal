@@ -71,11 +71,11 @@ public class FormGiocaPartitaController implements Initializable
 	private Label lblGiocatore4;
 	@FXML
 	private Label lblInfoUtente;
-	
+
 	//la lista dove stamperemo tutte le carte delle mani dei vari giocatori
 	@FXML
 	private ListView<String> listCarte = new ListView<String>();
-	
+
 	//bottoni nel programma sovrapposti in quanto potrà esserne visibile uno solo contemporaneamente
 	@FXML
 	Button btnGiocaCarta = new Button();
@@ -84,7 +84,7 @@ public class FormGiocaPartitaController implements Initializable
 	//l'immagine che sarà visibile solo in un turno di difesa con l'immagine giocata dal calciatore attaccante
 	@FXML
 	ImageView imgGiocata = new ImageView();
-	
+
 	//variabile che indica se ci stiamo riferendo ad un turno di attacco o un turno di difesa (prenderà il valore "d" per difesa e "a" per attacco)
 	String turno;
 	int posizioneGiocatoreAttaccante;
@@ -95,7 +95,9 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void btnGiocaCarta(ActionEvent event) throws IOException
 	{
-		if(listCarte.getSelectionModel().getSelectedItem() != null) {
+		//Controllo se è stata selezionata una carta, altrimenti mando un messaggio di errore all'utente
+		if(listCarte.getSelectionModel().getSelectedItem() != null) 
+		{
 			//la carta che è stata selezionata all'interno della listView
 			cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 			if(turno.equals("a"))
@@ -138,22 +140,15 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			else 
 			{
-				//mi salvo il giocatore vincente e gli aggiungo la vittoria della partita
+				//ricavo il nominativo dell'alias vincente della partita e richiamo il metodo per concludere la partita
 				String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
-				players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-				leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
-				//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
-				leaderboard.salvaPlayers();
-				alert.mostraInformazione(aliasVincente+" vinto la partita", "PARTITA TERMINATA");
-				form.copiaCodice(codicePartita);
-				//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
-				alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-				//s.deleteDirectory("partite");
+				showFinePartita(event, aliasVincente);
 			}
-		}else {
-			alert.mostraErrore("Devi selezionare una carta prima di premere il bottone", "ERRORE!");
 		}
-		
+		else
+		{
+			alert.mostraErrore("Devi selezionare una carta prima di premere il bottone!", "ERRORE!");
+		}
 	}
 
 	@FXML
@@ -214,65 +209,56 @@ public class FormGiocaPartitaController implements Initializable
 			alert.passaAlForm("/application/FormPrincipale.fxml", event);
 		}
 	}
-	
+
 	@FXML
 	public void selezionaCarta(MouseEvent event) 
 	{
-		//ottengo la carta selezionata
+		//ottengo la carta selezionata dalla listView
 		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 		if(turno.equals("a")) 
 		{
-			//se è una carta di attacco la rendo cliccabile e viceversa
-			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER)) {
-				if(!btnGiocaCarta.isVisible())
-					btnGiocaCarta.setVisible(true);
-			}
-			else 
+			//siamo in un turno di attacco, quindi non permettiamo di cliccare una carta difensiva
+			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR))
 			{
 				listCarte.getSelectionModel().clearSelection();
-				btnGiocaCarta.setVisible(false);
 			}
 		}
 		else 
 		{
-			//se è una carta di difesa la rendo cliccabile e viceversa
-			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR)) 
-			{
-				if(!btnGiocaCarta.isVisible())
-					btnGiocaCarta.setVisible(true);
-			}
-			else 
+			//siamo in un turno di difesa, quindi non permettiamo di cliccare una carta offensiva
+			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
 			{
 				listCarte.getSelectionModel().clearSelection();
-				btnGiocaCarta.setVisible(false);
 			}
 		}
 	}
 
+	//metodo che permette di stampare i giocatori nella label con il loro attuale punteggio
 	public void stampaGiocatoriLabel()
 	{
-		if(!lblGiocatore1.getText().equals(players[0].getAlias())) 
+		//posso avere tra i 2 e 4 giocatori, i controlli servono per il numero di giocatori che stanno giocando la partita
+		if(players.length >= 2)
 		{
-			if(players.length >= 2)
-			{
-				lblGiocatore1.setText(players[0].getAlias() + ": "+players[0].getPunteggio()+" GOAL");
-				lblGiocatore2.setText(players[1].getAlias() + ": "+players[1].getPunteggio()+" GOAL");
-			}
-			if(players.length >= 3)
-			{
-				lblGiocatore3.setText(players[2].getAlias() + ": "+players[2].getPunteggio()+" GOAL");
-			}
-			if(players.length == 4)
-			{
-				lblGiocatore4.setText(players[3].getAlias() + ": "+players[3].getPunteggio()+" GOAL");
-			}
+			lblGiocatore1.setText(players[0].getAlias() + ": "+players[0].getPunteggio()+" GOAL");
+			lblGiocatore2.setText(players[1].getAlias() + ": "+players[1].getPunteggio()+" GOAL");
+		}
+		if(players.length >= 3)
+		{
+			lblGiocatore3.setText(players[2].getAlias() + ": "+players[2].getPunteggio()+" GOAL");
+		}
+		if(players.length == 4)
+		{
+			lblGiocatore4.setText(players[3].getAlias() + ": "+players[3].getPunteggio()+" GOAL");
 		}
 	}
 
+	//metodo "initialize". viene eseguito ogni volta che si apre questo form
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
+		//controllo se viene passato da form a form il codice della partita
 		if(!(codicePartita == null)) 
 		{
+			//da qui commenti.........
 			try
 			{
 				leggiTurno();
@@ -376,19 +362,19 @@ public class FormGiocaPartitaController implements Initializable
 						{
 							switch(name) 
 							{
-								case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
-								case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
-								case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
-								case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
-								case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
-								case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
-								case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
-								case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
-								case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
-								case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
-								case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
-								case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
-								case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
+							case "ATTACCANTE": imageView.setImage(Carta.ATTACCANTE.getImmagine()); break;
+							case "BOMBER_VERO": imageView.setImage(Carta.BOMBER_VERO.getImmagine()); break;
+							case "RIGORE": imageView.setImage(Carta.RIGORE.getImmagine()); break;
+							case "ROVESCIATA_DELLANNO": imageView.setImage(Carta.ROVESCIATA_DELLANNO.getImmagine()); break;
+							case "TIRO_DOMENICA": imageView.setImage(Carta.TIRO_DOMENICA.getImmagine()); break;
+							case "DIFENSORE": imageView.setImage(Carta.DIFENSORE.getImmagine()); break;
+							case "DIFENSORE_ROCCIA": imageView.setImage(Carta.DIFENSORE_ROCCIA.getImmagine()); break;
+							case "PORTIERE": imageView.setImage(Carta.PORTIERE.getImmagine()); break;
+							case "INDICATORE_GOAL": imageView.setImage(Carta.INDICATORE_GOAL.getImmagine()); break;
+							case "FUORIGIOCO": imageView.setImage(Carta.FUORIGIOCO.getImmagine()); break;
+							case "GOAL": imageView.setImage(Carta.GOAL.getImmagine()); break;
+							case "MISTER": imageView.setImage(Carta.MISTER.getImmagine()); break;
+							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 							}
 							setGraphic(imageView);
 						}
@@ -462,7 +448,7 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		fw.close();
 	}
-	
+
 	private boolean finePartita() 
 	{
 		boolean fine = false;
