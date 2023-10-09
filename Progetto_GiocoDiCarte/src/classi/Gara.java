@@ -157,6 +157,14 @@ public abstract class Gara
 		}
 		return false;
 	}
+	
+	public boolean finePartita(int iPosAtt) 
+	{
+		boolean fine = false;
+		if(giocatori[iPosAtt].getPunteggio() == 5)
+			fine = true;
+		return fine;
+	}
 	public String mostraRisultati() {
 		String output = "CLASSIFICA FINALE:\n";
 		for(Giocatore g : giocatori) {

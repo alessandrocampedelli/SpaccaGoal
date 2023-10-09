@@ -116,7 +116,7 @@ public class FormGiocaPartitaController implements Initializable
 			loader.load();
 			FormRigoreController form = loader.getController();
 			//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
-			if(!finePartita()) 
+			if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
 			{
 				//scarto dal mazzo la carta giocata (la rimetto in fondo al mazzo) e salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
 				mazzo.scarta(cartaGiocata);
@@ -182,7 +182,7 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 		//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
-		if(!finePartita()) 
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
 		{
 			//salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
 			s = new Salvataggio(g.getGara(codicePartita));
@@ -447,14 +447,6 @@ public class FormGiocaPartitaController implements Initializable
 				fw.println(0);
 		}
 		fw.close();
-	}
-
-	private boolean finePartita() 
-	{
-		boolean fine = false;
-		if(players[posizioneGiocatoreAttaccante].getPunteggio() == 5)
-			fine = true;
-		return fine;
 	}
 
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
