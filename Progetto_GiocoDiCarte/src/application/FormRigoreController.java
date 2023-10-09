@@ -76,7 +76,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	// Event Listener on Button.onAction
@@ -98,7 +98,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 	// Event Listener on Button.onAction
@@ -120,7 +120,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		salvaTurno();
-		if(!(players[posizioneGiocatoreAttaccante].getPunteggio() == 5))
+		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 
@@ -161,7 +161,7 @@ public class FormRigoreController implements Initializable
 		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
 		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
-			if(players[posizioneGiocatoreAttaccante].getPunteggio() == 5)
+			if(partita.finePartita(posizioneGiocatoreAttaccante))
 				showFinePartita(e,players[posizioneGiocatoreAttaccante].getAlias());
 		}
 		else
