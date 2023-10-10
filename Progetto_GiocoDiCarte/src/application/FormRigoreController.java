@@ -77,7 +77,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
-		salvaTurno();
+		partita.salvaTurnoRigore(cartaGiocata);
 		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
@@ -99,7 +99,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
-		salvaTurno();
+		partita.salvaTurnoRigore(cartaGiocata);
 		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
@@ -121,7 +121,7 @@ public class FormRigoreController implements Initializable
 		s.salvaMani("partite");
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
-		salvaTurno();
+		partita.salvaTurnoRigore(cartaGiocata);
 		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
@@ -132,10 +132,14 @@ public class FormRigoreController implements Initializable
 		{
 			try
 			{
-				leggiTurno();
 				partita = (Partita) g.getGara(codicePartita);
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
+				partita.leggiTurno();
+				turno = partita.getTurno();
+				posizioneGiocatoreAttaccante = partita.getPosAttaccante();
+				posizioneGiocatoreDifensore = partita.getPosDifensore();
+				nomeCarta = partita.getNomeCarta();
 				if(turno.equals("a"))
 				{
 					//visualizzare pallone ma non portiere
@@ -170,52 +174,6 @@ public class FormRigoreController implements Initializable
 		{
 			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 		}
-	}
-	
-	private void leggiTurno() throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		File f = new File(absolutePath);
-		Scanner scan = new Scanner(f);
-		turno = scan.nextLine();
-		posizioneGiocatoreAttaccante = scan.nextInt();
-		posizioneGiocatoreDifensore = scan.nextInt();
-		if(turno.equals("d"))
-		{
-			nomeCarta = scan.next();
-		}
-		scan.close();
-	}
-	
-	private void salvaTurno() throws IOException{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codicePartita+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-
-		PrintWriter fw = new PrintWriter(absolutePath);
-		if(turno.equals("a")) 
-		{
-			fw.println("d");
-			fw.println(posizioneGiocatoreAttaccante);
-			fw.println(posizioneGiocatoreDifensore);
-			fw.println(cartaGiocata.name());
-		}
-		else 
-		{
-			fw.println("a");
-			if((players.length-1) != posizioneGiocatoreAttaccante)
-				fw.println(posizioneGiocatoreAttaccante+1);
-			else
-				fw.println(0);
-
-			if((players.length-1) != posizioneGiocatoreDifensore)
-				fw.println(posizioneGiocatoreDifensore+1);
-			else
-				fw.println(0);
-		}
-		fw.close();
 	}
 	
 	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
