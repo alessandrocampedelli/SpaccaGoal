@@ -51,7 +51,7 @@ public class FormGiocaPartitaController implements Initializable
 	String[] nomiCarte;
 	Carta cartaGiocata;
 	Carta cartaAtt;
-
+	
 	static String codicePartita;
 	//questo metodo permette di passare il codice della partita dal form precedente (FormIniziaPartitaController)
 	public void copiaCodice(String codice) 
@@ -276,6 +276,7 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+					lblInfoUtente.setText("Hai pescato la carta: "+nomiCarte[nomiCarte.length-1]);
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
@@ -286,6 +287,7 @@ public class FormGiocaPartitaController implements Initializable
 					}
 					else 
 					{
+						lblInfoUtente.setText("Non hai carte con le quali attaccare. Sei costretto a passare il turno");
 						//non è possibile attaccare, attivo il bottone "passa turno" e rimane disabilitato il bottone "gioca carta"
 						btnPassaTurno.setVisible(true);
 						btnPassaTurno.setLayoutX(374);
@@ -312,6 +314,7 @@ public class FormGiocaPartitaController implements Initializable
 						//il giocatore non ha carte di attacco al momento in mano, controllo se era l'ultima oppure non ha attaccato
 						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) 
 						{
+							lblInfoUtente.setText("L'attaccante non ha attaccato. Passa il turno");
 							//il giocatore attaccante non ha attaccato, il difensore non si difende e attivo la visualizzazione del bottone "passa turno"
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(374);
@@ -408,6 +411,16 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
+			String output;
+			if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA) || cartaAtt.equals(Carta.MISTER)) 
+			{
+				output = "La carta "+cartaAtt+" non è difendibile. Sei costretto a passare il turno";
+				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA))
+					output += " subendo un gol.";
+				lblInfoUtente.setText(output);
+			}else {
+				lblInfoUtente.setText("Non hai carte di difesa con le quali difenderti. Sei costretto a passare il turno e subire gol");
+			}
 			//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
 			btnPassaTurno.setVisible(true);
 			btnPassaTurno.setLayoutX(374);
