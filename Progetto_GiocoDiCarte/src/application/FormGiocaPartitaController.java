@@ -298,28 +298,11 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					
-					//MIGLIORARE! prima controllo nome carta, poi check gioca turno.....
-					
+										
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
-						//la carta che è stata giocata dal giocatore attaccante
-						cartaAtt = Carta.valueOf(nomeCarta);
-						//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
-						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
-						{
-							//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
-							btnPassaTurno.setVisible(true);
-							btnGiocaCarta.setVisible(true);
-						}
-						else 
-						{
-							//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
-							btnPassaTurno.setVisible(true);
-							btnPassaTurno.setLayoutX(374);
-							btnPassaTurno.setLayoutY(554);
-							listCarte.setDisable(true);
-						}
+						//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no
+						checkTurnoDifensore();
 					}
 					else
 					{
@@ -331,29 +314,13 @@ public class FormGiocaPartitaController implements Initializable
 							btnPassaTurno.setLayoutX(374);
 							btnPassaTurno.setLayoutY(554);
 							listCarte.setDisable(true);
-							//setto la carta giocata al carta di default, mi servirà in seguito
 							cartaAtt = Carta.INDICATORE_GOAL;
 						}
 						//caso in cui l'attaccante non abbia più carte offensive in mano, ma comunque ha giocato una carta di attacco nel turno precedente
 						else 
 						{
-							//la carta che è stata giocata dal giocatore attaccante
-							cartaAtt = Carta.valueOf(nomeCarta);
-							//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
-							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
-							{
-								//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
-								btnPassaTurno.setVisible(true);
-								btnGiocaCarta.setVisible(true);
-							}
-							else 
-							{
-								//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
-								btnPassaTurno.setVisible(true);
-								btnPassaTurno.setLayoutX(374);
-								btnPassaTurno.setLayoutY(554);
-								listCarte.setDisable(true);
-							}
+							//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no
+							checkTurnoDifensore();
 						}
 					}
 					//setto il campo "imageView" alla carta giocata dall'attaccante (se non ha giocato nulla visualizzo la carta di default)
@@ -487,5 +454,26 @@ public class FormGiocaPartitaController implements Initializable
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		s = new Salvataggio(g.getGara(codicePartita));
 		//s.deleteDirectory("partite");
+	}
+	
+	private void checkTurnoDifensore()
+	{
+		//la carta che è stata giocata dal giocatore attaccante
+		cartaAtt = Carta.valueOf(nomeCarta);
+		//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
+		if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
+		{
+			//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
+			btnPassaTurno.setVisible(true);
+			btnGiocaCarta.setVisible(true);
+		}
+		else 
+		{
+			//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
+			btnPassaTurno.setVisible(true);
+			btnPassaTurno.setLayoutX(374);
+			btnPassaTurno.setLayoutY(554);
+			listCarte.setDisable(true);
+		}
 	}
 }
