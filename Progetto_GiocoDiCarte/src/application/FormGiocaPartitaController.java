@@ -239,16 +239,16 @@ public class FormGiocaPartitaController implements Initializable
 		//posso avere tra i 2 e 4 giocatori, i controlli servono per il numero di giocatori che stanno giocando la partita
 		if(players.length >= 2)
 		{
-			lblGiocatore1.setText(players[0].getAlias() + ": "+players[0].getPunteggio()+" GOAL");
-			lblGiocatore2.setText(players[1].getAlias() + ": "+players[1].getPunteggio()+" GOAL");
+			lblGiocatore1.setText(players[0].getAlias() + ": " + players[0].getPunteggio() + " GOAL");
+			lblGiocatore2.setText(players[1].getAlias() + ": " + players[1].getPunteggio() + " GOAL");
 		}
 		if(players.length >= 3)
 		{
-			lblGiocatore3.setText(players[2].getAlias() + ": "+players[2].getPunteggio()+" GOAL");
+			lblGiocatore3.setText(players[2].getAlias() + ": " + players[2].getPunteggio() + " GOAL");
 		}
 		if(players.length == 4)
 		{
-			lblGiocatore4.setText(players[3].getAlias() + ": "+players[3].getPunteggio()+" GOAL");
+			lblGiocatore4.setText(players[3].getAlias() + ": " + players[3].getPunteggio() + " GOAL");
 		}
 	}
 
@@ -258,50 +258,63 @@ public class FormGiocaPartitaController implements Initializable
 		//controllo se viene passato da form a form il codice della partita
 		if(!(codicePartita == null)) 
 		{
-			//da qui commenti.........
+			//eseguo con un blocco try/catch il controllo la lettura corretta dei file di testo
 			try
 			{
+				//metodo che legge il turno attuale (attacco, difesa, posizione giocatore attaccante e difendente e eventuale carta giocata)
 				leggiTurno();
 				partita = (Partita) g.getGara(codicePartita);
 				mazzo = partita.getMazzo();
 				players = partita.getGiocatori();
-				boolean giocaTurnoAtt = partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante]);
+				//controllo se è un turno di attacco o di difesa
 				if(turno.equals("a")) 
 				{
+					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					if(giocaTurnoAtt) 
+					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
+					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
+						//è possibile attaccare, attivo il bottone "gioca carta" e rimane disabilitato il bottone "passa turno"
 						btnGiocaCarta.setVisible(true);
 						btnGiocaCarta.setLayoutX(374);
 						btnGiocaCarta.setLayoutY(554);
 					}
 					else 
 					{
+						//non è possibile attaccare, attivo il bottone "passa turno" e rimane disabilitato il bottone "gioca carta"
 						btnPassaTurno.setVisible(true);
 						btnPassaTurno.setLayoutX(374);
 						btnPassaTurno.setLayoutY(554);
 						listCarte.setDisable(true);
+						//non è possibile giocare alcuna carta di attacco, allora la settiamo noi di default
 						cartaGiocata = Carta.INDICATORE_GOAL;
 					}
 				}
 				else 
 				{
+					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(giocaTurnoAtt) 
+					
+					//MIGLIORARE! prima controllo nome carta, poi check gioca turno.....
+					
+					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
+						//la carta che è stata giocata dal giocatore attaccante
 						cartaAtt = Carta.valueOf(nomeCarta);
-						//controllo se il giocatore ha carte con le quali può difendersi
+						//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
 						if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 						{
+							//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
 							btnPassaTurno.setVisible(true);
 							btnGiocaCarta.setVisible(true);
 						}
 						else 
 						{
+							//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(374);
 							btnPassaTurno.setLayoutY(554);
@@ -310,24 +323,32 @@ public class FormGiocaPartitaController implements Initializable
 					}
 					else
 					{
-						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) {
+						//il giocatore non ha carte di attacco al momento in mano, controllo se era l'ultima oppure non ha attaccato
+						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) 
+						{
+							//il giocatore attaccante non ha attaccato, il difensore non si difende e attivo la visualizzazione del bottone "passa turno"
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(374);
 							btnPassaTurno.setLayoutY(554);
 							listCarte.setDisable(true);
+							//setto la carta giocata al carta di default, mi servirà in seguito
 							cartaAtt = Carta.INDICATORE_GOAL;
 						}
+						//caso in cui l'attaccante non abbia più carte offensive in mano, ma comunque ha giocato una carta di attacco nel turno precedente
 						else 
 						{
+							//la carta che è stata giocata dal giocatore attaccante
 							cartaAtt = Carta.valueOf(nomeCarta);
-							//controllo se il giocatore ha carte con le quali può difendersi
+							//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
 							if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 							{
+								//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
 								btnPassaTurno.setVisible(true);
 								btnGiocaCarta.setVisible(true);
 							}
 							else 
 							{
+								//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
 								btnPassaTurno.setVisible(true);
 								btnPassaTurno.setLayoutX(374);
 								btnPassaTurno.setLayoutY(554);
@@ -335,6 +356,7 @@ public class FormGiocaPartitaController implements Initializable
 							}
 						}
 					}
+					//setto il campo "imageView" alla carta giocata dall'attaccante (se non ha giocato nulla visualizzo la carta di default)
 					imgGiocata.setImage(cartaAtt.getImmagine());
 				}
 			}
@@ -342,16 +364,20 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				System.out.println(e.getMessage());
 			}
+			//metodo per stampare l'attuale punteggio della partita nella label
 			stampaGiocatoriLabel();
-			ObservableList<String> items =FXCollections.observableArrayList (nomiCarte);
-			// TODO Auto-generated method stub
+			//commenti da qui....
+			ObservableList<String> items =FXCollections.observableArrayList(nomiCarte);
 			listCarte.setItems(items);
-			listCarte.setCellFactory(param -> {
-				return new ListCell<String>() {
+			listCarte.setCellFactory(param -> 
+			{
+				return new ListCell<String>() 
+				{
 					private ImageView imageView = new ImageView();
 
 					@Override
-					public void updateItem(String name, boolean empty) {
+					public void updateItem(String name, boolean empty) 
+					{
 						super.updateItem(name, empty);
 						if (empty) 
 						{
@@ -381,7 +407,6 @@ public class FormGiocaPartitaController implements Initializable
 					}
 				};
 			});
-			//alert.mostraCartaPescata();
 		}
 	}
 

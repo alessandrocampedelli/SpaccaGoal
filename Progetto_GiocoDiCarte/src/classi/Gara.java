@@ -165,6 +165,7 @@ public abstract class Gara
 			fine = true;
 		return fine;
 	}
+	
 	public String mostraRisultati() {
 		String output = "CLASSIFICA FINALE:\n";
 		for(Giocatore g : giocatori) {

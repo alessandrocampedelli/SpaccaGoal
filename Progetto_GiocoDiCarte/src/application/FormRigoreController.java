@@ -54,10 +54,12 @@ public class FormRigoreController implements Initializable
 	{
 		codicePartita = codice;
 	}
-	public void copiaCartaGiocata(Carta c) {
+	
+	public void copiaCartaGiocata(Carta c) 
+	{
 		cartaGiocata = c;
 	}
-	// Event Listener on Button.onAction
+
 	@FXML
 	public void btnSinistra(ActionEvent event) throws IOException
 	{
@@ -79,7 +81,7 @@ public class FormRigoreController implements Initializable
 		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-	// Event Listener on Button.onAction
+
 	@FXML
 	public void btnCentro(ActionEvent event) throws IOException
 	{
@@ -101,7 +103,7 @@ public class FormRigoreController implements Initializable
 		if(!partita.finePartita(posizioneGiocatoreAttaccante))
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-	// Event Listener on Button.onAction
+
 	@FXML
 	public void btnDestra(ActionEvent event) throws IOException
 	{
