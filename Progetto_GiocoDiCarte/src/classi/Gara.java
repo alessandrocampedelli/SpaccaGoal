@@ -3,13 +3,24 @@ package classi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Scanner;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 public abstract class Gara 
 {
 	protected Giocatore[] giocatori;
 	protected Codice codice;
 	protected Mazzo carte;
 	protected final int N_CARTE_INIZIO = 5;
+	protected String turno;
+	protected int posizioneGiocatoreAttaccante;
+	protected int posizioneGiocatoreDifensore;
+	protected String nomeCarta;
 
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
@@ -34,8 +45,29 @@ public abstract class Gara
 		}
 		carte.mischia();
 	}
+	
+	public String getTurno()
+	{
+		return this.turno;
+	}
+	
+	public int getPosAttaccante()
+	{
+		return this.posizioneGiocatoreAttaccante;
+	}
+	
+	public int getPosDifensore()
+	{
+		return this.posizioneGiocatoreDifensore;
+	}
+	
+	public String getNomeCarta()
+	{
+		return this.nomeCarta;
+	}
 
-	private void pulisciMani() {
+	private void pulisciMani() 
+	{
 		for(Giocatore g : giocatori)
 			g.getMano().clear();
 	}
@@ -166,11 +198,106 @@ public abstract class Gara
 		return fine;
 	}
 	
-	public String mostraRisultati() {
+	public String mostraRisultati() 
+	{
 		String output = "CLASSIFICA FINALE:\n";
 		for(Giocatore g : giocatori) {
 			output += g.getAlias()+": "+g.getPunteggio()+"\n";
 		}
 		return output;
+	}
+	
+	public void leggiTurno() throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/partite/"+codice.getCodice()+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		Scanner scan = new Scanner(f);
+		turno = scan.nextLine();
+		posizioneGiocatoreAttaccante = scan.nextInt();
+		posizioneGiocatoreDifensore = scan.nextInt();
+		if(turno.equals("d"))
+		{
+			nomeCarta = scan.next();
+		}
+		scan.close();
+	}
+	
+	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/" + partiteTornei + "/"+codice.getCodice()+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+		if(turno.equals("a")) 
+		{
+			if(cartaGiocata.equals(Carta.RIGORE)) 
+			{
+				fw.println("a");
+			}
+			else 
+			{
+				fw.println("d");
+			}
+			fw.println(posizioneGiocatoreAttaccante);
+			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartaGiocata.name());
+		}
+		else 
+		{
+			if(!(cartaGiocata == null)) 
+			{
+				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
+				{
+					fw.println("d");
+					fw.println(posizioneGiocatoreAttaccante);
+					fw.println(posizioneGiocatoreDifensore);
+					fw.println(cartaAtt.name());
+				}
+			}
+			fw.println("a");
+			if((giocatori.length-1) != posizioneGiocatoreAttaccante)
+				fw.println(posizioneGiocatoreAttaccante+1);
+			else
+				fw.println(0);
+
+			if((giocatori.length-1) != posizioneGiocatoreDifensore)
+				fw.println(posizioneGiocatoreDifensore+1);
+			else
+				fw.println(0);
+		}
+		fw.close();
+	}
+	
+	public void salvaTurnoRigore(Carta cartaGiocata) throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/partite/"+codice.getCodice()+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+
+		PrintWriter fw = new PrintWriter(absolutePath);
+		if(turno.equals("a")) 
+		{
+			fw.println("d");
+			fw.println(posizioneGiocatoreAttaccante);
+			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartaGiocata.name());
+		}
+		else 
+		{
+			fw.println("a");
+			if((giocatori.length-1) != posizioneGiocatoreAttaccante)
+				fw.println(posizioneGiocatoreAttaccante+1);
+			else
+				fw.println(0);
+
+			if((giocatori.length-1) != posizioneGiocatoreDifensore)
+				fw.println(posizioneGiocatoreDifensore+1);
+			else
+				fw.println(0);
+		}
+		fw.close();
 	}
 }
