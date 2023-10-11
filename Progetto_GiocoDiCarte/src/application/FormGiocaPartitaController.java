@@ -391,7 +391,6 @@ public class FormGiocaPartitaController implements Initializable
 		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-		s = new Salvataggio(g.getGara(codicePartita));
 		//s.deleteDirectory("partite");
 	}
 	
