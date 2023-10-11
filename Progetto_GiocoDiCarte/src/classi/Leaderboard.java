@@ -5,7 +5,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-public class Leaderboard {
+public class Leaderboard 
+{
 	private ArrayList<Giocatore> players;
 	private String path;
 
