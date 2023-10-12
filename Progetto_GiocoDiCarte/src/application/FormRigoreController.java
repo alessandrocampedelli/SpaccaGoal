@@ -164,33 +164,18 @@ public class FormRigoreController implements Initializable
 		}
 	}
 	
-	private void rigoreSegnato(Carta rigore, Carta portiere,ActionEvent e) throws IOException
+	private void rigoreSegnato(Carta rigore, Carta portiere, ActionEvent event) throws IOException
 	{
 		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
 		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
 			if(partita.finePartita(posizioneGiocatoreAttaccante))
-				showFinePartita(e,players[posizioneGiocatoreAttaccante].getAlias());
+				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 		}
 		else
 		{
 			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 			partita.setCartePescate(1);
 		}
-	}
-	
-	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
-	{
-		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
-		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
-		leaderboard.salvaPlayers();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
-		loader.load();
-		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
-		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
-		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-		s = new Salvataggio(g.getGara(codicePartita));
-		//s.deleteDirectory("partite");
 	}
 }
