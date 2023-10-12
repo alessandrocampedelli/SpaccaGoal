@@ -333,4 +333,17 @@ public abstract class Gara
 		fw.println(cartePescate);
 		fw.close();
 	}
+	
+	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
+	{
+		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
+		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
+		leaderboard.salvaPlayers();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));		//loader.load();
+		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
+		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+		//s.deleteDirectory("partite");
+	}
 }

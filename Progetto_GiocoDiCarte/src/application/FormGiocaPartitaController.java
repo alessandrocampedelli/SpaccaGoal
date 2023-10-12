@@ -142,7 +142,7 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				//ricavo il nominativo dell'alias vincente della partita e richiamo il metodo per concludere la partita
 				String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
-				showFinePartita(event, aliasVincente);
+				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 			}
 		}
 		else
@@ -195,7 +195,7 @@ public class FormGiocaPartitaController implements Initializable
 		else 
 		{
 			//se la partita è terminata eseguo il metodo che mi permetterà di chiudere la partita
-			showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias());
+			partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 		}
 	}
 
@@ -387,20 +387,6 @@ public class FormGiocaPartitaController implements Initializable
 				};
 			});
 		}
-	}
-	
-	private void showFinePartita(ActionEvent event, String aliasVincente) throws IOException
-	{
-		players[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
-		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
-		leaderboard.salvaPlayers();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));
-		loader.load();
-		alert.mostraInformazione(partita.mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
-		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
-		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-		//s.deleteDirectory("partite");
 	}
 	
 	private void checkTurnoDifensore()
