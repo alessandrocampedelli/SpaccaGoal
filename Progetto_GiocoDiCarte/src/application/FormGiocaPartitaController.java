@@ -51,7 +51,7 @@ public class FormGiocaPartitaController implements Initializable
 	String[] nomiCarte;
 	Carta cartaGiocata;
 	Carta cartaAtt;
-
+	int cartePescate;
 	static String codicePartita;
 	//questo metodo permette di passare il codice della partita dal form precedente (FormIniziaPartitaController)
 	public void copiaCodice(String codice) 
@@ -269,6 +269,7 @@ public class FormGiocaPartitaController implements Initializable
 				posizioneGiocatoreAttaccante = partita.getPosAttaccante();
 				posizioneGiocatoreDifensore = partita.getPosDifensore();
 				nomeCarta = partita.getNomeCarta();
+				cartePescate = partita.getCartePescate();
 				//controllo se è un turno di attacco o di difesa
 				if(turno.equals("a")) 
 				{
@@ -276,7 +277,12 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					lblInfoUtente.setText("Hai pescato la carta: "+nomiCarte[nomiCarte.length-1]);
+					System.out.println("form "+cartePescate);
+					if(cartePescate == 1) {
+						lblInfoUtente.setText("Hai pescato la carta "+nomiCarte[nomiCarte.length-1]);
+					}else {
+						lblInfoUtente.setText("Hai pescato le carte "+nomiCarte[nomiCarte.length-2]+" e "+nomiCarte[nomiCarte.length-1]);
+					}
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{

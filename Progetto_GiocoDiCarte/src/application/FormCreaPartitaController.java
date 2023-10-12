@@ -177,6 +177,7 @@ public class FormCreaPartitaController{
 		pw.println("a");
 		pw.println(0);
 		pw.println(1);
+		pw.println(1);
 		pw.close();
 	}
 	

@@ -37,6 +37,7 @@ public class FormRigoreController implements Initializable
 	int posizioneGiocatoreAttaccante;
 	int posizioneGiocatoreDifensore;
 	String nomeCarta;
+	int cartePescate;
 	
 	Gara partita;
 	Mazzo mazzo;
@@ -140,6 +141,7 @@ public class FormRigoreController implements Initializable
 				posizioneGiocatoreAttaccante = partita.getPosAttaccante();
 				posizioneGiocatoreDifensore = partita.getPosDifensore();
 				nomeCarta = partita.getNomeCarta();
+				cartePescate = partita.getCartePescate();
 				if(turno.equals("a"))
 				{
 					//visualizzare pallone ma non portiere
@@ -173,6 +175,7 @@ public class FormRigoreController implements Initializable
 		else
 		{
 			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
+			partita.setCartePescate(1);
 		}
 	}
 	
