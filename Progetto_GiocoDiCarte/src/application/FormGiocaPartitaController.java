@@ -168,6 +168,7 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				//non è stata pescata la carta mister, quindi il difensore non si è potuto difendere e per questo motivo esso ha subito goal
 				players[posizioneGiocatoreAttaccante].aggiungiGoal();
+				partita.setCartePescate(1);
 			}
 		}
 		else 
@@ -178,6 +179,11 @@ public class FormGiocaPartitaController implements Initializable
 				if(!cartaAtt.equals(Carta.INDICATORE_GOAL)) 
 				{
 					players[posizioneGiocatoreAttaccante].aggiungiGoal();
+					partita.setCartePescate(1);
+				}
+				else
+				{
+					partita.setCartePescate(2);
 				}
 			}
 		}
@@ -277,10 +283,12 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					System.out.println("form "+cartePescate);
-					if(cartePescate == 1) {
+					if(cartePescate == 1) 
+					{
 						lblInfoUtente.setText("Hai pescato la carta "+nomiCarte[nomiCarte.length-1]);
-					}else {
+					}
+					else if(cartePescate == 2)
+					{
 						lblInfoUtente.setText("Hai pescato le carte "+nomiCarte[nomiCarte.length-2]+" e "+nomiCarte[nomiCarte.length-1]);
 					}
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
