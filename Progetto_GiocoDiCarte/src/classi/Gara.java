@@ -83,12 +83,17 @@ public abstract class Gara
 	{
 		return this.giocatori;
 	}
-	public int getCartePescate() {
+	
+	public int getCartePescate() 
+	{
 		return this.cartePescate;
 	}
-	public void setCartePescate(int i) {
-		this.cartePescate+=i;
+	
+	public void setCartePescate(int cartePescate) 
+	{
+		this.cartePescate = cartePescate;
 	}
+	
 	public Mazzo getMazzo() 
 	{
 		return carte;
@@ -173,7 +178,6 @@ public abstract class Gara
 				}
 			}
 		}
-		System.out.println(cartePescate);
 	}
 	
 	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) 
@@ -230,30 +234,15 @@ public abstract class Gara
 		turno = scan.nextLine();
 		posizioneGiocatoreAttaccante = scan.nextInt();
 		posizioneGiocatoreDifensore = scan.nextInt();
+		cartePescate = scan.nextInt();
 		//devo dire che se va nel form rigore deve leggere anche la carta giocata
 		if(turno.equals("d"))
 		{
 			nomeCarta = scan.next();
 		}
-		cartePescate = scan.nextInt();
 		scan.close();
 	}
-	/*
-	public void leggiTurnoRigore() throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice.getCodice()+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		File f = new File(absolutePath);
-		Scanner scan = new Scanner(f);
-		turno = scan.nextLine();
-		posizioneGiocatoreAttaccante = scan.nextInt();
-		posizioneGiocatoreDifensore = scan.nextInt();
-		nomeCarta = scan.next();
-		cartePescate = scan.nextInt();
-		scan.close();
-	}
-	*/
+
 	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -273,6 +262,7 @@ public abstract class Gara
 			}
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartePescate);
 			fw.println(cartaGiocata.name());
 		}
 		else 
@@ -284,6 +274,7 @@ public abstract class Gara
 					fw.println("d");
 					fw.println(posizioneGiocatoreAttaccante);
 					fw.println(posizioneGiocatoreDifensore);
+					fw.println(cartePescate);
 					fw.println(cartaAtt.name());
 				}
 			}
@@ -297,9 +288,8 @@ public abstract class Gara
 				fw.println(posizioneGiocatoreDifensore+1);
 			else
 				fw.println(0);
+			fw.println(cartePescate);
 		}
-		System.out.println("salva "+cartePescate);
-		fw.println(cartePescate);
 		fw.close();
 	}
 	
@@ -315,6 +305,7 @@ public abstract class Gara
 			fw.println("d");
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
+			fw.println(cartePescate);
 			fw.println(cartaGiocata.name());
 		}
 		else 
@@ -329,8 +320,8 @@ public abstract class Gara
 				fw.println(posizioneGiocatoreDifensore+1);
 			else
 				fw.println(0);
+			fw.println(cartePescate);
 		}
-		fw.println(cartePescate);
 		fw.close();
 	}
 	
@@ -340,7 +331,6 @@ public abstract class Gara
 		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
 		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormLeaderboard.fxml"));		//loader.load();
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);

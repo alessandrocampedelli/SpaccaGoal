@@ -169,13 +169,14 @@ public class FormRigoreController implements Initializable
 		if(!(rigore.getDirezione().equals(portiere.getDirezione()))) 
 		{
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
+			partita.setCartePescate(1);
 			if(partita.finePartita(posizioneGiocatoreAttaccante))
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 		}
 		else
 		{
 			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
-			partita.setCartePescate(1);
+			partita.setCartePescate(2);
 		}
 	}
 }
