@@ -153,12 +153,12 @@ public class FormCreaPartitaController{
 			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
-			//prova
 			salvaGara = new Salvataggio(g);
 			salvaGara.salvaNomiGiocatori("partite");
 			salvaGara.salvaMazzo("partite");
 			salvaGara.salvaMani("partite");
 			salvaGara.salvaPunteggio("partite");
+			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
 			salvaTurno(codice);
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
