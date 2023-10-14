@@ -136,12 +136,13 @@ public class FormCreaTorneoController implements Initializable{
 			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
 			formPrincipale.aggiungiGara(g);
-
+			//IDEA SALVATAGGIO TORNEO. FARE DENTRO LA CARTELLA DEL TORNEO UNA CARTELLA "PARTITE" CON DENTRO TUTTE LE PARTITE.
 			salvaGara = new Salvataggio(g);
 			salvaGara.salvaNomiGiocatori("tornei");
 			salvaGara.salvaMazzo("tornei");
 			salvaGara.salvaMani("tornei");
 			salvaGara.salvaPunteggio("tornei");
+			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
 			salvaTurno(codice);
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
@@ -159,6 +160,8 @@ public class FormCreaTorneoController implements Initializable{
 		
 		pw.println("a");
 		pw.println(0);
+		pw.println(1);
+		//PER NON FARE VEDERE LA PRIMA CARTA PESCATA PROVARE AD INSERIRE 1
 		pw.println(1);
 		pw.close();
 	}
@@ -181,7 +184,6 @@ public class FormCreaTorneoController implements Initializable{
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				// TODO Auto-generated method stub
 				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
 				String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
 				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
