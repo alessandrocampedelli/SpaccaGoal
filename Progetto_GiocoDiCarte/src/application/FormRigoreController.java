@@ -39,7 +39,7 @@ public class FormRigoreController implements Initializable
 	String nomeCarta;
 	int cartePescate;
 	
-	Gara partita;
+	Partita partita;
 	Mazzo mazzo;
 	Giocatore[] players;
 	static Carta cartaGiocata;

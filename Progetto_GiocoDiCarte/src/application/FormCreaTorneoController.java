@@ -130,7 +130,6 @@ public class FormCreaTorneoController implements Initializable{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "t"+codice;
 			g = new Torneo(giocatori,codice);
-			g.distribuzioneCarte();
 
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			loader.load();
@@ -143,27 +142,11 @@ public class FormCreaTorneoController implements Initializable{
 			salvaGara.salvaMani("tornei");
 			salvaGara.salvaPunteggio("tornei");
 			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
-			salvaTurno(codice);
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
 		}
-	}
-	
-	private void salvaTurno(String codice) throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/tornei/"+codice+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter pw = new PrintWriter(absolutePath);
-		
-		pw.println("a");
-		pw.println(0);
-		pw.println(1);
-		//PER NON FARE VEDERE LA PRIMA CARTA PESCATA PROVARE AD INSERIRE 1
-		pw.println(1);
-		pw.close();
 	}
 	
 	private String getRandomString(int len, char minChar, char maxChar) {
