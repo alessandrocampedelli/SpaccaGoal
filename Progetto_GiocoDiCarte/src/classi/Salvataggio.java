@@ -38,7 +38,7 @@ public class Salvataggio {
 		for(int i = 0; i < cartelle.length; i++) 
 		{
 			gareLette.add(leggiNomiPartita(new File(cartelle[i].getPath()+"/nomi.txt"), cartelle[i].getName()));
-			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName()));
+			leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName(), gareLette.get(i));
 			leggiMani(new File(cartelle[i].getPath()+"/mani.txt"),cartelle[i].getName(), gareLette.get(i));
 			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggi.txt"),cartelle[i].getName(), gareLette.get(i));
 		}
@@ -55,7 +55,7 @@ public class Salvataggio {
 		for(int i = 0; i < cartelle.length; i++) 
 		{
 			gareLette.add(leggiNomiTorneo(new File(cartelle[i].getPath()+"/nomi.txt"), cartelle[i].getName()));
-			gareLette.get(i).setMazzo(leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName()));
+			leggiMazzo(new File(cartelle[i].getPath()+"/mazzo.txt"), cartelle[i].getName(), gareLette.get(i));
 			leggiMani(new File(cartelle[i].getPath()+"/mani.txt"),cartelle[i].getName(), gareLette.get(i));
 			leggiPunteggi(new File(cartelle[i].getPath()+"/punteggi.txt"),cartelle[i].getName(), gareLette.get(i));
 		}
@@ -73,7 +73,7 @@ public class Salvataggio {
 		return new Torneo(giocatori,codice);
 	}
 	
-	private Mazzo leggiMazzo(File f, String codice) throws FileNotFoundException 
+	private void leggiMazzo(File f, String codice, Gara g) throws FileNotFoundException 
 	{
 		Scanner scan = new Scanner(f);
 		LinkedList<Carta> carte = new LinkedList<Carta>();
@@ -81,8 +81,8 @@ public class Salvataggio {
 		{
 			carte.add(Carta.valueOf(scan.nextLine()));
 		}
+		g.setMazzo(new Mazzo(carte));
 		scan.close();
-		return new Mazzo(carte);
 	}
 
 	private void leggiMani(File f, String codice, Gara g) throws FileNotFoundException
