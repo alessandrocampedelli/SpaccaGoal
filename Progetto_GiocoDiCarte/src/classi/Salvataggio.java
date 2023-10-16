@@ -227,4 +227,8 @@ public class Salvataggio {
         }
 		file.delete();
     }
+    public void createDirectory(String percorso) throws IOException{
+    	String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara().getCodice();
+    	Files.createDirectory(Paths.get(path));
+    }
 }

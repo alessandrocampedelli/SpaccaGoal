@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -34,10 +35,12 @@ import classi.Alert_cambiaForm;
 import classi.Codice;
 import classi.Giocatore;
 import classi.Torneo;
+import classi.Partita;
 import classi.Gara;
 import classi.Gare;
+import classi.Leaderboard;
 
-public class FormCreaTorneoController implements Initializable{
+public class FormCreaTorneoController{
 	@FXML
 	private TextField txtAlias;
 	@FXML
@@ -57,8 +60,8 @@ public class FormCreaTorneoController implements Initializable{
 
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
-	static Gara g;
-
+	static Torneo t;
+	Leaderboard leaderboard = new Leaderboard();
 	public String getGiocatori() {
 		String output = "";
 		for(Giocatore g: giocatori) {
@@ -85,40 +88,27 @@ public class FormCreaTorneoController implements Initializable{
 				throw new IOException();
 			}
 			String nome = txtAlias.getText();
+			if(nomeGiaUsato(nome)) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
+				throw new IllegalArgumentException();
+			}
 			if(chbRobot.isSelected()) {
 				robot = true;
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
 			}else
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-
-			giocatori.add(new Giocatore(nome,robot));
-
-			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-
-			if(giocatori.size() <= 4)
-			{
-				lblSemifinale.setText("" + (4 - giocatori.size()));
+			
+			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
+			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
+			if(nuovoGiocatore == null) {
+				nuovoGiocatore = new Giocatore(nome,robot);
+				//aggiungo il giocatore alla lista di giocatori globali
+				leaderboard.addPlayers(nuovoGiocatore);
 			}
-			else
-			{
-				lblSemifinale.setText("");
-			}
-			lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
-
-			txtAlias.clear();
-			chbRobot.setSelected(false);
-
-			if(giocatori.size() == 8) {
-				btnAggiungiGiocatore.setVisible(false);
-			}
-			if(giocatori.size() == 4 || giocatori.size() == 8) 
-			{
-				btnCreaTorneo.setVisible(true);
-			}
-			else 
-			{
-				btnCreaTorneo.setVisible(false);
-			}
+			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
+			giocatori.add(leaderboard.getPlayers().get(i));
+			setLabel();
 		}catch (IOException e) {
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
 		}
@@ -128,19 +118,27 @@ public class FormCreaTorneoController implements Initializable{
 	{	
 		if(alert.chiediConferma("Sei sicuro di creare questo torneo con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
 			String codice = getRandomString(6,'a', 'z');
+			leaderboard.salvaPlayers();
 			codice = "t"+codice;
-			g = new Torneo(giocatori,codice);
+			t = new Torneo(giocatori,codice);
 
+			//forse nn serve
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			loader.load();
 			FormPrincipaleController formPrincipale = loader.getController();
-			formPrincipale.aggiungiGara(g);
-			//IDEA SALVATAGGIO TORNEO. FARE DENTRO LA CARTELLA DEL TORNEO UNA CARTELLA "PARTITE" CON DENTRO TUTTE LE PARTITE.
-			salvaGara = new Salvataggio(g);
-			salvaGara.salvaNomiGiocatori("tornei");
-			salvaGara.salvaMazzo("tornei");
-			salvaGara.salvaMani("tornei");
-			salvaGara.salvaPunteggio("tornei");
+			formPrincipale.aggiungiGara(t);
+			//creo la cartella del torneo
+			salvaGara = new Salvataggio(t);
+			salvaGara.createDirectory("tornei");
+			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
+			for(Partita p : t.getPartite()) {
+				salvaGara = new Salvataggio(p);
+				String percorso = "tornei/"+t.getCodiceGara().getCodice();
+				salvaGara.salvaNomiGiocatori(percorso);
+				salvaGara.salvaMazzo(percorso);
+				salvaGara.salvaMani(percorso);
+				salvaGara.salvaPunteggio(percorso);
+			}
 			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
@@ -155,52 +153,60 @@ public class FormCreaTorneoController implements Initializable{
 			s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
 		return s;
 	}
+	private boolean nomeGiaUsato(String nome) {
+		for(Giocatore g : giocatori) {
+			if(g.getAlias().equals(nome))	
+				return true;
+		}
+		return false;
+	}
+	private void setLabel() {
+		txtAlias.clear();
+		chbRobot.setSelected(false);
+
+		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+
+		if(giocatori.size() <= 4)
+		{
+			lblSemifinale.setText("" + (4 - giocatori.size()));
+		}
+		else
+		{
+			lblSemifinale.setText("");
+		}
+		lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
+
+		txtAlias.clear();
+		chbRobot.setSelected(false);
+
+		if(giocatori.size() == 8) {
+			btnAggiungiGiocatore.setVisible(false);
+		}
+		if(giocatori.size() == 4 || giocatori.size() == 8) 
+		{
+			btnCreaTorneo.setVisible(true);
+		}
+		else 
+		{
+			btnCreaTorneo.setVisible(false);
+		}
+	}
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
 	{
 		giocatori.clear();
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 	}
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		txtGiocatoriInseriti.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
-
-			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
-				String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-				if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
-					giocatori.remove(indiceEliminato);
-					txtGiocatoriInseriti.getItems().clear();
-					txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
-
-					lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-
-					if(giocatori.size() <= 4)
-					{
-						lblSemifinale.setText("" + (4 - giocatori.size()));
-					}
-					else
-					{
-						lblSemifinale.setText("");
-					}
-
-					lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
-
-					if(giocatori.size() != 8) 
-					{
-						btnAggiungiGiocatore.setVisible(true);
-					}
-					if(giocatori.size() == 4 || giocatori.size() == 8) 
-					{
-						btnCreaTorneo.setVisible(true);
-					}else 
-					{
-						btnCreaTorneo.setVisible(false);
-					}
-				}
-			}
-
-		});
+	@FXML
+	public void eliminaGiocatore(MouseEvent event) throws IOException {
+		// TODO Autogenerated
+		int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
+		if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
+			giocatori.remove(indiceEliminato);
+			txtGiocatoriInseriti.getItems().clear();
+			txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+			setLabel();
+		}
 	}
 }
