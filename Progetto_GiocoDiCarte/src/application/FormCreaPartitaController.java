@@ -62,7 +62,7 @@ public class FormCreaPartitaController{
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
-	static Gara g;
+	static Partita g;
 	Leaderboard leaderboard = new Leaderboard();
 	
 	public String getGiocatori() {

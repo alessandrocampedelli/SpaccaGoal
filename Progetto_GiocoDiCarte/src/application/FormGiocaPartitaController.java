@@ -45,7 +45,7 @@ public class FormGiocaPartitaController implements Initializable
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 
 	Salvataggio s;
-	Gara partita;
+	Partita partita;
 	Mazzo mazzo;
 	Giocatore[] players;
 	String[] nomiCarte;
