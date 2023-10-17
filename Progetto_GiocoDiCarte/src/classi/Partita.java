@@ -197,7 +197,7 @@ public class Partita extends Gara{
 	public void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice.getCodice()+"/turno.txt";
+		String relativePath = "src/partite/"+codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		File f = new File(absolutePath);
 		Scanner scan = new Scanner(f);
@@ -213,10 +213,24 @@ public class Partita extends Gara{
 		scan.close();
 	}
 
+	
+	public void salvaTurno(String partitaTorneo) throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		PrintWriter pw = new PrintWriter(absolutePath);
+		
+		pw.println("a");
+		pw.println(0);
+		pw.println(1);
+		pw.println(1);
+		pw.close();
+	}
 	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/" + partiteTornei + "/"+codice.getCodice()+"/turno.txt";
+		String relativePath = "src/" + partiteTornei + "/"+codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -266,7 +280,7 @@ public class Partita extends Gara{
 	public void salvaTurnoRigore(Carta cartaGiocata) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice.getCodice()+"/turno.txt";
+		String relativePath = "src/partite/"+codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);

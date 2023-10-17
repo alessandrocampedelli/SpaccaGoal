@@ -16,7 +16,7 @@ public class Torneo extends Gara
 			ArrayList<Giocatore> g = new ArrayList<>();
 			g.add(giocatori[i]);
 			g.add(giocatori[i+1]);
-			Partita p = new Partita(g,this.codice.getCodice()+k);
+			Partita p = new Partita(g,this.codice+k);
 			partite.add(p);
 		}
 	}

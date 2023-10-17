@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import classi.Alert_cambiaForm;
-import classi.Codice;
 import classi.Gare;
 import classi.Gara;
 import classi.Giocatore;
@@ -40,12 +40,12 @@ public class FormEliminaEventoController implements Initializable{
 		Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
 		Salvataggio s = new Salvataggio(gara);
 		//chiedo conferma di cancellazione
-		if(alert.chiediConferma("Sei sicuro di voler eliminare l'evento avente codice '"+gara.getCodiceGara().getCodice()+"' ?", "CONFERMA DI ELIMINAZIONE")) {
-			if(gara.getCodiceGara().getCodice().charAt(0) == 'p')
+		if(alert.chiediConferma("Sei sicuro di voler eliminare l'evento avente codice '"+gara.getCodiceGara()+"' ?", "CONFERMA DI ELIMINAZIONE")) {
+			if(gara.getCodiceGara().charAt(0) == 'p')
 				s.deleteDirectory("partite");
 			else
 				s.deleteDirectory("tornei");
-			alert.mostraInformazione("Eliminazione dell'evento '"+gara.getCodiceGara().getCodice()+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
+			alert.mostraInformazione("Eliminazione dell'evento '"+gara.getCodiceGara()+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
 	}
@@ -59,7 +59,7 @@ public class FormEliminaEventoController implements Initializable{
 	public void cliccaGara(MouseEvent event){
 		//accedo alla gara con il codice selezionato sulla listview
 		Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
-		String codice = gara.getCodiceGara().getCodice();
+		String codice = gara.getCodiceGara();
 		String info = "";
 		//salvo le info della partita selezionata
 		if(codice.charAt(0) == 'p') {
@@ -77,7 +77,7 @@ public class FormEliminaEventoController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		for(Gara gara : g.getGare()) {
-			lblPartite.getItems().add(gara.getCodiceGara().getCodice());
+			lblPartite.getItems().add(gara.getCodiceGara());
 		}
 	}
 }

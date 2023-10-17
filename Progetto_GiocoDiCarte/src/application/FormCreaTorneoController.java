@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import com.sun.tools.javac.Main;
 import javafx.scene.input.MouseEvent;
@@ -32,7 +34,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
-import classi.Codice;
 import classi.Giocatore;
 import classi.Torneo;
 import classi.Partita;
@@ -120,6 +121,7 @@ public class FormCreaTorneoController{
 			String codice = getRandomString(6,'a', 'z');
 			leaderboard.salvaPlayers();
 			codice = "t"+codice;
+			Collections.shuffle(giocatori);
 			t = new Torneo(giocatori,codice);
 
 			//forse nn serve
@@ -130,16 +132,17 @@ public class FormCreaTorneoController{
 			//creo la cartella del torneo
 			salvaGara = new Salvataggio(t);
 			salvaGara.createDirectory("tornei");
+			salvaGara.salvaGiocatoriTorneo();
 			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
 			for(Partita p : t.getPartite()) {
 				salvaGara = new Salvataggio(p);
-				String percorso = "tornei/"+t.getCodiceGara().getCodice();
+				String percorso = "tornei/"+t.getCodiceGara();
 				salvaGara.salvaNomiGiocatori(percorso);
 				salvaGara.salvaMazzo(percorso);
 				salvaGara.salvaMani(percorso);
 				salvaGara.salvaPunteggio(percorso);
+				p.salvaTurno(percorso);
 			}
-			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);

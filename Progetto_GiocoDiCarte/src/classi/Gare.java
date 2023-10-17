@@ -35,7 +35,7 @@ public class Gare
 			if(codiceUtente.charAt(0) == partitaTorneo)
 			{
 				//ricerco all'interno delle partite se è presente il codice inserito dall'utente
-				if(g.getCodiceGara().getCodice().equals(codiceUtente))
+				if(g.getCodiceGara().equals(codiceUtente))
 				{
 					infoCodice = true;
 					break;
@@ -52,9 +52,9 @@ public class Gare
 		for(Gara g : gare)
 		{
 			//ricerco all'interno delle partite se è presente il codice inserito dall'utente
-			if(g.getCodiceGara().getCodice().equals(codiceUtente))
+			if(g.getCodiceGara().equals(codiceUtente))
 			{
-				infoCodice = g.getCodiceGara().getNuovoCarica();
+				infoCodice = true;
 				break;
 			}
 		}		
@@ -65,7 +65,7 @@ public class Gare
 	public Gara getGara(String codice) {
 		int pos = -1;
 		for(int i = 0; i < this.gare.size(); i++) {
-			if(gare.get(i).getCodiceGara().getCodice().equals(codice))
+			if(gare.get(i).getCodiceGara().equals(codice))
 			{
 				pos = i;
 				break;
@@ -79,7 +79,7 @@ public class Gare
 		ArrayList<String> giocatori = new ArrayList<String>();
 		for(Gara g : gare)
 		{
-			if(g.getCodiceGara().getCodice().equals(codiceUtente))
+			if(g.getCodiceGara().equals(codiceUtente))
 			{
 				for(int i = 0; i < g.getGiocatori().length; i++)
 				{
@@ -96,7 +96,7 @@ public class Gare
 	{
 		String nomi = "";
 		for(int i = 0; i < gare.size();i++) {
-			nomi += gare.get(i).codice.getCodice()+"\n";
+			nomi += gare.get(i).codice+"\n";
 		}
 		return nomi;
 	}

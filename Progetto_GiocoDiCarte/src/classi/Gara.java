@@ -15,16 +15,15 @@ import java.io.PrintWriter;
 public abstract class Gara 
 {
 	protected Giocatore[] giocatori;
-	protected Codice codice;
+	protected String codice;
 	protected Mazzo carte;
 
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
-		Collections.shuffle(giocatori);
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
-		this.codice = new Codice(codice);
+		this.codice = codice;
 	}
-	public Codice getCodiceGara()
+	public String getCodiceGara()
 	{
 		return this.codice;
 	}
