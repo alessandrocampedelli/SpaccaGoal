@@ -9,9 +9,10 @@ public class Torneo extends Gara
 	{
 		super(giocatori, codice);
 		this.partite = new ArrayList<>();
-		creazionePartite();
 	}
-	private void creazionePartite() {
+	
+	public void creazionePartite() 
+	{
 		for(int i = 0, k = 1; i < this.giocatori.length; i+=2,k++) {
 			ArrayList<Giocatore> g = new ArrayList<>();
 			g.add(giocatori[i]);
@@ -20,7 +21,15 @@ public class Torneo extends Gara
 			partite.add(p);
 		}
 	}
-	public ArrayList<Partita> getPartite(){
+	
+	public ArrayList<Partita> getPartite()
+	{
 		return this.partite;
 	}
+	
+	public void aggiungiPartita(Partita p)
+	{
+		this.partite.add(p);
+	}
+
 }
