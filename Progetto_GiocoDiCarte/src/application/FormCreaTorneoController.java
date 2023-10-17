@@ -139,6 +139,7 @@ public class FormCreaTorneoController{
 			{
 				salvaGara = new Salvataggio(p);
 				String percorso = "tornei/"+t.getCodiceGara();
+				p.distribuzioneCarte();
 				salvaGara.salvaNomiGiocatori(percorso);
 				salvaGara.salvaMazzo(percorso);
 				salvaGara.salvaMani(percorso);
