@@ -31,5 +31,17 @@ public class Torneo extends Gara
 	{
 		this.partite.add(p);
 	}
-
+	
+	public Partita getPartitaTorneo(String codice)
+	{
+		Partita partitaTorneo = null;
+		for(Partita p: this.partite)
+		{
+			if(p.getCodiceGara().equals(codice))
+			{
+				partitaTorneo = p;
+			}
+		}
+		return partitaTorneo;
+	}
 }
