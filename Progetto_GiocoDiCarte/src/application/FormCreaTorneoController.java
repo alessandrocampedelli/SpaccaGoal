@@ -123,7 +123,8 @@ public class FormCreaTorneoController{
 			codice = "t"+codice;
 			Collections.shuffle(giocatori);
 			t = new Torneo(giocatori,codice);
-
+			//creazione delle partite
+			t.creazionePartite();
 			//forse nn serve
 			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
 			loader.load();
@@ -134,7 +135,8 @@ public class FormCreaTorneoController{
 			salvaGara.createDirectory("tornei");
 			salvaGara.salvaGiocatoriTorneo();
 			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
-			for(Partita p : t.getPartite()) {
+			for(Partita p : t.getPartite()) 
+			{
 				salvaGara = new Salvataggio(p);
 				String percorso = "tornei/"+t.getCodiceGara();
 				salvaGara.salvaNomiGiocatori(percorso);

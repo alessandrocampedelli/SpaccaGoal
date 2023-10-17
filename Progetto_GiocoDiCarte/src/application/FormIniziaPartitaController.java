@@ -53,33 +53,33 @@ public class FormIniziaPartitaController implements Initializable
 		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-	
+	//IDEA, CONTROLLARE SE è T E ANDARE ALLA RICERCA DELLA PARTITA DA INIZIARE
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
-		if(!(codiceUtente == null)) {
+		if(!(codiceUtente == null)) 
+		{
 			giocatori = gare.restituisciGiocatori(codiceUtente);
-			if(!lblNomeGiocatore1.getText().equals(giocatori.get(0))) 
+			if(giocatori.size() >= 2)
 			{
-				if(giocatori.size() >= 2)
-				{
-					lblNomeGiocatore1.setText(giocatori.get(0));
-					lblNomeGiocatore2.setText(giocatori.get(1));
-				}
-				if(giocatori.size() >= 3)
-				{
-					lblNomeGiocatore3.setText(giocatori.get(2));
-				}
-				if(giocatori.size() == 4)
-				{
-					lblNomeGiocatore4.setText(giocatori.get(3));
-				}
+				lblNomeGiocatore1.setText(giocatori.get(0));
+				lblNomeGiocatore2.setText(giocatori.get(1));
+			}
+			if(giocatori.size() >= 3)
+			{
+				lblNomeGiocatore3.setText(giocatori.get(2));
+			}
+			if(giocatori.size() == 4)
+			{
+				lblNomeGiocatore4.setText(giocatori.get(3));
 			}
 		}
 	}
-	
-	public String getGiocatoriString() {
+
+	public String getGiocatoriString() 
+	{
 		String output = "";
-		for(int i = 0; i < this.giocatori.size(); i++) {
+		for(int i = 0; i < this.giocatori.size(); i++) 
+		{
 			output += (i+1) +") "+giocatori.get(i)+"\n";
 		}
 		return output;

@@ -54,14 +54,21 @@ public class Salvataggio {
 		File[] tornei = f.listFiles();
 		for(int i = 0; i < tornei.length; i++) 
 		{
-			gareLette.add(leggiGiocatoriTorneo(new File(tornei[i].getPath()+"/giocatoriTorneo.txt"), tornei[i].getName()));
+			Torneo torneo = leggiGiocatoriTorneo(new File(tornei[i].getPath()+"/giocatoriTorneo.txt"), tornei[i].getName());
+			gareLette.add(torneo);
 			File[] partite = tornei[i].listFiles();
+			
 			for(int j = 0; j < partite.length; j++) 
 			{
-				leggiNomiPartita(new File(partite[j].getPath()+"/nomi.txt"), partite[j].getName());
-				leggiMazzo(new File(partite[j].getPath()+"/mazzo.txt"), partite[j].getName(), gareLette.get(gareLette.size() - 1));
-				leggiMani(new File(partite[j].getPath()+"/mani.txt"),partite[j].getName(), gareLette.get(gareLette.size() - 1));
-				leggiPunteggi(new File(partite[j].getPath()+"/punteggi.txt"),partite[j].getName(), gareLette.get(gareLette.size() - 1));
+				//controllo se è una cartella, in questo modo entro in questo ciclo
+				if(partite[j].isDirectory())
+				{
+					Partita p = (Partita) leggiNomiPartita(new File(partite[j].getPath()+"/nomi.txt"), partite[j].getName());
+					leggiMazzo(new File(partite[j].getPath()+"/mazzo.txt"), partite[j].getName(), gareLette.get(gareLette.size() - 1));
+					leggiMani(new File(partite[j].getPath()+"/mani.txt"), partite[j].getName(), gareLette.get(gareLette.size() - 1));
+					leggiPunteggi(new File(partite[j].getPath()+"/punteggi.txt"),partite[j].getName(), gareLette.get(gareLette.size() - 1));
+					torneo.aggiungiPartita(p);
+				}
 			}
 		}
 	}
