@@ -12,3 +12,7 @@ dsg,0,0,p
 sdg,0,0,p
 cxbx,0,0,p
 safs,0,0,p
+E,0,0,p
+F,0,0,p
+G,0,0,p
+H,0,0,p
