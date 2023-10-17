@@ -20,6 +20,7 @@ public abstract class Gara
 
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
+		Collections.shuffle(giocatori);
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = new Codice(codice);
 	}
