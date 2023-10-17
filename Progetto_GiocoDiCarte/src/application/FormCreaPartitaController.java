@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 
 
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -38,7 +39,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
-import classi.Codice;
 import classi.Giocatore;
 import classi.Partita;
 import classi.Gara;
@@ -158,27 +158,12 @@ public class FormCreaPartitaController{
 			salvaGara.salvaMazzo("partite");
 			salvaGara.salvaMani("partite");
 			salvaGara.salvaPunteggio("partite");
-			//PROVARE SALVA TURNO DENTRO CLASSE GARA SE FUNZIONANTE
-			salvaTurno(codice);
+			g.salvaTurno("partite");
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
 		}
-	}
-	
-	private void salvaTurno(String codice) throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter pw = new PrintWriter(absolutePath);
-		
-		pw.println("a");
-		pw.println(0);
-		pw.println(1);
-		pw.println(1);
-		pw.close();
 	}
 	
 	private String getRandomString(int len, char minChar, char maxChar) {
