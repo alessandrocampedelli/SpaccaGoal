@@ -13,7 +13,8 @@ public class Torneo extends Gara
 	
 	public void creazionePartite() 
 	{
-		for(int i = 0, k = 1; i < this.giocatori.length; i+=2,k++) {
+		for(int i = 0, k = 1; i < this.giocatori.length; i+=2,k++) 
+		{
 			ArrayList<Giocatore> g = new ArrayList<>();
 			g.add(giocatori[i]);
 			g.add(giocatori[i+1]);

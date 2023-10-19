@@ -57,7 +57,6 @@ public class Salvataggio {
 			Torneo torneo = leggiGiocatoriTorneo(new File(tornei[i].getPath()+"/giocatoriTorneo.txt"), tornei[i].getName());
 			gareLette.add(torneo);
 			File[] partite = tornei[i].listFiles();
-			
 			for(int j = 0; j < partite.length; j++) 
 			{
 				//controllo se è una cartella, in questo modo entro in questo ciclo
