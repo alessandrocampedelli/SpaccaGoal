@@ -23,6 +23,8 @@ public abstract class Gara
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = codice;
 	}
+	public Gara() {
+	}
 	public String getCodiceGara()
 	{
 		return this.codice;

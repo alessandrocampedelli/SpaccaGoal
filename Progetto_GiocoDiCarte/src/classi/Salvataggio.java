@@ -72,7 +72,7 @@ public class Salvataggio {
 		}
 	}
 	
-	private Gara leggiNomiPartita(File f, String codice) throws FileNotFoundException
+	public Gara leggiNomiPartita(File f, String codice) throws FileNotFoundException
 	{
 		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
 		return new Partita(giocatori,codice);
@@ -84,7 +84,7 @@ public class Salvataggio {
 		return new Torneo(giocatori,codice);
 	}
 	
-	private void leggiMazzo(File f, String codice, Gara g) throws FileNotFoundException 
+	public void leggiMazzo(File f, String codice, Gara g) throws FileNotFoundException 
 	{
 		Scanner scan = new Scanner(f);
 		LinkedList<Carta> carte = new LinkedList<Carta>();
@@ -96,7 +96,7 @@ public class Salvataggio {
 		scan.close();
 	}
 
-	private void leggiMani(File f, String codice, Gara g) throws FileNotFoundException
+	public void leggiMani(File f, String codice, Gara g) throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(f);
 		for(int i = 0; scan.hasNextLine(); i++)
@@ -116,7 +116,7 @@ public class Salvataggio {
 		return _mano;
 	}
 	
-	private void leggiPunteggi(File f, String codice, Gara g) throws FileNotFoundException
+	public void leggiPunteggi(File f, String codice, Gara g) throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(f);
 		for(int i = 0; scan.hasNextLine(); i++) 
@@ -168,7 +168,11 @@ public class Salvataggio {
 	public void salvaMazzo(String partitaTorneo) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
+		String relativePath; 
+		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
+			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
+		else
+			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -183,7 +187,11 @@ public class Salvataggio {
 	public void salvaMani(String partitaTorneo) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
+		String relativePath; 
+		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
+			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
+		else
+			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
@@ -212,7 +220,11 @@ public class Salvataggio {
 	public void salvaPunteggio(String partitaTorneo) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara()+"/punteggi.txt";
+		String relativePath; 
+		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
+			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/punteggi.txt";
+		else
+			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/punteggi.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);

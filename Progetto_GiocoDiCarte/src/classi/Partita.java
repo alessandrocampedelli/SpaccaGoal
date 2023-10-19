@@ -21,7 +21,7 @@ public class Partita extends Gara{
 		super(giocatori,codice);
 		this.carte = new Mazzo();
 	}
-
+	public Partita() {}
 	public void distribuzioneCarte()
 	{
 		//pulisco le mani dei giocatori da eventuali partite precedenti
@@ -197,7 +197,11 @@ public class Partita extends Gara{
 	public void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice+"/turno.txt";
+		String relativePath = "";
+		if(codice.charAt(0) == 'p')
+			relativePath = "src/partite/"+codice+"/turno.txt";
+		else
+			relativePath = "src/tornei/"+codice.substring(0,codice.length() - 1)+"/"+codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		File f = new File(absolutePath);
 		Scanner scan = new Scanner(f);
@@ -230,7 +234,11 @@ public class Partita extends Gara{
 	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/" + partiteTornei + "/"+codice+"/turno.txt";
+		String relativePath; 
+		if(this.getCodiceGara().charAt(0) == 'p')
+			relativePath = "src/partite/"+this.getCodiceGara()+"/turno.txt";
+		else
+			relativePath = "src/tornei/"+this.getCodiceGara().substring(0, this.getCodiceGara().length() - 1)+"/"+this.getCodiceGara()+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);
