@@ -64,18 +64,19 @@ public class Gare
 	//metodo che mi restituisce la gara dato il suo codice
 	public Gara getGara(String codice) 
 	{
-		int pos = -1;
-		for(int i = 0; i < this.gare.size(); i++) 
+		Gara gara = null;
+		for(Gara g: this.gare)
 		{
-			if(gare.get(i).getCodiceGara().equals(codice))
+			if(g.getCodiceGara().equals(codice))
 			{
-				pos = i;
+				gara = g;
 				break;
 			}
-		}
-		return this.gare.get(pos);
-	}
 
+		}
+		return gara;
+	}
+	
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{
 		ArrayList<String> giocatori = new ArrayList<String>();
@@ -91,12 +92,12 @@ public class Gare
 		}
 		return giocatori;
 	}
-	
+
 	public ArrayList<Gara> getGare()
 	{
 		return this.gare;
 	}
-	
+
 	public String toString() 
 	{
 		String nomi = "";

@@ -48,7 +48,7 @@ public class FormPartitaSingolaController
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
 				loader.load();
 				FormIniziaPartitaController form = loader.getController();
-				form.copiaInfo(codiceUtente,null);
+				form.copiaInfo(codiceUtente);
 				
 				alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 			}

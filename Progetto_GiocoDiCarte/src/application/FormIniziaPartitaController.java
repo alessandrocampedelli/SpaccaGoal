@@ -38,12 +38,10 @@ public class FormIniziaPartitaController implements Initializable
 	private ArrayList<String> giocatori;
 
 	static String codiceUtente;
-	static String codicePartitaTorneo;
 
-	public void copiaInfo(String codice, String codiceTorneo) 
+	public void copiaInfo(String codice) 
 	{
 		codiceUtente = codice;
-		codicePartitaTorneo = codiceTorneo;
 	}
 
 	@FXML
@@ -62,9 +60,10 @@ public class FormIniziaPartitaController implements Initializable
 	{	
 		if(!(codiceUtente == null)) 
 		{
-			Torneo t = (Torneo) gare.getGara(codiceUtente);
-			//sarà sempre la prima partita perchè mano a mano vengono eliminate
-			Partita p = t.getPartitaTorneo(codicePartitaTorneo);
+			//RIGHE CHE SERVONO PER UTILIZZARE IL TORNEO
+			//Torneo t = (Torneo) gare.getGara(codiceUtente);
+			//Partita p = t.getPartitaTorneo();
+			//NON SO COME CERCARE DENTRO UNA PARTITA
 			giocatori = gare.restituisciGiocatori(codiceUtente);
 
 			if(giocatori.size() >= 2)
