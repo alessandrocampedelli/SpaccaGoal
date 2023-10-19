@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,7 +57,7 @@ public class FormEliminaEventoController implements Initializable{
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 	}
 	@FXML
-	public void cliccaGara(MouseEvent event){
+	public void cliccaGara(MouseEvent event) throws FileNotFoundException{
 		//accedo alla gara con il codice selezionato sulla listview
 		Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
 		String codice = gara.getCodiceGara();
