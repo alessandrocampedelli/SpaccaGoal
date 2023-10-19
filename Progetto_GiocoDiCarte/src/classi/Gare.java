@@ -62,9 +62,11 @@ public class Gare
 	}
 
 	//metodo che mi restituisce la gara dato il suo codice
-	public Gara getGara(String codice) {
+	public Gara getGara(String codice) 
+	{
 		int pos = -1;
-		for(int i = 0; i < this.gare.size(); i++) {
+		for(int i = 0; i < this.gare.size(); i++) 
+		{
 			if(gare.get(i).getCodiceGara().equals(codice))
 			{
 				pos = i;
@@ -89,9 +91,12 @@ public class Gare
 		}
 		return giocatori;
 	}
-	public ArrayList<Gara> getGare(){
+	
+	public ArrayList<Gara> getGare()
+	{
 		return this.gare;
 	}
+	
 	public String toString() 
 	{
 		String nomi = "";

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import classi.Gare;
 import classi.Partita;
+import classi.Torneo;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
@@ -37,11 +38,14 @@ public class FormIniziaPartitaController implements Initializable
 	private ArrayList<String> giocatori;
 
 	static String codiceUtente;
+	static String codicePartitaTorneo;
 
-	public void copiaInfo(String codice) 
+	public void copiaInfo(String codice, String codiceTorneo) 
 	{
 		codiceUtente = codice;
+		codicePartitaTorneo = codiceTorneo;
 	}
+
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
@@ -58,7 +62,11 @@ public class FormIniziaPartitaController implements Initializable
 	{	
 		if(!(codiceUtente == null)) 
 		{
+			Torneo t = (Torneo) gare.getGara(codiceUtente);
+			//sarà sempre la prima partita perchè mano a mano vengono eliminate
+			Partita p = t.getPartitaTorneo(codicePartitaTorneo);
 			giocatori = gare.restituisciGiocatori(codiceUtente);
+
 			if(giocatori.size() >= 2)
 			{
 				lblNomeGiocatore1.setText(giocatori.get(0));
