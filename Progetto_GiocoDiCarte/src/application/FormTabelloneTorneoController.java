@@ -66,13 +66,10 @@ public class FormTabelloneTorneoController implements Initializable
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
-		Torneo t = (Torneo) gare.getGara(codiceUtente);
-		//sarà sempre la prima partita perchè mano a mano vengono eliminate
-		Partita p = t.getPartite().get(0);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));
 		loader.load();
 		FormIniziaPartitaController form = loader.getController();
-		form.copiaInfo(codiceUtente,p.getCodiceGara());
+		form.copiaInfo(codiceUtente);
 		alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 	}
 
@@ -81,23 +78,23 @@ public class FormTabelloneTorneoController implements Initializable
 		if(!(codiceUtente == null)) 
 		{
 			giocatori = gare.restituisciGiocatori(codiceUtente);
-			if(giocatori.size() == 1)
+			if(giocatori.size() <= 1)
 			{
 				lblVincitore.setText(giocatori.get(0));
 			}
-			if(giocatori.size() == 2)
+			if(giocatori.size() <= 2)
 			{
 				lblFinale1.setText(giocatori.get(0));
 				lblFinale2.setText(giocatori.get(1));
 			}
-			if(giocatori.size() == 4)
+			if(giocatori.size() <= 4)
 			{
 				lblSemifinale1.setText(giocatori.get(0));
 				lblSemifinale2.setText(giocatori.get(1));
 				lblSemifinale3.setText(giocatori.get(2));
 				lblSemifinale4.setText(giocatori.get(3));
 			}
-			else if(giocatori.size() == 8) 
+			if(giocatori.size() <= 8) 
 			{
 				lblQuarto1.setText(giocatori.get(0));
 				lblQuarto2.setText(giocatori.get(1));
