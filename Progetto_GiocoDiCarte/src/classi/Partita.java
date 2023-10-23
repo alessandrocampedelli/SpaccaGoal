@@ -9,12 +9,12 @@ import java.util.Scanner;
 import javafx.event.ActionEvent;
 
 public class Partita extends Gara{
-	protected final int N_CARTE_INIZIO = 5;
-	protected String turno;
-	protected int posizioneGiocatoreAttaccante;
-	protected int posizioneGiocatoreDifensore;
-	protected String nomeCarta;
-	protected int cartePescate;
+	private final int N_CARTE_INIZIO = 5;
+	private String turno;
+	private int posizioneGiocatoreAttaccante;
+	private int posizioneGiocatoreDifensore;
+	private String nomeCarta;
+	private int cartePescate;
 
 	public Partita(ArrayList<Giocatore> giocatori, String codice)
 	{
@@ -186,11 +186,7 @@ public class Partita extends Gara{
 	
 	public String mostraRisultati() 
 	{
-		String output = "CLASSIFICA FINALE:\n";
-		for(Giocatore g : giocatori) {
-			output += g.getAlias()+": "+g.getPunteggio()+"\n";
-		}
-		return output;
+		return super.mostraRisultati();
 	}
 	
 	public void leggiTurno() throws IOException

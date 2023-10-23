@@ -17,12 +17,13 @@ public abstract class Gara
 	protected Giocatore[] giocatori;
 	protected String codice;
 	protected Mazzo carte;
-
+	protected Salvataggio s;
 	public Gara(ArrayList<Giocatore> giocatori, String codice)
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = codice;
 		this.carte = new Mazzo();
+		this.s = new Salvataggio(this);
 	}
 	public Gara() {
 	}
@@ -45,5 +46,11 @@ public abstract class Gara
 	{
 		this.carte = m;
 	}
-	
+	public String mostraRisultati() {
+		String output = "CLASSIFICA FINALE:\n";
+		for(Giocatore g : giocatori) {
+			output += g.getAlias()+": "+g.getPunteggio()+"\n";
+		}
+		return output;
+	}
 }

@@ -256,13 +256,13 @@ public class Salvataggio {
 		return giocatori;
 	}
 	//metodo che elimina la cartella della partita terminata
-    public void deleteDirectory(String partitaTorneo)
+    public void deleteDirectory(String percorso)
     {
-		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara();
+		String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
 		File file = new File(path);
         for (File subfile : file.listFiles()) {
             if (subfile.isDirectory()) {
-                deleteDirectory(partitaTorneo);
+                deleteDirectory(percorso);
             }
             subfile.delete();
         }
