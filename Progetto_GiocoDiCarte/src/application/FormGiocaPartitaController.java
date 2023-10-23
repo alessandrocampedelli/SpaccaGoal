@@ -140,8 +140,6 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			else 
 			{
-				//ricavo il nominativo dell'alias vincente della partita e richiamo il metodo per concludere la partita
-				String aliasVincente = players[posizioneGiocatoreAttaccante].getAlias();
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 			}
 		}

@@ -1,6 +1,9 @@
 package classi;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javafx.event.ActionEvent;
 
 public class Torneo extends Gara
 {	

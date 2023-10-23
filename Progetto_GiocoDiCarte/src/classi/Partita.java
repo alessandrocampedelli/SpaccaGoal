@@ -19,7 +19,6 @@ public class Partita extends Gara{
 	public Partita(ArrayList<Giocatore> giocatori, String codice)
 	{
 		super(giocatori,codice);
-		this.carte = new Mazzo();
 	}
 	public Partita() {}
 	public void distribuzioneCarte()
@@ -288,7 +287,11 @@ public class Partita extends Gara{
 	public void salvaTurnoRigore(Carta cartaGiocata) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/partite/"+codice+"/turno.txt";
+		String relativePath;
+		if(this.getCodiceGara().charAt(0) == 'p')
+			relativePath = "src/partite/"+this.getCodiceGara()+"/turno.txt";
+		else
+			relativePath = "src/tornei/"+this.getCodiceGara().substring(0, this.getCodiceGara().length() - 1)+"/"+this.getCodiceGara()+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 
 		PrintWriter fw = new PrintWriter(absolutePath);

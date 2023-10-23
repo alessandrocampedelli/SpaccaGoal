@@ -67,6 +67,7 @@ public class FormIniziaPartitaController implements Initializable
 		{
 			//RIGHE CHE SERVONO PER UTILIZZARE IL TORNEO
 			try {
+				System.out.println(codiceUtente);
 				Gara p = (Partita) gare.getGara(codiceUtente);
 				
 				if(codiceUtente.charAt(0) == 't') {

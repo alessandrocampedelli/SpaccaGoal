@@ -22,6 +22,7 @@ public abstract class Gara
 	{
 		this.giocatori = giocatori.toArray(new Giocatore[giocatori.size()]);
 		this.codice = codice;
+		this.carte = new Mazzo();
 	}
 	public Gara() {
 	}

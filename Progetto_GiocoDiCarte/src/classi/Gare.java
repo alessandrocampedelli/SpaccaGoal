@@ -70,9 +70,9 @@ public class Gare
 			{
 				if(g.getCodiceGara().equals(codice))
 				{
-					gara = getPartitaDiTorneo(codice);
+					Torneo t = (Torneo) g;
+					gara = t.partite.get(0);
 				}
-
 			}
 		}else {
 			for(Gara g: this.gare)
@@ -86,25 +86,6 @@ public class Gare
 			}
 		}
 		return gara;
-	}
-	private Partita getPartitaDiTorneo(String codice) throws FileNotFoundException{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src\\tornei\\"+codice;
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		File f = new File(absolutePath);
-		//ottengo il vettore di file con tutti i file presenti nella cartella
-		File[] partite = f.listFiles();
-		Partita p = creaPartita(partite[1]);
-		return p;
-	}
-	private Partita creaPartita(File p) throws FileNotFoundException {
-		Partita partita = new Partita();
-		Salvataggio s = new Salvataggio(partita);
-		partita = (Partita) s.leggiNomiPartita(new File(p.getPath()+"/nomi.txt"), p.getName());
-		s.leggiMazzo(new File(p.getPath()+"/mazzo.txt"), p.getName(), partita);
-		s.leggiMani(new File(p.getPath()+"/mani.txt"),p.getName(), partita);
-		s.leggiPunteggi(new File(p.getPath()+"/punteggi.txt"),p.getName(), partita);
-		return partita;
 	}
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{

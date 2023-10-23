@@ -63,9 +63,9 @@ public class Salvataggio {
 				if(partite[j].isDirectory())
 				{
 					Partita p = (Partita) leggiNomiPartita(new File(partite[j].getPath()+"/nomi.txt"), partite[j].getName());
-					leggiMazzo(new File(partite[j].getPath()+"/mazzo.txt"), partite[j].getName(), gareLette.get(gareLette.size() - 1));
-					leggiMani(new File(partite[j].getPath()+"/mani.txt"), partite[j].getName(), gareLette.get(gareLette.size() - 1));
-					leggiPunteggi(new File(partite[j].getPath()+"/punteggi.txt"),partite[j].getName(), gareLette.get(gareLette.size() - 1));
+					leggiMazzo(new File(partite[j].getPath()+"/mazzo.txt"), partite[j].getName(), p);
+					leggiMani(new File(partite[j].getPath()+"/mani.txt"), partite[j].getName(), p);
+					leggiPunteggi(new File(partite[j].getPath()+"/punteggi.txt"),partite[j].getName(), p);
 					torneo.aggiungiPartita(p);
 				}
 			}
