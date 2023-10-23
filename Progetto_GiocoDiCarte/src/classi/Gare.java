@@ -20,7 +20,6 @@ public class Gare
 			System.out.println(e.getMessage());
 		}
 	}
-
 	public void aggiungiGara(Gara g)
 	{
 		gare.add(g);
@@ -82,10 +81,24 @@ public class Gare
 					gara = g;
 					break;
 				}
-
 			}
 		}
 		return gara;
+	}
+	public Torneo getTorneo(String codice) {
+		Torneo torneo = null;
+		for(Gara t : gare) {
+			if(t.getCodiceGara().equals(codice)){
+				torneo = (Torneo) t;
+				break;
+			}
+		}
+		return torneo;
+	}
+	public void updateTorneo(ArrayList<Giocatore> vincenti, String codice) {
+		//aggiorno il torneo
+		gare.remove(getTorneo(codice));
+		gare.add(new Torneo(vincenti,codice));
 	}
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{

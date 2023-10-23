@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -27,6 +28,7 @@ import classi.Salvataggio;
 import classi.Gare;
 import classi.Giocatore;
 import classi.Partita;
+import classi.Torneo;
 import classi.Tipologia;
 import classi.Leaderboard;
 import javafx.scene.layout.Pane;
@@ -46,6 +48,7 @@ public class FormGiocaPartitaController implements Initializable
 
 	Salvataggio s;
 	Partita partita;
+	Torneo torneo = null;
 	Mazzo mazzo;
 	Giocatore[] players;
 	String[] nomiCarte;
@@ -140,7 +143,12 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			else 
 			{
-				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+				if(codicePartita.charAt(0) == 'p')
+					partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+				else {
+					torneo = g.getTorneo(codicePartita);
+					torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreAttaccante].getAlias(), alert);
+				}
 			}
 		}
 		else
@@ -199,7 +207,12 @@ public class FormGiocaPartitaController implements Initializable
 		else 
 		{
 			//se la partita è terminata eseguo il metodo che mi permetterà di chiudere la partita
-			partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+			if(codicePartita.charAt(0) == 'p')
+				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+			else {
+				torneo = g.getTorneo(codicePartita);
+				torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreAttaccante].getAlias(), alert);
+			}
 		}
 	}
 
