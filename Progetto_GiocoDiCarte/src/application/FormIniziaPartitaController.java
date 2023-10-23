@@ -60,14 +60,12 @@ public class FormIniziaPartitaController implements Initializable
 		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-	//IDEA, CONTROLLARE SE è T E ANDARE ALLA RICERCA DELLA PARTITA DA INIZIARE
+	
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
 		if(!(codiceUtente == null)) 
 		{
-			//RIGHE CHE SERVONO PER UTILIZZARE IL TORNEO
 			try {
-				System.out.println(codiceUtente);
 				Gara p = (Partita) gare.getGara(codiceUtente);
 				
 				if(codiceUtente.charAt(0) == 't') {

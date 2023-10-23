@@ -1,5 +1,6 @@
 package classi;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,7 +45,11 @@ public class Torneo extends Gara
 	}
 	public String mostraRisultati() 
 	{
-		return super.mostraRisultati();
+		String output = "CLASSIFICA FINALE:\n";
+		for(Giocatore g : partite.get(0).giocatori) {
+			output += g.getAlias()+": "+g.getPunteggio()+"\n";
+		}
+		return output;
 	}
 	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert) throws IOException
 	{
@@ -52,7 +57,30 @@ public class Torneo extends Gara
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
+		s = new Salvataggio(partite.get(0));
 		s.deleteDirectory("tornei/"+this.getCodiceGara());
+		//controllare se il turno è finito
+		if(fineTurno()) {
+			//riscrivere il file di testo
+			Salvataggio s = new Salvataggio(this);
+			s.salvaGiocatoriTorneo();
+			//ricreare le partite--> sovrascrivere il torneo nell'arraylist di gara e ricrearlo solo con i giocatori vincenti
+			Gare g = new Gare();
+			g.updateTorneo(giocatoriVincenti, codice);
+		}
+	}
+	private boolean fineTurno(){
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/tornei/"+this.codice;
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		//ottengo il vettore di file con tutti i file presenti nella cartella
+		File[] tornei = f.listFiles();
+		//mi chiedo se la directory contiene solo il file di testo dei giocatori
+		if(tornei.length == 1 && !tornei[0].isDirectory()) {
+			return true;	
+		}
+		return false;
 	}
 	private Giocatore trovaGiocatore(String alias) {
 		Giocatore trovato = null;
