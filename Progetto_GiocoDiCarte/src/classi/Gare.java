@@ -95,10 +95,24 @@ public class Gare
 		}
 		return torneo;
 	}
-	public void updateTorneo(ArrayList<Giocatore> vincenti, String codice) {
+	public void updateTorneo(ArrayList<Giocatore> vincenti, String codice) throws IOException{
 		//aggiorno il torneo
 		gare.remove(getTorneo(codice));
-		gare.add(new Torneo(vincenti,codice));
+		Torneo t = new Torneo(vincenti,codice);
+		t.creazionePartite();
+		gare.add(t);
+		//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
+		for(Partita p : t.getPartite()) 
+		{
+			Salvataggio salvaGara = new Salvataggio(p);
+			String percorso = "tornei/"+t.getCodiceGara();
+			p.distribuzioneCarte();
+			salvaGara.salvaNomiGiocatori(percorso);
+			salvaGara.salvaMazzo(percorso);
+			salvaGara.salvaMani(percorso);
+			salvaGara.salvaPunteggio(percorso);
+			p.salvaTurno(percorso);
+		}
 	}
 	public ArrayList<String> restituisciGiocatori(String codiceUtente)
 	{

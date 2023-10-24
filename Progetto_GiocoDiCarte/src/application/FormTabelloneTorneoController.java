@@ -12,6 +12,7 @@ import classi.Gare;
 import classi.Torneo;
 import classi.Partita;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +54,10 @@ public class FormTabelloneTorneoController implements Initializable
 	private Label lblFinale1;
 	@FXML
 	private Label lblVincitore;
-
+	@FXML
+	private Button btnMostraLeaderboard = new Button();
+	@FXML
+	private Button btnAvviaPartita = new Button();
 	private ArrayList<String> giocatori;
 
 	static String codiceUtente;
@@ -73,8 +77,23 @@ public class FormTabelloneTorneoController implements Initializable
 		alert.passaAlForm("/application/FormIniziaPartita.fxml", event);
 	}
 
+	@FXML
+	public void btnMostraLeaderboard(ActionEvent event) throws IOException
+	{	
+		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+	}
+
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
+		if(!(codiceUtente == null))
+		{
+			Torneo t = gare.getTorneo(codiceUtente);
+			if(t.getGiocatoreVincenti().size() == 1) {
+				btnMostraLeaderboard.setVisible(true);
+				btnAvviaPartita.setVisible(false);
+			}
+		}
+		/*
 		if(!(codiceUtente == null)) 
 		{
 			giocatori = gare.restituisciGiocatori(codiceUtente);
@@ -105,6 +124,6 @@ public class FormTabelloneTorneoController implements Initializable
 				lblQuarto7.setText(giocatori.get(6));
 				lblQuarto8.setText(giocatori.get(7));
 			}
-		}
+		}*/
 	}
 }

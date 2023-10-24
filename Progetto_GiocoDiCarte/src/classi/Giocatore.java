@@ -83,6 +83,11 @@ public class Giocatore
 		this.nPartiteVinte = this.nPartiteVinte + 1;
 	}
 	
+	public void aggiungiVittoriaTorneo() 
+	{
+		this.nTorneiVinti = this.nTorneiVinti + 1;
+	}
+	
 	public void aggiungiGoal() {
 		this.punteggio+=1;
 	}

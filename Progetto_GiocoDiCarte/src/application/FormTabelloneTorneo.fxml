@@ -7,57 +7,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0"
-	prefWidth="656.0" xmlns="http://javafx.com/javafx/20.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormTabelloneTorneoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormTabelloneTorneoController">
 	<children>
-		<ImageView fitHeight="412.0" fitWidth="632.0" layoutX="93.0"
-			layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="412.0" fitWidth="632.0" layoutX="93.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../griglia_torneo.png" />
 			</image>
 		</ImageView>
-		<Button defaultButton="true" layoutX="259.0" layoutY="472.0"
-			mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="50.0"
-			prefWidth="137.0" text="AVVIA PARTITA" />
-		<Label fx:id="lblQuarto1" layoutX="93.0" layoutY="46.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto2" layoutX="93.0" layoutY="171.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto3" layoutX="93.0" layoutY="292.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto4" layoutX="99.0" layoutY="415.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto5" layoutX="484.0" layoutY="46.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto6" layoutX="500.0" layoutY="171.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto7" layoutX="500.0" layoutY="292.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblQuarto8" layoutX="500.0" layoutY="415.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblSemifinale1" layoutX="179.0" layoutY="111.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblSemifinale2" layoutX="179.0" layoutY="354.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblSemifinale3" layoutX="421.0" layoutY="111.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblSemifinale4" layoutX="421.0" layoutY="354.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblFinale2" layoutX="342.0" layoutY="232.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label fx:id="lblFinale1" layoutX="248.0" layoutY="232.0"
-			prefHeight="20.0" prefWidth="79.0" />
-		<Label layoutX="288.0" layoutY="75.0" prefHeight="20.0"
-			prefWidth="79.0" text="VINCITORE" textAlignment="CENTER"
-			textFill="RED" underline="true">
+		<Button fx:id="btnAvviaPartita" defaultButton="true" layoutX="259.0" layoutY="472.0" mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="50.0" prefWidth="137.0" text="AVVIA PARTITA" />
+		<Label fx:id="lblQuarto1" layoutX="93.0" layoutY="46.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto2" layoutX="93.0" layoutY="171.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto3" layoutX="93.0" layoutY="292.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto4" layoutX="99.0" layoutY="415.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto5" layoutX="484.0" layoutY="46.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto6" layoutX="500.0" layoutY="171.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto7" layoutX="500.0" layoutY="292.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblQuarto8" layoutX="500.0" layoutY="415.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale1" layoutX="179.0" layoutY="111.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale2" layoutX="179.0" layoutY="354.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale3" layoutX="421.0" layoutY="111.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblSemifinale4" layoutX="421.0" layoutY="354.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblFinale2" layoutX="342.0" layoutY="232.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblFinale1" layoutX="248.0" layoutY="232.0" prefHeight="20.0" prefWidth="79.0" />
+		<Label layoutX="288.0" layoutY="75.0" prefHeight="20.0" prefWidth="79.0" text="VINCITORE" textAlignment="CENTER" textFill="RED" underline="true">
 			<font>
 				<Font size="14.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblVincitore" layoutX="288.0" layoutY="101.0"
-			prefHeight="20.0" prefWidth="79.0" />
+		<Label fx:id="lblVincitore" layoutX="288.0" layoutY="101.0" prefHeight="20.0" prefWidth="79.0" />
+      <Button fx:id="btnMostraLeaderboard" defaultButton="true" layoutX="248.0" layoutY="472.0" mnemonicParsing="false" onAction="#btnMostraLeaderboard" prefHeight="50.0" prefWidth="160.0" text="MOSTRA LEADERBOARD" visible="false" />
 	</children>
 </AnchorPane>

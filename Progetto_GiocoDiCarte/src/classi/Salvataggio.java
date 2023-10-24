@@ -154,7 +154,8 @@ public class Salvataggio {
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		
 		PrintWriter fw = new PrintWriter(absolutePath);
-		for(Giocatore player : eventoDaSalvare.giocatori) 
+		Torneo t = (Torneo) eventoDaSalvare;
+		for(Giocatore player : t.getGiocatoreVincenti()) 
 		{
 			//controllo se il giocatore da salvare è un robot oppure no
 			if(player.getRobot())
@@ -270,6 +271,7 @@ public class Salvataggio {
     }
     public void createDirectory(String percorso) throws IOException{
     	String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
+    	System.out.println(path);
     	Files.createDirectory(Paths.get(path));
     }
 }

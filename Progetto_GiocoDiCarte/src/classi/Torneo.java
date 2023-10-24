@@ -38,7 +38,9 @@ public class Torneo extends Gara
 	{
 		this.partite.add(p);
 	}
-	
+	public ArrayList<Giocatore> getGiocatoreVincenti(){
+		return this.giocatoriVincenti;
+	}
 	public Partita getPartitaTorneo()
 	{
 		return this.partite.get(0);
@@ -51,23 +53,36 @@ public class Torneo extends Gara
 		}
 		return output;
 	}
-	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert) throws IOException
+	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
 	{
+		
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
-		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
-		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
-		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 		s = new Salvataggio(partite.get(0));
 		s.deleteDirectory("tornei/"+this.getCodiceGara());
-		//controllare se il turno è finito
-		if(fineTurno()) {
-			//riscrivere il file di testo
-			Salvataggio s = new Salvataggio(this);
-			s.salvaGiocatoriTorneo();
-			//ricreare le partite--> sovrascrivere il torneo nell'arraylist di gara e ricrearlo solo con i giocatori vincenti
-			Gare g = new Gare();
-			g.updateTorneo(giocatoriVincenti, codice);
+		//riscrivere il file di testo
+		Salvataggio s = new Salvataggio(this);
+		s.salvaGiocatoriTorneo();
+		if(this.giocatoriVincenti.size() != 1)
+		{
+			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+			//controllare se il turno è finito
+			if(fineTurno()) 
+			{
+				//ricreare le partite--> sovrascrivere il torneo nell'arraylist di gara e ricrearlo solo con i giocatori vincenti
+				Gare g = new Gare();
+				g.updateTorneo(giocatoriVincenti, codice);
+			}
 		}
+		else
+		{
+			this.giocatoriVincenti.get(0).aggiungiVittoriaTorneo();
+			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaTorneo();
+			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
+			leaderboard.salvaPlayers();
+			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO IL TORNEO");
+		}
+		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
+		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 	}
 	private boolean fineTurno(){
 		String currentDirectory = System.getProperty("user.dir");

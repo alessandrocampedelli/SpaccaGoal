@@ -147,7 +147,7 @@ public class FormGiocaPartitaController implements Initializable
 					partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 				else {
 					torneo = g.getTorneo(codicePartita);
-					torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreAttaccante].getAlias(), alert);
+					torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 				}
 			}
 		}
@@ -211,7 +211,7 @@ public class FormGiocaPartitaController implements Initializable
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 			else {
 				torneo = g.getTorneo(codicePartita);
-				torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreAttaccante].getAlias(), alert);
+				torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 			}
 		}
 	}
