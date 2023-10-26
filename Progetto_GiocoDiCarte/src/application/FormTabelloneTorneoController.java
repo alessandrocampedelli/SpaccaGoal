@@ -11,6 +11,8 @@ import javafx.event.ActionEvent;
 import classi.Gare;
 import classi.Torneo;
 import classi.Partita;
+import classi.Salvataggio;
+import classi.Giocatore;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +20,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.util.ResourceBundle;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class FormTabelloneTorneoController implements Initializable
 {
@@ -58,7 +65,7 @@ public class FormTabelloneTorneoController implements Initializable
 	private Button btnMostraLeaderboard = new Button();
 	@FXML
 	private Button btnAvviaPartita = new Button();
-	private ArrayList<String> giocatori;
+	private ArrayList<Giocatore> giocatori;
 
 	static String codiceUtente;
 
@@ -85,45 +92,51 @@ public class FormTabelloneTorneoController implements Initializable
 
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
-		if(!(codiceUtente == null))
+		try
 		{
-			Torneo t = gare.getTorneo(codiceUtente);
-			if(t.getGiocatoreVincenti().size() == 1) {
-				btnMostraLeaderboard.setVisible(true);
-				btnAvviaPartita.setVisible(false);
+			if(!(codiceUtente == null))
+			{
+				Torneo t = gare.getTorneo(codiceUtente);
+				if(t.getGiocatoreVincenti().size() == 1) 
+				{
+					btnMostraLeaderboard.setVisible(true);
+					btnAvviaPartita.setVisible(false);
+				}
+				Salvataggio s = new Salvataggio(t);
+				giocatori = s.leggiTabelloneTorneo();
+				System.out.println(giocatori.size());
+				/*if(giocatori.size() <= 1)
+				{
+					lblVincitore.setText(giocatori.get(0));
+				}
+				if(giocatori.size() <= 2)
+				{
+					lblFinale1.setText(giocatori.get(0));
+					lblFinale2.setText(giocatori.get(1));
+				}
+				if(giocatori.size() <= 4)
+				{
+					lblSemifinale1.setText(giocatori.get(0));
+					lblSemifinale2.setText(giocatori.get(1));
+					lblSemifinale3.setText(giocatori.get(2));
+					lblSemifinale4.setText(giocatori.get(3));
+				}
+				if(giocatori.size() <= 8) 
+				{
+					lblQuarto1.setText(giocatori.get(0));
+					lblQuarto2.setText(giocatori.get(1));
+					lblQuarto3.setText(giocatori.get(2));
+					lblQuarto4.setText(giocatori.get(3));
+					lblQuarto5.setText(giocatori.get(4));
+					lblQuarto6.setText(giocatori.get(5));
+					lblQuarto7.setText(giocatori.get(6));
+					lblQuarto8.setText(giocatori.get(7));
+				}*/
 			}
 		}
-		/*
-		if(!(codiceUtente == null)) 
+		catch(Exception e)
 		{
-			giocatori = gare.restituisciGiocatori(codiceUtente);
-			if(giocatori.size() <= 1)
-			{
-				lblVincitore.setText(giocatori.get(0));
-			}
-			if(giocatori.size() <= 2)
-			{
-				lblFinale1.setText(giocatori.get(0));
-				lblFinale2.setText(giocatori.get(1));
-			}
-			if(giocatori.size() <= 4)
-			{
-				lblSemifinale1.setText(giocatori.get(0));
-				lblSemifinale2.setText(giocatori.get(1));
-				lblSemifinale3.setText(giocatori.get(2));
-				lblSemifinale4.setText(giocatori.get(3));
-			}
-			if(giocatori.size() <= 8) 
-			{
-				lblQuarto1.setText(giocatori.get(0));
-				lblQuarto2.setText(giocatori.get(1));
-				lblQuarto3.setText(giocatori.get(2));
-				lblQuarto4.setText(giocatori.get(3));
-				lblQuarto5.setText(giocatori.get(4));
-				lblQuarto6.setText(giocatori.get(5));
-				lblQuarto7.setText(giocatori.get(6));
-				lblQuarto8.setText(giocatori.get(7));
-			}
-		}*/
+			System.out.println(e.getMessage());
+		}
 	}
 }
