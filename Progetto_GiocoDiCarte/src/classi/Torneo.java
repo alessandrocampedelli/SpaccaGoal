@@ -10,10 +10,13 @@ public class Torneo extends Gara
 {	
 	ArrayList<Partita> partite;
 	private ArrayList<Giocatore> giocatoriVincenti;
+	private ArrayList<Giocatore> tabelloneGiocatori;
+	
 	public Torneo(ArrayList<Giocatore> giocatori, String codice) 
 	{
 		super(giocatori, codice);
 		this.partite = new ArrayList<>();
+		this.tabelloneGiocatori = giocatori;
 		this.giocatoriVincenti = giocatori;
 	}
 	
@@ -38,13 +41,27 @@ public class Torneo extends Gara
 	{
 		this.partite.add(p);
 	}
-	public ArrayList<Giocatore> getGiocatoreVincenti(){
+	
+	public ArrayList<Giocatore> getGiocatoreVincenti()
+	{
 		return this.giocatoriVincenti;
 	}
+	
+	public ArrayList<Giocatore> getTabelloneGiocatori()
+	{
+		return this.tabelloneGiocatori;
+	}
+	
 	public Partita getPartitaTorneo()
 	{
 		return this.partite.get(0);
 	}
+	
+	public void aggiungiTabelloneGiocatori(Giocatore g)
+	{
+		this.tabelloneGiocatori.add(g);
+	}
+	
 	public String mostraRisultati() 
 	{
 		String output = "CLASSIFICA FINALE:\n";
@@ -53,15 +70,24 @@ public class Torneo extends Gara
 		}
 		return output;
 	}
+	
 	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
-	{
-		
+	{	
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
 		s = new Salvataggio(partite.get(0));
 		s.deleteDirectory("tornei/"+this.getCodiceGara());
 		//riscrivere il file di testo
 		Salvataggio s = new Salvataggio(this);
 		s.salvaGiocatoriTorneo();
+		for(Giocatore giocatoreVincente: this.giocatoriVincenti)
+		{
+			if(giocatoreVincente.getAlias().equals(aliasVincente))
+			{
+				aggiungiTabelloneGiocatori(giocatoreVincente);
+				break;
+			}
+		}
+		s.salvaTabelloneTorneo();
 		if(this.giocatoriVincenti.size() != 1)
 		{
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
@@ -84,7 +110,9 @@ public class Torneo extends Gara
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 	}
-	private boolean fineTurno(){
+	
+	private boolean fineTurno()
+	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+this.codice;
 		String absolutePath = currentDirectory + File.separator + relativePath;
@@ -97,6 +125,7 @@ public class Torneo extends Gara
 		}
 		return false;
 	}
+	
 	private Giocatore trovaGiocatore(String alias) {
 		Giocatore trovato = null;
 		for(Giocatore g : this.giocatoriVincenti) {

@@ -11,10 +11,12 @@ import java.nio.file.Paths;
 public class Salvataggio {
 	Gara eventoDaSalvare;
 	ArrayList<Gara> gareLette;
+	
 	public Salvataggio(Gara g) 
 	{
 		this.eventoDaSalvare = g;
 	}
+	
 	public Salvataggio() 
 	{
 		this.gareLette = new ArrayList<Gara>();
@@ -82,6 +84,16 @@ public class Salvataggio {
 	{
 		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
 		return new Torneo(giocatori,codice);
+	}
+	
+	public ArrayList<Giocatore> leggiTabelloneTorneo() throws FileNotFoundException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/giocatoriTorneo.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		File f = new File(absolutePath);
+		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
+		return giocatori;
 	}
 	
 	public void leggiMazzo(File f, String codice, Gara g) throws FileNotFoundException 
@@ -156,6 +168,25 @@ public class Salvataggio {
 		PrintWriter fw = new PrintWriter(absolutePath);
 		Torneo t = (Torneo) eventoDaSalvare;
 		for(Giocatore player : t.getGiocatoreVincenti()) 
+		{
+			//controllo se il giocatore da salvare è un robot oppure no
+			if(player.getRobot())
+				fw.println(player.getAlias()+"*");
+			else
+				fw.println(player.getAlias());
+		}
+		fw.close();
+	}
+	
+	public void salvaTabelloneTorneo() throws IOException
+	{
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		
+		PrintWriter fw = new PrintWriter(absolutePath);
+		Torneo t = (Torneo) eventoDaSalvare;
+		for(Giocatore player : t.getTabelloneGiocatori()) 
 		{
 			//controllo se il giocatore da salvare è un robot oppure no
 			if(player.getRobot())
@@ -256,6 +287,7 @@ public class Salvataggio {
 		scan.close();
 		return giocatori;
 	}
+	
 	//metodo che elimina la cartella della partita terminata
     public void deleteDirectory(String percorso)
     {
@@ -269,6 +301,7 @@ public class Salvataggio {
         }
 		file.delete();
     }
+    
     public void createDirectory(String percorso) throws IOException{
     	String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
     	System.out.println(path);
