@@ -89,10 +89,9 @@ public class Salvataggio {
 	public ArrayList<Giocatore> leggiTabelloneTorneo() throws FileNotFoundException
 	{
 		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/giocatoriTorneo.txt";
+		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		File f = new File(absolutePath);
-		ArrayList<Giocatore> giocatori = leggiGiocatori(f);
+		ArrayList<Giocatore> giocatori = leggiGiocatori(new File(absolutePath));
 		return giocatori;
 	}
 	
@@ -164,7 +163,6 @@ public class Salvataggio {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/giocatoriTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		
 		PrintWriter fw = new PrintWriter(absolutePath);
 		Torneo t = (Torneo) eventoDaSalvare;
 		for(Giocatore player : t.getGiocatoreVincenti()) 
@@ -183,7 +181,6 @@ public class Salvataggio {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		
 		PrintWriter fw = new PrintWriter(absolutePath);
 		Torneo t = (Torneo) eventoDaSalvare;
 		for(Giocatore player : t.getTabelloneGiocatori()) 

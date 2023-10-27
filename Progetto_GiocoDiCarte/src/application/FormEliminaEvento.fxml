@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormEliminaEventoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormEliminaEventoController">
 	<children>
 		<Label layoutX="136.0" layoutY="56.0" text="CODICE EVENTO" />
 		<ListView fx:id="lblPartite" layoutX="119.0" layoutY="77.0" onMouseClicked="#cliccaGara" prefHeight="494.0" prefWidth="122.0" />

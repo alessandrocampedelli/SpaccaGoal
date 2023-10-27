@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaTorneoController">
+<AnchorPane prefHeight="635.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaTorneoController">
 	<children>
 		<AnchorPane layoutX="-91.0" layoutY="-136.0" prefHeight="200.0" prefWidth="200.0">
 			<children>

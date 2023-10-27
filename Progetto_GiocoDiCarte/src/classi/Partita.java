@@ -20,7 +20,7 @@ public class Partita extends Gara{
 	{
 		super(giocatori,codice);
 	}
-	public Partita() {}
+
 	public void distribuzioneCarte()
 	{
 		//pulisco le mani dei giocatori da eventuali partite precedenti
