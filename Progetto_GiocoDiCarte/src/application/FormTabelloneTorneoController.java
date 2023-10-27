@@ -66,7 +66,6 @@ public class FormTabelloneTorneoController implements Initializable
 	@FXML
 	private Button btnAvviaPartita = new Button();
 	private ArrayList<Giocatore> giocatori;
-
 	static String codiceUtente;
 
 	public void copiaInfo(String codice) 
@@ -96,6 +95,8 @@ public class FormTabelloneTorneoController implements Initializable
 		{
 			if(!(codiceUtente == null))
 			{
+				Label[] labels4 = {lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
+				Label[] labels8 = {lblQuarto1,lblQuarto2,lblQuarto3,lblQuarto4,lblQuarto5,lblQuarto6,lblQuarto7,lblQuarto8,lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
 				Torneo t = gare.getTorneo(codiceUtente);
 				if(t.getGiocatoreVincenti().size() == 1) 
 				{
@@ -104,37 +105,13 @@ public class FormTabelloneTorneoController implements Initializable
 				}
 				Salvataggio s = new Salvataggio(t);
 				giocatori = s.leggiTabelloneTorneo();
-				System.out.println(giocatori.size());
-				/*if(giocatori.size() <= 1)
+				for(int i = 0; i < giocatori.size(); i++)
 				{
-					lblVincitore.setText(giocatori.get(0));
+					labels8[i].setText(giocatori.get(i).getAlias());
 				}
-				if(giocatori.size() <= 2)
-				{
-					lblFinale1.setText(giocatori.get(0));
-					lblFinale2.setText(giocatori.get(1));
-				}
-				if(giocatori.size() <= 4)
-				{
-					lblSemifinale1.setText(giocatori.get(0));
-					lblSemifinale2.setText(giocatori.get(1));
-					lblSemifinale3.setText(giocatori.get(2));
-					lblSemifinale4.setText(giocatori.get(3));
-				}
-				if(giocatori.size() <= 8) 
-				{
-					lblQuarto1.setText(giocatori.get(0));
-					lblQuarto2.setText(giocatori.get(1));
-					lblQuarto3.setText(giocatori.get(2));
-					lblQuarto4.setText(giocatori.get(3));
-					lblQuarto5.setText(giocatori.get(4));
-					lblQuarto6.setText(giocatori.get(5));
-					lblQuarto7.setText(giocatori.get(6));
-					lblQuarto8.setText(giocatori.get(7));
-				}*/
 			}
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			System.out.println(e.getMessage());
 		}

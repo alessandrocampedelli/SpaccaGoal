@@ -57,11 +57,6 @@ public class Torneo extends Gara
 		return this.partite.get(0);
 	}
 	
-	public void aggiungiTabelloneGiocatori(Giocatore g)
-	{
-		this.tabelloneGiocatori.add(g);
-	}
-	
 	public String mostraRisultati() 
 	{
 		String output = "CLASSIFICA FINALE:\n";
@@ -79,11 +74,11 @@ public class Torneo extends Gara
 		//riscrivere il file di testo
 		Salvataggio s = new Salvataggio(this);
 		s.salvaGiocatoriTorneo();
-		for(Giocatore giocatoreVincente: this.giocatoriVincenti)
+		for(Giocatore giocatoreVincente: this.tabelloneGiocatori)
 		{
 			if(giocatoreVincente.getAlias().equals(aliasVincente))
 			{
-				aggiungiTabelloneGiocatori(giocatoreVincente);
+				this.tabelloneGiocatori.add(giocatoreVincente);
 				break;
 			}
 		}
@@ -120,7 +115,8 @@ public class Torneo extends Gara
 		//ottengo il vettore di file con tutti i file presenti nella cartella
 		File[] tornei = f.listFiles();
 		//mi chiedo se la directory contiene solo il file di testo dei giocatori
-		if(tornei.length == 1 && !tornei[0].isDirectory()) {
+		if(tornei.length == 1 && !tornei[0].isDirectory()) 
+		{
 			return true;	
 		}
 		return false;

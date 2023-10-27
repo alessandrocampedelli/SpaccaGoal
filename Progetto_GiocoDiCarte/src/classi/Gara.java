@@ -25,8 +25,7 @@ public abstract class Gara
 		this.carte = new Mazzo();
 		this.s = new Salvataggio(this);
 	}
-	public Gara() {
-	}
+
 	public String getCodiceGara()
 	{
 		return this.codice;

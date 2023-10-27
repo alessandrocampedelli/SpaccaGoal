@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0"
-	prefWidth="498.0" xmlns="http://javafx.com/javafx/20.0.1"
+	prefWidth="498.0" xmlns="http://javafx.com/javafx/20"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.FormTorneoController">
 	<children>
