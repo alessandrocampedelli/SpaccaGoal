@@ -134,6 +134,7 @@ public class FormCreaTorneoController{
 			salvaGara = new Salvataggio(t);
 			salvaGara.createDirectory("tornei");
 			salvaGara.salvaGiocatoriTorneo();
+			t.setTabelloneGiocatori(giocatori);
 			salvaGara.salvaTabelloneTorneo();
 			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
 			for(Partita p : t.getPartite()) 

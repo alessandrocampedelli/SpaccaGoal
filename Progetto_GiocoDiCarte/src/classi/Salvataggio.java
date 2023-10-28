@@ -163,9 +163,12 @@ public class Salvataggio {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/giocatoriTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter fw = new PrintWriter(absolutePath);
 		Torneo t = (Torneo) eventoDaSalvare;
-		for(Giocatore player : t.getGiocatoreVincenti()) 
+		salvaFile(absolutePath, t.getGiocatoreVincenti());
+	}
+	public void salvaFile(String absolutePath, ArrayList<Giocatore> players) throws FileNotFoundException {
+		PrintWriter fw = new PrintWriter(absolutePath);
+		for(Giocatore player : players) 
 		{
 			//controllo se il giocatore da salvare è un robot oppure no
 			if(player.getRobot())
@@ -175,23 +178,13 @@ public class Salvataggio {
 		}
 		fw.close();
 	}
-	
 	public void salvaTabelloneTorneo() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter fw = new PrintWriter(absolutePath);
 		Torneo t = (Torneo) eventoDaSalvare;
-		for(Giocatore player : t.getTabelloneGiocatori()) 
-		{
-			//controllo se il giocatore da salvare è un robot oppure no
-			if(player.getRobot())
-				fw.println(player.getAlias()+"*");
-			else
-				fw.println(player.getAlias());
-		}
-		fw.close();
+		salvaFile(absolutePath, t.getTabelloneGiocatori());
 	}
 	
 	public void salvaMazzo(String partitaTorneo) throws IOException
