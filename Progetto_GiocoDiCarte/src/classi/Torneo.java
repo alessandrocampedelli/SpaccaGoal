@@ -1,6 +1,7 @@
 package classi;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,7 +17,12 @@ public class Torneo extends Gara
 	{
 		super(giocatori, codice);
 		this.partite = new ArrayList<>();
-		this.tabelloneGiocatori = giocatori;
+		Salvataggio s = new Salvataggio(this);
+		try {
+			this.tabelloneGiocatori = s.leggiTabelloneTorneo();
+		}catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 		this.giocatoriVincenti = giocatori;
 	}
 	
@@ -56,7 +62,10 @@ public class Torneo extends Gara
 	{
 		return this.partite.get(0);
 	}
-	
+
+	public void setTabelloneGiocatori(ArrayList<Giocatore> tabelloneGiocatori) {
+		this.tabelloneGiocatori = tabelloneGiocatori;
+	}
 	public String mostraRisultati() 
 	{
 		String output = "CLASSIFICA FINALE:\n";
@@ -114,8 +123,8 @@ public class Torneo extends Gara
 		File f = new File(absolutePath);
 		//ottengo il vettore di file con tutti i file presenti nella cartella
 		File[] tornei = f.listFiles();
-		//mi chiedo se la directory contiene solo il file di testo dei giocatori
-		if(tornei.length == 1 && !tornei[0].isDirectory()) 
+		//mi chiedo se la directory contiene solo i file di testo dei giocatori
+		if(tornei.length == 2 && !tornei[0].isDirectory() && !tornei[1].isDirectory()) 
 		{
 			return true;	
 		}

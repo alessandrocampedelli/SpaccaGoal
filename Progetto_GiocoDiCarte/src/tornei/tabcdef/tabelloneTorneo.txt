@@ -1,8 +1,8 @@
 H
+C
+B
 A
 D
 G
-C
-F
 E
-H
+F
