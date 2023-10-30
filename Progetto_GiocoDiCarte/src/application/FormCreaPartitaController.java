@@ -62,9 +62,9 @@ public class FormCreaPartitaController{
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
-	static Partita g;
+	static Partita p;
 	Leaderboard leaderboard = new Leaderboard();
-	
+	Gare gare = new Gare();
 	public String getGiocatori() {
 		String output = "";
 		for(Giocatore g: giocatori) {
@@ -147,18 +147,15 @@ public class FormCreaPartitaController{
 			leaderboard.salvaPlayers();
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
-			g = new Partita(giocatori,codice);
-			g.distribuzioneCarte();
-			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
-			loader.load();
-			FormPrincipaleController formPrincipale = loader.getController();
-			formPrincipale.aggiungiGara(g);
-			salvaGara = new Salvataggio(g);
+			p = new Partita(giocatori,codice);
+			p.distribuzioneCarte();
+			gare.aggiungiGara(p);
+			salvaGara = new Salvataggio(p);
 			salvaGara.salvaNomiGiocatori("partite");
 			salvaGara.salvaMazzo("partite");
 			salvaGara.salvaMani("partite");
 			salvaGara.salvaPunteggio("partite");
-			g.salvaTurno("partite");
+			p.salvaTurno("partite");
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);

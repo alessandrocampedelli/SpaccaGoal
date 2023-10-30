@@ -15,11 +15,6 @@ import classi.Gare;
 public class FormPrincipaleController 
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	Gare gare = new Gare();
-	
-	public void aggiungiGara(Gara g) {
-		gare.aggiungiGara(g);
-	}
 	
 	// Event Listener on Button.onAction
 	@FXML

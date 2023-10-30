@@ -62,6 +62,7 @@ public class FormCreaTorneoController{
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
 	static Torneo t;
+	Gare gare = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
 	public String getGiocatori() {
 		String output = "";
@@ -125,11 +126,7 @@ public class FormCreaTorneoController{
 			t = new Torneo(giocatori,codice);
 			//creazione delle partite
 			t.creazionePartite();
-			//forse nn serve
-			FXMLLoader loader =new FXMLLoader(getClass().getResource("FormPrincipale.fxml"));
-			loader.load();
-			FormPrincipaleController formPrincipale = loader.getController();
-			formPrincipale.aggiungiGara(t);
+			gare.aggiungiGara(t);
 			//creo la cartella del torneo
 			salvaGara = new Salvataggio(t);
 			salvaGara.createDirectory("tornei");
