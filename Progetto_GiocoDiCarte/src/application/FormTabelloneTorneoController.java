@@ -72,7 +72,7 @@ public class FormTabelloneTorneoController implements Initializable
 	{
 		codiceUtente = codice;
 	}
-
+	Torneo t;
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
@@ -86,6 +86,8 @@ public class FormTabelloneTorneoController implements Initializable
 	@FXML
 	public void btnMostraLeaderboard(ActionEvent event) throws IOException
 	{	
+		//Salvataggio s = new Salvataggio(t);
+		//s.deleteDirectory("tornei");
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 	}
 
@@ -97,7 +99,7 @@ public class FormTabelloneTorneoController implements Initializable
 			{
 				Label[] labels4 = {lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
 				Label[] labels8 = {lblQuarto1,lblQuarto2,lblQuarto3,lblQuarto4,lblQuarto5,lblQuarto6,lblQuarto7,lblQuarto8,lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
-				Torneo t = gare.getTorneo(codiceUtente);
+				t = gare.getTorneo(codiceUtente);
 				if(t.getGiocatoreVincenti().size() == 1) 
 				{
 					btnMostraLeaderboard.setVisible(true);

@@ -116,7 +116,6 @@ public class Torneo extends Gara
 			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO IL TORNEO");
-			//*********************INSERIRE CANCELLAZIONE CARTELLA
 		}
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
