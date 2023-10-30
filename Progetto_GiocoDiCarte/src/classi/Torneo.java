@@ -81,7 +81,7 @@ public class Torneo extends Gara
 		}
 		return players;
 	}
-	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
+	public void finePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
 	{	
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
 		s = new Salvataggio(partite.get(0));

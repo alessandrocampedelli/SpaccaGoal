@@ -147,7 +147,7 @@ public class FormGiocaPartitaController implements Initializable
 					partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 				else {
 					torneo = g.getTorneo(codicePartita);
-					torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
+					torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 				}
 			}
 		}
@@ -211,7 +211,7 @@ public class FormGiocaPartitaController implements Initializable
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
 			else {
 				torneo = g.getTorneo(codicePartita);
-				torneo.showFinePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
+				torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 			}
 		}
 	}
@@ -294,13 +294,23 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+					String c1;
+					String c2;
+					Carta cPescata1;
+					Carta cPescata2;
 					if(cartePescate == 1) 
 					{
-						lblInfoUtente.setText("Hai pescato la carta "+nomiCarte[nomiCarte.length-1]);
+						cPescata1 = Carta.valueOf(nomiCarte[nomiCarte.length-1]);
+						c1 = cPescata1.getStampa() != null ? cPescata1.getStampa() : cPescata1.name();
+						lblInfoUtente.setText("Hai pescato la carta "+c1);
 					}
 					else if(cartePescate == 2)
 					{
-						lblInfoUtente.setText("Hai pescato le carte "+nomiCarte[nomiCarte.length-2]+" e "+nomiCarte[nomiCarte.length-1]);
+						cPescata1 = Carta.valueOf(nomiCarte[nomiCarte.length-1]);
+						cPescata2 = Carta.valueOf(nomiCarte[nomiCarte.length-2]);
+						c1 = cPescata1.getStampa() != null ? cPescata1.getStampa() : cPescata1.name();
+						c2 = cPescata2.getStampa() != null ? cPescata2.getStampa() : cPescata2.name();
+						lblInfoUtente.setText("Hai pescato le carte "+c1+" e "+c2);
 					}
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
