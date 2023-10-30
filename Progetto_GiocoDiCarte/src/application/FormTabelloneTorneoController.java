@@ -98,7 +98,7 @@ public class FormTabelloneTorneoController implements Initializable
 			if(!(codiceUtente == null))
 			{
 				Label[] labels4 = {lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
-				Label[] labels8 = {lblQuarto1,lblQuarto2,lblQuarto3,lblQuarto4,lblQuarto5,lblQuarto6,lblQuarto7,lblQuarto8,lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
+				
 				t = gare.getTorneo(codiceUtente);
 				if(t.getGiocatoreVincenti().size() == 1) 
 				{
@@ -107,9 +107,15 @@ public class FormTabelloneTorneoController implements Initializable
 				}
 				Salvataggio s = new Salvataggio(t);
 				giocatori = s.leggiTabelloneTorneo();
+				Label[] labels;
+				if(t.getTabelloneGiocatori().size() >= 8) {
+					labels = new Label[]{lblQuarto1,lblQuarto2,lblQuarto3,lblQuarto4,lblQuarto5,lblQuarto6,lblQuarto7,lblQuarto8,lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};
+				}else {
+					labels = new Label[]{lblSemifinale1,lblSemifinale2,lblSemifinale3,lblSemifinale4,lblFinale1,lblFinale2,lblVincitore};	
+				}
 				for(int i = 0; i < giocatori.size(); i++)
 				{
-					labels8[i].setText(giocatori.get(i).getAlias());
+					labels[i].setText(giocatori.get(i).getAlias());
 				}
 			}
 		}
