@@ -91,8 +91,12 @@ public class Salvataggio {
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		ArrayList<Giocatore> giocatori = leggiGiocatori(new File(absolutePath));
-		return giocatori;
+		File f = new File(absolutePath);
+		if(f.exists()) {
+			ArrayList<Giocatore> giocatori = leggiGiocatori(f);
+			return giocatori;
+		}
+		return null;
 	}
 	
 	public void leggiMazzo(File f, String codice, Gara g) throws FileNotFoundException 
@@ -294,7 +298,6 @@ public class Salvataggio {
     
     public void createDirectory(String percorso) throws IOException{
     	String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
-    	System.out.println(path);
     	Files.createDirectory(Paths.get(path));
     }
 }

@@ -74,7 +74,13 @@ public class Torneo extends Gara
 		}
 		return output;
 	}
-	
+	public String stampaVincenti() {
+		String players = "";
+		for(Giocatore g : this.giocatoriVincenti) {
+			players +=g.getAlias()+"\n";
+		}
+		return players;
+	}
 	public void showFinePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
 	{	
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
@@ -110,6 +116,7 @@ public class Torneo extends Gara
 			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO IL TORNEO");
+			//*********************INSERIRE CANCELLAZIONE CARTELLA
 		}
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);

@@ -327,13 +327,12 @@ public class Partita extends Gara{
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		//s.deleteDirectory("partite");
 	}
-	//in forse
-	/*
+	
 	public String toString() {
-		String output = "Codice: "+codice.getCodice()+"\nGiocatori:\n";
-		for(int i = 0; i < giocatori.length; i++) {
-			output+= (i+1)+") "+giocatori[i].getAlias()+"\n";
+		String info = "";
+		for(Giocatore p: this.getGiocatori()) {
+			info += "Giocatore "+p.getAlias()+"\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
 		}
-		return output;
-	}*/
+		return info;
+	}
 }

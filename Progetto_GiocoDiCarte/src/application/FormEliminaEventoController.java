@@ -13,7 +13,9 @@ import classi.Alert_cambiaForm;
 import classi.Gare;
 import classi.Gara;
 import classi.Giocatore;
+import classi.Partita;
 import classi.Salvataggio;
+import classi.Torneo;
 import javafx.scene.control.Button;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -66,11 +68,17 @@ public class FormEliminaEventoController implements Initializable{
 		if(codice.charAt(0) == 'p') {
 			info = "Codice partita: "+codice+"\n"
 					+ "Numero giocatori: "+gara.getGiocatori().length+"\n\n";
-			for(Giocatore p: gara.getGiocatori()) {
-				info += "Giocatore "+p.getAlias()+"\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
-			}
+			Partita p = (Partita) gara;
+			info += p.toString();
 		}else {
-			
+			codice = codice.substring(0, codice.length()-1);
+			gara = g.getTorneo(codice);
+			info = "Codice torneo: "+codice+"\n";
+			Torneo t = (Torneo) gara;
+			Partita p = t.getPartitaTorneo();
+			info += "\nPROSSIMA PARTITA DA INIZIARE/TERMINARE: "+p.getGiocatori()[0].getAlias()+" VS "+p.getGiocatori()[1].getAlias()+"\n";
+			info += p.toString();
+			info +="GIOCATORI RIMASTI ANCORA IN LOTTA PER LA VITTORIA FINALE\n"+t.stampaVincenti();
 		}
 		txtInfo.setText(info);
 		btnElimina.setVisible(true);
