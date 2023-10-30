@@ -36,19 +36,28 @@ public class FormEliminaEventoController implements Initializable{
 	@FXML
 	private Button btnElimina;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	// Event Listener on Button[#btnElimina].onAction
 	@FXML
 	public void elimina(ActionEvent event) throws IOException{
 		//accedo alla gara con il codice selezionato sulla listview
 		Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
-		Salvataggio s = new Salvataggio(gara);
+		Salvataggio s;
+		String codice = "";
+		//ottengo il codice della gara (partita o torneo)
+		if(gara.getCodiceGara().charAt(0) == 't') {
+			codice = gara.getCodiceGara().substring(0, gara.getCodiceGara().length()-1);
+		}else {
+			codice = gara.getCodiceGara();
+		}
 		//chiedo conferma di cancellazione
-		if(alert.chiediConferma("Sei sicuro di voler eliminare l'evento avente codice '"+gara.getCodiceGara()+"' ?", "CONFERMA DI ELIMINAZIONE")) {
-			if(gara.getCodiceGara().charAt(0) == 'p')
-				s.deleteDirectory("partite");
-			else
-				s.deleteDirectory("tornei");
-			alert.mostraInformazione("Eliminazione dell'evento '"+gara.getCodiceGara()+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
+		if(alert.chiediConferma("Sei sicuro di voler eliminare l'evento avente codice '"+codice+"' ?", "CONFERMA DI ELIMINAZIONE")) {
+			if(gara.getCodiceGara().charAt(0) == 'p') {
+				s = new Salvataggio(gara);
+				s.deleteDirectory("partite/"+codice);
+			}else {
+				s = new Salvataggio(g.getTorneo(codice));
+				s.deleteDirectory("tornei/"+codice);
+			}
+			alert.mostraInformazione("Eliminazione dell'evento '"+codice+"' avvenuta con successo.", "ELIMINAZIONE ESEGUITA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
 	}
@@ -61,27 +70,29 @@ public class FormEliminaEventoController implements Initializable{
 	@FXML
 	public void cliccaGara(MouseEvent event) throws FileNotFoundException{
 		//accedo alla gara con il codice selezionato sulla listview
-		Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
-		String codice = gara.getCodiceGara();
-		String info = "";
-		//salvo le info della partita selezionata
-		if(codice.charAt(0) == 'p') {
-			info = "Codice partita: "+codice+"\n"
-					+ "Numero giocatori: "+gara.getGiocatori().length+"\n\n";
-			Partita p = (Partita) gara;
-			info += p.toString();
-		}else {
-			codice = codice.substring(0, codice.length()-1);
-			gara = g.getTorneo(codice);
-			info = "Codice torneo: "+codice+"\n";
-			Torneo t = (Torneo) gara;
-			Partita p = t.getPartitaTorneo();
-			info += "\nPROSSIMA PARTITA DA INIZIARE/TERMINARE: "+p.getGiocatori()[0].getAlias()+" VS "+p.getGiocatori()[1].getAlias()+"\n";
-			info += p.toString();
-			info +="GIOCATORI RIMASTI ANCORA IN LOTTA PER LA VITTORIA FINALE\n"+t.stampaVincenti();
+		if(lblPartite.getSelectionModel().getSelectedItem() != null) {
+			Gara gara = g.getGara(lblPartite.getSelectionModel().getSelectedItem());
+			String codice = gara.getCodiceGara();
+			String info = "";
+			//salvo le info della partita selezionata
+			if(codice.charAt(0) == 'p') {
+				info = "Codice partita: "+codice+"\n"
+						+ "Numero giocatori: "+gara.getGiocatori().length+"\n\n";
+				Partita p = (Partita) gara;
+				info += p.toString();
+			}else {
+				codice = codice.substring(0, codice.length()-1);
+				gara = g.getTorneo(codice);
+				info = "Codice torneo: "+codice+"\n";
+				Torneo t = (Torneo) gara;
+				Partita p = t.getPartitaTorneo();
+				info += "\nPROSSIMA PARTITA DA INIZIARE/TERMINARE: "+p.getGiocatori()[0].getAlias()+" VS "+p.getGiocatori()[1].getAlias()+"\n";
+				info += p.toString();
+				info +="GIOCATORI RIMASTI ANCORA IN LOTTA PER LA VITTORIA FINALE\n"+t.stampaVincenti();
+			}
+			txtInfo.setText(info);
+			btnElimina.setVisible(true);
 		}
-		txtInfo.setText(info);
-		btnElimina.setVisible(true);
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

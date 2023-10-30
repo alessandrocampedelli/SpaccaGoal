@@ -292,11 +292,11 @@ public class Salvataggio {
 	//metodo che elimina la cartella della partita terminata
     public void deleteDirectory(String percorso)
     {
-		String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
+		String path = "src/"+percorso;
 		File file = new File(path);
         for (File subfile : file.listFiles()) {
             if (subfile.isDirectory()) {
-                deleteDirectory(percorso);
+                deleteDirectory(percorso+"/"+subfile.getName());
             }
             subfile.delete();
         }
