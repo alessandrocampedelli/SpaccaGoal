@@ -136,14 +136,8 @@ public class FormCreaTorneoController{
 			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
 			for(Partita p : t.getPartite()) 
 			{
-				salvaGara = new Salvataggio(p);
-				String percorso = "tornei/"+t.getCodiceGara();
-				p.distribuzioneCarte();
-				salvaGara.salvaNomiGiocatori(percorso);
-				salvaGara.salvaMazzo(percorso);
-				salvaGara.salvaMani(percorso);
-				salvaGara.salvaPunteggio(percorso);
-				p.salvaTurno(percorso);
+				Salvataggio salvaGara = new Salvataggio(p);
+				salvaGara.salvaPartita(p, "tornei/"+t.getCodiceGara());
 			}
 
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");

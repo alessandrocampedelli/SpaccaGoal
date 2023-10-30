@@ -141,7 +141,14 @@ public class Salvataggio {
 		}
 		scan.close();
 	}
-	
+	public void salvaPartita(Partita p,String percorso) throws IOException{
+		p.distribuzioneCarte();
+		this.salvaNomiGiocatori(percorso);
+		this.salvaMazzo(percorso);
+		this.salvaMani(percorso);
+		this.salvaPunteggio(percorso);
+		p.salvaTurno(percorso);
+	}
 	public void salvaNomiGiocatori(String partitaTorneo) throws IOException
 	{
 		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara();

@@ -61,7 +61,6 @@ public class FormCreaPartitaController{
 	private Button btnCreaPartita = new Button();
 	
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
-	private Salvataggio salvaGara;
 	static Partita p;
 	Leaderboard leaderboard = new Leaderboard();
 	Gare gare = new Gare();
@@ -148,14 +147,10 @@ public class FormCreaPartitaController{
 			String codice = getRandomString(6,'a', 'z');
 			codice = "p"+codice;
 			p = new Partita(giocatori,codice);
-			p.distribuzioneCarte();
 			gare.aggiungiGara(p);
-			salvaGara = new Salvataggio(p);
-			salvaGara.salvaNomiGiocatori("partite");
-			salvaGara.salvaMazzo("partite");
-			salvaGara.salvaMani("partite");
-			salvaGara.salvaPunteggio("partite");
-			p.salvaTurno("partite");
+			
+			Salvataggio salvaGara = new Salvataggio(p);
+			salvaGara.salvaPartita(p, "partite");
 			
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
