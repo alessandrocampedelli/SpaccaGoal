@@ -24,11 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FormIniziaPartitaController implements Initializable
 {
@@ -49,6 +46,7 @@ public class FormIniziaPartitaController implements Initializable
 	private Label lblPercentualeProgressBar;
 
 	private ArrayList<String> giocatori;
+	
 	static String codiceUtente;
 
 	public void copiaInfo(String codice) 
@@ -72,15 +70,19 @@ public class FormIniziaPartitaController implements Initializable
 	{	
 		if(!(codiceUtente == null)) 
 		{
-			try {
+			try 
+			{
 				Gara p = (Partita) gare.getGara(codiceUtente);
-				
-				if(codiceUtente.charAt(0) == 't') {
+				if(codiceUtente.charAt(0) == 't') 
+				{
 					giocatori = new ArrayList<>();
 					giocatori.add(p.getGiocatori()[0].getAlias());
 					giocatori.add(p.getGiocatori()[1].getAlias());
-				}else
+				}
+				else
+				{
 					giocatori = gare.restituisciGiocatori(codiceUtente);
+				}
 
 				if(giocatori.size() >= 2)
 				{
@@ -95,23 +97,18 @@ public class FormIniziaPartitaController implements Initializable
 				{
 					lblNomeGiocatore4.setText(giocatori.get(3));
 				}
-				//Intervallo di 1 secondo
-				Duration interval = Duration.seconds(1); 
-				Timeline timeline = new Timeline(new KeyFrame(interval, new EventHandler<ActionEvent>() 
-				{
-				    @Override
-				    public void handle(ActionEvent event) 
-				    {
-				        // L'azione da eseguire ad intervalli regolari
-				        // Puoi inserire il tuo codice qui
-				    }
-				}));
-				// Imposta il ciclo come indefinito per eseguire l'azione ripetutamente
-				timeline.setCycleCount(Timeline.INDEFINITE);
-				//Avvia la timeline
-				timeline.play(); 
-				
-			}catch(FileNotFoundException e) {
+				Timer timer = new Timer();
+				MyTimerTask task = new MyTimerTask();
+
+				// Per eseguire il task periodicamente ad intervalli di tempo fissi (ad esempio, ogni 2 secondi):
+				timer.schedule(task, 0, 2000); // Esegui il task dopo 0 millisecondi iniziali e poi ogni 2000 millisecondi (2 secondi).
+
+				// Per eseguire il task una sola volta dopo un ritardo specifico (ad esempio, dopo 5 secondi):
+				timer.schedule(task, 5000); // Esegui il task dopo 5000 millisecondi (5 secondi)
+				timer.cancel();
+			}
+			catch(Exception e) 
+			{
 				System.out.println(e.getMessage());
 			}
 		}
@@ -125,5 +122,13 @@ public class FormIniziaPartitaController implements Initializable
 			output += (i+1) +") "+giocatori.get(i)+"\n";
 		}
 		return output;
+	}
+	
+	public class MyTimerTask extends TimerTask 
+	{
+	    @Override
+	    public void run() {
+	        // Inserisci qui il codice da eseguire periodicamente
+	    }
 	}
 }
