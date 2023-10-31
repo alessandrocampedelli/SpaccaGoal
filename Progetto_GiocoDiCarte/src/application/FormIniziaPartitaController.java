@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.InterruptedException;
@@ -23,7 +22,13 @@ import classi.Partita;
 import classi.Torneo;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 
 public class FormIniziaPartitaController implements Initializable
 {
@@ -39,9 +44,11 @@ public class FormIniziaPartitaController implements Initializable
 	@FXML
 	private Label lblNomeGiocatore4;
 	@FXML
+	private ProgressBar progressBar;
+	@FXML
+	private Label lblPercentualeProgressBar;
 
 	private ArrayList<String> giocatori;
-
 	static String codiceUtente;
 
 	public void copiaInfo(String codice) 
@@ -88,6 +95,22 @@ public class FormIniziaPartitaController implements Initializable
 				{
 					lblNomeGiocatore4.setText(giocatori.get(3));
 				}
+				//Intervallo di 1 secondo
+				Duration interval = Duration.seconds(1); 
+				Timeline timeline = new Timeline(new KeyFrame(interval, new EventHandler<ActionEvent>() 
+				{
+				    @Override
+				    public void handle(ActionEvent event) 
+				    {
+				        // L'azione da eseguire ad intervalli regolari
+				        // Puoi inserire il tuo codice qui
+				    }
+				}));
+				// Imposta il ciclo come indefinito per eseguire l'azione ripetutamente
+				timeline.setCycleCount(Timeline.INDEFINITE);
+				//Avvia la timeline
+				timeline.play(); 
+				
 			}catch(FileNotFoundException e) {
 				System.out.println(e.getMessage());
 			}
