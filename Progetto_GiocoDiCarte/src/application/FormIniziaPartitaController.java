@@ -1,9 +1,9 @@
 package application;
-
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.InterruptedException;
@@ -24,14 +24,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class FormIniziaPartitaController implements Initializable
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
-
 	@FXML
 	private Label lblNomeGiocatore1;
 	@FXML
@@ -46,7 +48,7 @@ public class FormIniziaPartitaController implements Initializable
 	private Label lblPercentualeProgressBar;
 
 	private ArrayList<String> giocatori;
-	
+
 	static String codiceUtente;
 
 	public void copiaInfo(String codice) 
@@ -65,14 +67,16 @@ public class FormIniziaPartitaController implements Initializable
 		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-	
+
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
 		if(!(codiceUtente == null)) 
 		{
+			progressBar.setStyle("-fx-accent: green;");
 			try 
 			{
 				Gara p = (Partita) gare.getGara(codiceUtente);
+
 				if(codiceUtente.charAt(0) == 't') 
 				{
 					giocatori = new ArrayList<>();
@@ -80,9 +84,7 @@ public class FormIniziaPartitaController implements Initializable
 					giocatori.add(p.getGiocatori()[1].getAlias());
 				}
 				else
-				{
 					giocatori = gare.restituisciGiocatori(codiceUtente);
-				}
 
 				if(giocatori.size() >= 2)
 				{
@@ -97,17 +99,30 @@ public class FormIniziaPartitaController implements Initializable
 				{
 					lblNomeGiocatore4.setText(giocatori.get(3));
 				}
-				Timer timer = new Timer();
-				MyTimerTask task = new MyTimerTask();
 
-				// Per eseguire il task periodicamente ad intervalli di tempo fissi (ad esempio, ogni 2 secondi):
-				timer.schedule(task, 0, 2000); // Esegui il task dopo 0 millisecondi iniziali e poi ogni 2000 millisecondi (2 secondi).
+				Thread taskThread = new Thread(() -> 
+				{
+				    for (double i = 0; i <= 1; i = i + 0.1) 
+				    {
+				        try 
+				        {
+				        	//simula un'attività di 0.5 secondi
+				            Thread.sleep(500); 
+					        progressBar.setProgress(i);
+				        } 
+				        catch (InterruptedException e) 
+				        {
+				            e.printStackTrace();
+				        }
 
-				// Per eseguire il task una sola volta dopo un ritardo specifico (ad esempio, dopo 5 secondi):
-				timer.schedule(task, 5000); // Esegui il task dopo 5000 millisecondi (5 secondi)
-				timer.cancel();
+				    }
+				});
+				//avvia il thread
+				taskThread.start(); 
+				//btnAvviaPartita.fire();
+				
 			}
-			catch(Exception e) 
+			catch(FileNotFoundException e) 
 			{
 				System.out.println(e.getMessage());
 			}
@@ -122,13 +137,5 @@ public class FormIniziaPartitaController implements Initializable
 			output += (i+1) +") "+giocatori.get(i)+"\n";
 		}
 		return output;
-	}
-	
-	public class MyTimerTask extends TimerTask 
-	{
-	    @Override
-	    public void run() {
-	        // Inserisci qui il codice da eseguire periodicamente
-	    }
 	}
 }
