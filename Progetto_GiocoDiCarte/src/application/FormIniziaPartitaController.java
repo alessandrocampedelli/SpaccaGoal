@@ -1,6 +1,7 @@
 package application;
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
@@ -11,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.text.DecimalFormat;
 import classi.Alert_cambiaForm;
 import classi.Carta;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import classi.Gare;
 import classi.Gara;
 import classi.Partita;
 import classi.Torneo;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ProgressBar;
@@ -27,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -45,8 +49,9 @@ public class FormIniziaPartitaController implements Initializable
 	@FXML
 	private ProgressBar progressBar;
 	@FXML
-	private Label lblPercentualeProgressBar;
-
+	private Label lblPercentualeProgressBar = new Label();
+	@FXML
+	private Button btnAvviaPartita = new Button();
 	private ArrayList<String> giocatori;
 
 	static String codiceUtente;
@@ -64,7 +69,7 @@ public class FormIniziaPartitaController implements Initializable
 		loader.load();
 		FormGiocaPartitaController form = loader.getController();
 		form.copiaCodice(codiceUtente);
-		alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
+		//alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
 
@@ -102,25 +107,38 @@ public class FormIniziaPartitaController implements Initializable
 
 				Thread taskThread = new Thread(() -> 
 				{
-				    for (double i = 0; i <= 1; i = i + 0.1) 
+					double[] i = new double[] {0.0};
+				    for (i[0] = 0; i[0] <= 1; i[0] = i[0] + 0.1) 
 				    {
 				        try 
 				        {
-				        	//simula un'attività di 0.5 secondi
-				            Thread.sleep(500); 
-					        progressBar.setProgress(i);
+				        	//simula un'attività di 0.2 secondi
+				            Thread.sleep(200); 
+					        Platform.runLater(new Runnable() {
+						        @Override
+						        public void run() {
+						        	DecimalFormat df = new DecimalFormat("#.##");
+						        	double k = Double.parseDouble(df.format(i[0]*100));
+							        lblPercentualeProgressBar.setText(k+"%");
+						        }
+						    });
+					        progressBar.setProgress(i[0]);
+					        Thread.sleep(300);
 				        } 
 				        catch (InterruptedException e) 
 				        {
 				            e.printStackTrace();
 				        }
-
 				    }
+				    Platform.runLater(new Runnable() {
+				        @Override
+				        public void run() {
+							btnAvviaPartita.fire();
+				        }
+				    });
 				});
 				//avvia il thread
-				taskThread.start(); 
-				//btnAvviaPartita.fire();
-				
+				taskThread.start();
 			}
 			catch(FileNotFoundException e) 
 			{
