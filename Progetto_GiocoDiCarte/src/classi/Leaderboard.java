@@ -53,7 +53,7 @@ public class Leaderboard
 		PrintWriter fw = new PrintWriter(path);
 		for(Giocatore g: players) {
 			String riga = g.getAlias()+","+g.getNPartiteVinte()+","+g.getNTorneiVinti();
-			if(g.getRobot())
+			if(g.isRobot())
 				riga += ",r";
 			else
 				riga += ",p";

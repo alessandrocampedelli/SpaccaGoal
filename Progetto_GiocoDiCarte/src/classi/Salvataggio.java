@@ -161,7 +161,7 @@ public class Salvataggio {
 		for(Giocatore player : eventoDaSalvare.giocatori) 
 		{
 			//controllo se il giocatore da salvare è un robot oppure no
-			if(player.getRobot())
+			if(player.isRobot())
 				fw.println(player.getAlias()+"*");
 			else
 				fw.println(player.getAlias());
@@ -182,7 +182,7 @@ public class Salvataggio {
 		for(Giocatore player : players) 
 		{
 			//controllo se il giocatore da salvare è un robot oppure no
-			if(player.getRobot())
+			if(player.isRobot())
 				fw.println(player.getAlias()+"*");
 			else
 				fw.println(player.getAlias());

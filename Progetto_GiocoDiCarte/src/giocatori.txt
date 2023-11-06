@@ -6,3 +6,11 @@ e,0,0,p
 f,0,0,p
 g,1,1,p
 h,0,2,p
+bb,0,0,r
+cc,1,0,p
+ee,2,0,r
+qq,0,0,p
+aaa,1,0,r
+bbb,1,0,r
+ccc,0,0,r
+ddd,0,0,r

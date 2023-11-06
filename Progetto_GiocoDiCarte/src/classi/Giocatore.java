@@ -40,7 +40,7 @@ public class Giocatore
 		return nTorneiVinti;
 	}
 	
-	public boolean getRobot()
+	public boolean isRobot()
 	{
 		return robot;
 	}
