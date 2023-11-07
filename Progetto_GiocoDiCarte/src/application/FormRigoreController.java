@@ -1,12 +1,17 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +21,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import classi.Alert_cambiaForm;
+import classi.Robot;
 import classi.Carta;
 import classi.Gara;
 import classi.Gare;
@@ -49,6 +55,12 @@ public class FormRigoreController implements Initializable
 	private ImageView imgPallone;
 	@FXML
 	private Label lblRigore;
+	@FXML
+	private Button btnSinistra = new Button();
+	@FXML
+	private Button btnDestra = new Button();
+	@FXML
+	private Button btnCentro = new Button();
 	static String codicePartita;
 	
 	public void copiaCodice(String codice) 
@@ -79,8 +91,16 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
-		if(!partita.finePartita(posizioneGiocatoreAttaccante))
-			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+			Scene scene = btnSinistra.getScene();
+			if (scene != null) {
+			    Window window = scene.getWindow();
+			    if (window != null) {
+					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+			    }
+			}
+		}
 	}
 
 	@FXML
@@ -101,8 +121,15 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
-		if(!partita.finePartita(posizioneGiocatoreAttaccante))
-			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+			Scene scene = btnCentro.getScene();
+			if (scene != null) {
+			    Window window = scene.getWindow();
+			    if (window != null) {
+					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+			    }
+			}
+		}
 	}
 
 	@FXML
@@ -123,8 +150,15 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
-		if(!partita.finePartita(posizioneGiocatoreAttaccante))
-			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+			Scene scene = btnDestra.getScene();
+			if (scene != null) {
+			    Window window = scene.getWindow();
+			    if (window != null) {
+					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+			    }
+			}
+		}
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1)
@@ -155,6 +189,41 @@ public class FormRigoreController implements Initializable
 					imgPallone.setVisible(false);
 					imgPortiere.setVisible(true);
 					lblRigore.setText(players[posizioneGiocatoreDifensore].getAlias() +" dove ti vuoi buttare per parare il rigore?");
+				}
+				//eseguo il codice solo se siamo in un turno di attacco e l'attaccante è un robot o il caso opposto
+				if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot())){
+					Robot robot;
+					if(turno.equals("a")) {
+						robot = new Robot(players[posizioneGiocatoreAttaccante]);
+					}else {
+						robot = new Robot(players[posizioneGiocatoreDifensore]);
+					}
+					int direzione = robot.scegliDirezione();
+	        		if(direzione == 0) {
+	        			btnSinistra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
+	        		}else if(direzione == 1) {
+	        			btnCentro.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
+	        		}else {
+	        			btnDestra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
+	        		}
+					Platform.runLater(new Runnable() {
+				        @Override
+				        public void run() {
+				        	try {
+								Thread.sleep(3000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if(direzione == 0) {
+			        			btnSinistra.fire();
+			        		}else if(direzione == 1) {
+			        			btnCentro.fire();
+			        		}else {
+			        			btnDestra.fire();
+			        		}
+				        }
+				    });
 				}
 			}
 			catch(IOException e)

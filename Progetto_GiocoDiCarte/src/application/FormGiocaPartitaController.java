@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -407,7 +408,8 @@ public class FormGiocaPartitaController implements Initializable
 			listCarte.setCellFactory(param -> 
 			{
 				return new ListCell<String>() 
-				{
+				{	
+
 					private ImageView imageView = new ImageView();
 					@Override
 					public void updateItem(String name, boolean empty) 
@@ -439,11 +441,13 @@ public class FormGiocaPartitaController implements Initializable
 							}
 							setGraphic(imageView);
 							if(turno.equals("a")) {
-								if(players[posizioneGiocatoreAttaccante].isRobot() && name == cartaGiocata.name())
+								if((players[posizioneGiocatoreAttaccante].isRobot() && name == cartaGiocata.name())) {
 									setStyle("-fx-control-inner-background: blue;");
+								}
 							}else {
-								if(players[posizioneGiocatoreDifensore].isRobot() && name == cartaGiocata.name())
+								if((players[posizioneGiocatoreDifensore].isRobot() && name == cartaGiocata.name())) {
 									setStyle("-fx-control-inner-background: blue;");
+								}
 							}
 						}
 					}
@@ -457,7 +461,6 @@ public class FormGiocaPartitaController implements Initializable
 			        	try {
 							Thread.sleep(3000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						btnGiocaCarta.fire();
@@ -474,9 +477,11 @@ public class FormGiocaPartitaController implements Initializable
 		//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
 		if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 		{
-			//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
-			btnPassaTurno.setVisible(true);
-			btnGiocaCarta.setVisible(true);
+			if(!players[posizioneGiocatoreDifensore].isRobot()) {
+				//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
+				btnPassaTurno.setVisible(true);
+				btnGiocaCarta.setVisible(true);
+			}
 		}
 		else 
 		{
@@ -490,11 +495,13 @@ public class FormGiocaPartitaController implements Initializable
 			}else {
 				lblInfoUtente.setText("Non hai carte di difesa con le quali difenderti. Sei costretto a passare il turno e subire gol");
 			}
-			//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
-			btnPassaTurno.setVisible(true);
-			btnPassaTurno.setLayoutX(374);
-			btnPassaTurno.setLayoutY(554);
-			listCarte.setDisable(true);
+			if(!players[posizioneGiocatoreDifensore].isRobot()) {
+				//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
+				btnPassaTurno.setVisible(true);
+				btnPassaTurno.setLayoutX(374);
+				btnPassaTurno.setLayoutY(554);
+				listCarte.setDisable(true);
+			}
 		}
 	}
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormRigoreController">
+<AnchorPane prefHeight="600.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormRigoreController">
    <children>
       <ImageView cache="true" fitHeight="600.0" fitWidth="877.0">
          <image>
@@ -25,9 +25,9 @@
             <Image url="@../../pallone.png" />
          </image>
       </ImageView>
-      <Button layoutX="185.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnSinistra" text="SINISTRA" />
-      <Button layoutX="416.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnCentro" text="CENTRO" />
-      <Button layoutX="650.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnDestra" text="DESTRA" />
+      <Button fx:id="btnSinistra" layoutX="185.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnSinistra" text="SINISTRA" />
+      <Button fx:id="btnCentro" layoutX="416.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnCentro" text="CENTRO" />
+      <Button fx:id="btnDestra" layoutX="650.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnDestra" text="DESTRA" />
       <Label fx:id="lblRigore" alignment="CENTER" layoutX="147.0" layoutY="89.0" prefHeight="35.0" prefWidth="599.0" text="Label" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
