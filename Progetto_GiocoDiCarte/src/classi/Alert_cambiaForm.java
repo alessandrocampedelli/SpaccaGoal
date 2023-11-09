@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.ColumnConstraints;
@@ -31,23 +33,45 @@ public class Alert_cambiaForm
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+	public Stage getStage() {
+		return stage;
+	}
+	public void setStage(ActionEvent event) {
+		this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	}
+	public void setStage(MouseEvent event) {
+		this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	}
+	public Scene getScene() {
+		return scene;
+	}
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+	public Parent getRoot() {
+		return root;
+	}
+	public void setRoot(String form) throws IOException {
+		this.root = FXMLLoader.load(getClass().getResource(form));;
+	}
+	public void chiudiProgramma(String form) {
+	}
 	public void passaAlForm(String form, ActionEvent event)  throws IOException
 	{
-		root = FXMLLoader.load(getClass().getResource(form));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
+		setRoot(form);
+	    setStage(event);
+	    this.scene = new Scene(getRoot());
+	    this.stage.setScene(this.scene);
+	    this.stage.show();
 	}
 	
 	public void passaAlForm(String form, MouseEvent event)  throws IOException
 	{
-		root = FXMLLoader.load(getClass().getResource(form));
-	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	    scene = new Scene(root);
-	    stage.setScene(scene);
-	    stage.show();
+		setRoot(form);
+	    setStage(event);
+	    this.scene = new Scene(getRoot());
+	    this.stage.setScene(this.scene);
+	    this.stage.show();
 	}
 	
 	public void mostraErrore(String setContent, String setHeader) 
@@ -90,44 +114,6 @@ public class Alert_cambiaForm
 		alert.getDialogPane().setContentText(setContent);
 		alert.showAndWait();
 	}
-	
-	/*
-	public void mostraCartaPescata() 
-	{
-		Alert alert = new Alert(AlertType.WARNING);
-	    alert.initModality(Modality.APPLICATION_MODAL);
-	    alert.initOwner(stage);
-	    alert.getDialogPane().setContentText("CARTA PESCATA");
-	    DialogPane dialogPane = alert.getDialogPane();
-	    GridPane grid = new GridPane();
-	    ColumnConstraints graphicColumn = new ColumnConstraints();
-	    graphicColumn.setFillWidth(false);
-	    graphicColumn.setHgrow(Priority.NEVER);
-	    ColumnConstraints textColumn = new ColumnConstraints();
-	    textColumn.setFillWidth(true);
-	    textColumn.setHgrow(Priority.ALWAYS);
-	    grid.getColumnConstraints().setAll(graphicColumn, textColumn);
-	    grid.setPadding(new Insets(5));
-	    Image image1 = new Image(Carta.getUrl("attacco_attaccante.jpg"));
-	    ImageView imageView = new ImageView(image1);
-	    imageView.setFitWidth(100);
-	    imageView.setFitHeight(100);
-	    StackPane stackPane = new StackPane(imageView);
-	    stackPane.setAlignment(Pos.CENTER);
-	    grid.add(stackPane, 0, 0);
-	    Label headerLabel = new Label("Warning");
-	    headerLabel.setWrapText(true);
-	    headerLabel.setAlignment(Pos.CENTER_RIGHT);
-	    headerLabel.setMaxWidth(Double.MAX_VALUE);
-	    headerLabel.setMaxHeight(Double.MAX_VALUE);
-	    grid.add(headerLabel, 1, 0);
-	    dialogPane.setHeader(grid);
-	    dialogPane.setGraphic(null);
-	    alert.showAndWait()
-	        .filter(response -> response == ButtonType.OK)
-	        .ifPresent(response -> System.out.println("The alert was approved"));
-	}*/
-	
 	public boolean chiediConferma(String setContent, String setHeader) 
 	{
 		AlertType message = AlertType.CONFIRMATION;

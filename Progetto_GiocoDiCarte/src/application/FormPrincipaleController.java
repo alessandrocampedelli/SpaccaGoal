@@ -4,18 +4,23 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
+
+import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.Node;
 import classi.Alert_cambiaForm;
 import classi.Gara;
 import classi.Gare;
-public class FormPrincipaleController 
+public class FormPrincipaleController
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event) throws IOException
 	{
@@ -33,5 +38,14 @@ public class FormPrincipaleController
 	public void btnModalitaGiocatore(ActionEvent event) throws IOException 
 	{
 		alert.passaAlForm("/application/FormModalitaGiocatore.fxml",event);
+	}
+	@FXML
+	Button button = new Button();
+	@FXML
+	public void closeButton(ActionEvent event) throws IOException
+	{
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		if(alert.chiediConferma("MESSAGGIO DI CONFERMA", "Sei sicuro di voler chiudere il gioco?"))
+			stage.close();
 	}
 }
