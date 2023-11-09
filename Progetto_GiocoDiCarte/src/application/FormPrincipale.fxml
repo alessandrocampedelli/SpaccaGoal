@@ -7,40 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/20"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormPrincipaleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPrincipaleController">
 	<children>
-		<Label layoutX="22.0" layoutY="52.0"
-			text="BENVENUTI A CINQUE, IL GIOCO DI CARTE CALCISTICO ENTUSIASMANTE"
-			textAlignment="CENTER" textFill="#ff1e00">
+		<Label layoutX="22.0" layoutY="52.0" text="BENVENUTI A CINQUE, IL GIOCO DI CARTE CALCISTICO ENTUSIASMANTE" textAlignment="CENTER" textFill="#ff1e00">
 			<font>
 				<Font name="System Bold" size="16.0" />
 			</font>
 		</Label>
-		<Button defaultButton="true" layoutX="216.0" layoutY="317.0"
-			mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard"
-			prefHeight="63.0" prefWidth="188.0" text="VISUALIZZA LEADERBOARD" />
-		<Button defaultButton="true" layoutX="217.0" layoutY="128.0"
-			mnemonicParsing="false" onAction="#btnModalitaAmministratore"
-			prefHeight="63.0" prefWidth="188.0" text="MODALITA' AMMINISTRATORE" />
-		<Button defaultButton="true" layoutX="216.0" layoutY="223.0"
-			mnemonicParsing="false" onAction="#btnModalitaGiocatore"
-			prefHeight="63.0" prefWidth="188.0" text="MODALITA' GIOCATORE" />
-		<ImageView fitHeight="283.0" fitWidth="154.0" layoutX="32.0"
-			layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+		<Button defaultButton="true" layoutX="216.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="188.0" text="VISUALIZZA LEADERBOARD" />
+		<Button defaultButton="true" layoutX="216.0" layoutY="98.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' AMMINISTRATORE" />
+		<Button defaultButton="true" layoutX="216.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' GIOCATORE" />
+		<ImageView fitHeight="283.0" fitWidth="154.0" layoutX="32.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="283.0" fitWidth="154.0"
-			layoutX="422.0" layoutY="153.0" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fitHeight="283.0" fitWidth="154.0" layoutX="422.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
 			</image>
 		</ImageView>
+      <Button fx:id="button" defaultButton="true" layoutX="216.0" layoutY="347.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="63.0" prefWidth="188.0" text="CHIUDI PROGRAMMA" />
 	</children>
 </AnchorPane>
