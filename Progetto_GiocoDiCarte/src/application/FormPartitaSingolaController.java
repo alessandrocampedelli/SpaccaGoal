@@ -23,7 +23,6 @@ public class FormPartitaSingolaController
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 	
-	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaPartitaSingola(ActionEvent event) throws IOException
 	{
@@ -63,7 +62,7 @@ public class FormPartitaSingolaController
 		}
 	}
 
-	// Event Listener on Button.onAction
+
 	@FXML
 	public void btnTornaFormModalitaGiocatore(MouseEvent event) throws IOException
 	{

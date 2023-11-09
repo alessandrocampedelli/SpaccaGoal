@@ -45,34 +45,42 @@ public class Giocatore
 		return robot;
 	}
 	
-	public int getPunteggio() {
+	public int getPunteggio() 
+	{
 		return this.punteggio;
 	}
 	
-	public ArrayList<Carta> getMano(){
+	public ArrayList<Carta> getMano()
+	{
 		return mano;
 	}
 	
-	public void setMano(ArrayList<Carta> mano) {
+	public void setMano(ArrayList<Carta> mano) 
+	{
 		this.mano = mano;
 	}
 	
-	public void setPunteggio(int p) {
+	public void setPunteggio(int p) 
+	{
 		this.punteggio = p;
 	}
 	
-	public void setVittoriePartite(int v) {
+	public void setVittoriePartite(int v) 
+	{
 		this.nPartiteVinte = v;
 	}
 
-	public void setVittorieTornei(int v) {
+	public void setVittorieTornei(int v) 
+	{
 		this.nTorneiVinti = v;
 	}
 	
 	//metodo che restituisce un vettore di stringhe contenenti i nomi delle carte della mano
-	public String[] getManoNomi(){
+	public String[] getManoNomi()
+	{
 		String[] nomiCarte = new String[mano.size()];
-		for(int i = 0; i < nomiCarte.length; i++) {
+		for(int i = 0; i < nomiCarte.length; i++) 
+		{
 			nomiCarte[i] = mano.get(i).name();
 		}
 		return nomiCarte;
@@ -88,11 +96,13 @@ public class Giocatore
 		this.nTorneiVinti = this.nTorneiVinti + 1;
 	}
 	
-	public void aggiungiGoal() {
+	public void aggiungiGoal() 
+	{
 		this.punteggio+=1;
 	}
 	
-	public void rimuoviGoal() {
+	public void rimuoviGoal() 
+	{
 		this.punteggio-=1;
 	}
 

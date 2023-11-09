@@ -89,7 +89,9 @@ public class FormIniziaPartitaController implements Initializable
 					giocatori.add(p.getGiocatori()[1].getAlias());
 				}
 				else
+				{
 					giocatori = gare.restituisciGiocatori(codiceUtente);
+				}
 
 				if(giocatori.size() >= 2)
 				{
@@ -114,9 +116,11 @@ public class FormIniziaPartitaController implements Initializable
 				        {
 				        	//simula un'attività di 0.2 secondi
 				            Thread.sleep(200); 
-					        Platform.runLater(new Runnable() {
+					        Platform.runLater(new Runnable() 
+					        {
 						        @Override
-						        public void run() {
+						        public void run() 
+						        {
 						        	DecimalFormat df = new DecimalFormat("#.##");
 						        	double k = Double.parseDouble(df.format(i[0]*100));
 							        lblPercentualeProgressBar.setText(k+"%");
@@ -130,9 +134,11 @@ public class FormIniziaPartitaController implements Initializable
 				            e.printStackTrace();
 				        }
 				    }
-				    Platform.runLater(new Runnable() {
+				    Platform.runLater(new Runnable() 
+				    {
 				        @Override
-				        public void run() {
+				        public void run() 
+				        {
 							btnAvviaPartita.fire();
 				        }
 				    });

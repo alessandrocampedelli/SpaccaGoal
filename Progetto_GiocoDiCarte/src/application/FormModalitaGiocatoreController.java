@@ -11,19 +11,18 @@ public class FormModalitaGiocatoreController
 {
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void btnPartitaSingola(ActionEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormPartitaSingola.fxml", event);
 	}
-	// Event Listener on Button.onAction
+
 	@FXML
 	public void btnTorneo(ActionEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormTorneo.fxml", event);
 	}
-	// Event Listener on ImageView.onMouseClicked
+
 	@FXML
 	public void btnTornaModalitaPrincipale(MouseEvent event) throws IOException
 	{

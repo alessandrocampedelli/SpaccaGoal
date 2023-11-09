@@ -14,23 +14,28 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import classi.Alert_cambiaForm;
-public class FormModalitaAmministratoreController {
+public class FormModalitaAmministratoreController 
+{
 	@FXML
 	private TextField txtUsername;
 	@FXML
 	private PasswordField txtPassword;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	// Event Listener on Button.onAction
+
 	@FXML
-	public void btnAccedi(ActionEvent event) throws IOException{
+	public void btnAccedi(ActionEvent event) throws IOException
+	{
 		Amministratore admin = new Amministratore();
-		if(admin.getUserName().equals(txtUsername.getText()) && admin.getPassword().equals(txtPassword.getText())) {
+		if(admin.getUserName().equals(txtUsername.getText()) && admin.getPassword().equals(txtPassword.getText())) 
+		{
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml", event);
 		}
-		else {
+		else 
+		{
 			alert.mostraErrore("Username e/o password errati","ERRORE");
 		}
 	}
+	
 	public void btnTornaFormPrincipale(MouseEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormPrincipale.fxml", event);

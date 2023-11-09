@@ -18,9 +18,12 @@ public class Torneo extends Gara
 		super(giocatori, codice);
 		this.partite = new ArrayList<>();
 		Salvataggio s = new Salvataggio(this);
-		try {
+		try 
+		{
 			this.tabelloneGiocatori = s.leggiTabelloneTorneo();
-		}catch(FileNotFoundException e) {
+		}
+		catch(FileNotFoundException e) 
+		{
 			System.out.println(e.getMessage());
 		}
 		this.giocatoriVincenti = giocatori;
@@ -63,24 +66,31 @@ public class Torneo extends Gara
 		return this.partite.get(0);
 	}
 
-	public void setTabelloneGiocatori(ArrayList<Giocatore> tabelloneGiocatori) {
+	public void setTabelloneGiocatori(ArrayList<Giocatore> tabelloneGiocatori) 
+	{
 		this.tabelloneGiocatori = tabelloneGiocatori;
 	}
+	
 	public String mostraRisultati() 
 	{
 		String output = "CLASSIFICA FINALE:\n";
-		for(Giocatore g : partite.get(0).giocatori) {
+		for(Giocatore g : partite.get(0).giocatori) 
+		{
 			output += g.getAlias()+": "+g.getPunteggio()+"\n";
 		}
 		return output;
 	}
-	public String stampaVincenti() {
+	
+	public String stampaVincenti() 
+	{
 		String players = "";
-		for(Giocatore g : this.giocatoriVincenti) {
+		for(Giocatore g : this.giocatoriVincenti) 
+		{
 			players +=g.getAlias()+"\n";
 		}
 		return players;
 	}
+	
 	public void finePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
 	{	
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
@@ -137,9 +147,11 @@ public class Torneo extends Gara
 		return false;
 	}
 	
-	private Giocatore trovaGiocatore(String alias) {
+	private Giocatore trovaGiocatore(String alias) 
+	{
 		Giocatore trovato = null;
-		for(Giocatore g : this.giocatoriVincenti) {
+		for(Giocatore g : this.giocatoriVincenti) 
+		{
 			if(g.getAlias().equals(alias))
 				trovato = g;
 		}

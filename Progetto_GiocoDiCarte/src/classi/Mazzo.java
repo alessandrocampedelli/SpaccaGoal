@@ -30,14 +30,18 @@ public class Mazzo
 		return this.carte;
 	}
 	
-	public void mischia() {
+	public void mischia() 
+	{
 		Collections.shuffle(carte);
 	}
 
-	public Carta pesca() {
+	public Carta pesca() 
+	{
 		return carte.removeFirst();
 	}
-	public void scarta(Carta c) {
+	
+	public void scarta(Carta c) 
+	{
 		carte.addLast(c);
 	}
 }

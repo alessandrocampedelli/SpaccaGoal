@@ -26,26 +26,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 
-public class Alert_cambiaForm {
+public class Alert_cambiaForm 
+{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
-	public void passaAlForm(String form, ActionEvent event)  throws IOException{
+	public void passaAlForm(String form, ActionEvent event)  throws IOException
+	{
 		root = FXMLLoader.load(getClass().getResource(form));
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
 	}
-	public void passaAlForm(String form, MouseEvent event)  throws IOException{
+	
+	public void passaAlForm(String form, MouseEvent event)  throws IOException
+	{
 		root = FXMLLoader.load(getClass().getResource(form));
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
 	}
-	public void mostraErrore(String setContent, String setHeader) {
+	
+	public void mostraErrore(String setContent, String setHeader) 
+	{
 		AlertType message = AlertType.ERROR;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -54,8 +60,9 @@ public class Alert_cambiaForm {
 		alert.getDialogPane().setHeaderText(setHeader);
 		alert.showAndWait();
 	}
-	public void mostraInformazione(Gare g, String setContent, String[] setHeader,String codiceUtente) {
-
+	
+	public void mostraInformazione(Gare g, String setContent, String[] setHeader,String codiceUtente) 
+	{
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -72,6 +79,7 @@ public class Alert_cambiaForm {
 		}
 		alert.showAndWait();
 	}
+	
 	public void mostraInformazione(String setContent, String setHeader) 
 	{
 		AlertType message = AlertType.INFORMATION;
@@ -82,14 +90,14 @@ public class Alert_cambiaForm {
 		alert.getDialogPane().setContentText(setContent);
 		alert.showAndWait();
 	}
+	
 	/*
-	public void mostraCartaPescata() {
+	public void mostraCartaPescata() 
+	{
 		Alert alert = new Alert(AlertType.WARNING);
-
 	    alert.initModality(Modality.APPLICATION_MODAL);
 	    alert.initOwner(stage);
 	    alert.getDialogPane().setContentText("CARTA PESCATA");
-
 	    DialogPane dialogPane = alert.getDialogPane();
 	    GridPane grid = new GridPane();
 	    ColumnConstraints graphicColumn = new ColumnConstraints();
@@ -100,7 +108,6 @@ public class Alert_cambiaForm {
 	    textColumn.setHgrow(Priority.ALWAYS);
 	    grid.getColumnConstraints().setAll(graphicColumn, textColumn);
 	    grid.setPadding(new Insets(5));
-
 	    Image image1 = new Image(Carta.getUrl("attacco_attaccante.jpg"));
 	    ImageView imageView = new ImageView(image1);
 	    imageView.setFitWidth(100);
@@ -108,22 +115,21 @@ public class Alert_cambiaForm {
 	    StackPane stackPane = new StackPane(imageView);
 	    stackPane.setAlignment(Pos.CENTER);
 	    grid.add(stackPane, 0, 0);
-
 	    Label headerLabel = new Label("Warning");
 	    headerLabel.setWrapText(true);
 	    headerLabel.setAlignment(Pos.CENTER_RIGHT);
 	    headerLabel.setMaxWidth(Double.MAX_VALUE);
 	    headerLabel.setMaxHeight(Double.MAX_VALUE);
 	    grid.add(headerLabel, 1, 0);
-
 	    dialogPane.setHeader(grid);
 	    dialogPane.setGraphic(null);
-
 	    alert.showAndWait()
 	        .filter(response -> response == ButtonType.OK)
 	        .ifPresent(response -> System.out.println("The alert was approved"));
 	}*/
-	public boolean chiediConferma(String setContent, String setHeader) {
+	
+	public boolean chiediConferma(String setContent, String setHeader) 
+	{
 		AlertType message = AlertType.CONFIRMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);

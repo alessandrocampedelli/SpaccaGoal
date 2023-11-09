@@ -10,13 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import classi.Gare;
 
-public class FormTorneoController {
+public class FormTorneoController 
+{
 	@FXML
 	private TextField txtCodiceTorneo;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void btnGiocaTorneo(ActionEvent event) throws IOException
 	{
@@ -53,7 +53,7 @@ public class FormTorneoController {
 			alert.mostraErrore("Codice del torneo errato!","CODICE TORNEO ERRATO");
 		}
 	}
-	// Event Listener on ImageView.onMouseClicked
+
 	@FXML
 	public void btnTornaFormModalitaGiocatore(MouseEvent event) throws IOException
 	{
