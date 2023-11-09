@@ -92,11 +92,14 @@ public class FormRigoreController implements Initializable
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
 
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
+		{
 			Scene scene = btnSinistra.getScene();
-			if (scene != null) {
+			if (scene != null) 
+			{
 			    Window window = scene.getWindow();
-			    if (window != null) {
+			    if (window != null) 
+			    {
 					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 			    }
 			}
@@ -121,11 +124,14 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
+		{
 			Scene scene = btnCentro.getScene();
-			if (scene != null) {
+			if (scene != null) 
+			{
 			    Window window = scene.getWindow();
-			    if (window != null) {
+			    if (window != null) 
+			    {
 					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 			    }
 			}
@@ -150,11 +156,14 @@ public class FormRigoreController implements Initializable
 		s.salvaMazzo("partite");
 		s.salvaPunteggio("partite");
 		partita.salvaTurnoRigore(cartaGiocata);
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) {
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
+		{
 			Scene scene = btnDestra.getScene();
-			if (scene != null) {
+			if (scene != null) 
+			{
 			    Window window = scene.getWindow();
-			    if (window != null) {
+			    if (window != null) 
+			    {
 					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 			    }
 			}
@@ -193,33 +202,51 @@ public class FormRigoreController implements Initializable
 				//eseguo il codice solo se siamo in un turno di attacco e l'attaccante è un robot o il caso opposto
 				if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot())){
 					Robot robot;
-					if(turno.equals("a")) {
+					if(turno.equals("a")) 
+					{
 						robot = new Robot(players[posizioneGiocatoreAttaccante]);
-					}else {
+					}
+					else 
+					{
 						robot = new Robot(players[posizioneGiocatoreDifensore]);
 					}
+					
 					int direzione = robot.scegliDirezione();
-	        		if(direzione == 0) {
+	        		if(direzione == 0) 
+	        		{
 	        			btnSinistra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
-	        		}else if(direzione == 1) {
+	        		}
+	        		else if(direzione == 1) 
+	        		{
 	        			btnCentro.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
-	        		}else {
+	        		}
+	        		else 
+	        		{
 	        			btnDestra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
 	        		}
-					Platform.runLater(new Runnable() {
+	        		
+					Platform.runLater(new Runnable() 
+					{
 				        @Override
 				        public void run() {
-				        	try {
+				        	try 
+				        	{
 								Thread.sleep(3000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
+							} 
+				        	catch (InterruptedException e) 
+				        	{
 								e.printStackTrace();
 							}
-							if(direzione == 0) {
+							if(direzione == 0) 
+							{
 			        			btnSinistra.fire();
-			        		}else if(direzione == 1) {
+			        		}
+							else if(direzione == 1) 
+							{
 			        			btnCentro.fire();
-			        		}else {
+			        		}
+							else 
+							{
 			        			btnDestra.fire();
 			        		}
 				        }

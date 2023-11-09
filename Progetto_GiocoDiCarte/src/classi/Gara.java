@@ -45,9 +45,12 @@ public abstract class Gara
 	{
 		this.carte = m;
 	}
-	public String mostraRisultati() {
+	
+	public String mostraRisultati() 
+	{
 		String output = "CLASSIFICA FINALE:\n";
-		for(Giocatore g : giocatori) {
+		for(Giocatore g : giocatori) 
+		{
 			output += g.getAlias()+": "+g.getPunteggio()+"\n";
 		}
 		return output;

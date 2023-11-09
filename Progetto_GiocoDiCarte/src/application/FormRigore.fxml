@@ -7,31 +7,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormRigoreController">
-   <children>
-      <ImageView cache="true" fitHeight="600.0" fitWidth="877.0">
-         <image>
-            <Image url="@../../portaDaCalcio.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imgPortiere" fitHeight="208.0" fitWidth="206.0" layoutX="344.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../portiere.png" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="-124.0" layoutY="-111.0" prefHeight="200.0" prefWidth="200.0" />
-      <ImageView fx:id="imgPallone" fitHeight="82.0" fitWidth="127.0" layoutX="377.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../pallone.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="btnSinistra" layoutX="185.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnSinistra" text="SINISTRA" />
-      <Button fx:id="btnCentro" layoutX="416.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnCentro" text="CENTRO" />
-      <Button fx:id="btnDestra" layoutX="650.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnDestra" text="DESTRA" />
-      <Label fx:id="lblRigore" alignment="CENTER" layoutX="147.0" layoutY="89.0" prefHeight="35.0" prefWidth="599.0" text="Label" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="872.0"
+	xmlns="http://javafx.com/javafx/20"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormRigoreController">
+	<children>
+		<ImageView cache="true" fitHeight="600.0" fitWidth="877.0">
+			<image>
+				<Image url="@../../portaDaCalcio.jpg" />
+			</image>
+		</ImageView>
+		<ImageView fx:id="imgPortiere" fitHeight="208.0"
+			fitWidth="206.0" layoutX="344.0" layoutY="223.0" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../../portiere.png" />
+			</image>
+		</ImageView>
+		<AnchorPane layoutX="-124.0" layoutY="-111.0"
+			prefHeight="200.0" prefWidth="200.0" />
+		<ImageView fx:id="imgPallone" fitHeight="82.0"
+			fitWidth="127.0" layoutX="377.0" layoutY="504.0" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../../pallone.png" />
+			</image>
+		</ImageView>
+		<Button fx:id="btnSinistra" layoutX="185.0" layoutY="300.0"
+			mnemonicParsing="false" onAction="#btnSinistra" text="SINISTRA" />
+		<Button fx:id="btnCentro" layoutX="416.0" layoutY="300.0"
+			mnemonicParsing="false" onAction="#btnCentro" text="CENTRO" />
+		<Button fx:id="btnDestra" layoutX="650.0" layoutY="300.0"
+			mnemonicParsing="false" onAction="#btnDestra" text="DESTRA" />
+		<Label fx:id="lblRigore" alignment="CENTER" layoutX="147.0"
+			layoutY="89.0" prefHeight="35.0" prefWidth="599.0" text="Label"
+			textOverrun="CENTER_WORD_ELLIPSIS">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Label>
+	</children>
 </AnchorPane>

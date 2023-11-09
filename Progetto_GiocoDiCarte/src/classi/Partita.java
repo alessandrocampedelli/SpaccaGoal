@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 
-public class Partita extends Gara{
+public class Partita extends Gara
+{
 	private final int N_CARTE_INIZIO = 5;
 	private String turno;
 	private int posizioneGiocatoreAttaccante;
@@ -27,12 +28,11 @@ public class Partita extends Gara{
 		pulisciMani();
 		carte.mischia();
 		//distribuzione delle carte
-		for(int j = 0; j < this.giocatori.length; j++) {
-			for(int i = 0; i < N_CARTE_INIZIO; i++) {
+		for(int j = 0; j < this.giocatori.length; j++) 
+		{
+			for(int i = 0; i < N_CARTE_INIZIO; i++) 
+			{
 				giocatori[j].getMano().add(carte.pesca());
-				//il primo giocatore deve pescare una carta in più
-				if(i == 4 && j == 0)
-					giocatori[j].getMano().add(carte.pesca());
 			}
 		}
 		carte.mischia();
@@ -212,7 +212,6 @@ public class Partita extends Gara{
 		scan.close();
 	}
 
-	
 	public void salvaTurno(String partitaTorneo) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -226,6 +225,7 @@ public class Partita extends Gara{
 		pw.println(1);
 		pw.close();
 	}
+	
 	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -328,9 +328,11 @@ public class Partita extends Gara{
 		//s.deleteDirectory("partite");
 	}
 	
-	public String toString() {
+	public String toString() 
+	{
 		String info = "";
-		for(Giocatore p: this.getGiocatori()) {
+		for(Giocatore p: this.getGiocatori()) 
+		{
 			info += "Giocatore "+p.getAlias()+"\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
 		}
 		return info;

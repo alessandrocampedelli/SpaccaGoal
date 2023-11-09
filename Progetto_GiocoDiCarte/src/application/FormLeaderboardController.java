@@ -23,18 +23,20 @@ import classi.Gare;
 import classi.Leaderboard;
 import classi.Giocatore;
 
-public class FormLeaderboardController implements Initializable{
+public class FormLeaderboardController implements Initializable
+{
 	Leaderboard leaderboard = new Leaderboard();
 	Gare gare = new Gare();
-	//Gara g = gare.getGara(null)
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	@FXML
 	private TableView<Giocatore> table = new TableView<Giocatore>();
+	
 	@FXML
 	public void tornaHome(MouseEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormPrincipale.fxml", event);
 	}
+	
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
 		//creo la colonna col nome

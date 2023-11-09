@@ -68,8 +68,10 @@ public class Leaderboard
 	}
 
 	//metodo che mi ritorna l'indice del giocatore dato l'alias
-	public int indexPlayer(String alias) {
-		for(int i = 0; i < players.size(); i++) {
+	public int indexPlayer(String alias) 
+	{
+		for(int i = 0; i < players.size(); i++) 
+		{
 			if(players.get(i).getAlias().equals(alias))
 				return i;
 		}
@@ -82,8 +84,10 @@ public class Leaderboard
 	}
 
 	//controllo se e' gia stato creato un giocatore con quell'alias
-	public Giocatore giocatoreGiaCreato(String alias) {
-		for(Giocatore g : players) {
+	public Giocatore giocatoreGiaCreato(String alias) 
+	{
+		for(Giocatore g : players) 
+		{
 			if(g.getAlias().equals(alias))
 				return g;
 		}

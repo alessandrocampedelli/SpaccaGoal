@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-public class Salvataggio {
+public class Salvataggio 
+{
 	Gara eventoDaSalvare;
 	ArrayList<Gara> gareLette;
 	
@@ -92,7 +93,8 @@ public class Salvataggio {
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
 		File f = new File(absolutePath);
-		if(f.exists()) {
+		if(f.exists()) 
+		{
 			ArrayList<Giocatore> giocatori = leggiGiocatori(f);
 			return giocatori;
 		}
@@ -127,7 +129,9 @@ public class Salvataggio {
 		ArrayList<Carta> _mano = new ArrayList<>();
 		String[] nomiCarte = mano.split(",");
 		for(int i = 0; i < nomiCarte.length; i++)
+		{
 			_mano.add(Carta.valueOf(nomiCarte[i]));
+		}
 		return _mano;
 	}
 	
@@ -141,7 +145,9 @@ public class Salvataggio {
 		}
 		scan.close();
 	}
-	public void salvaPartita(Partita p,String percorso) throws IOException{
+	
+	public void salvaPartita(Partita p,String percorso) throws IOException
+	{
 		p.distribuzioneCarte();
 		this.salvaNomiGiocatori(percorso);
 		this.salvaMazzo(percorso);
@@ -149,6 +155,7 @@ public class Salvataggio {
 		this.salvaPunteggio(percorso);
 		p.salvaTurno(percorso);
 	}
+	
 	public void salvaNomiGiocatori(String partitaTorneo) throws IOException
 	{
 		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara();
@@ -177,7 +184,9 @@ public class Salvataggio {
 		Torneo t = (Torneo) eventoDaSalvare;
 		salvaFile(absolutePath, t.getGiocatoreVincenti());
 	}
-	public void salvaFile(String absolutePath, ArrayList<Giocatore> players) throws FileNotFoundException {
+	
+	public void salvaFile(String absolutePath, ArrayList<Giocatore> players) throws FileNotFoundException 
+	{
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(Giocatore player : players) 
 		{
@@ -189,6 +198,7 @@ public class Salvataggio {
 		}
 		fw.close();
 	}
+	
 	public void salvaTabelloneTorneo() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -207,9 +217,7 @@ public class Salvataggio {
 		else
 			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
 		PrintWriter fw = new PrintWriter(absolutePath);
-
 		for(int i = 0; i < eventoDaSalvare.getMazzo().getCarte().size(); i++)
 		{
 			fw.println(eventoDaSalvare.getMazzo().getCarte().get(i));
@@ -226,7 +234,6 @@ public class Salvataggio {
 		else
 			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(int i = 0; i < eventoDaSalvare.getGiocatori().length; i++)
 		{
@@ -294,8 +301,10 @@ public class Salvataggio {
     {
 		String path = "src/"+percorso;
 		File file = new File(path);
-        for (File subfile : file.listFiles()) {
-            if (subfile.isDirectory()) {
+        for (File subfile : file.listFiles()) 
+        {
+            if (subfile.isDirectory()) 
+            {	
                 deleteDirectory(percorso+"/"+subfile.getName());
             }
             subfile.delete();
@@ -303,7 +312,8 @@ public class Salvataggio {
 		file.delete();
     }
     
-    public void createDirectory(String percorso) throws IOException{
+    public void createDirectory(String percorso) throws IOException
+    {
     	String path = "src/"+percorso+"/"+eventoDaSalvare.getCodiceGara();
     	Files.createDirectory(Paths.get(path));
     }

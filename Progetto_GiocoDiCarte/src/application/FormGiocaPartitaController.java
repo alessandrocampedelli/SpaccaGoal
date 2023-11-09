@@ -106,7 +106,8 @@ public class FormGiocaPartitaController implements Initializable
 	{
 		if(turno.equals("a"))
 		{
-			if(!players[posizioneGiocatoreAttaccante].isRobot()) {
+			if(!players[posizioneGiocatoreAttaccante].isRobot()) 
+			{
 				//la carta che è stata selezionata all'interno della listView
 				cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 			}
@@ -115,7 +116,8 @@ public class FormGiocaPartitaController implements Initializable
 		}
 		else 
 		{
-			if(!players[posizioneGiocatoreDifensore].isRobot()) {
+			if(!players[posizioneGiocatoreDifensore].isRobot()) 
+			{
 				//la carta che è stata selezionata all'interno della listView
 				cartaGiocata = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
 			}
@@ -153,8 +155,11 @@ public class FormGiocaPartitaController implements Initializable
 		else 
 		{
 			if(codicePartita.charAt(0) == 'p')
+			{
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
-			else {
+			}
+			else 
+			{
 				torneo = g.getTorneo(codicePartita);
 				torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 			}
@@ -163,7 +168,7 @@ public class FormGiocaPartitaController implements Initializable
 		//Controllo se è stata selezionata una carta, altrimenti mando un messaggio di errore all'utente
 		if(listCarte.getSelectionModel().getSelectedItem() != null) 
 		{
-			
+
 		}
 		else
 		{
@@ -222,8 +227,11 @@ public class FormGiocaPartitaController implements Initializable
 		{
 			//se la partita è terminata eseguo il metodo che mi permetterà di chiudere la partita
 			if(codicePartita.charAt(0) == 'p')
+			{
 				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
-			else {
+			}
+			else 
+			{
 				torneo = g.getTorneo(codicePartita);
 				torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 			}
@@ -263,7 +271,7 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 	}
-	
+
 	//metodo che permette di stampare i giocatori nella label con il loro attuale punteggio
 	public void stampaGiocatoriLabel()
 	{
@@ -304,7 +312,8 @@ public class FormGiocaPartitaController implements Initializable
 				//controllo se è un turno di attacco o di difesa
 				if(turno.equals("a")) 
 				{
-					if(players[posizioneGiocatoreAttaccante].isRobot()) {
+					if(players[posizioneGiocatoreAttaccante].isRobot()) 
+					{
 						Robot robot = new Robot(players[posizioneGiocatoreAttaccante]);
 						cartaGiocata = Carta.valueOf(robot.cartaGiocata('a'));
 					}
@@ -333,7 +342,8 @@ public class FormGiocaPartitaController implements Initializable
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
-						if(!players[posizioneGiocatoreAttaccante].isRobot()) {
+						if(!players[posizioneGiocatoreAttaccante].isRobot()) 
+						{
 							//è possibile attaccare, attivo il bottone "gioca carta" e rimane disabilitato il bottone "passa turno"
 							btnGiocaCarta.setVisible(true);
 							btnGiocaCarta.setLayoutX(374);
@@ -344,7 +354,8 @@ public class FormGiocaPartitaController implements Initializable
 					{
 						lblInfoUtente.setText("Non hai carte con le quali attaccare. Sei costretto a passare il turno");
 						//non è possibile attaccare, attivo il bottone "passa turno" e rimane disabilitato il bottone "gioca carta"
-						if(!players[posizioneGiocatoreAttaccante].isRobot()) {
+						if(!players[posizioneGiocatoreAttaccante].isRobot()) 
+						{
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(374);
 							btnPassaTurno.setLayoutY(554);
@@ -356,7 +367,8 @@ public class FormGiocaPartitaController implements Initializable
 				}
 				else 
 				{
-					if(players[posizioneGiocatoreDifensore].isRobot()) {
+					if(players[posizioneGiocatoreDifensore].isRobot()) 
+					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
 						cartaGiocata = Carta.valueOf(robot.cartaGiocata('d'));
 					}
@@ -364,7 +376,7 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-										
+
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
 						//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no
@@ -376,7 +388,8 @@ public class FormGiocaPartitaController implements Initializable
 						if(Carta.valueOf(nomeCarta).equals(Carta.INDICATORE_GOAL)) 
 						{
 							lblInfoUtente.setText("L'attaccante non ha attaccato. Passa il turno");
-							if(!players[posizioneGiocatoreDifensore].isRobot()) {
+							if(!players[posizioneGiocatoreDifensore].isRobot()) 
+							{
 								//il giocatore attaccante non ha attaccato, il difensore non si difende e attivo la visualizzazione del bottone "passa turno"
 								btnPassaTurno.setVisible(true);
 								btnPassaTurno.setLayoutX(374);
@@ -400,16 +413,15 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				System.out.println(e.getMessage());
 			}
+			
 			//metodo per stampare l'attuale punteggio della partita nella label
 			stampaGiocatoriLabel();
-			//commenti da qui....
 			ObservableList<String> items =FXCollections.observableArrayList(nomiCarte);
 			listCarte.setItems(items);
 			listCarte.setCellFactory(param -> 
 			{
 				return new ListCell<String>() 
 				{	
-
 					private ImageView imageView = new ImageView();
 					@Override
 					public void updateItem(String name, boolean empty) 
@@ -440,12 +452,17 @@ public class FormGiocaPartitaController implements Initializable
 							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 							}
 							setGraphic(imageView);
-							if(turno.equals("a")) {
-								if((players[posizioneGiocatoreAttaccante].isRobot() && name == cartaGiocata.name())) {
+							if(turno.equals("a")) 
+							{
+								if((players[posizioneGiocatoreAttaccante].isRobot() && name == cartaGiocata.name())) 
+								{
 									setStyle("-fx-control-inner-background: blue;");
 								}
-							}else {
-								if((players[posizioneGiocatoreDifensore].isRobot() && name == cartaGiocata.name())) {
+							}
+							else 
+							{
+								if((players[posizioneGiocatoreDifensore].isRobot() && name == cartaGiocata.name())) 
+								{
 									setStyle("-fx-control-inner-background: blue;");
 								}
 							}
@@ -454,22 +471,28 @@ public class FormGiocaPartitaController implements Initializable
 				};
 			});
 			//eseguo il codice solo se siamo in un turno di attacco e l'attaccante è un robot o il caso opposto
-			if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot())){
-				Platform.runLater(new Runnable() {
-			        @Override
-			        public void run() {
-			        	try {
+			if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot()))
+			{
+				Platform.runLater(new Runnable() 
+				{
+					@Override
+					public void run() 
+					{
+						try 
+						{
 							Thread.sleep(3000);
-						} catch (InterruptedException e) {
+						}
+						catch (InterruptedException e) 
+						{
 							e.printStackTrace();
 						}
 						btnGiocaCarta.fire();
-			        }
-			    });
+					}
+				});
 			}
 		}
 	}
-	
+
 	private void checkTurnoDifensore()
 	{
 		//la carta che è stata giocata dal giocatore attaccante
@@ -477,7 +500,8 @@ public class FormGiocaPartitaController implements Initializable
 		//controllo se il giocatore ha almeno una carta di difesa in mano (in modo che possa difendersi)
 		if(partita.checkGiocaTurno(cartaAtt, players[posizioneGiocatoreDifensore].getMano()))
 		{
-			if(!players[posizioneGiocatoreDifensore].isRobot()) {
+			if(!players[posizioneGiocatoreDifensore].isRobot()) 
+			{
 				//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
 				btnPassaTurno.setVisible(true);
 				btnGiocaCarta.setVisible(true);
@@ -490,12 +514,17 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				output = "La carta "+cartaAtt+" non è difendibile. Sei costretto a passare il turno";
 				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA))
+				{
 					output += " subendo un gol.";
+				}
 				lblInfoUtente.setText(output);
-			}else {
+			}
+			else 
+			{
 				lblInfoUtente.setText("Non hai carte di difesa con le quali difenderti. Sei costretto a passare il turno e subire gol");
 			}
-			if(!players[posizioneGiocatoreDifensore].isRobot()) {
+			if(!players[posizioneGiocatoreDifensore].isRobot()) 
+			{
 				//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
 				btnPassaTurno.setVisible(true);
 				btnPassaTurno.setLayoutX(374);

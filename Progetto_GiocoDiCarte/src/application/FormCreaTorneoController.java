@@ -41,7 +41,8 @@ import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
 
-public class FormCreaTorneoController{
+public class FormCreaTorneoController
+{
 	@FXML
 	private TextField txtAlias;
 	@FXML
@@ -64,46 +65,42 @@ public class FormCreaTorneoController{
 	static Torneo t;
 	Gare gare = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
-	public String getGiocatori() {
-		String output = "";
-		for(Giocatore g: giocatori) {
-			output += g.getAlias() + "\n";
-		}
-		return output;
-	}
-	public String[] nomiGiocatori() {
-		String[] g = new String[giocatori.size()];
-		for(int i = 0; i < g.length; i++) {
-			g[i] = giocatori.get(i).getAlias();
-		}
-		return g;
-	}
+
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
-	// Event Listener on Button.onAction
+
 	@FXML
-	public void btnAggiungiGiocatore(ActionEvent event) {
-		try {
+	public void btnAggiungiGiocatore(ActionEvent event) 
+	{
+		try 
+		{
 			boolean robot = false;
-			if(txtAlias.getText().trim().equals("")) {
+			if(txtAlias.getText().trim().equals("")) 
+			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IOException();
 			}
 			String nome = txtAlias.getText();
-			if(nomeGiaUsato(nome)) {
+			if(nomeGiaUsato(nome)) 
+			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IllegalArgumentException();
 			}
-			if(chbRobot.isSelected()) {
+			if(chbRobot.isSelected()) 
+			{
 				robot = true;
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
-			}else
+			}
+			else
+			{
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-			
+			}
+
 			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
 			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
-			if(nuovoGiocatore == null) {
+			if(nuovoGiocatore == null) 
+			{
 				nuovoGiocatore = new Giocatore(nome,robot);
 				//aggiungo il giocatore alla lista di giocatori globali
 				leaderboard.addPlayers(nuovoGiocatore);
@@ -111,17 +108,22 @@ public class FormCreaTorneoController{
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 			setLabel();
-		}catch (IOException e) {
+		}
+		catch (IOException e) 
+		{
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
 		}
 	}
+
 	@FXML
 	public void btnCreaTorneo(ActionEvent event) throws IOException
 	{	
-		if(alert.chiediConferma("Sei sicuro di creare questo torneo con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) {
+		if(alert.chiediConferma("Sei sicuro di creare questo torneo con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) 
+		{
 			String codice = getRandomString(6,'a', 'z');
 			leaderboard.salvaPlayers();
 			codice = "t"+codice;
+			//mischio l'ordine in cui i giocatori giocano la partita
 			Collections.shuffle(giocatori);
 			t = new Torneo(giocatori,codice);
 			//creazione delle partite
@@ -139,36 +141,62 @@ public class FormCreaTorneoController{
 				Salvataggio salvaGara = new Salvataggio(p);
 				salvaGara.salvaPartita(p, "tornei/"+t.getCodiceGara());
 			}
-
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 			giocatori.clear();
 		}
 	}
-	
+
+	@FXML
+	public void btnVaiIndietro1(MouseEvent event) throws IOException
+	{
+		giocatori.clear();
+		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+	}
+
+	@FXML
+	public void eliminaGiocatore(MouseEvent event) throws IOException 
+	{
+		int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		if(indiceEliminato != -1) 
+		{
+			String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA"))
+			{
+				giocatori.remove(indiceEliminato);
+				txtGiocatoriInseriti.getItems().clear();
+				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+				setLabel();
+			}	
+		}
+	}
+
 	private String getRandomString(int len, char minChar, char maxChar) 
 	{
 		String s = "";
 		for (int i = 0; i < len; ++i)
+		{
 			s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
+		}
 		return s;
 	}
-	
+
 	private boolean nomeGiaUsato(String nome) 
 	{
 		for(Giocatore g : giocatori) 
 		{
 			if(g.getAlias().equals(nome))	
+			{
 				return true;
+			}
 		}
 		return false;
 	}
-	
+
 	private void setLabel() 
 	{
 		txtAlias.clear();
 		chbRobot.setSelected(false);
-
 		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 
 		if(giocatori.size() <= 4)
@@ -184,7 +212,8 @@ public class FormCreaTorneoController{
 		txtAlias.clear();
 		chbRobot.setSelected(false);
 
-		if(giocatori.size() == 8) {
+		if(giocatori.size() == 8) 
+		{
 			btnAggiungiGiocatore.setVisible(false);
 		}
 		if(giocatori.size() == 4 || giocatori.size() == 8) 
@@ -196,26 +225,24 @@ public class FormCreaTorneoController{
 			btnCreaTorneo.setVisible(false);
 		}
 	}
-	
-	@FXML
-	public void btnVaiIndietro1(MouseEvent event) throws IOException
+
+	public String getGiocatori() 
 	{
-		giocatori.clear();
-		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-	}
-	
-	@FXML
-	public void eliminaGiocatore(MouseEvent event) throws IOException {
-		// TODO Autogenerated
-		int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
-		if(indiceEliminato != -1) {
-			String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA")){
-				giocatori.remove(indiceEliminato);
-				txtGiocatoriInseriti.getItems().clear();
-				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
-				setLabel();
-			}	
+		String output = "";
+		for(Giocatore g: giocatori) 
+		{
+			output += g.getAlias() + "\n";
 		}
+		return output;
+	}
+
+	public String[] nomiGiocatori() 
+	{
+		String[] g = new String[giocatori.size()];
+		for(int i = 0; i < g.length; i++) 
+		{
+			g[i] = giocatori.get(i).getAlias();
+		}
+		return g;
 	}
 }

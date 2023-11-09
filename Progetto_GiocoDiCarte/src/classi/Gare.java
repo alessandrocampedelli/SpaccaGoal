@@ -20,6 +20,7 @@ public class Gare
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	public void aggiungiGara(Gara g)
 	{
 		gare.add(g);
@@ -64,7 +65,8 @@ public class Gare
 	public Gara getGara(String codice)  throws FileNotFoundException
 	{
 		Gara gara = null;
-		if(codice.charAt(0) == 't') {
+		if(codice.charAt(0) == 't') 
+		{
 			for(Gara g: this.gare)
 			{
 				if(g.getCodiceGara().equals(codice))
@@ -73,7 +75,9 @@ public class Gare
 					gara = t.partite.get(0);
 				}
 			}
-		}else {
+		}
+		else 
+		{
 			for(Gara g: this.gare)
 			{
 				if(g.getCodiceGara().equals(codice))
@@ -85,17 +89,22 @@ public class Gare
 		}
 		return gara;
 	}
-	public Torneo getTorneo(String codice) {
+	
+	public Torneo getTorneo(String codice) 
+	{
 		Torneo torneo = null;
 		for(Gara t : gare) {
-			if(t.getCodiceGara().equals(codice)){
+			if(t.getCodiceGara().equals(codice))
+			{
 				torneo = (Torneo) t;
 				break;
 			}
 		}
 		return torneo;
 	}
-	public void updateTorneo(ArrayList<Giocatore> vincenti, String codice) throws IOException{
+	
+	public void updateTorneo(ArrayList<Giocatore> vincenti, String codice) throws IOException
+	{
 		//aggiorno il torneo
 		gare.remove(getTorneo(codice));
 		Torneo t = new Torneo(vincenti,codice);
@@ -133,7 +142,8 @@ public class Gare
 	public String toString() 
 	{
 		String nomi = "";
-		for(int i = 0; i < gare.size();i++) {
+		for(int i = 0; i < gare.size();i++) 
+		{
 			nomi += gare.get(i).codice+"\n";
 		}
 		return nomi;
