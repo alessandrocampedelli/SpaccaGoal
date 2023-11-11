@@ -7,10 +7,10 @@ f,0,0,p
 g,1,1,p
 h,0,2,p
 bb,0,0,r
-cc,1,0,p
-ee,2,0,r
+cc,1,0,r
+ee,2,0,p
 qq,0,0,p
-aaa,1,0,r
-bbb,2,0,r
+aaa,5,0,r
+bbb,3,0,r
 ccc,0,0,r
-ddd,1,0,r
+ddd,2,0,r

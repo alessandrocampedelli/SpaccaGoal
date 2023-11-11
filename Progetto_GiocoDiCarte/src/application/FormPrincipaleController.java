@@ -45,7 +45,7 @@ public class FormPrincipaleController
 	public void closeButton(ActionEvent event) throws IOException
 	{
 		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		if(alert.chiediConferma("MESSAGGIO DI CONFERMA", "Sei sicuro di voler chiudere il gioco?"))
+		if(alert.chiediConferma("Sei sicuro di voler chiudere il gioco?","MESSAGGIO DI CONFERMA"))
 			stage.close();
 	}
 }

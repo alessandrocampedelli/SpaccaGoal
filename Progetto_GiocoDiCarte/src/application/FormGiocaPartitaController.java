@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -90,6 +91,8 @@ public class FormGiocaPartitaController implements Initializable
 	Button btnGiocaCarta = new Button();
 	@FXML
 	Button btnPassaTurno = new Button();
+	@FXML
+	Button btnSospendiGara = new Button();
 	//l'immagine che sarà visibile solo in un turno di difesa con l'immagine giocata dal calciatore attaccante
 	@FXML
 	ImageView imgGiocata = new ImageView();
@@ -252,23 +255,30 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void selezionaCarta(MouseEvent event) 
 	{
-		//ottengo la carta selezionata dalla listView
-		Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
-		if(turno.equals("a")) 
-		{
-			//siamo in un turno di attacco, quindi non permettiamo di cliccare una carta difensiva
-			if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR))
-			{
-				listCarte.getSelectionModel().clearSelection();
+		try {
+			if(listCarte.getSelectionModel().getSelectedItem().equals(null)) {
+				throw new NullPointerException();
 			}
-		}
-		else 
-		{
-			//siamo in un turno di difesa, quindi non permettiamo di cliccare una carta offensiva
-			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
+			//ottengo la carta selezionata dalla listView
+			Carta c = Carta.valueOf(listCarte.getSelectionModel().getSelectedItem());
+			if(turno.equals("a")) 
 			{
-				listCarte.getSelectionModel().clearSelection();
+				//siamo in un turno di attacco, quindi non permettiamo di cliccare una carta difensiva
+				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.FUORIGIOCO) || c.equals(Carta.VAR))
+				{
+					listCarte.getSelectionModel().clearSelection();
+				}
 			}
+			else 
+			{
+				//siamo in un turno di difesa, quindi non permettiamo di cliccare una carta offensiva
+				if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
+				{
+					listCarte.getSelectionModel().clearSelection();
+				}
+			}
+		}catch(NullPointerException e) {
+			event.consume();
 		}
 	}
 
@@ -316,11 +326,15 @@ public class FormGiocaPartitaController implements Initializable
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreAttaccante]);
 						cartaGiocata = Carta.valueOf(robot.cartaGiocata('a'));
+						listCarte.setMouseTransparent(true);
 					}
 					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
+					if(players[posizioneGiocatoreAttaccante].isRobot()) {
+						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
+					}
 					String c1;
 					String c2;
 					Carta cPescata1;
@@ -339,6 +353,7 @@ public class FormGiocaPartitaController implements Initializable
 						c2 = cPescata2.getStampa() != null ? cPescata2.getStampa() : cPescata2.name();
 						lblInfoUtente.setText("Hai pescato le carte "+c1+" e "+c2);
 					}
+					
 					//metodo che restituisce se è presente nella mano almeno una carta di attacco (possibile attaccare)
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
@@ -348,6 +363,7 @@ public class FormGiocaPartitaController implements Initializable
 							btnGiocaCarta.setVisible(true);
 							btnGiocaCarta.setLayoutX(374);
 							btnGiocaCarta.setLayoutY(554);
+							btnSospendiGara.setVisible(true);
 						}
 					}
 					else 
@@ -359,6 +375,7 @@ public class FormGiocaPartitaController implements Initializable
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(374);
 							btnPassaTurno.setLayoutY(554);
+							btnSospendiGara.setVisible(true);
 						}
 						listCarte.setDisable(true);
 						//non è possibile giocare alcuna carta di attacco, allora la settiamo noi di default
@@ -371,12 +388,15 @@ public class FormGiocaPartitaController implements Initializable
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
 						cartaGiocata = Carta.valueOf(robot.cartaGiocata('d'));
+						listCarte.setMouseTransparent(true);
 					}
 					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-
+					if(players[posizioneGiocatoreDifensore].isRobot()) {
+						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
+					}
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
 						//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no
@@ -394,6 +414,7 @@ public class FormGiocaPartitaController implements Initializable
 								btnPassaTurno.setVisible(true);
 								btnPassaTurno.setLayoutX(374);
 								btnPassaTurno.setLayoutY(554);
+								btnSospendiGara.setVisible(true);
 							}
 							listCarte.setDisable(true);
 							cartaAtt = Carta.INDICATORE_GOAL;
@@ -454,16 +475,16 @@ public class FormGiocaPartitaController implements Initializable
 							setGraphic(imageView);
 							if(turno.equals("a")) 
 							{
-								if((players[posizioneGiocatoreAttaccante].isRobot() && name == cartaGiocata.name())) 
+								if((players[posizioneGiocatoreAttaccante].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreAttaccante,items))) 
 								{
 									setStyle("-fx-control-inner-background: blue;");
 								}
 							}
 							else 
 							{
-								if((players[posizioneGiocatoreDifensore].isRobot() && name == cartaGiocata.name())) 
-								{
-									setStyle("-fx-control-inner-background: blue;");
+								if((players[posizioneGiocatoreDifensore].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreDifensore,items))) 
+								{ 
+									setStyle("-fx-control-inner-background: red;");
 								}
 							}
 						}
@@ -492,7 +513,17 @@ public class FormGiocaPartitaController implements Initializable
 			}
 		}
 	}
-
+	private int getIndexCartaGiocata(int posGiocatore, ObservableList<String> items) {
+		int cellaDaColorare = -1;
+		for (int i = 0; i < items.size(); i++) {
+	        String name = items.get(i);
+	        if (players[posizioneGiocatoreAttaccante].isRobot() && name.equals(cartaGiocata.name())) {
+	        	cellaDaColorare = i;
+	            break;
+	        }
+	    }
+		return cellaDaColorare;
+	}
 	private void checkTurnoDifensore()
 	{
 		//la carta che è stata giocata dal giocatore attaccante
@@ -505,6 +536,7 @@ public class FormGiocaPartitaController implements Initializable
 				//ha una carta difensiva in mano, setto entrambi i bottoni visualizzabili
 				btnPassaTurno.setVisible(true);
 				btnGiocaCarta.setVisible(true);
+				btnSospendiGara.setVisible(true);
 			}
 		}
 		else 
@@ -529,6 +561,7 @@ public class FormGiocaPartitaController implements Initializable
 				btnPassaTurno.setVisible(true);
 				btnPassaTurno.setLayoutX(374);
 				btnPassaTurno.setLayoutY(554);
+				btnSospendiGara.setVisible(true);
 				listCarte.setDisable(true);
 			}
 		}
