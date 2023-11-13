@@ -33,6 +33,11 @@ public class Partita extends Gara
 			for(int i = 0; i < N_CARTE_INIZIO; i++) 
 			{
 				giocatori[j].getMano().add(carte.pesca());
+				//il primo giocatore deve pescare una carta in più
+				if(i == 4 && j == 0)
+				{
+					giocatori[j].getMano().add(carte.pesca());
+				}
 			}
 		}
 		carte.mischia();
