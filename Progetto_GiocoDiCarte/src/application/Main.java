@@ -26,13 +26,14 @@ public class Main extends Application
 			primaryStage.setTitle("GIOCO");
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			/*
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 		        @Override
 		        public void handle(WindowEvent event) {
 		            // Mostra un avviso di conferma prima di chiudere la finestra
 		            event.consume();
 		        }
-		    });
+		    });*/
 		} 
 		catch(Exception e) 
 		{
