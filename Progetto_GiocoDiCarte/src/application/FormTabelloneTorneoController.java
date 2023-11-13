@@ -100,11 +100,6 @@ public class FormTabelloneTorneoController implements Initializable
 			if(!(codiceUtente == null))
 			{				
 				t = gare.getTorneo(codiceUtente);
-				if(t.getGiocatoreVincenti().size() == 1) 
-				{
-					btnMostraLeaderboard.setVisible(true);
-					btnAvviaPartita.setVisible(false);
-				}
 				Salvataggio s = new Salvataggio(t);
 				giocatori = s.leggiTabelloneTorneo();
 				Label[] labels;
@@ -120,6 +115,13 @@ public class FormTabelloneTorneoController implements Initializable
 				for(int i = 0; i < giocatori.size(); i++)
 				{
 					labels[i].setText(giocatori.get(i).getAlias());
+				}
+				if(t.getGiocatoreVincenti().size() == 1) 
+				{
+					btnMostraLeaderboard.setVisible(true);
+					btnAvviaPartita.setVisible(false);
+					Salvataggio elimina = new Salvataggio(t);
+					elimina.deleteDirectory("tornei/"+t.getCodiceGara());
 				}
 			}
 		}

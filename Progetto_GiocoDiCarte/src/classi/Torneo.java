@@ -95,7 +95,7 @@ public class Torneo extends Gara
 	{	
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
 		s = new Salvataggio(partite.get(0));
-		s.deleteDirectory("tornei/"+this.getCodiceGara());
+		s.deleteDirectory("tornei/"+this.getCodiceGara()+"/"+partite.get(0).codice);
 		//riscrivere il file di testo
 		Salvataggio s = new Salvataggio(this);
 		s.salvaGiocatoriTorneo();
