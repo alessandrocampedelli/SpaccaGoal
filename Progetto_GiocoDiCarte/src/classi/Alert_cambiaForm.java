@@ -58,20 +58,34 @@ public class Alert_cambiaForm
 	}
 	public void passaAlForm(String form, ActionEvent event)  throws IOException
 	{
-		setRoot(form);
-	    setStage(event);
-	    this.scene = new Scene(getRoot());
-	    this.stage.setScene(this.scene);
-	    this.stage.show();
+		try {
+			if(((Node)event.getSource()).getScene().equals(null)){
+				throw new NullPointerException();
+			}
+			setRoot(form);
+		    setStage(event);
+		    this.scene = new Scene(getRoot());
+		    this.stage.setScene(this.scene);
+		    this.stage.show();
+		}catch(NullPointerException e) {
+			event.consume();
+		}
 	}
 	
 	public void passaAlForm(String form, MouseEvent event)  throws IOException
 	{
-		setRoot(form);
-	    setStage(event);
-	    this.scene = new Scene(getRoot());
-	    this.stage.setScene(this.scene);
-	    this.stage.show();
+		try {
+			if(((Node)event.getSource()).getScene().equals(null)){
+				throw new NullPointerException();
+			}
+			setRoot(form);
+		    setStage(event);
+		    this.scene = new Scene(getRoot());
+		    this.stage.setScene(this.scene);
+		    this.stage.show();
+		}catch(NullPointerException e) {
+			event.consume();
+		}
 	}
 	
 	public void mostraErrore(String setContent, String setHeader) 
