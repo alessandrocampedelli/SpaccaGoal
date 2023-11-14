@@ -121,9 +121,12 @@ public class FormIniziaPartitaController implements Initializable
 						        @Override
 						        public void run() 
 						        {
-						        	DecimalFormat df = new DecimalFormat("#.##");
-						        	double k = Double.parseDouble(df.format(i[0]*100));
-							        lblPercentualeProgressBar.setText(k+"%");
+						        	//la percentuale double del numero
+						        	double k = i[0]*100;
+						        	//arrotondo la percentuale double a due decimali e la converto in un numero intero (troncamento)
+						        	int percentualeIntera = (int)(Math.round(k * 100.0) / 100.0);
+						        	//stampo la percentuale in output nella label
+							        lblPercentualeProgressBar.setText(percentualeIntera+"%");
 						        }
 						    });
 					        progressBar.setProgress(i[0]);
