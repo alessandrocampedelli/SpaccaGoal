@@ -32,6 +32,7 @@ public class Main extends Application
 		        public void handle(WindowEvent event) {
 		            // Mostra un avviso di conferma prima di chiudere la finestra
 		            event.consume();
+		            //Thread.currentThread().interrupt();
 		        }
 		    });*/
 		} 

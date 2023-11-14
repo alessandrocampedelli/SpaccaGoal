@@ -247,7 +247,10 @@ public class FormGiocaPartitaController implements Initializable
 		//l'utente ha intenzione di sospendere la partita,lo richiedo per conferma con un alert, sospendo la partita e torno al form principale
 		if(alert.chiediConferma("Sei sicuro di voler sospendere la partita?", "ATTENZIONE")) 
 		{
-			alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
+			if(codicePartita.charAt(0) == 'p')
+				alert.mostraInformazione("Operazione eseguita con successo. La partita avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
+			else
+				alert.mostraInformazione("Operazione eseguita con successo. Il torneo avente il codice '"+codicePartita+"' è stata sospesa", "OPERAZIONE COMPLETATA");
 			alert.passaAlForm("/application/FormPrincipale.fxml", event);
 		}
 	}
