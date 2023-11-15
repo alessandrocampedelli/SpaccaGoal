@@ -202,28 +202,19 @@ public class FormRigoreController implements Initializable
 				//eseguo il codice solo se siamo in un turno di attacco e l'attaccante è un robot o il caso opposto
 				if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot())){
 					Robot robot;
+					int direzione;
 					if(turno.equals("a")) 
 					{
 						robot = new Robot(players[posizioneGiocatoreAttaccante]);
+						direzione = robot.scegliDirezione();
+						coloraDirezioneRobot(direzione, "blue");
 					}
 					else 
 					{
 						robot = new Robot(players[posizioneGiocatoreDifensore]);
+						direzione = robot.scegliDirezione();
+						coloraDirezioneRobot(direzione, "red");
 					}
-					
-					int direzione = robot.scegliDirezione();
-	        		if(direzione == 0) 
-	        		{
-	        			btnSinistra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
-	        		}
-	        		else if(direzione == 1) 
-	        		{
-	        			btnCentro.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
-	        		}
-	        		else 
-	        		{
-	        			btnDestra.setStyle("-fx-background-color: #336699; -fx-text-fill: white;");
-	        		}
 	        		
 					Platform.runLater(new Runnable() 
 					{
@@ -273,6 +264,22 @@ public class FormRigoreController implements Initializable
 		{
 			players[posizioneGiocatoreDifensore].getMano().add(this.mazzo.pesca());
 			partita.setCartePescate(2);
+		}
+	}
+	
+	private void coloraDirezioneRobot(int direzione, String colore)
+	{
+		if(direzione == 0) 
+		{
+			btnSinistra.setStyle("-fx-background-color: " + colore + "; -fx-text-fill: white;");
+		}
+		else if(direzione == 1) 
+		{
+			btnCentro.setStyle("-fx-background-color: " + colore + "; -fx-text-fill: white;");
+		}
+		else 
+		{
+			btnDestra.setStyle("-fx-background-color: " + colore + "; -fx-text-fill: white;");
 		}
 	}
 }
