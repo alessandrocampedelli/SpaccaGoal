@@ -139,10 +139,10 @@ public class FormGiocaPartitaController implements Initializable
 			mazzo.scarta(cartaGiocata);
 			//salvo tutte le informazioni utili della partita tramite il costruttore della classe "Salvataggio"
 			s = new Salvataggio(g.getGara(codicePartita));
-			s.salvaMani("partite");
-			s.salvaMazzo("partite");
-			s.salvaPunteggio("partite");
-			partita.salvaTurnoGara("partite", cartaGiocata, cartaAtt);
+			s.salvaMani();
+			s.salvaMazzo();
+			s.salvaPunteggio();
+			partita.salvaTurnoGara(cartaGiocata, cartaAtt);
 			//controllo se è stata giocata una di queste carte, se cosi fosse passeremo al form del rigore, altrimenti rimaremmo in questo form
 			if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 			{
@@ -220,10 +220,10 @@ public class FormGiocaPartitaController implements Initializable
 		{
 			//salvo le mani, il mazzo, il punteggio e l'ultimo turno giocato della partita
 			s = new Salvataggio(g.getGara(codicePartita));
-			s.salvaMani("partite");
-			s.salvaMazzo("partite");
-			s.salvaPunteggio("partite");
-			partita.salvaTurnoGara("partite", cartaGiocata, cartaAtt);
+			s.salvaMani();
+			s.salvaMazzo();
+			s.salvaPunteggio();
+			partita.salvaTurnoGara(cartaGiocata, cartaAtt);
 			alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 		}
 		else 
@@ -497,22 +497,23 @@ public class FormGiocaPartitaController implements Initializable
 			//eseguo il codice solo se siamo in un turno di attacco e l'attaccante è un robot o il caso opposto
 			if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot()))
 			{
-				Platform.runLater(new Runnable() 
+				Thread taskThread = new Thread(() -> 
 				{
-					@Override
-					public void run() 
-					{
-						try 
-						{
-							Thread.sleep(3000);
-						}
-						catch (InterruptedException e) 
-						{
-							e.printStackTrace();
-						}
-						btnGiocaCarta.fire();
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
+					Platform.runLater(new Runnable() 
+					{
+						@Override
+						public void run() 
+						{
+							btnGiocaCarta.fire();
+						}
+					});
 				});
+				taskThread.start();
 			}
 		}
 	}

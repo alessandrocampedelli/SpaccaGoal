@@ -231,7 +231,7 @@ public class Partita extends Gara
 		pw.close();
 	}
 	
-	public void salvaTurnoGara(String partiteTornei, Carta cartaGiocata, Carta cartaAtt) throws IOException
+	public void salvaTurnoGara(Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
