@@ -150,9 +150,9 @@ public class Salvataggio
 	{
 		p.distribuzioneCarte();
 		this.salvaNomiGiocatori(percorso);
-		this.salvaMazzo(percorso);
-		this.salvaMani(percorso);
-		this.salvaPunteggio(percorso);
+		this.salvaMazzo();
+		this.salvaMani();
+		this.salvaPunteggio();
 		p.salvaTurno(percorso);
 	}
 	
@@ -208,7 +208,7 @@ public class Salvataggio
 		salvaFile(absolutePath, t.getTabelloneGiocatori());
 	}
 	
-	public void salvaMazzo(String partitaTorneo) throws IOException
+	public void salvaMazzo() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
@@ -225,7 +225,7 @@ public class Salvataggio
 		fw.close();
 	}
 	
-	public void salvaMani(String partitaTorneo) throws IOException
+	public void salvaMani() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
@@ -257,7 +257,7 @@ public class Salvataggio
 		fw.close();
 	}
 	
-	public void salvaPunteggio(String partitaTorneo) throws IOException
+	public void salvaPunteggio() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 

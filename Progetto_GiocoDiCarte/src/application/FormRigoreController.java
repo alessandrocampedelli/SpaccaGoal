@@ -87,9 +87,9 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani("partite");
-		s.salvaMazzo("partite");
-		s.salvaPunteggio("partite");
+		s.salvaMani();
+		s.salvaMazzo();
+		s.salvaPunteggio();
 		partita.salvaTurnoRigore(cartaGiocata);
 
 		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
@@ -120,9 +120,9 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani("partite");
-		s.salvaMazzo("partite");
-		s.salvaPunteggio("partite");
+		s.salvaMani();
+		s.salvaMazzo();
+		s.salvaPunteggio();
 		partita.salvaTurnoRigore(cartaGiocata);
 		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
 		{
@@ -152,9 +152,9 @@ public class FormRigoreController implements Initializable
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
 		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani("partite");
-		s.salvaMazzo("partite");
-		s.salvaPunteggio("partite");
+		s.salvaMani();
+		s.salvaMazzo();
+		s.salvaPunteggio();
 		partita.salvaTurnoRigore(cartaGiocata);
 		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
 		{
@@ -215,33 +215,34 @@ public class FormRigoreController implements Initializable
 						direzione = robot.scegliDirezione();
 						coloraDirezioneRobot(direzione, "red");
 					}
-	        		
-					Platform.runLater(new Runnable() 
+					Thread taskThread = new Thread(() -> 
 					{
-				        @Override
-				        public void run() {
-				        	try 
-				        	{
-								Thread.sleep(3000);
-							} 
-				        	catch (InterruptedException e) 
-				        	{
-								e.printStackTrace();
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						Platform.runLater(new Runnable() 
+						{
+							@Override
+							public void run() 
+							{
+								if(direzione == 0) 
+								{
+				        			btnSinistra.fire();
+				        		}
+								else if(direzione == 1) 
+								{
+				        			btnCentro.fire();
+				        		}
+								else 
+								{
+				        			btnDestra.fire();
+				        		}
 							}
-							if(direzione == 0) 
-							{
-			        			btnSinistra.fire();
-			        		}
-							else if(direzione == 1) 
-							{
-			        			btnCentro.fire();
-			        		}
-							else 
-							{
-			        			btnDestra.fire();
-			        		}
-				        }
-				    });
+						});
+					});
+					taskThread.start();
 				}
 			}
 			catch(IOException e)

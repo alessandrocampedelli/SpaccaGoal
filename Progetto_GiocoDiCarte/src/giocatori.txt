@@ -10,7 +10,7 @@ bb,0,0,r
 cc,1,0,r
 ee,2,0,p
 qq,0,0,p
-aaa,6,1,r
-bbb,3,2,r
-ccc,1,0,r
-ddd,2,0,r
+aaa,10,2,r
+bbb,10,4,r
+ccc,3,0,r
+ddd,6,0,r
