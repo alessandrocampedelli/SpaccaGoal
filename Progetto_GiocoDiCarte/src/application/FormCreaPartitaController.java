@@ -1,11 +1,6 @@
 package application;
 
 import javafx.fxml.FXML;
-
-
-
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -20,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.*;
 import classi.Salvataggio;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,9 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import com.sun.tools.javac.Main;
-
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,6 +36,7 @@ import classi.Partita;
 import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
+
 public class FormCreaPartitaController
 {
 	@FXML

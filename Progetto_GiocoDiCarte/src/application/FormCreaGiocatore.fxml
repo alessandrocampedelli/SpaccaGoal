@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="524.0" prefWidth="539.0"
+	xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormCreaGiocatoreController">
+	<children>
+		<ImageView fitHeight="70.0" fitWidth="63.0"
+			onMouseClicked="#btnVaiIndietro1" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../../frecciaTornaIndietro.jpg" />
+			</image>
+		</ImageView>
+		<Label layoutX="178.0" layoutY="40.0"
+			text="CREA UN NUOVO GIOCATORE" />
+		<CheckBox fx:id="chbRobot" layoutX="338.0" layoutY="106.0"
+			mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
+		<Label layoutX="329.0" layoutY="89.0" text="Robot" />
+		<TextField fx:id="txtAlias" layoutX="168.0" layoutY="106.0" />
+		<Button fx:id="btnAggiungiGiocatore" layoutX="190.0"
+			layoutY="145.0" mnemonicParsing="false"
+			onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
+		<Label layoutX="188.0" layoutY="72.0"
+			text="Inserisci alias del giocatore" />
+		<ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0"
+			layoutX="145.0" layoutY="203.0" onMouseClicked="#eliminaGiocatore"
+			prefHeight="297.0" prefWidth="248.0" />
+	</children>
+</AnchorPane>
