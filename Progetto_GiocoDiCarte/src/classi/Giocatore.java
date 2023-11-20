@@ -5,19 +5,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 public class Giocatore 
 {
 	private String alias;
 	private int nPartiteVinte;
 	private int nTorneiVinti;
-	private boolean robot;
+	private BooleanProperty robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
 	
 	public Giocatore(String alias, boolean robot) 
 	{
 		this.alias = alias;
-		this.robot = robot;
+		this.robot = new SimpleBooleanProperty(robot);;
 		this.punteggio = 0;
 		this.nPartiteVinte = 0;
 		this.nTorneiVinti = 0;
@@ -42,9 +45,11 @@ public class Giocatore
 	
 	public boolean isRobot()
 	{
+		return robot.get();
+	}
+	public BooleanProperty getRobot() {
 		return robot;
 	}
-	
 	public int getPunteggio() 
 	{
 		return this.punteggio;

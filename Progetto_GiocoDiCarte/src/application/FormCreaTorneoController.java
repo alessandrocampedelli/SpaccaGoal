@@ -9,8 +9,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -32,6 +36,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
 import classi.Giocatore;
@@ -41,14 +47,10 @@ import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
 
-public class FormCreaTorneoController
+public class FormCreaTorneoController implements Initializable
 {
 	@FXML
-	private TextField txtAlias;
-	@FXML
-	private CheckBox chbRobot;
-	@FXML
-	private ListView<String> txtGiocatoriInseriti = new ListView<String>();
+	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	@FXML
 	private Label lblGiocatoriInseriti;
 	@FXML
@@ -59,6 +61,8 @@ public class FormCreaTorneoController
 	private Button btnAggiungiGiocatore = new Button();
 	@FXML
 	private Button btnCreaTorneo = new Button();
+	@FXML
+	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
 
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
@@ -73,41 +77,30 @@ public class FormCreaTorneoController
 	{
 		try 
 		{
-			boolean robot = false;
-			if(txtAlias.getText().trim().equals("")) 
+			if(cmbSelectPlayer.getSelectionModel().getSelectedItem() == null) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
 				throw new IOException();
 			}
-			String nome = txtAlias.getText();
-			if(nomeGiaUsato(nome)) 
+			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
+			String subNome = "";
+			if(nome.contains("(Robot)")) {
+				subNome = nome.substring(0,nome.indexOf('(')-1);
+			}else {
+				subNome = nome;
+			}
+			if(nomeGiaUsato(subNome)) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
+				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
-			if(chbRobot.isSelected()) 
-			{
-				robot = true;
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
-			}
-			else
-			{
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-			}
-
-			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
-			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
-			if(nuovoGiocatore == null) 
-			{
-				nuovoGiocatore = new Giocatore(nome,robot);
-				//aggiungo il giocatore alla lista di giocatori globali
-				leaderboard.addPlayers(nuovoGiocatore);
-			}
+			Giocatore nuovoGiocatore = leaderboard.getPlayers(subNome);
+			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 			setLabel();
+			cmbSelectPlayer.setValue(null);
+		}catch(IllegalArgumentException e){
+			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
 		catch (IOException e) 
 		{
@@ -157,15 +150,15 @@ public class FormCreaTorneoController
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{
-		int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
 		if(indiceEliminato != -1) 
 		{
-			String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA"))
+			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
 			{
 				giocatori.remove(indiceEliminato);
-				txtGiocatoriInseriti.getItems().clear();
-				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+				tableGiocatoriInseriti.getItems().clear();
+				tableGiocatoriInseriti.getItems().addAll(giocatori);
 				setLabel();
 			}	
 		}
@@ -195,8 +188,6 @@ public class FormCreaTorneoController
 
 	private void setLabel() 
 	{
-		txtAlias.clear();
-		chbRobot.setSelected(false);
 		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 
 		if(giocatori.size() <= 4)
@@ -208,9 +199,6 @@ public class FormCreaTorneoController
 			lblSemifinale.setText("");
 		}
 		lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
-
-		txtAlias.clear();
-		chbRobot.setSelected(false);
 
 		if(giocatori.size() == 8) 
 		{
@@ -244,5 +232,36 @@ public class FormCreaTorneoController
 			g[i] = giocatori.get(i).getAlias();
 		}
 		return g;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub//creo la colonna col nome
+		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
+		alias.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		//creo la colonna col nome
+		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
+		
+		//aggiungo le colonne
+		tableGiocatoriInseriti.getColumns().add(alias);
+		tableGiocatoriInseriti.getColumns().add(robot);
+
+		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		alias.setStyle("-fx-alignment: CENTER;");
+		robot.setStyle("-fx-alignment: CENTER;");
+		// TODO Auto-generated method stub
+		for(Giocatore g : leaderboard.getPlayers()) 
+		{
+			if(g.isRobot())
+				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
+			else
+				cmbSelectPlayer.getItems().add(g.getAlias());
+		}
 	}
 }
