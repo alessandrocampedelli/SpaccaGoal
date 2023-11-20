@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,8 +49,8 @@
 				<Font size="14.0" />
 			</font>
 		</Label>
-		<ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="229.0" layoutY="344.0" onMouseClicked="#eliminaGiocatore" prefHeight="253.0" prefWidth="200.0" />
-		<Button fx:id="btnCreaTorneo" layoutX="280.0" layoutY="614.0" mnemonicParsing="false" onAction="#btnCreaTorneo" prefHeight="10.0" prefWidth="94.0" text="CREA TORNEO" />
+		<Button fx:id="btnCreaTorneo" layoutX="280.0" layoutY="614.0" mnemonicParsing="false" onAction="#btnCreaTorneo" prefHeight="10.0" prefWidth="94.0" text="CREA TORNEO" visible="false" />
 		<ComboBox fx:id="cmbSelectPlayer" layoutX="252.0" layoutY="99.0" prefWidth="150.0" />
+      <TableView fx:id="tableGiocatoriInseriti" layoutX="231.0" layoutY="343.0" onMouseClicked="#eliminaGiocatore" prefHeight="252.0" prefWidth="200.0" />
 	</children>
 </AnchorPane>

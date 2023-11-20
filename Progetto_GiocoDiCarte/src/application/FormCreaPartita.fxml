@@ -3,12 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="524.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController">
+<AnchorPane prefHeight="542.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController">
 	<children>
 		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
 			<image>
@@ -21,7 +21,7 @@
 		<Label fx:id="lblGiocatoriInseriti" layoutX="226.0" layoutY="190.0" text="Giocatori inseriti: 0 " />
 		<Label layoutX="247.0" layoutY="65.0" text="Seleziona gli alias dei giocatori" />
 		<Label fx:id="lblGiocatoriDaInserire" layoutX="226.0" layoutY="207.0" text="Giocatori che puoi ancora inserire: 4" />
-		<Button fx:id="btnCreaPartita" layoutX="280.0" layoutY="477.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
-		<ListView fx:id="txtGiocatoriInseriti" fixedCellSize="25.0" layoutX="232.0" layoutY="232.0" onMouseClicked="#eliminaGiocatore" prefHeight="234.0" prefWidth="200.0" />
+		<Button fx:id="btnCreaPartita" layoutX="280.0" layoutY="502.0" mnemonicParsing="false" onAction="#btnCreaPartita" text="CREA PARTITA" visible="false" />
+      <TableView fx:id="tableGiocatoriInseriti" layoutX="227.0" layoutY="238.0" onMouseClicked="#eliminaGiocatore" prefHeight="252.0" prefWidth="200.0" />
 	</children>
 </AnchorPane>

@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -33,6 +36,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
 import classi.Giocatore;
@@ -45,7 +50,7 @@ import classi.Leaderboard;
 public class FormCreaTorneoController implements Initializable
 {
 	@FXML
-	private ListView<String> txtGiocatoriInseriti = new ListView<String>();
+	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	@FXML
 	private Label lblGiocatoriInseriti;
 	@FXML
@@ -77,21 +82,19 @@ public class FormCreaTorneoController implements Initializable
 				throw new IOException();
 			}
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
-
-			if(nomeGiaUsato(nome)) 
+			String subNome = "";
+			if(nome.contains("(Robot)")) {
+				subNome = nome.substring(0,nome.indexOf('(')-1);
+			}else {
+				subNome = nome;
+			}
+			if(nomeGiaUsato(subNome)) 
 			{
 				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
-			Giocatore nuovoGiocatore = leaderboard.getPlayers(nome);
-			if(nuovoGiocatore.isRobot()) 
-			{
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
-			}
-			else
-			{
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-			}
+			Giocatore nuovoGiocatore = leaderboard.getPlayers(subNome);
+			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 			setLabel();
@@ -147,15 +150,15 @@ public class FormCreaTorneoController implements Initializable
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{
-		int indiceEliminato = txtGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
 		if(indiceEliminato != -1) 
 		{
-			String alias  =txtGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+alias, "MESSAGGIO DI CONFERMA"))
+			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
 			{
 				giocatori.remove(indiceEliminato);
-				txtGiocatoriInseriti.getItems().clear();
-				txtGiocatoriInseriti.getItems().addAll(nomiGiocatori());
+				tableGiocatoriInseriti.getItems().clear();
+				tableGiocatoriInseriti.getItems().addAll(giocatori);
 				setLabel();
 			}	
 		}
@@ -233,6 +236,25 @@ public class FormCreaTorneoController implements Initializable
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub//creo la colonna col nome
+		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
+		alias.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		//creo la colonna col nome
+		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
+		
+		//aggiungo le colonne
+		tableGiocatoriInseriti.getColumns().add(alias);
+		tableGiocatoriInseriti.getColumns().add(robot);
+
+		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		alias.setStyle("-fx-alignment: CENTER;");
+		robot.setStyle("-fx-alignment: CENTER;");
 		// TODO Auto-generated method stub
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
