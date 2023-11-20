@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
@@ -12,6 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
@@ -27,6 +31,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import com.sun.tools.javac.Main;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -49,9 +55,10 @@ public class FormCreaGiocatoreController implements Initializable
 	@FXML
 	private Button btnAggiungiGiocatore = new Button();
 	@FXML
-	private ListView<String> txtGiocatoriInseriti = new ListView<String>();
+	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	private Leaderboard leaderboard = new Leaderboard();
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
+	TableColumn<Giocatore, String> alias;
 	
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
@@ -76,7 +83,6 @@ public class FormCreaGiocatoreController implements Initializable
 	{
 		try 
 		{
-			boolean robot = false;
 			if(txtAlias.getText().trim().equals("")) 
 			{
 				txtAlias.clear();
@@ -90,25 +96,16 @@ public class FormCreaGiocatoreController implements Initializable
 				chbRobot.setSelected(false);
 				throw new IllegalArgumentException();
 			}
-			if(chbRobot.isSelected()) 
-			{
-				robot = true;
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
-			}
-			else
-			{
-				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
-			}
-
 			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
 			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
 			if(nuovoGiocatore == null) 
 			{
-				nuovoGiocatore = new Giocatore(nome,robot);
+				nuovoGiocatore = new Giocatore(nome,chbRobot.isSelected());
 				//aggiungo il giocatore alla lista di giocatori globali
 				leaderboard.addPlayers(nuovoGiocatore);
 				leaderboard.salvaPlayers();
 			}
+			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
 			txtAlias.clear();
 			chbRobot.setSelected(false);
 		}
@@ -134,12 +131,28 @@ public class FormCreaGiocatoreController implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		//creo la colonna col nome
+		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
+		alias.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		//creo la colonna col nome
+		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
+		
+		//aggiungo le colonne
+		tableGiocatoriInseriti.getColumns().add(alias);
+		tableGiocatoriInseriti.getColumns().add(robot);
+
+		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		alias.setStyle("-fx-alignment: CENTER;");
+		robot.setStyle("-fx-alignment: CENTER;");
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
-			if(g.isRobot())
-				txtGiocatoriInseriti.getItems().add(g.getAlias()+" (Robot)");
-			else
-				txtGiocatoriInseriti.getItems().add(g.getAlias());
+			tableGiocatoriInseriti.getItems().add(g);
 		}
 	}
 }
