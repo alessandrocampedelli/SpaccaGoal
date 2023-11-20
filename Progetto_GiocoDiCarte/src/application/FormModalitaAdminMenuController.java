@@ -30,7 +30,18 @@ public class FormModalitaAdminMenuController
 			alert.mostraErrore("Si è verificato un errore!","ERRORE");
 		}
 	}
-	
+	@FXML
+	public void btnCreaNewGiocatore(ActionEvent event) 
+	{
+		try 
+		{
+			alert.passaAlForm("/application/FormCreaGiocatore.fxml",event);
+		}
+		catch (IOException e)
+		{
+			alert.mostraErrore("Si è verificato un errore!","ERRORE");
+		}
+	}
 	@FXML
 	public void btnCreaNewTorneo(ActionEvent event) 
 	{

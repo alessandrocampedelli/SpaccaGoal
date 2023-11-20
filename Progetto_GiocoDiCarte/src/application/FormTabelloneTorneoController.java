@@ -114,7 +114,10 @@ public class FormTabelloneTorneoController implements Initializable
 				
 				for(int i = 0; i < giocatori.size(); i++)
 				{
-					labels[i].setText(giocatori.get(i).getAlias());
+					if(giocatori.get(i).isRobot())
+						labels[i].setText(giocatori.get(i).getAlias() + " (Robot)");
+					else
+						labels[i].setText(giocatori.get(i).getAlias());
 				}
 				if(t.getGiocatoreVincenti().size() == 1) 
 				{

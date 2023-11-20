@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -37,12 +38,8 @@ import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
 
-public class FormCreaPartitaController
+public class FormCreaPartitaController implements Initializable
 {
-	@FXML
-	private TextField txtAlias;
-	@FXML
-	private CheckBox chbRobot;
 	@FXML
 	private ListView<String> txtGiocatoriInseriti = new ListView<String>();
 	@FXML
@@ -53,7 +50,8 @@ public class FormCreaPartitaController
 	private Button btnAggiungiGiocatore = new Button();
 	@FXML
 	private Button btnCreaPartita = new Button();
-
+	@FXML
+	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	static Partita p;
@@ -102,45 +100,31 @@ public class FormCreaPartitaController
 	{
 		try 
 		{
-			boolean robot = false;
-			if(txtAlias.getText().trim().equals("")) 
+			if(cmbSelectPlayer.getSelectionModel().getSelectedItem() == null) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
 				throw new IOException();
 			}
-			String nome = txtAlias.getText();
+			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
+
 			if(nomeGiaUsato(nome)) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
+				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
-			if(chbRobot.isSelected()) 
+			Giocatore nuovoGiocatore = leaderboard.getPlayers(nome);
+			if(nuovoGiocatore.isRobot()) 
 			{
-				robot = true;
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
 			}
 			else
 			{
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
 			}
-
-			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
-			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
-			if(nuovoGiocatore == null) 
-			{
-				nuovoGiocatore = new Giocatore(nome,robot);
-				//aggiungo il giocatore alla lista di giocatori globali
-				leaderboard.addPlayers(nuovoGiocatore);
-			}
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
-			txtAlias.clear();
-			chbRobot.setSelected(false);
 			if(giocatori.size() == 4) 
 			{
 				btnAggiungiGiocatore.setVisible(false);
@@ -153,6 +137,7 @@ public class FormCreaPartitaController
 			{
 				btnCreaPartita.setVisible(false);
 			}
+			cmbSelectPlayer.setValue(null);
 		}
 		catch (IOException e) 
 		{
@@ -160,7 +145,7 @@ public class FormCreaPartitaController
 		}
 		catch (IllegalArgumentException e) 
 		{
-			alert.mostraErrore("Nome già utilizzato. Non sono ammessi omonimi","ERRORE");
+			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
 	}
 	
@@ -223,5 +208,17 @@ public class FormCreaPartitaController
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		for(Giocatore g : leaderboard.getPlayers()) 
+		{
+			if(g.isRobot())
+				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
+			else
+				cmbSelectPlayer.getItems().add(g.getAlias());
+		}
 	}
 }

@@ -2,13 +2,15 @@ package application;
 
 import java.io.IOException;
 
+
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
-
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.fxml.FXML;
@@ -44,6 +46,12 @@ public class FormLeaderboardController implements Initializable
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		//creo la colonna col nome
+		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
 		
 		TableColumn<Giocatore, Integer> partiteVinte = new TableColumn<>("PARTITE VINTE");
 		partiteVinte.setCellValueFactory(new PropertyValueFactory<Giocatore, Integer>("nPartiteVinte"));
@@ -55,10 +63,12 @@ public class FormLeaderboardController implements Initializable
 		
 		//aggiungo le colonne
 		table.getColumns().add(alias);
+		table.getColumns().add(robot);
 		table.getColumns().add(partiteVinte);
 		table.getColumns().add(torneiVinti);
 		
 		alias.setStyle("-fx-alignment: CENTER;");
+		robot.setStyle("-fx-alignment: CENTER;");
 		partiteVinte.setStyle("-fx-alignment: CENTER;");
 		torneiVinti.setStyle("-fx-alignment: CENTER;");
 

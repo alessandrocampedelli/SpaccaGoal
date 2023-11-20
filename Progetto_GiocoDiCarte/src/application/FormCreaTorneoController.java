@@ -11,6 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -41,12 +42,8 @@ import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
 
-public class FormCreaTorneoController
+public class FormCreaTorneoController implements Initializable
 {
-	@FXML
-	private TextField txtAlias;
-	@FXML
-	private CheckBox chbRobot;
 	@FXML
 	private ListView<String> txtGiocatoriInseriti = new ListView<String>();
 	@FXML
@@ -59,6 +56,8 @@ public class FormCreaTorneoController
 	private Button btnAggiungiGiocatore = new Button();
 	@FXML
 	private Button btnCreaTorneo = new Button();
+	@FXML
+	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
 
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 	private Salvataggio salvaGara;
@@ -73,41 +72,32 @@ public class FormCreaTorneoController
 	{
 		try 
 		{
-			boolean robot = false;
-			if(txtAlias.getText().trim().equals("")) 
+			if(cmbSelectPlayer.getSelectionModel().getSelectedItem() == null) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
 				throw new IOException();
 			}
-			String nome = txtAlias.getText();
+			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
+
 			if(nomeGiaUsato(nome)) 
 			{
-				txtAlias.clear();
-				chbRobot.setSelected(false);
+				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
-			if(chbRobot.isSelected()) 
+			Giocatore nuovoGiocatore = leaderboard.getPlayers(nome);
+			if(nuovoGiocatore.isRobot()) 
 			{
-				robot = true;
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome+" (Robot)");
 			}
 			else
 			{
 				txtGiocatoriInseriti.getItems().add(txtGiocatoriInseriti.getItems().size(), nome);
 			}
-
-			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
-			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
-			if(nuovoGiocatore == null) 
-			{
-				nuovoGiocatore = new Giocatore(nome,robot);
-				//aggiungo il giocatore alla lista di giocatori globali
-				leaderboard.addPlayers(nuovoGiocatore);
-			}
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			giocatori.add(leaderboard.getPlayers().get(i));
 			setLabel();
+			cmbSelectPlayer.setValue(null);
+		}catch(IllegalArgumentException e){
+			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
 		catch (IOException e) 
 		{
@@ -195,8 +185,6 @@ public class FormCreaTorneoController
 
 	private void setLabel() 
 	{
-		txtAlias.clear();
-		chbRobot.setSelected(false);
 		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 
 		if(giocatori.size() <= 4)
@@ -208,9 +196,6 @@ public class FormCreaTorneoController
 			lblSemifinale.setText("");
 		}
 		lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
-
-		txtAlias.clear();
-		chbRobot.setSelected(false);
 
 		if(giocatori.size() == 8) 
 		{
@@ -244,5 +229,17 @@ public class FormCreaTorneoController
 			g[i] = giocatori.get(i).getAlias();
 		}
 		return g;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		for(Giocatore g : leaderboard.getPlayers()) 
+		{
+			if(g.isRobot())
+				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
+			else
+				cmbSelectPlayer.getItems().add(g.getAlias());
+		}
 	}
 }

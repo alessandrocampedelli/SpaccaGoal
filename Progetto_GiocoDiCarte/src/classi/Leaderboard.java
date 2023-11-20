@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.imageio.plugins.tiff.ExifGPSTagSet;
+
 import java.io.FileNotFoundException;
 public class Leaderboard 
 {
@@ -26,7 +29,15 @@ public class Leaderboard
 			System.out.println(e.getMessage());
 		}
 	}
-
+	public Giocatore getPlayers(String alias) {
+		for(Giocatore g : this.getPlayers()) 
+		{
+			if(g.getAlias().equals(alias)) {
+				return g;
+			}
+		}
+		return null;
+	}
 	//metodo che carica i giocatori gia presenti salvati sul file di testo nell'arrayList
 	private void caricaPlayers(String path) throws FileNotFoundException
 	{
