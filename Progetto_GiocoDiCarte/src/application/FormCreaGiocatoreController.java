@@ -29,6 +29,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
 import com.sun.tools.javac.Main;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableColumn;
@@ -90,6 +92,16 @@ public class FormCreaGiocatoreController implements Initializable
 				throw new IOException();
 			}
 			String nome = txtAlias.getText();
+			if(!checkCharacters(nome)) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
+				throw new IllegalStateException();
+			}
+			if(nome.length() > 13) {
+				txtAlias.clear();
+				chbRobot.setSelected(false);
+				throw new IndexOutOfBoundsException();
+			}
 			if(nomeGiaUsato(nome)) 
 			{
 				txtAlias.clear();
@@ -112,10 +124,14 @@ public class FormCreaGiocatoreController implements Initializable
 		catch (IOException e) 
 		{
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
+		}catch (IllegalStateException e) {
+			alert.mostraErrore("Il nome utilizzato deve contenere solo lettere e/o numeri", "ERRORE");
 		}
 		catch (IllegalArgumentException e) 
 		{
 			alert.mostraErrore("Nome già utilizzato. Non sono ammessi omonimi","ERRORE");
+		}catch (IndexOutOfBoundsException e) {
+			alert.mostraErrore("L'alias deve avere una lunghezza massima di 12 caratteri", "ERRORE");
 		}
 	}
 	public String[] nomiGiocatori() 
@@ -127,7 +143,12 @@ public class FormCreaGiocatoreController implements Initializable
 		}
 		return g;
 	}
-
+	//ritorna true se la stringa è corretta
+	public boolean checkCharacters(String input) {
+        // Utilizza un'espressione regolare per verificare se la stringa contiene solo lettere e numeri
+        String regex = "^[a-zA-Z0-9]+$";
+        return Pattern.matches(regex, input);
+    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
