@@ -135,10 +135,6 @@ public class FormGiocaPartitaController implements Initializable
 				partita.gioca(players[posizioneGiocatoreAttaccante], players[posizioneGiocatoreDifensore], Carta.valueOf(nomeCarta), cartaGiocata);
 				players[posizioneGiocatoreDifensore].getMano().remove(cartaGiocata);
 			}
-			//il form del rigore che ci passerà nel caso in cui sia stata giocata una carta "rigore" o "portiere"
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
-			loader.load();
-			FormRigoreController form = loader.getController();
 			//controllo tramite il metodo se la partita è terminata (i giocatori hanno raggiunto i 5 goal)
 			if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
 			{
@@ -153,6 +149,10 @@ public class FormGiocaPartitaController implements Initializable
 				//controllo se è stata giocata una di queste carte, se cosi fosse passeremo al form del rigore, altrimenti rimaremmo in questo form
 				if(cartaGiocata.equals(Carta.RIGORE) || ((cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_SX)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_C)) || (cartaGiocata.equals(Carta.PORTIERE) && cartaAtt.equals(Carta.RIGORE_DX))))
 				{
+					//il form del rigore che ci passerà nel caso in cui sia stata giocata una carta "rigore" o "portiere"
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("FormRigore.fxml"));
+					loader.load();
+					FormRigoreController form = loader.getController();
 					form.copiaCodice(codicePartita);
 					form.copiaCartaGiocata(cartaAtt);
 					alert.passaAlForm("/application/FormRigore.fxml", event);
