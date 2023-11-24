@@ -68,6 +68,12 @@ public class Alert_cambiaForm
 		    this.stage.setScene(this.scene);
 		    this.stage.show();
 		}catch(NullPointerException e) {
+			/*
+			setRoot(form);
+		    setStage(event);
+		    this.scene = new Scene(getRoot());
+		    this.stage.setScene(this.scene);
+		    this.stage.show();*/
 			event.consume();
 		}
 	}
@@ -84,6 +90,12 @@ public class Alert_cambiaForm
 		    this.stage.setScene(this.scene);
 		    this.stage.show();
 		}catch(NullPointerException e) {
+			/*
+			setRoot(form);
+		    setStage(event);
+		    this.scene = new Scene(getRoot());
+		    this.stage.setScene(this.scene);
+		    this.stage.show();*/
 			event.consume();
 		}
 	}
