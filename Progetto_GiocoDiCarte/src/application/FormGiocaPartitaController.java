@@ -174,16 +174,6 @@ public class FormGiocaPartitaController implements Initializable
 					torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
 				}
 			}
-			/*
-			//Controllo se è stata selezionata una carta, altrimenti mando un messaggio di errore all'utente
-			if(listCarte.getSelectionModel().getSelectedItem() != null) 
-			{
-
-			}
-			else
-			{
-				alert.mostraErrore("Devi selezionare una carta prima di premere il bottone!", "ERRORE!");
-			}*/
 		}catch(IllegalArgumentException e) {
 			alert.mostraErrore("Prima di premere il bottone seleziona una carta", "ERRORE");
 		}catch(IOException e) {
@@ -340,7 +330,7 @@ public class FormGiocaPartitaController implements Initializable
 					if(players[posizioneGiocatoreAttaccante].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreAttaccante]);
-						cartaGiocata = Carta.valueOf(robot.cartaGiocata('a'));
+						cartaGiocata = robot.cartaGiocata('a');
 						listCarte.setMouseTransparent(true);
 					}
 					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
@@ -402,7 +392,7 @@ public class FormGiocaPartitaController implements Initializable
 					if(players[posizioneGiocatoreDifensore].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
-						cartaGiocata = Carta.valueOf(robot.cartaGiocata('d'));
+						cartaGiocata = robot.cartaGiocata('d');
 						listCarte.setMouseTransparent(true);
 					}
 					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
@@ -454,11 +444,12 @@ public class FormGiocaPartitaController implements Initializable
 			stampaGiocatoriLabel();
 			ObservableList<String> items =FXCollections.observableArrayList(nomiCarte);
 			listCarte.setItems(items);
+			ImageView[] _imageView = new ImageView[1];
 			listCarte.setCellFactory(param -> 
 			{
 				return new ListCell<String>() 
 				{	
-					private ImageView imageView = new ImageView();
+					ImageView imageView = new ImageView();
 					@Override
 					public void updateItem(String name, boolean empty) 
 					{
@@ -488,6 +479,7 @@ public class FormGiocaPartitaController implements Initializable
 							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 							}
 							setGraphic(imageView);
+							_imageView[0] = imageView;
 							if(turno.equals("a")) 
 							{
 								if((players[posizioneGiocatoreAttaccante].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreAttaccante,items))) 
@@ -521,7 +513,14 @@ public class FormGiocaPartitaController implements Initializable
 						@Override
 						public void run() 
 						{
-							btnGiocaCarta.fire();
+							if(!_imageView[0].getImage().getUrl().equals(Carta.INDICATORE_GOAL.getImmagine().getUrl()) || !_imageView[0].getImage().getUrl().equals(Carta.ROVESCIATA_DELLANNO.getImmagine().getUrl())
+									|| !_imageView[0].getImage().getUrl().equals(Carta.TIRO_DOMENICA.getImmagine().getUrl())) {
+								System.out.println("fire gioca carta");
+								btnGiocaCarta.fire();
+							}else {
+								System.out.println("fire passa turno");
+								btnPassaTurno.fire();
+							}
 						}
 					});
 				});
