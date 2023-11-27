@@ -333,16 +333,13 @@ public class FormGiocaPartitaController implements Initializable
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreAttaccante]);
 						cartaGiocata = robot.cartaGiocata('a');
+						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 						listCarte.setMouseTransparent(true);
 					}
 					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					if(players[posizioneGiocatoreAttaccante].isRobot()) 
-					{
-						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
-					}
 					String c1;
 					String c2;
 					Carta cPescata1;
@@ -395,19 +392,15 @@ public class FormGiocaPartitaController implements Initializable
 					if(players[posizioneGiocatoreDifensore].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
-						//LA CARTA GIOCATA A VALORE NULLO, DEVE ESSERE LA CARTA DELL'ATTACCANTE
-						robot.setCartaGiocata(cartaGiocata);
+						robot.setCartaGiocata(Carta.valueOf(nomeCarta));
 						cartaGiocata = robot.cartaGiocata('d');
 						listCarte.setMouseTransparent(true);
+						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
 					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(players[posizioneGiocatoreDifensore].isRobot()) 
-					{
-						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
-					}
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
 						//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no

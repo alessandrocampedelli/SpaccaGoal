@@ -21,17 +21,37 @@ public class Robot
 	{
 		this.cartaGiocataAvversario = cartaGiocata;
 	}
-	
-	public Giocatore getPlayer() 
+	//metodo che ritorna la carta che giocherà il giocatore
+	public Carta cartaGiocata(char turno) 
 	{
-		return player;
+		ArrayList<Carta> carteGiocabili = new ArrayList<>();
+		for(Carta c : player.getMano()) 
+		{
+			if(turno == 'a') 
+			{
+				if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.MISTER) || c.equals(Carta.GOAL))
+				{
+					carteGiocabili.add(c);
+				}
+			}
+			else 
+			{
+				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.VAR) || c.equals(Carta.FUORIGIOCO))
+				{
+					carteGiocabili.add(c);
+				}
+			}
+		}
+		if(carteGiocabili.size()>0)
+		{
+			return scegliCarta(carteGiocabili, turno);
+		}
+		else
+		{
+			return Carta.INDICATORE_GOAL;
+		}
 	}
-	
-	public void setPlayer(Giocatore player) 
-	{
-		this.player = player;
-	}
-	
+
 	public Carta scegliCarta(ArrayList<Carta> carte, char turno) 
 	{
 		if(turno == 'a') 
@@ -78,38 +98,6 @@ public class Robot
 		}
 		return max;
 	}
-	
-	//metodo che ritorna la carta che giocherà il giocatore
-	public Carta cartaGiocata(char turno) 
-	{
-		ArrayList<Carta> carteGiocabili = new ArrayList<>();
-		for(Carta c : player.getMano()) 
-		{
-			if(turno == 'a') 
-			{
-				if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.MISTER) || c.equals(Carta.GOAL))
-				{
-					carteGiocabili.add(c);
-				}
-			}
-			else 
-			{
-				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.VAR) || c.equals(Carta.FUORIGIOCO))
-				{
-					carteGiocabili.add(c);
-				}
-			}
-		}
-		if(carteGiocabili.size()>0)
-		{
-			return scegliCarta(carteGiocabili, turno);
-		}
-		else
-		{
-			return Carta.INDICATORE_GOAL;
-		}
-	}
-
 	public int scegliDirezione() 
 	{
 		Random r =  new Random();
