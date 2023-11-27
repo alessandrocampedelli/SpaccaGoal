@@ -513,14 +513,16 @@ public class FormGiocaPartitaController implements Initializable
 						@Override
 						public void run() 
 						{
-							if(!_imageView[0].getImage().getUrl().equals(Carta.INDICATORE_GOAL.getImmagine().getUrl()) || !_imageView[0].getImage().getUrl().equals(Carta.ROVESCIATA_DELLANNO.getImmagine().getUrl())
-									|| !_imageView[0].getImage().getUrl().equals(Carta.TIRO_DOMENICA.getImmagine().getUrl())) {
+							btnGiocaCarta.fire();
+							/*
+							if(!_imageView[0].getImage().getUrl().equals(Carta.INDICATORE_GOAL.getImmagine().getUrl()) && !_imageView[0].getImage().getUrl().equals(Carta.ROVESCIATA_DELLANNO.getImmagine().getUrl())
+									&& !_imageView[0].getImage().getUrl().equals(Carta.TIRO_DOMENICA.getImmagine().getUrl())) {
 								System.out.println("fire gioca carta");
 								btnGiocaCarta.fire();
 							}else {
 								System.out.println("fire passa turno");
 								btnPassaTurno.fire();
-							}
+							}*/
 						}
 					});
 				});

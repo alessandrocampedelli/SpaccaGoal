@@ -11,6 +11,6 @@ cc,1,0,r
 ee,2,0,p
 qq,0,0,p
 aaa,13,2,r
-bbb,12,8,r
+bbb,13,8,r
 ccc,3,0,r
 ddd,6,0,r
