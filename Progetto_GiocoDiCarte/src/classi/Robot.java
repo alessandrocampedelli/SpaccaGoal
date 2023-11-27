@@ -7,55 +7,19 @@ public class Robot
 	private Giocatore player;
 	private Carta cartaGiocataAvversario;
 	
-	public Carta getCartaGiocata() {
-		return cartaGiocataAvversario;
-	}
-	public void setCartaGiocata(Carta cartaGiocata) {
-		this.cartaGiocataAvversario = cartaGiocata;
-	}
-	public Carta scegliCarta(ArrayList<Carta> carte, char turno) {
-		if(turno == 'a') {
-			return getMaxPriorityAtt(carte);
-		}else {
-			return cartaCorrettaDif(carte,getCartaGiocata().getPriority());
-		}
-	}
-	private Carta cartaCorrettaDif(ArrayList<Carta> carteDif, int priority) {
-		//se le carte di difesa sono meno della metà delle carte che ha in mano fa passa turno
-		if(this.player.getMano().size() > 2*carteDif.size()) {
-			return Carta.INDICATORE_GOAL;
-		}else {
-			//altrimenti gioco la carta di difesa con priorità minore
-			return getMinPriorityDif(carteDif);
-		}
-	}
-	private Carta getMaxPriorityAtt(ArrayList<Carta> carteAtt) {
-		Carta max = carteAtt.get(0);
-		int maxPriority = max.getPriority();
-		for(int i = 1; i < carteAtt.size(); i++) {
-			Carta c = carteAtt.get(i);
-			if(c.getPriority() > maxPriority) {
-				max = c;
-				maxPriority = c.getPriority();
-			}
-		}
-		return max;
-	}
-	private Carta getMinPriorityDif(ArrayList<Carta> carteDif) {
-		Carta min = carteDif.get(0);
-		int minPriority = min.getPriority();
-		for(int i = 1; i < carteDif.size(); i++) {
-			Carta c = carteDif.get(i);
-			if(c.getPriority() < minPriority) {
-				min = c;
-				minPriority = c.getPriority();
-			}
-		}
-		return min;
-	}
 	public Robot(Giocatore player) 
 	{
 		this.player = player;
+	}
+	
+	public Carta getCartaGiocata() 
+	{
+		return cartaGiocataAvversario;
+	}
+	
+	public void setCartaGiocata(Carta cartaGiocata) 
+	{
+		this.cartaGiocataAvversario = cartaGiocata;
 	}
 	
 	public Giocatore getPlayer() 
@@ -66,6 +30,53 @@ public class Robot
 	public void setPlayer(Giocatore player) 
 	{
 		this.player = player;
+	}
+	
+	public Carta scegliCarta(ArrayList<Carta> carte, char turno) 
+	{
+		if(turno == 'a') 
+		{
+			return getMaxPriorityAtt(carte);
+		}
+		else 
+		{
+			return cartaCorrettaDif(carte,cartaGiocataAvversario);
+		}
+	}
+	
+	private Carta cartaCorrettaDif(ArrayList<Carta> carteDif, Carta cartaGiocata) 
+	{
+		boolean ugualePriority = false;
+		Carta carta = null;
+		for(int i = 0; i < carteDif.size(); i++)
+		{
+			if(cartaGiocata.getPriority() == carteDif.get(i).getPriority())
+			{
+				ugualePriority = true;
+				carta = carteDif.get(i);
+			}
+		}
+		if(ugualePriority == false)
+		{
+			carta = Carta.INDICATORE_GOAL;
+		}
+		return carta;
+	}
+	
+	private Carta getMaxPriorityAtt(ArrayList<Carta> carteAtt) 
+	{
+		Carta max = carteAtt.get(0);
+		int maxPriority = max.getPriority();
+		for(int i = 1; i < carteAtt.size(); i++) 
+		{
+			Carta c = carteAtt.get(i);
+			if(c.getPriority() > maxPriority) 
+			{
+				max = c;
+				maxPriority = c.getPriority();
+			}
+		}
+		return max;
 	}
 	
 	//metodo che ritorna la carta che giocherà il giocatore
@@ -98,14 +109,7 @@ public class Robot
 			return Carta.INDICATORE_GOAL;
 		}
 	}
-	/*
-	protected Carta scegliCarta(ArrayList<Carta> carte, char turno) 
-	{
-		Random r = new Random();
-		int randomNumber = r.nextInt(carte.size());
-		return carte.get(randomNumber);
-	}
-	*/
+
 	public int scegliDirezione() 
 	{
 		Random r =  new Random();

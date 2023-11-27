@@ -107,10 +107,12 @@ public class FormGiocaPartitaController implements Initializable
 	@FXML
 	public void btnGiocaCarta(ActionEvent event)
 	{
-		try {
+		try 
+		{
 			if(turno.equals("a"))
 			{
-				if(listCarte.getSelectionModel().getSelectedItem() == null && !players[posizioneGiocatoreAttaccante].isRobot()) {
+				if(listCarte.getSelectionModel().getSelectedItem() == null && !players[posizioneGiocatoreAttaccante].isRobot()) 
+				{
 					throw new IllegalArgumentException();
 				}
 				if(!players[posizioneGiocatoreAttaccante].isRobot()) 
@@ -337,7 +339,8 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.BLUE);
 					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
-					if(players[posizioneGiocatoreAttaccante].isRobot()) {
+					if(players[posizioneGiocatoreAttaccante].isRobot()) 
+					{
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
 					String c1;
@@ -392,6 +395,8 @@ public class FormGiocaPartitaController implements Initializable
 					if(players[posizioneGiocatoreDifensore].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
+						//LA CARTA GIOCATA A VALORE NULLO, DEVE ESSERE LA CARTA DELL'ATTACCANTE
+						robot.setCartaGiocata(cartaGiocata);
 						cartaGiocata = robot.cartaGiocata('d');
 						listCarte.setMouseTransparent(true);
 					}
@@ -399,7 +404,8 @@ public class FormGiocaPartitaController implements Initializable
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
 					lblTurnoAttacco.setTextFill(Color.RED);
 					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
-					if(players[posizioneGiocatoreDifensore].isRobot()) {
+					if(players[posizioneGiocatoreDifensore].isRobot()) 
+					{
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
@@ -503,9 +509,12 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				Thread taskThread = new Thread(() -> 
 				{
-					try {
+					try 
+					{
 						Thread.sleep(3000);
-					} catch (InterruptedException e) {
+					} 
+					catch (InterruptedException e) 
+					{
 						e.printStackTrace();
 					}
 					Platform.runLater(new Runnable() 
