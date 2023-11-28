@@ -200,6 +200,7 @@ public class FormGiocaPartitaController implements Initializable
 			{
 				//non è stata pescata la carta mister, quindi il difensore non si è potuto difendere e per questo motivo esso ha subito goal
 				players[posizioneGiocatoreAttaccante].aggiungiGoal();
+				//serve per label
 				partita.setCartePescate(1);
 			}
 		}
@@ -443,7 +444,6 @@ public class FormGiocaPartitaController implements Initializable
 			stampaGiocatoriLabel();
 			ObservableList<String> items =FXCollections.observableArrayList(nomiCarte);
 			listCarte.setItems(items);
-			ImageView[] _imageView = new ImageView[1];
 			listCarte.setCellFactory(param -> 
 			{
 				return new ListCell<String>() 
@@ -478,7 +478,6 @@ public class FormGiocaPartitaController implements Initializable
 							case "VAR": imageView.setImage(Carta.VAR.getImmagine()); break;
 							}
 							setGraphic(imageView);
-							_imageView[0] = imageView;
 							if(turno.equals("a")) 
 							{
 								if((players[posizioneGiocatoreAttaccante].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreAttaccante,items))) 
@@ -515,16 +514,11 @@ public class FormGiocaPartitaController implements Initializable
 						@Override
 						public void run() 
 						{
-							btnGiocaCarta.fire();
-							/*
-							if(!_imageView[0].getImage().getUrl().equals(Carta.INDICATORE_GOAL.getImmagine().getUrl()) && !_imageView[0].getImage().getUrl().equals(Carta.ROVESCIATA_DELLANNO.getImmagine().getUrl())
-									&& !_imageView[0].getImage().getUrl().equals(Carta.TIRO_DOMENICA.getImmagine().getUrl())) {
-								System.out.println("fire gioca carta");
+							if(!cartaGiocata.equals(Carta.INDICATORE_GOAL)) {
 								btnGiocaCarta.fire();
 							}else {
-								System.out.println("fire passa turno");
 								btnPassaTurno.fire();
-							}*/
+							}
 						}
 					});
 				});
