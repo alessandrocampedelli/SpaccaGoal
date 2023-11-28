@@ -86,7 +86,7 @@ public class Torneo extends Gara
 		String players = "";
 		for(Giocatore g : this.giocatoriVincenti) 
 		{
-			players +=g.getAlias()+"\n";
+			players +=g.getAlias()+(g.isRobot() ? " (Robot)" : "")+"\n";
 		}
 		return players;
 	}

@@ -39,13 +39,4 @@ public class FormPrincipaleController
 	{
 		alert.passaAlForm("/application/FormModalitaGiocatore.fxml",event);
 	}
-	@FXML
-	Button button = new Button();
-	@FXML
-	public void closeButton(ActionEvent event) throws IOException
-	{
-		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		if(alert.chiediConferma("Sei sicuro di voler chiudere il gioco?","MESSAGGIO DI CONFERMA"))
-			stage.close();
-	}
 }

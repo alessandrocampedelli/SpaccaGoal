@@ -14,9 +14,9 @@
 				<Font name="System Bold" size="16.0" />
 			</font>
 		</Label>
-		<Button defaultButton="true" layoutX="216.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="188.0" text="VISUALIZZA LEADERBOARD" />
-		<Button defaultButton="true" layoutX="216.0" layoutY="98.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' AMMINISTRATORE" />
-		<Button defaultButton="true" layoutX="216.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' GIOCATORE" />
+		<Button defaultButton="true" layoutX="216.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="188.0" text="VISUALIZZA LEADERBOARD" />
+		<Button defaultButton="true" layoutX="216.0" layoutY="143.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' AMMINISTRATORE" />
+		<Button defaultButton="true" layoutX="216.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' GIOCATORE" />
 		<ImageView fitHeight="283.0" fitWidth="154.0" layoutX="32.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
@@ -27,6 +27,5 @@
 				<Image url="@../../mazzo_di_carte/indicatoreGoal.jpg" />
 			</image>
 		</ImageView>
-      <Button fx:id="button" defaultButton="true" layoutX="216.0" layoutY="347.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="63.0" prefWidth="188.0" text="CHIUDI PROGRAMMA" />
 	</children>
 </AnchorPane>

@@ -164,7 +164,7 @@ public class Partita extends Gara
 		{
 			for(Carta c : manoAvversario) 
 			{
-				if(c.getTipologia().equals(Tipologia.DIFESA))
+				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.VAR) || c.equals(Carta.FUORIGIOCO))
 					return true;
 			}
 			return false;
@@ -338,7 +338,7 @@ public class Partita extends Gara
 		String info = "";
 		for(Giocatore p: this.getGiocatori()) 
 		{
-			info += "Giocatore "+p.getAlias()+"\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
+			info += "Giocatore "+p.getAlias() +(p.isRobot() ? " (Robot)" : "") + "\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
 		}
 		return info;
 	}
