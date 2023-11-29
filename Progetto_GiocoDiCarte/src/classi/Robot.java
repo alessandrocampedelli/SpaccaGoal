@@ -67,6 +67,7 @@ public class Robot
 	private Carta cartaCorrettaDif(ArrayList<Carta> carteDif, Carta cartaGiocata) 
 	{
 		boolean ugualePriority = false;
+		boolean presenzaRoccia = false;
 		Carta carta = null;
 		for(int i = 0; i < carteDif.size(); i++)
 		{
@@ -75,10 +76,19 @@ public class Robot
 				ugualePriority = true;
 				carta = carteDif.get(i);
 			}
-		}
-		if(ugualePriority == false)
+			//mi serve sapere se fra le carte di difesa c'è un bomber vero solo se l'attaccante ha giocato la carta attaccante
+			if(cartaGiocata.getPriority() == 2 && carteDif.get(i).getPriority() == 3)
+			{
+				presenzaRoccia = true;
+			}
+		}		
+		if(!ugualePriority) 
 		{
-			carta = Carta.INDICATORE_GOAL;
+		    carta = Carta.INDICATORE_GOAL;
+		    if(presenzaRoccia) 
+		    {
+		        carta = Carta.DIFENSORE_ROCCIA;
+		    }
 		}
 		return carta;
 	}

@@ -514,9 +514,12 @@ public class FormGiocaPartitaController implements Initializable
 						@Override
 						public void run() 
 						{
-							if(!cartaGiocata.equals(Carta.INDICATORE_GOAL)) {
+							if(!cartaGiocata.equals(Carta.INDICATORE_GOAL)) 
+							{
 								btnGiocaCarta.fire();
-							}else {
+							}
+							else 
+							{		
 								btnPassaTurno.fire();
 							}
 						}
@@ -528,9 +531,9 @@ public class FormGiocaPartitaController implements Initializable
 	}
 	private int getIndexCartaGiocata(int posGiocatore, ObservableList<String> items) {
 		int cellaDaColorare = -1;
-		for (int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size(); i++) {
 	        String name = items.get(i);
-	        if (players[posizioneGiocatoreAttaccante].isRobot() && name.equals(cartaGiocata.name())) {
+	        if(players[posGiocatore].isRobot() && name.equals(cartaGiocata.name())) {
 	        	cellaDaColorare = i;
 	            break;
 	        }
@@ -550,6 +553,17 @@ public class FormGiocaPartitaController implements Initializable
 				btnPassaTurno.setVisible(true);
 				btnGiocaCarta.setVisible(true);
 				btnSospendiGara.setVisible(true);
+			}
+			else
+			{
+				if(cartaGiocata.equals(Carta.INDICATORE_GOAL)) 
+				{
+					lblInfoUtente.setText("Non hai carte di difesa corrette con le quali difenderti. Sei costretto a passare il turno e subire gol");
+				}
+				else
+				{					
+					lblInfoUtente.setText("La carta che giocherà il robot è "+cartaGiocata);
+				}
 			}
 		}
 		else 
