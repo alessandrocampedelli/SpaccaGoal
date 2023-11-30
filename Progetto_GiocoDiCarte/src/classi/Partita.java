@@ -1,11 +1,20 @@
 package classi;
 
 import java.io.File;
+
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
-
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javafx.event.ActionEvent;
 
 public class Partita extends Gara
@@ -320,6 +329,48 @@ public class Partita extends Gara
 		}
 		fw.close();
 	}
+	public void inviaMailAlVincitore() {
+		// Indirizzo email e password dell'account mittente
+        final String username = "spaccagoal@yahoo.com";
+        final String password = "MatAle1@";
+
+        // Proprietà per la configurazione del server di posta
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+        props.put("mail.smtp.port", "587");
+
+        // Crea un oggetto Session con l'autenticazione
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try{
+            // Crea un oggetto MimeMessage
+            Message message = new MimeMessage(session);
+
+            // Imposta il mittente
+            message.setFrom(new InternetAddress(username));
+
+            // Aggiungi il destinatario
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("campedellicristian86@gmail.com"));
+
+            // Oggetto della mail
+            message.setSubject("Oggetto della mail");
+
+            // Contenuto del messaggio
+            message.setText("Questo è il corpo del messaggio.");
+
+            // Invia il messaggio
+            Transport.send(message);
+        } catch (MessagingException e) {
+        	e.printStackTrace();
+        }
+	}
 	
 	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
 	{
@@ -330,6 +381,7 @@ public class Partita extends Gara
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
+		inviaMailAlVincitore();
 		//s.deleteDirectory("partite");
 	}
 	
