@@ -331,14 +331,14 @@ public class Partita extends Gara
 	}
 	public void inviaMailAlVincitore() {
 		// Indirizzo email e password dell'account mittente
-        final String username = "spaccagoal@yahoo.com";
-        final String password = "MatAle1@";
+        final String username = "spaccagoal@gmx.com";
+        final String password = "QH5GKMUI6Z2PWENOUI3Y";
 
         // Proprietà per la configurazione del server di posta
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+        props.put("mail.smtp.host", "mail.gmx.com");
         props.put("mail.smtp.port", "587");
 
         // Crea un oggetto Session con l'autenticazione
@@ -357,13 +357,13 @@ public class Partita extends Gara
             message.setFrom(new InternetAddress(username));
 
             // Aggiungi il destinatario
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("campedellicristian86@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alessandro.campedelli15@gmail.com"));
 
             // Oggetto della mail
-            message.setSubject("Oggetto della mail");
+            message.setSubject("Quanto godo ALEALEALE");
 
             // Contenuto del messaggio
-            message.setText("Questo è il corpo del messaggio.");
+            message.setText("cimpe");
 
             // Invia il messaggio
             Transport.send(message);
