@@ -1,4 +1,4 @@
-a,0,2,p,alessandro.campedelli15@gmail.com
+a,15,2,p,alessandro.campedelli15@gmail.com
 b,8,5,p,matteo.boscherini17@gmail.com
 c,12,1,p,alessandro.campedelli15@gmail.com
 d,5,3,p,matteo.boscherini17@gmail.com

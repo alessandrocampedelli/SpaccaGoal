@@ -8,6 +8,7 @@ import java.util.Scanner;
 import javax.imageio.plugins.tiff.ExifGPSTagSet;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 public class Leaderboard 
 {
 	private ArrayList<Giocatore> players;
@@ -104,5 +105,17 @@ public class Leaderboard
 				return g;
 		}
 		return null;
+	}
+	public String[][] toMatrix(){
+		String[][] matrice = new String[players.size()][4];
+		for(int r = 0; r < matrice.length; r++) {
+			for(Giocatore g : this.players) {
+				matrice[r][0] = g.getAlias();
+				matrice[r][1] = Integer.toString(g.getNPartiteVinte());
+				matrice[r][2] = Integer.toString(g.getNTorneiVinti());
+				matrice[r][3] = (g.isRobot() ? "SI" : "NO");
+			}
+		}
+		return matrice;
 	}
 }

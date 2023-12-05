@@ -1,22 +1,36 @@
 package classi;
 
 import java.io.File;
-
-
-
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 import javafx.event.ActionEvent;
 
 public class Partita extends Gara
@@ -27,7 +41,7 @@ public class Partita extends Gara
 	private int posizioneGiocatoreDifensore;
 	private String nomeCarta;
 	private int cartePescate;
-
+	private Leaderboard tabella = new Leaderboard();
 	public Partita(ArrayList<Giocatore> giocatori, String codice)
 	{
 		super(giocatori,codice);
@@ -354,29 +368,127 @@ public class Partita extends Gara
         try{
         	for(Giocatore g : giocatori) 
         	{
-                // Crea un oggetto MimeMessage
+        		// Creazione del messaggio
                 Message message = new MimeMessage(session);
-
-                // Imposta il mittente
+                // Impostazione dell'indirizzo email del mittente
                 message.setFrom(new InternetAddress(username));
-
-                // Aggiungi il destinatario
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(g.getEmail()));
-
+                // Aggiunta degli indirizzi email dei destinatari
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(g.getEmail()));
                 // Oggetto della mail
-                message.setSubject("Quanto godo ALEALEALE");
+                message.setSubject("SPACCA GOAL - RISULTATI PARTITA");
 
-                // Contenuto del messaggio
-                message.setText("cimpe");
 
+                LocalDateTime dataEOra = LocalDateTime.now();
+                LocalDate data = dataEOra.toLocalDate();
+                LocalTime ora = dataEOra.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
+                // Creazione di una parte di testo del messaggio
+                BodyPart messageBodyPart = new MimeBodyPart();
+                messageBodyPart.setText("Ciao, "+g.getAlias()+"!.\nEcco a te i risultati della partita '"+this.codice+"' "
+                		+ "terminata in data "+data+" alle ore "+ora+"\n"+this.mostraRisultati()+"Grazie per aver giocato a SPACCA GOAL. A presto!\n"
+                				+ "Ecco la leaderboard aggiornata:\n "+tabella);
+
+                // Creazione di una parte per l'allegato
+                MimeBodyPart attachmentPart = new MimeBodyPart();
+                attachmentPart.attachFile(getPdf());
+
+                // Creazione di un oggetto Multipart per contenere il testo e l'allegato
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(messageBodyPart);
+                multipart.addBodyPart(attachmentPart);
+
+                // Impostazione del contenuto del messaggio come il Multipart
+                message.setContent(multipart);
                 // Invia il messaggio
                 Transport.send(message);
         	}
         } catch (MessagingException e) {
         	e.printStackTrace();
-        }
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+	public String getPdf() {
+		// Crea un nuovo documento PDF
+        PDDocument document = new PDDocument();
+        String path = "";
+		try { 
+			String[][] data = tabella.toMatrix();
+	        // Aggiunge una nuova pagina al documento
+	        PDPage page = new PDPage(PDRectangle.A4);
+	        document.addPage(page);
+
+	        // Crea un nuovo stream di contenuto per la pagina
+	        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+	        drawTable(data, document, page, contentStream);
+	        // Chiude lo stream di contenuto
+	        contentStream.close();
+	        path = System.getProperty("user.dir")+"/leaderboard.pdf";
+	        // Salva il documento su disco
+	        document.save(path);
+
+	        // Chiude il documento
+	        document.close();
+		}catch(IOException e) {
+			e.getMessage();
+		}
+        return path;
+	}
+	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream) {
+		try {
+
+			// Impostare le dimensioni della cella e la posizione iniziale
+	        float margin = 50;
+	        float yStart = page.getMediaBox().getHeight() - margin;
+	        float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+	        float yPosition = yStart;
+	        float tableHeight = 20; // Altezza delle celle
+	        float rowHeight = 15; // Altezza delle righe
+			String path = System.getProperty("user.dir")+"/Roboto-Regular.ttf";
+	        PDType0Font font = PDType0Font.load(document, new FileInputStream(path));
+	        contentStream.setFont(font, 12);
+	     // Impostare il font
+	        contentStream.setFont(font, 12);
+	        
+	        // Impostare la larghezza delle colonne
+	        float tableWidths[] = {150f, 150f, 150f};
+
+	        // Impostare la posizione iniziale per il contenuto della tabella
+	        float yBottom = yPosition - tableHeight;
+
+	        for (int i = 0; i < data.length; i++) {
+	            float yPositionNew = yPosition - (i * rowHeight);
+
+	            // Disegnare la riga orizzontale
+	            contentStream.moveTo(margin, yPositionNew);
+	            contentStream.lineTo(margin + tableWidth, yPositionNew);
+	            contentStream.stroke();
+
+	            for (int j = 0; j < data[i].length-1; j++) {
+	                float xPosition = margin + tableWidths[j];
+
+	                // Disegnare la colonna verticale
+	                contentStream.moveTo(xPosition, yPosition);
+	                contentStream.lineTo(xPosition, yBottom);
+	                contentStream.stroke();
+
+	                // Aggiungere il testo nella cella
+	                contentStream.beginText();
+	                contentStream.newLineAtOffset(margin + 5, yPosition - 12);
+	                contentStream.showText(data[i][j]);
+	                contentStream.endText();
+
+	                margin += tableWidths[j];
+	            }
+
+	            yPosition -= rowHeight;
+	            margin = 50; // Ripristina il margine per la prossima riga
+	        }
+		}catch(IOException e) {
+			e.getMessage();
+		}
+	}
 	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
 	{
 		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
