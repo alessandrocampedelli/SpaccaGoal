@@ -48,9 +48,9 @@ public class Leaderboard
 			String[] infoPlayer = riga.split(",");
 			Giocatore g;
 			if(infoPlayer[3].equals("p"))
-				g = new Giocatore(infoPlayer[0],false);
+				g = new Giocatore(infoPlayer[0],false,infoPlayer[4]);
 			else
-				g = new Giocatore(infoPlayer[0],true);
+				g = new Giocatore(infoPlayer[0],true,infoPlayer[4]);
 			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
 			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
 			addPlayers(g);
@@ -68,6 +68,7 @@ public class Leaderboard
 				riga += ",r";
 			else
 				riga += ",p";
+			riga +=","+g.getEmail();
 			fw.println(riga);
 		}
 		fw.close();

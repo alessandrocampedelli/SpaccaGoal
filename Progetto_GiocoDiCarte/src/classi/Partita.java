@@ -3,11 +3,13 @@ package classi;
 import java.io.File;
 
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -329,10 +331,10 @@ public class Partita extends Gara
 		}
 		fw.close();
 	}
-	public void inviaMailAlVincitore() {
+	public void inviaMail() {
 		// Indirizzo email e password dell'account mittente
-        final String username = "spaccagoal@gmx.com";
-        final String password = "QH5GKMUI6Z2PWENOUI3Y";
+        final String username = "spacca.goal@gmx.com";
+        final String password = "FK4VUZD7GIZSHMQUH7BZ";
 
         // Proprietà per la configurazione del server di posta
         Properties props = new Properties();
@@ -350,23 +352,26 @@ public class Partita extends Gara
                 });
 
         try{
-            // Crea un oggetto MimeMessage
-            Message message = new MimeMessage(session);
+        	for(Giocatore g : giocatori) 
+        	{
+                // Crea un oggetto MimeMessage
+                Message message = new MimeMessage(session);
 
-            // Imposta il mittente
-            message.setFrom(new InternetAddress(username));
+                // Imposta il mittente
+                message.setFrom(new InternetAddress(username));
 
-            // Aggiungi il destinatario
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alessandro.campedelli15@gmail.com"));
+                // Aggiungi il destinatario
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(g.getEmail()));
 
-            // Oggetto della mail
-            message.setSubject("Quanto godo ALEALEALE");
+                // Oggetto della mail
+                message.setSubject("Quanto godo ALEALEALE");
 
-            // Contenuto del messaggio
-            message.setText("cimpe");
+                // Contenuto del messaggio
+                message.setText("cimpe");
 
-            // Invia il messaggio
-            Transport.send(message);
+                // Invia il messaggio
+                Transport.send(message);
+        	}
         } catch (MessagingException e) {
         	e.printStackTrace();
         }
@@ -381,7 +386,7 @@ public class Partita extends Gara
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-		inviaMailAlVincitore();
+		inviaMail();
 		//s.deleteDirectory("partite");
 	}
 	

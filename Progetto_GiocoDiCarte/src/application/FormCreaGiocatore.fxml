@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -17,11 +18,14 @@
 			</image>
 		</ImageView>
 		<Label layoutX="178.0" layoutY="40.0" text="CREA UN NUOVO GIOCATORE" />
-		<CheckBox fx:id="chbRobot" layoutX="338.0" layoutY="106.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
-		<Label layoutX="329.0" layoutY="89.0" text="Robot" />
-		<TextField fx:id="txtAlias" layoutX="168.0" layoutY="106.0" />
-		<Button fx:id="btnAggiungiGiocatore" layoutX="189.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
-		<Label layoutX="188.0" layoutY="72.0" text="Inserisci alias del giocatore" />
-      <TableView fx:id="tableGiocatoriInseriti" layoutX="170.0" layoutY="217.0" prefHeight="252.0" prefWidth="200.0" />
+		<CheckBox fx:id="chbRobot" layoutX="396.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="19.0" />
+		<Label layoutX="387.0" layoutY="71.0" text="Robot" />
+		<TextField fx:id="txtAlias" layoutX="99.0" layoutY="87.0" prefHeight="26.0" prefWidth="170.0" />
+		<Button fx:id="btnAggiungiGiocatore" layoutX="200.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
+		<Label layoutX="63.0" layoutY="92.0" text="Alias:" />
+      <TableView fx:id="tableGiocatoriInseriti" layoutX="31.0" layoutY="217.0" prefHeight="252.0" prefWidth="470.0" />
+      <TextField fx:id="txtUsermail" layoutX="99.0" layoutY="129.0" prefHeight="26.0" prefWidth="170.0" />
+      <Label layoutX="61.0" layoutY="133.0" text="Email:" />
+      <ComboBox fx:id="chbDominio" layoutX="269.0" layoutY="129.0" prefHeight="26.0" prefWidth="146.0" />
 	</children>
 </AnchorPane>

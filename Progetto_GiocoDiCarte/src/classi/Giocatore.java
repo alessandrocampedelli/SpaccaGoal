@@ -16,18 +16,28 @@ public class Giocatore
 	private BooleanProperty robot;
 	private ArrayList<Carta> mano;
 	private int punteggio;
+	private String email;
 	
-	public Giocatore(String alias, boolean robot) 
+	public Giocatore(String alias, boolean robot, String email) 
 	{
 		this.alias = alias;
 		this.robot = new SimpleBooleanProperty(robot);;
 		this.punteggio = 0;
 		this.nPartiteVinte = 0;
 		this.nTorneiVinti = 0;
+		this.email = email;
 		this.mano = new ArrayList<>();
 		caricaVittoriePartiteTorneo();
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getAlias() 
 	{
 		return alias;

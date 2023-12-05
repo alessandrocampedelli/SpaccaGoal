@@ -12,7 +12,7 @@ public class Salvataggio
 {
 	Gara eventoDaSalvare;
 	ArrayList<Gara> gareLette;
-	
+	Leaderboard leaderboard = new Leaderboard();
 	public Salvataggio(Gara g) 
 	{
 		this.eventoDaSalvare = g;
@@ -287,10 +287,13 @@ public class Salvataggio
 			if(robot == '*') 
 			{
 				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
-				giocatori.add(new Giocatore(idGiocatore,true));
+				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				giocatori.add(new Giocatore(idGiocatore,true,email));
 			}
-			else
-				giocatori.add(new Giocatore(idGiocatore,false));
+			else {
+				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				giocatori.add(new Giocatore(idGiocatore,false,email));
+			}
 		}
 		scan.close();
 		return giocatori;
