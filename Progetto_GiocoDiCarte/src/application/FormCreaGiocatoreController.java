@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -29,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.sun.tools.javac.Main;
@@ -37,6 +40,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -56,6 +61,10 @@ public class FormCreaGiocatoreController implements Initializable
 	private TextField txtAlias;
 	@FXML
 	private Button btnAggiungiGiocatore = new Button();
+	@FXML
+	private TextField txtUsermail;
+	@FXML
+	private ComboBox<String> chbDominio = new ComboBox();
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	private Leaderboard leaderboard = new Leaderboard();
@@ -87,15 +96,24 @@ public class FormCreaGiocatoreController implements Initializable
 		{
 			if(txtAlias.getText().trim().equals("")) 
 			{
-				txtAlias.clear();
 				chbRobot.setSelected(false);
-				throw new IOException();
+				throw new IOException("Il giocatore deve avere un nome");
+			}
+			if(txtUsermail.getText().trim().equals("") || chbDominio.getSelectionModel().getSelectedItem() == null) 
+			{
+				throw new IOException("Il giocatore deve avere una mail");
 			}
 			String nome = txtAlias.getText();
+			String email = txtUsermail.getText() + chbDominio.getSelectionModel().getSelectedItem();
 			if(!checkCharacters(nome)) {
 				txtAlias.clear();
 				chbRobot.setSelected(false);
-				throw new IllegalStateException();
+				throw new IllegalStateException("Il nome utilizzato deve contenere solo lettere e/o numeri");
+			}
+			if(!isValidEmail(email)) {
+				txtUsermail.clear();
+				chbDominio.setValue(null);
+				throw new IllegalStateException("La mail contiene caratteri non accettabili");
 			}
 			if(nome.length() > 13) {
 				txtAlias.clear();
@@ -112,25 +130,31 @@ public class FormCreaGiocatoreController implements Initializable
 			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
 			if(nuovoGiocatore == null) 
 			{
-				nuovoGiocatore = new Giocatore(nome,chbRobot.isSelected());
+				nuovoGiocatore = new Giocatore(nome,chbRobot.isSelected(),email);
 				//aggiungo il giocatore alla lista di giocatori globali
 				leaderboard.addPlayers(nuovoGiocatore);
 				leaderboard.salvaPlayers();
 			}
 			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
 			txtAlias.clear();
+			txtUsermail.clear();
+			chbDominio.setValue(null);
 			chbRobot.setSelected(false);
 		}
 		catch (IOException e) 
 		{
-			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
-		}catch (IllegalStateException e) {
-			alert.mostraErrore("Il nome utilizzato deve contenere solo lettere e/o numeri", "ERRORE");
+			alert.mostraErrore(e.getMessage(),"ERRORE");
+		}
+		catch (IllegalStateException e) 
+		{
+			alert.mostraErrore(e.getMessage(), "ERRORE");
 		}
 		catch (IllegalArgumentException e) 
 		{
 			alert.mostraErrore("Nome già utilizzato. Non sono ammessi omonimi","ERRORE");
-		}catch (IndexOutOfBoundsException e) {
+		}
+		catch (IndexOutOfBoundsException e) 
+		{
 			alert.mostraErrore("L'alias deve avere una lunghezza massima di 12 caratteri", "ERRORE");
 		}
 	}
@@ -149,6 +173,19 @@ public class FormCreaGiocatoreController implements Initializable
         String regex = "^[a-zA-Z0-9]+$";
         return Pattern.matches(regex, input);
     }
+	 public static boolean isValidEmail(String email) {
+	        // Definizione del pattern per l'indirizzo email
+	        String emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})+$";
+
+	        // Creazione dell'oggetto Pattern
+	        Pattern pattern = Pattern.compile(emailRegex);
+
+	        // Creazione dell'oggetto Matcher
+	        Matcher matcher = pattern.matcher(email);
+
+	        // Verifica della corrispondenza
+	        return matcher.matches();
+	    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -157,6 +194,12 @@ public class FormCreaGiocatoreController implements Initializable
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
+		
+		//creo la colonna con la mail
+		TableColumn<Giocatore, String> email = new TableColumn<>("E-MAIL");
+		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		email.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("email"));
+		email.setCellFactory(TextFieldTableCell.forTableColumn());
 
 		//creo la colonna col nome
 		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
@@ -166,6 +209,7 @@ public class FormCreaGiocatoreController implements Initializable
 		
 		//aggiungo le colonne
 		tableGiocatoriInseriti.getColumns().add(alias);
+		tableGiocatoriInseriti.getColumns().add(email);
 		tableGiocatoriInseriti.getColumns().add(robot);
 
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
@@ -175,5 +219,19 @@ public class FormCreaGiocatoreController implements Initializable
 		{
 			tableGiocatoriInseriti.getItems().add(g);
 		}
+		//inserisco i domini nella choiceBox
+		String[] domini = new String[]{
+				"@gmail.com",
+				"@yahoo.com", 
+				"@outlook.com", 
+				"@icloud.com", 
+				"@aol.com", 
+				"@protonmail.com", 
+				"@yandex.com", 
+				"@zoho.com", 
+				"@mail.com", 
+				"@gmx.com"};
+		ObservableList<String> items =FXCollections.observableArrayList(domini);
+		chbDominio.setItems(items);
 	}
 }
