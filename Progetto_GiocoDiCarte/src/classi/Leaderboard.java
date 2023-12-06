@@ -107,14 +107,19 @@ public class Leaderboard
 		return null;
 	}
 	public String[][] toMatrix(){
-		String[][] matrice = new String[players.size()][4];
-		for(int r = 0; r < matrice.length; r++) {
-			for(Giocatore g : this.players) {
-				matrice[r][0] = g.getAlias();
-				matrice[r][1] = Integer.toString(g.getNPartiteVinte());
-				matrice[r][2] = Integer.toString(g.getNTorneiVinti());
-				matrice[r][3] = (g.isRobot() ? "SI" : "NO");
-			}
+		String[][] matrice = new String[players.size()+1][4];
+		
+		matrice[0][0] = "ALIAS";
+		matrice[0][1] = "PARTITE VINTE";
+		matrice[0][2] = "TORNEI VINTI";
+		matrice[0][3] = "GIOCATORE ROBOT";
+		int r = 1;
+		for(Giocatore g : this.players) {
+			matrice[r][0] = g.getAlias();
+			matrice[r][1] = Integer.toString(g.getNPartiteVinte());
+			matrice[r][2] = Integer.toString(g.getNTorneiVinti());
+			matrice[r][3] = (g.isRobot() ? "SI" : "NO");
+			r+=1;
 		}
 		return matrice;
 	}

@@ -390,7 +390,7 @@ public class Partita extends Gara
 
                 // Creazione di una parte per l'allegato
                 MimeBodyPart attachmentPart = new MimeBodyPart();
-                attachmentPart.attachFile(getPdf());
+                attachmentPart.attachFile(getPdf(data,ora));
 
                 // Creazione di un oggetto Multipart per contenere il testo e l'allegato
                 Multipart multipart = new MimeMultipart();
@@ -400,7 +400,7 @@ public class Partita extends Gara
                 // Impostazione del contenuto del messaggio come il Multipart
                 message.setContent(multipart);
                 // Invia il messaggio
-                Transport.send(message);
+                //Transport.send(message);
         	}
         } catch (MessagingException e) {
         	e.printStackTrace();
@@ -409,7 +409,7 @@ public class Partita extends Gara
 			e.printStackTrace();
 		}
 	}
-	public String getPdf() {
+	public String getPdf(LocalDate date, LocalTime ora) {
 		// Crea un nuovo documento PDF
         PDDocument document = new PDDocument();
         String path = "";
@@ -421,7 +421,7 @@ public class Partita extends Gara
 
 	        // Crea un nuovo stream di contenuto per la pagina
 	        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-	        drawTable(data, document, page, contentStream);
+	        drawTable(data, document, page, contentStream,date,ora);
 	        // Chiude lo stream di contenuto
 	        contentStream.close();
 	        path = System.getProperty("user.dir")+"/leaderboard.pdf";
@@ -435,56 +435,45 @@ public class Partita extends Gara
 		}
         return path;
 	}
-	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream) {
+	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream,LocalDate date, LocalTime ora) {
 		try {
+			float margin = 50;
+            float yStart = page.getMediaBox().getHeight() - margin;
+            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+            float yPosition = yStart;
+            float tableHeight = 20f; // Altezza delle celle
+            float rowHeight = tableHeight / data.length;
 
-			// Impostare le dimensioni della cella e la posizione iniziale
-	        float margin = 50;
-	        float yStart = page.getMediaBox().getHeight() - margin;
-	        float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
-	        float yPosition = yStart;
-	        float tableHeight = 20; // Altezza delle celle
-	        float rowHeight = 15; // Altezza delle righe
-			String path = System.getProperty("user.dir")+"/Roboto-Regular.ttf";
-	        PDType0Font font = PDType0Font.load(document, new FileInputStream(path));
-	        contentStream.setFont(font, 12);
-	     // Impostare il font
-	        contentStream.setFont(font, 12);
-	        
-	        // Impostare la larghezza delle colonne
-	        float tableWidths[] = {150f, 150f, 150f};
+            String path = System.getProperty("user.dir") + "/Roboto-Regular.ttf";
+            PDType0Font font = PDType0Font.load(document, new FileInputStream(path));
+            contentStream.setFont(font, 12);
 
-	        // Impostare la posizione iniziale per il contenuto della tabella
-	        float yBottom = yPosition - tableHeight;
+            // Aggiungi la frase prima della matrice
+            contentStream.beginText();
+            contentStream.newLineAtOffset(margin, yPosition);
+            contentStream.showText("Leaderboard aggiornata in data "+date+" - "+ora);
+            contentStream.newLine();
+            contentStream.endText();
+            yPosition -= 20; // Aggiungi uno spazio tra la frase e la matrice
 
-	        for (int i = 0; i < data.length; i++) {
-	            float yPositionNew = yPosition - (i * rowHeight);
+            // Stampa la matrice
+            for (int i = 0; i < data.length; i++) {
+                float nextY = yPosition - rowHeight;
+                contentStream.beginText();
+                contentStream.newLineAtOffset(margin, yPosition);
 
-	            // Disegnare la riga orizzontale
-	            contentStream.moveTo(margin, yPositionNew);
-	            contentStream.lineTo(margin + tableWidth, yPositionNew);
-	            contentStream.stroke();
+                for (int j = 0; j < data[i].length; j++) {
+                    contentStream.showText(data[i][j]);
+                    contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
+                }
 
-	            for (int j = 0; j < data[i].length-1; j++) {
-	                float xPosition = margin + tableWidths[j];
+                contentStream.endText();
+                if(i!=0)
+	            	yPosition = nextY - 10; // Aggiungi uno spazio di 10 punti tra le righe
+	            else
+	            	yPosition = nextY - 20;
+            }
 
-	                // Disegnare la colonna verticale
-	                contentStream.moveTo(xPosition, yPosition);
-	                contentStream.lineTo(xPosition, yBottom);
-	                contentStream.stroke();
-
-	                // Aggiungere il testo nella cella
-	                contentStream.beginText();
-	                contentStream.newLineAtOffset(margin + 5, yPosition - 12);
-	                contentStream.showText(data[i][j]);
-	                contentStream.endText();
-
-	                margin += tableWidths[j];
-	            }
-
-	            yPosition -= rowHeight;
-	            margin = 50; // Ripristina il margine per la prossima riga
-	        }
 		}catch(IOException e) {
 			e.getMessage();
 		}
