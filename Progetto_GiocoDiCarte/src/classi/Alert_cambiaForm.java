@@ -7,6 +7,7 @@ import java.util.Optional;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,10 +19,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +35,7 @@ public class Alert_cambiaForm
 {
 	private Stage stage;
 	private Scene scene;
-	private Parent root;
+	private AnchorPane root;
 	public Stage getStage() {
 		return stage;
 	}
@@ -48,11 +51,19 @@ public class Alert_cambiaForm
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
-	public Parent getRoot() {
+	public AnchorPane getRoot() {
 		return root;
 	}
 	public void setRoot(String form) throws IOException {
-		this.root = FXMLLoader.load(getClass().getResource(form));;
+		this.root = FXMLLoader.load(getClass().getResource(form));
+		
+		// Ottieni le dimensioni dello schermo primario
+        Screen screen = Screen.getPrimary();
+        double screenWidth = screen.getBounds().getWidth();
+        double screenHeight = screen.getBounds().getHeight();
+        // Imposta le dimensioni del contenuto uguale a quelle dello stage
+        root.setPrefWidth(screenWidth);
+        root.setPrefHeight(screenHeight);
 	}
 	public void chiudiProgramma(String form) {
 	}
