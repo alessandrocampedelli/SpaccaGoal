@@ -26,7 +26,6 @@ public class Main extends Application
 		{
 			AnchorPane root = FXMLLoader.load(getClass().getResource("FormPrincipale.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("GIOCO");
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UTILITY);
 			primaryStage.setResizable(false);

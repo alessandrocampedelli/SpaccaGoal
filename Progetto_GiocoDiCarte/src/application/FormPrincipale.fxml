@@ -9,18 +9,27 @@
 
 <AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPrincipaleController">
 	<children>
-      <ImageView fitHeight="712.0" fitWidth="1104.0" layoutX="-1.0" pickOnBounds="true">
+      <ImageView fitHeight="712.0" fitWidth="1105.0" layoutX="-4.0" pickOnBounds="true">
          <image>
-            <Image url="@../../sfondo.png" />
+            <Image url="@../../../../../../../Desktop/sfondo.jpg" />
          </image>
       </ImageView>
-		<Label layoutX="22.0" layoutY="52.0" text="BENVENUTI A CINQUE, IL GIOCO DI CARTE CALCISTICO ENTUSIASMANTE" textAlignment="CENTER" textFill="#ff1e00">
+		<Label layoutX="412.0" layoutY="505.0" prefHeight="206.0" prefWidth="595.0" text="SPACCAGOAL" textAlignment="CENTER" textFill="#511007">
 			<font>
-				<Font name="System Bold" size="16.0" />
+				<Font name="System Bold" size="90.0" />
 			</font>
 		</Label>
-		<Button defaultButton="true" layoutX="216.0" layoutY="312.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="188.0" text="VISUALIZZA LEADERBOARD" />
-		<Button defaultButton="true" layoutX="216.0" layoutY="143.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' AMMINISTRATORE" />
-		<Button defaultButton="true" layoutX="216.0" layoutY="227.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="188.0" text="MODALITA' GIOCATORE" />
+		<Button defaultButton="true" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a;" text="VISUALIZZA LEADERBOARD">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+		<Button defaultButton="true" layoutX="14.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a;" text="MODALITA' AMMINISTRATORE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+		<Button defaultButton="true" layoutX="14.0" layoutY="193.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a;" text="MODALITA' GIOCATORE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
 	</children>
 </AnchorPane>
