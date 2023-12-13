@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -27,14 +28,8 @@ public class Main extends Application
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("GIOCO");
 			primaryStage.setScene(scene);
-			// Ottieni le dimensioni dello schermo primario
-	        Screen screen = Screen.getPrimary();
-	        double screenWidth = screen.getBounds().getWidth();
-	        double screenHeight = screen.getBounds().getHeight();
-	        // Imposta le dimensioni del contenuto uguale a quelle dello stage
-	        root.setPrefWidth(screenWidth);
-	        root.setPrefHeight(screenHeight);
-
+			primaryStage.initStyle(StageStyle.UTILITY);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 			/*
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

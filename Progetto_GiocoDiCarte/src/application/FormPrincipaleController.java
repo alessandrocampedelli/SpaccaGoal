@@ -25,12 +25,8 @@ import javafx.scene.Node;
 import classi.Alert_cambiaForm;
 import classi.Gara;
 import classi.Gare;
-public class FormPrincipaleController extends Application implements Initializable
+public class FormPrincipaleController 
 {
-	@FXML
-    private ImageView sfondo;
-    @FXML
-    private AnchorPane root;
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event) throws IOException
@@ -49,18 +45,5 @@ public class FormPrincipaleController extends Application implements Initializab
 	public void btnModalitaGiocatore(ActionEvent event) throws IOException 
 	{
 		alert.passaAlForm("/application/FormModalitaGiocatore.fxml",event);
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		sfondo.fitWidthProperty().bind(root.widthProperty());
-        sfondo.fitHeightProperty().bind(root.heightProperty());
-	}
-
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		alert.setRoot("FormPrincipale.fxml");
 	}
 }

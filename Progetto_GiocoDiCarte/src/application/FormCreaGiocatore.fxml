@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="524.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaGiocatoreController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaGiocatoreController">
 	<children>
 		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
 			<image>

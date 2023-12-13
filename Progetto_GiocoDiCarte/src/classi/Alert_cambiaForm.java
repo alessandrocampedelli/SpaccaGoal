@@ -56,14 +56,6 @@ public class Alert_cambiaForm
 	}
 	public void setRoot(String form) throws IOException {
 		this.root = FXMLLoader.load(getClass().getResource(form));
-		
-		// Ottieni le dimensioni dello schermo primario
-        Screen screen = Screen.getPrimary();
-        double screenWidth = screen.getBounds().getWidth();
-        double screenHeight = screen.getBounds().getHeight();
-        // Imposta le dimensioni del contenuto uguale a quelle dello stage
-        root.setPrefWidth(screenWidth);
-        root.setPrefHeight(screenHeight);
 	}
 	public void chiudiProgramma(String form) {
 	}
