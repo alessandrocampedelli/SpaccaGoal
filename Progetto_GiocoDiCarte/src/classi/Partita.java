@@ -347,8 +347,8 @@ public class Partita extends Gara
 	}
 	public void inviaMail() {
 		// Indirizzo email e password dell'account mittente
-        final String username = "spacca.goal@gmx.com";
-        final String password = "FK4VUZD7GIZSHMQUH7BZ";
+        final String username = "spaccagooal@gmx.com";
+        final String password = "N2U73GGRZ2PFIIMBSSIX";
 
         // Proprietà per la configurazione del server di posta
         Properties props = new Properties();
@@ -384,9 +384,8 @@ public class Partita extends Gara
                 LocalTime ora = dataEOra.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
                 // Creazione di una parte di testo del messaggio
                 BodyPart messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setText("Ciao, "+g.getAlias()+"!.\nEcco a te i risultati della partita '"+this.codice+"' "
-                		+ "terminata in data "+data+" alle ore "+ora+"\n"+this.mostraRisultati()+"Grazie per aver giocato a SPACCA GOAL. A presto!\n"
-                				+ "Ecco la leaderboard aggiornata:\n "+tabella);
+                messageBodyPart.setText("Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
+                		+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n");
 
                 // Creazione di una parte per l'allegato
                 MimeBodyPart attachmentPart = new MimeBodyPart();
