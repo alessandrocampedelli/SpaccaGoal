@@ -7,46 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0"
-	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
-	prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormPrincipaleController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPrincipaleController">
 	<children>
-		<ImageView fitHeight="712.0" fitWidth="1105.0"
-			layoutX="-4.0" pickOnBounds="true">
+		<ImageView fitHeight="712.0" fitWidth="1105.0" layoutX="-4.0" pickOnBounds="true">
 			<image>
 				<Image url="@../../sfondo_formprincipale.jpg" />
 			</image>
 		</ImageView>
-		<Label layoutX="412.0" layoutY="505.0" prefHeight="206.0"
-			prefWidth="595.0" text="SPACCAGOAL" textAlignment="CENTER"
-			textFill="#511007">
+		<Label layoutX="412.0" layoutY="505.0" prefHeight="206.0" prefWidth="595.0" text="SPACCAGOAL" textAlignment="CENTER" textFill="#511007">
 			<font>
 				<Font name="System Bold" size="90.0" />
 			</font>
 		</Label>
-		<Button defaultButton="true" layoutX="14.0" layoutY="292.0"
-			mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard"
-			prefHeight="63.0" prefWidth="255.0"
-			style="-fx-background-color: #e9967a;" text="VISUALIZZA LEADERBOARD">
+		<Button defaultButton="true" layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a; -fx-border-color: #800000;" styleClass="colored-button" stylesheets="@application.css" text="VISUALIZZA LEADERBOARD">
 			<font>
 				<Font name="System Bold" size="15.0" />
 			</font>
 		</Button>
-		<Button defaultButton="true" layoutX="14.0" layoutY="96.0"
-			mnemonicParsing="false" onAction="#btnModalitaAmministratore"
-			prefHeight="63.0" prefWidth="255.0"
-			style="-fx-background-color: #e9967a;"
-			text="MODALITA' AMMINISTRATORE">
+		<Button defaultButton="true" layoutX="14.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a; -fx-border-color: #800000;" styleClass="colored-button" stylesheets="@application.css" text="MODALITA' AMMINISTRATORE">
 			<font>
 				<Font name="System Bold" size="15.0" />
 			</font>
 		</Button>
-		<Button defaultButton="true" layoutX="14.0" layoutY="193.0"
-			mnemonicParsing="false" onAction="#btnModalitaGiocatore"
-			prefHeight="63.0" prefWidth="255.0"
-			style="-fx-background-color: #e9967a;" text="MODALITA' GIOCATORE">
+		<Button defaultButton="true" layoutX="14.0" layoutY="193.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="63.0" prefWidth="255.0" style="-fx-background-color: #e9967a; -fx-border-color: #800000;" styleClass="colored-button" stylesheets="@application.css" text="MODALITA' GIOCATORE">
 			<font>
 				<Font name="System Bold" size="15.0" />
 			</font>
