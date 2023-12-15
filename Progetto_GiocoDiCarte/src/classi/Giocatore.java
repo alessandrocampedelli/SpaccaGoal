@@ -1,13 +1,12 @@
 package classi;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+
 public class Giocatore 
 {
 	private String alias;
@@ -30,11 +29,13 @@ public class Giocatore
 		caricaVittoriePartiteTorneo();
 	}
 	
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
 
@@ -57,9 +58,12 @@ public class Giocatore
 	{
 		return robot.get();
 	}
-	public BooleanProperty getRobot() {
+	
+	public BooleanProperty getRobot() 
+	{
 		return robot;
 	}
+	
 	public int getPunteggio() 
 	{
 		return this.punteggio;

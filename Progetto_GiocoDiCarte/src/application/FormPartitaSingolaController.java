@@ -39,9 +39,7 @@ public class FormPartitaSingolaController
 			//controllo se il codice inserito dall'utente è funzionante
 			if(gare.cercaCodice(codiceUtente, 'p')) 
 			{			
-				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di una partita...",
-				"Codice inserito corretto! E' in corso il riavvio della partita non terminata..."};
-				alert.mostraInformazione(gare, "AVVIO PARTITA IN CORSO", output, codiceUtente);
+				alert.mostraInformazione("Codice inserito corretto! E' in corso l'avvio di una partita...","AVVIO PARTITA IN CORSO");
 
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormIniziaPartita.fxml"));

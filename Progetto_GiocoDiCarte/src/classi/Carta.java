@@ -1,8 +1,12 @@
 package classi;
 import java.io.File;
 import javafx.scene.image.Image;
+
+//enumeration per gestire le carte del gioco
 public enum Carta 
 {
+	//ogni carta è formata da una tipologia (attacco, difesa e speciale), l'url della carta e la priorità della carta(utile per il robot)
+	//la carta "rigore" e la carta "portiere" hanno anche come priorità la direzione (destra, centro e sinistra) a seconda della scelta dell'utente
 	ATTACCANTE(Tipologia.ATTACCO, new Image(getUrl("attacco_attaccante.jpg")),2),
 	BOMBER_VERO(Tipologia.ATTACCO, new Image(getUrl("attacco_bomberVero.jpg")), "BOMBER VERO",3),
 	RIGORE(Tipologia.ATTACCO, new Image(getUrl("attacco_rigore.JPG")),5),
@@ -23,12 +27,14 @@ public enum Carta
 	VAR(Tipologia.SPECIALE, new Image(getUrl("speciale_var.jpg")),4),
 	INDICATORE_GOAL(null,new Image(getUrl("indicatoreGoal.jpg")),0);
 	
+	//i campi privati utili per le carte: la tipologia, il suo percorso, la direzione per il rigore, il nome della carta e la sua priorità
 	private Tipologia tipo;
 	private Image img;
 	private Direzione d;
 	private String stampa;
 	private int priority;
 	
+	//costruttore della classe "Carta" dove vengono passate la tipologia della carta, il percorso dell'immagine e la sua priorità
 	private Carta(Tipologia tipo, Image img, int priority) 
 	{
 		this.tipo = tipo;
@@ -36,6 +42,7 @@ public enum Carta
 		this.priority = priority;
 	}
 	
+	//costruttore della classe "Carta" dove vengono passate la tipologia della carta, la direzione del rigore e la sua priorità
 	private Carta(Tipologia tipo, Image img, Direzione d, int priority) 
 	{
 		this.tipo = tipo;
@@ -44,13 +51,15 @@ public enum Carta
 		this.priority = priority;
 	}
 	
-	private Carta(Tipologia tipo, Image img, String stampa,int priority) 
+	//costruttore della classe "Carta" dove vengono passate la tipologia della carta, il percorso dell'immagine, il nome della carta e la sua priorità
+	private Carta(Tipologia tipo, Image img, String stampa, int priority) 
 	{
 		this.tipo = tipo;
 		this.img = img;
 		this.stampa = stampa;
 		this.priority = priority;
 	}
+	
 	public Direzione getDirezione() 
 	{
 		return d;
@@ -76,11 +85,13 @@ public enum Carta
 		return this.stampa;
 	}
 	
+	//metodo che permette di costruire l'url della carta dal nome passato in input
 	public static String getUrl(String nomeCarta) 
 	{
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "mazzo_di_carte";
 		String absolutePath = currentDirectory + File.separator + relativePath + "\\"+nomeCarta;
+		//ritorna la stringa con l'url della carta costruito
 		return absolutePath;
 	}
 }
