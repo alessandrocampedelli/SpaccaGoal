@@ -33,9 +33,7 @@ public class FormTorneoController
 			//controllo se il codice inserito dall'utente è funzionante
 			if(gare.cercaCodice(codiceInseritoUtente, 't')) 
 			{		
-				String[] output = new String[] {"Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...",
-						"Codice inserito corretto! E' in corso il riavvio del torneo non terminato..."};
-				alert.mostraInformazione(gare, "AVVIO TORNEO IN CORSO", output, codiceInseritoUtente);
+				alert.mostraInformazione("Codice inserito corretto! E' in corso l'avvio di un nuovo torneo...","AVVIO TORNEO IN CORSO");
 				//classe da cui partono i dati
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("FormTabelloneTorneo.fxml"));
 				loader.load();

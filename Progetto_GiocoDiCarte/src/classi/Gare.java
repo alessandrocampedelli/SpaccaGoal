@@ -1,8 +1,8 @@
 package classi;
 
 import java.util.ArrayList;
-import classi.Salvataggio;
 import java.io.*;
+
 public class Gare 
 {	
 	private ArrayList<Gara> gare;

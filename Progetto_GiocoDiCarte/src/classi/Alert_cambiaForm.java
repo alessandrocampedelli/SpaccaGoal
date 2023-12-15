@@ -1,110 +1,116 @@
 package classi;
 
 import java.io.IOException;
-
 import java.util.Optional;
-
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.control.Label;
 
+//classe che viene richiamata ogni volta che è necessario un cambio di schermata del form e per mandare gli alert all'utente
 public class Alert_cambiaForm 
 {
 	private Stage stage;
 	private Scene scene;
 	private AnchorPane root;
-	public Stage getStage() {
+	
+	public Stage getStage() 
+	{
 		return stage;
 	}
-	public void setStage(ActionEvent event) {
+	
+	//proprietà "set" per settare lo stage da parte dell'evento "ActionEvent"
+	public void setStage(ActionEvent event) 
+	{
 		this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	}
-	public void setStage(MouseEvent event) {
+	
+	//proprietà "set" per settare lo stage da parte dell'evento "MouseEvent"
+	public void setStage(MouseEvent event) 
+	{
 		this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	}
-	public Scene getScene() {
+	
+	public Scene getScene() 
+	{
 		return scene;
 	}
-	public void setScene(Scene scene) {
+	
+	public void setScene(Scene scene) 
+	{
 		this.scene = scene;
 	}
-	public AnchorPane getRoot() {
+	
+	public AnchorPane getRoot() 
+	{	
 		return root;
 	}
-	public void setRoot(String form) throws IOException {
+	
+	//proprietà che permette di settare la root in base alla stringa del form in cui viene richiamato questo metodo
+	public void setRoot(String form) throws IOException 
+	{
 		this.root = FXMLLoader.load(getClass().getResource(form));
 	}
-	public void chiudiProgramma(String form) {
-	}
+	
+	//metodo che permette il passaggio da un form all'altro (riconosciuto dal nome) tramite l'evento "ActionEvent"
 	public void passaAlForm(String form, ActionEvent event)  throws IOException
 	{
-		try {
-			if(((Node)event.getSource()).getScene().equals(null)){
+		try 
+		{
+			if(((Node)event.getSource()).getScene().equals(null))
+			{
 				throw new NullPointerException();
 			}
+			//setto la room e lo stage con le informazioni passate
 			setRoot(form);
 		    setStage(event);
 		    this.scene = new Scene(getRoot());
 		    this.stage.setScene(this.scene);
+		    //permetto all'utente la visibilità del form successivo
 		    this.stage.show();
-		}catch(NullPointerException e) {
-			/*
-			setRoot(form);
-		    setStage(event);
-		    this.scene = new Scene(getRoot());
-		    this.stage.setScene(this.scene);
-		    this.stage.show();*/
+		}
+		catch(NullPointerException e) 
+		{
+			//è stata sollevata un eccezione, consumo l'evento permettendone la chiusura
 			event.consume();
 		}
 	}
 	
+	//metodo che permette il passaggio da un form all'altro (riconosciuto dal nome) tramite l'evento "MouseEvent"
 	public void passaAlForm(String form, MouseEvent event)  throws IOException
 	{
-		try {
-			if(((Node)event.getSource()).getScene().equals(null)){
+		try 
+		{
+			if(((Node)event.getSource()).getScene().equals(null))
+			{
 				throw new NullPointerException();
 			}
+			//setto la room e lo stage con le informazioni passate
 			setRoot(form);
 		    setStage(event);
 		    this.scene = new Scene(getRoot());
 		    this.stage.setScene(this.scene);
+		    //permetto all'utente la visibilità del form successivo
 		    this.stage.show();
-		}catch(NullPointerException e) {
-			/*
-			setRoot(form);
-		    setStage(event);
-		    this.scene = new Scene(getRoot());
-		    this.stage.setScene(this.scene);
-		    this.stage.show();*/
+		}
+		catch(NullPointerException e) 
+		{
+			//è stata sollevata un eccezione, consumo l'evento permettendone la chiusura
 			event.consume();
 		}
 	}
 	
+	//metodo che manda un alert all'utente di errore con il messaggio passato come parametro
 	public void mostraErrore(String setContent, String setHeader) 
 	{
+		//questa tipologia di alert è di tipo errore
 		AlertType message = AlertType.ERROR;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -114,27 +120,10 @@ public class Alert_cambiaForm
 		alert.showAndWait();
 	}
 	
-	public void mostraInformazione(Gare g, String setContent, String[] setHeader,String codiceUtente) 
-	{
-		AlertType message = AlertType.INFORMATION;
-		Alert alert = new Alert(message, "");
-		alert.initModality(Modality.APPLICATION_MODAL);
-		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText(setContent);
-		boolean nuovoTorneo = g.cercaCodice(codiceUtente);
-		if(nuovoTorneo)
-		{
-			alert.getDialogPane().setContentText(setHeader[0]);
-		}
-		else
-		{
-			alert.getDialogPane().setContentText(setHeader[1]);
-		}
-		alert.showAndWait();
-	}
-	
+	//metodo che manda un alert all'utente di informazione con il messaggio passato come parametro
 	public void mostraInformazione(String setContent, String setHeader) 
 	{
+		//questa tipologia di alert è di tipo informazione
 		AlertType message = AlertType.INFORMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -143,15 +132,20 @@ public class Alert_cambiaForm
 		alert.getDialogPane().setContentText(setContent);
 		alert.showAndWait();
 	}
+	
+	//metodo che manda un alert all'utente di conferma all'utente con il messaggio passato come parametro
 	public boolean chiediConferma(String setContent, String setHeader) 
 	{
+		//questa tipologia di alert è di tipo conferma	
 		AlertType message = AlertType.CONFIRMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText(setHeader);
 		alert.getDialogPane().setContentText(setContent);
+		//bottone utile per ricevere un feedback da parte dell'utente
 		Optional<ButtonType> result = alert.showAndWait();
+		//controllo che l'utente abbia premuto il bottone "OK" e proseguo, altrimenti resto nella schermata precedente
 		if(result.get() == ButtonType.OK)
 			return true;
 		else
