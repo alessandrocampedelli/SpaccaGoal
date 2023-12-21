@@ -1,19 +1,14 @@
 package application;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import classi.Alert_cambiaForm;
 import classi.Amministratore;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import classi.Alert_cambiaForm;
+
 public class FormModalitaAmministratoreController 
 {
 	@FXML

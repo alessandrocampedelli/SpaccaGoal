@@ -1,10 +1,7 @@
 package classi;
-import classi.Gara;
-import classi.Giocatore;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Arrays;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;

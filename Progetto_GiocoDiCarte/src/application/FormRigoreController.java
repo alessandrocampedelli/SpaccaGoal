@@ -1,37 +1,26 @@
 package application;
 
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Window;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-
 import classi.Alert_cambiaForm;
 import classi.Robot;
 import classi.Carta;
-import classi.Gara;
 import classi.Gare;
 import classi.Giocatore;
 import classi.Mazzo;
 import classi.Partita;
 import classi.Salvataggio;
 import classi.Leaderboard;
-
-import java.io.IOException; 
 
 public class FormRigoreController implements Initializable
 {

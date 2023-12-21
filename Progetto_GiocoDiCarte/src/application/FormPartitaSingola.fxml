@@ -8,19 +8,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPartitaSingolaController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormPartitaSingolaController">
 	<children>
-		<Button defaultButton="true" layoutX="158.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnGiocaPartitaSingola" prefHeight="63.0" prefWidth="243.0" text="GIOCA PARTITA SINGOLA" />
-		<Label layoutX="158.0" layoutY="45.0" text="MODALITA' PARTITA SINGOLA" textAlignment="CENTER" textFill="RED">
+		<Button defaultButton="true" layoutX="158.0" layoutY="198.0"
+			mnemonicParsing="false" onAction="#btnGiocaPartitaSingola"
+			prefHeight="63.0" prefWidth="243.0" text="GIOCA PARTITA SINGOLA" />
+		<Label layoutX="158.0" layoutY="45.0"
+			text="MODALITA' PARTITA SINGOLA" textAlignment="CENTER"
+			textFill="RED">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="34.0" layoutY="135.0" text="Inserire il codice della partita singola =&gt;" />
-		<TextField fx:id="txtCodicePartitaSingola" layoutX="282.0" layoutY="130.0" prefHeight="26.0" prefWidth="214.0" />
-		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="3.0" onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true" preserveRatio="true">
+		<Label layoutX="34.0" layoutY="135.0"
+			text="Inserire il codice della partita singola =&gt;" />
+		<TextField fx:id="txtCodicePartitaSingola" layoutX="282.0"
+			layoutY="130.0" prefHeight="26.0" prefWidth="214.0" />
+		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="3.0"
+			onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.png" />
+				<Image url="@../../freccia_indietro.jpeg" />
 			</image>
 		</ImageView>
 	</children>

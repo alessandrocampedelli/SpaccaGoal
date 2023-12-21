@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.FormIniziaPartitaController">
 	<children>

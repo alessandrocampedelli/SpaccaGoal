@@ -1,56 +1,27 @@
 package application;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import java.io.*;
-import classi.Salvataggio;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.sun.tools.javac.Main;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
 import classi.Alert_cambiaForm;
 import classi.Giocatore;
-import classi.Partita;
-import classi.Gara;
-import classi.Gare;
 import classi.Leaderboard;
 
 public class FormCreaGiocatoreController implements Initializable
@@ -64,7 +35,7 @@ public class FormCreaGiocatoreController implements Initializable
 	@FXML
 	private TextField txtUsermail;
 	@FXML
-	private ComboBox<String> chbDominio = new ComboBox();
+	private ComboBox<String> chbDominio;
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	private Leaderboard leaderboard = new Leaderboard();

@@ -1,7 +1,6 @@
 package application;
 
 import javafx.fxml.FXML;
-
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
