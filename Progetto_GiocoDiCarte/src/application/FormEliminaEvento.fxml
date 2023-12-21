@@ -8,25 +8,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormEliminaEventoController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormEliminaEventoController">
 	<children>
 		<Label layoutX="136.0" layoutY="56.0" text="CODICE EVENTO" />
-		<ListView fx:id="lblPartite" layoutX="119.0" layoutY="77.0"
-			onMouseClicked="#cliccaGara" prefHeight="494.0" prefWidth="122.0" />
-		<TextArea fx:id="txtInfo" editable="false" layoutX="321.0"
-			layoutY="110.0" prefHeight="375.0" prefWidth="470.0" />
-		<Label layoutX="321.0" layoutY="92.0"
-			text="Informazioni evento selezionato" />
-		<Button fx:id="btnElimina" layoutX="471.0" layoutY="491.0"
-			mnemonicParsing="false" onAction="#elimina" prefHeight="50.0"
-			prefWidth="170.0" text="ELIMINA EVENTO" visible="false" />
-		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="7.0"
-			onMouseClicked="#tornaIndietro" pickOnBounds="true"
-			preserveRatio="true">
+		<ListView fx:id="lblPartite" layoutX="119.0" layoutY="77.0" onMouseClicked="#cliccaGara" prefHeight="494.0" prefWidth="122.0" />
+		<TextArea fx:id="txtInfo" editable="false" layoutX="321.0" layoutY="110.0" prefHeight="375.0" prefWidth="470.0" />
+		<Label layoutX="321.0" layoutY="92.0" text="Informazioni evento selezionato" />
+		<Button fx:id="btnElimina" layoutX="471.0" layoutY="491.0" mnemonicParsing="false" onAction="#elimina" prefHeight="50.0" prefWidth="170.0" text="ELIMINA EVENTO" visible="false" />
+		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="7.0" onMouseClicked="#tornaIndietro" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.jpg" />
+				<Image url="@../../frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
 	</children>

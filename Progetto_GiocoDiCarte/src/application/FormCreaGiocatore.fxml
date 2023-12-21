@@ -14,7 +14,7 @@
 	<children>
 		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.jpg" />
+				<Image url="@../../frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
 		<Label layoutX="178.0" layoutY="40.0" text="CREA UN NUOVO GIOCATORE" />
