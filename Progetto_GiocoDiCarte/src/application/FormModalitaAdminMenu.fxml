@@ -4,13 +4,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaAdminMenuController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormModalitaAdminMenuController">
 	<children>
-		<Button layoutX="195.0" layoutY="122.0" mnemonicParsing="false" onAction="#btnCreaNewPartita" prefHeight="54.0" prefWidth="210.0" text="CREA NUOVA PARTITA" />
-		<Button layoutX="195.0" layoutY="190.0" mnemonicParsing="false" onAction="#btnCreaNewTorneo" prefHeight="54.0" prefWidth="210.0" text="CREA NUOVO TORNEO" />
-		<Button layoutX="195.0" layoutY="319.0" mnemonicParsing="false" onAction="#btnLogout" prefHeight="54.0" prefWidth="210.0" text="LOGOUT" />
-		<Label layoutX="199.0" layoutY="30.0" text="Modalità di creazione di un contenuto" />
-		<Button layoutX="194.0" layoutY="255.0" mnemonicParsing="false" onAction="#btnEliminaEvento" prefHeight="54.0" prefWidth="210.0" text="ELIMINA PARTITE E TORNEI" />
-      <Button layoutX="194.0" layoutY="56.0" mnemonicParsing="false" onAction="#btnCreaNewGiocatore" prefHeight="54.0" prefWidth="210.0" text="CREA NUOVO GIOCATORE" />
+		<Button layoutX="195.0" layoutY="122.0" mnemonicParsing="false"
+			onAction="#btnCreaNewPartita" prefHeight="54.0" prefWidth="210.0"
+			text="CREA NUOVA PARTITA" />
+		<Button layoutX="195.0" layoutY="190.0" mnemonicParsing="false"
+			onAction="#btnCreaNewTorneo" prefHeight="54.0" prefWidth="210.0"
+			text="CREA NUOVO TORNEO" />
+		<Button layoutX="195.0" layoutY="319.0" mnemonicParsing="false"
+			onAction="#btnLogout" prefHeight="54.0" prefWidth="210.0"
+			text="LOGOUT" />
+		<Label layoutX="199.0" layoutY="30.0"
+			text="Modalità di creazione di un contenuto" />
+		<Button layoutX="194.0" layoutY="255.0" mnemonicParsing="false"
+			onAction="#btnEliminaEvento" prefHeight="54.0" prefWidth="210.0"
+			text="ELIMINA PARTITE E TORNEI" />
+		<Button layoutX="194.0" layoutY="56.0" mnemonicParsing="false"
+			onAction="#btnCreaNewGiocatore" prefHeight="54.0" prefWidth="210.0"
+			text="CREA NUOVO GIOCATORE" />
 	</children>
 </AnchorPane>
