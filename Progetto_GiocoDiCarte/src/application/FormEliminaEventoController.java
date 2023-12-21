@@ -1,30 +1,21 @@
 package application;
 
 import javafx.fxml.FXML;
-
 import javafx.fxml.Initializable;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import classi.Alert_cambiaForm;
 import classi.Gare;
 import classi.Gara;
-import classi.Giocatore;
 import classi.Partita;
 import classi.Salvataggio;
 import classi.Torneo;
 import javafx.scene.control.Button;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.ListView;
-
 import javafx.scene.control.TextArea;
-
 import javafx.scene.input.MouseEvent;
 
 public class FormEliminaEventoController implements Initializable

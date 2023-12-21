@@ -1,26 +1,18 @@
 package application;
 
 import java.io.IOException;
-
-
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import classi.Alert_cambiaForm;
-import classi.Gara;
 import classi.Gare;
 import classi.Leaderboard;
 import classi.Giocatore;

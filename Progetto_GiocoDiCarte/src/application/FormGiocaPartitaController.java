@@ -1,36 +1,21 @@
 package application;
 
 import javafx.fxml.FXML;
-
-
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.control.SelectionMode;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-import javafx.scene.layout.HBox;
 import classi.Robot;
 import classi.Alert_cambiaForm;
 import classi.Carta;
-import classi.Gara;
 import classi.Salvataggio;
 import classi.Gare;
 import classi.Giocatore;
@@ -38,9 +23,6 @@ import classi.Partita;
 import classi.Torneo;
 import classi.Tipologia;
 import classi.Leaderboard;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import classi.Mazzo;
 import javafx.application.Platform;

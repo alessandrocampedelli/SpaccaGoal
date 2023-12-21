@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.imageio.plugins.tiff.ExifGPSTagSet;
-
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 public class Leaderboard 
 {
 	private ArrayList<Giocatore> players;
