@@ -7,27 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormModalitaGiocatoreController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaGiocatoreController">
 	<children>
-		<Button defaultButton="true" layoutX="144.0" layoutY="111.0"
-			mnemonicParsing="false" onAction="#btnPartitaSingola"
-			prefHeight="88.0" prefWidth="204.0" text="PARTITA SINGOLA" />
-		<Button defaultButton="true" layoutX="144.0" layoutY="239.0"
-			mnemonicParsing="false" onAction="#btnTorneo" prefHeight="88.0"
-			prefWidth="204.0" text="TORNEO" />
-		<Label layoutX="144.0" layoutY="36.0" text="STIAMO PER GIOCARE!"
-			textAlignment="CENTER" textFill="RED">
+      <ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/progetto/erba.jpg" />
+         </image>
+      </ImageView>
+		<Button fx:id="partita" defaultButton="true" layoutX="390.0" layoutY="149.0" mnemonicParsing="false" onAction="#btnPartitaSingola" onMouseEntered="#coloraBottoneP" onMouseExited="#pulisciBottoneP" prefHeight="88.0" prefWidth="349.0" style="-fx-background-color: 255,0,0; -fx-border-color: black; -fx-border-width: 2;" text="PARTITA SINGOLA">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font></Button>
+		<Button fx:id="torneo" defaultButton="true" layoutX="390.0" layoutY="340.0" mnemonicParsing="false" onAction="#btnTorneo" onMouseEntered="#coloraBottoneT" onMouseExited="#pulisciBottoneT" prefHeight="88.0" prefWidth="349.0" style="-fx-background-color: 255,0,0; -fx-border-color: black; -fx-border-width: 2;" text="TORNEO">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font></Button>
+		<Label layoutX="223.0" layoutY="24.0" prefHeight="119.0" prefWidth="684.0" text="SCEGLI LA MODALITA DI GIOCO" textFill="WHITE">
 			<font>
-				<Font size="20.0" />
+				<Font name="System Bold" size="44.0" />
 			</font>
 		</Label>
-		<ImageView fitHeight="70.0" fitWidth="63.0"
-			onMouseClicked="#btnTornaModalitaPrincipale" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnTornaModalitaPrincipale" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.jpg" />
+				<Image url="@../../frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
 	</children>
