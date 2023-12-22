@@ -116,7 +116,10 @@ public class Alert_cambiaForm
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setContentText(setContent);
+		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
 		alert.getDialogPane().setHeaderText(setHeader);
+		alert.getDialogPane().lookup(".header-panel").setStyle("-fx-font-size: 15;-fx-font-weight: bold;");
+		alert.getDialogPane().lookupButton(alert.getButtonTypes().get(0)).setStyle("-fx-font-size: 15;");
 		alert.showAndWait();
 	}
 	
@@ -128,8 +131,11 @@ public class Alert_cambiaForm
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText(setHeader);
 		alert.getDialogPane().setContentText(setContent);
+		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
+		alert.getDialogPane().setHeaderText(setHeader);
+		alert.getDialogPane().lookup(".header-panel").setStyle("-fx-font-size: 15;-fx-font-weight: bold;");
+		alert.getDialogPane().lookupButton(alert.getButtonTypes().get(0)).setStyle("-fx-font-size: 15;");
 		alert.showAndWait();
 	}
 	
@@ -140,9 +146,11 @@ public class Alert_cambiaForm
 		AlertType message = AlertType.CONFIRMATION;
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
-		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText(setHeader);
 		alert.getDialogPane().setContentText(setContent);
+		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
+		alert.getDialogPane().setHeaderText(setHeader);
+		alert.getDialogPane().lookup(".header-panel").setStyle("-fx-font-size: 15;-fx-font-weight: bold;");
+		alert.getDialogPane().lookupButton(alert.getButtonTypes().get(0)).setStyle("-fx-font-size: 15;");
 		//bottone utile per ricevere un feedback da parte dell'utente
 		Optional<ButtonType> result = alert.showAndWait();
 		//controllo che l'utente abbia premuto il bottone "OK" e proseguo, altrimenti resto nella schermata precedente

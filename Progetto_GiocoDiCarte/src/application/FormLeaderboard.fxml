@@ -7,27 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0"
-	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
-	prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormLeaderboardController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormLeaderboardController">
 	<children>
-		<ImageView fitHeight="61.0" fitWidth="59.0"
-			onMouseClicked="#tornaHome">
+      <ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../erba.jpg" />
+         </image>
+      </ImageView>
+		<ImageView fitHeight="61.0" fitWidth="59.0" onMouseClicked="#tornaHome">
 			<image>
 				<Image url="@../../backHome.png" />
 			</image>
 		</ImageView>
-		<TableView fx:id="table" layoutX="246.0" layoutY="52.0"
-			prefHeight="636.0" prefWidth="606.0">
+		<TableView fx:id="table" layoutX="164.0" layoutY="70.0" onMouseClicked="#evidenziaRiga" prefHeight="636.0" prefWidth="776.0">
 			<columnResizePolicy>
 				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 			</columnResizePolicy>
 		</TableView>
-		<Label layoutX="246.0" layoutY="24.0" text="LEADERBOARD">
+		<Label alignment="CENTER" layoutX="164.0" layoutY="31.0" prefHeight="35.0" prefWidth="776.0" text="LEADERBOARD" textFill="WHITE">
 			<font>
-				<Font size="18.0" />
+				<Font name="System Bold" size="24.0" />
 			</font>
 		</Label>
 	</children>
