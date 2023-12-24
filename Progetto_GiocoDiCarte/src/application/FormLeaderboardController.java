@@ -36,7 +36,7 @@ public class FormLeaderboardController implements Initializable
 	public void evidenziaRiga(MouseEvent event) {
 		// Set background color to yellow for the selected row
         int selectedIndex = table.getSelectionModel().getSelectedIndex();
-        System.out.println(selectedIndex);
+        //System.out.println(selectedIndex);
         if (selectedIndex >= 0) {
         	impostaRowFactorySelected();
         }
