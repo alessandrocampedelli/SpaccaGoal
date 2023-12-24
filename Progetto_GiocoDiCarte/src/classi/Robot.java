@@ -2,6 +2,7 @@ package classi;
 import java.util.ArrayList;
 import java.util.Random;
 
+//la classe "Robot" intelligente del gioco
 public class Robot 
 {
 	private Giocatore player;
@@ -21,6 +22,7 @@ public class Robot
 	{
 		this.cartaGiocataAvversario = cartaGiocata;
 	}
+	
 	//metodo che ritorna la carta che giocherà il giocatore
 	public Carta cartaGiocata(char turno) 
 	{
@@ -108,6 +110,8 @@ public class Robot
 		}
 		return max;
 	}
+	
+	//metodo che restituisce un numero da 1 a 3 che permetterà di sciegliere la direzione di battuta del rigore (sinistra, centro, destra)
 	public int scegliDirezione() 
 	{
 		Random r =  new Random();

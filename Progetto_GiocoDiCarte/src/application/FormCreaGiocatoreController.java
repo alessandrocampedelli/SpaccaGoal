@@ -97,7 +97,7 @@ public class FormCreaGiocatoreController implements Initializable
 				chbRobot.setSelected(false);
 				throw new IllegalArgumentException();
 			}
-			Giocatore nuovoGiocatore = leaderboard.giocatoreGiaCreato(nome);
+			Giocatore nuovoGiocatore = leaderboard.getPlayers(nome);
 			//se è vero significa che questo alias non è mai stato usato e non è collegato a nessun giocatore
 			if(nuovoGiocatore == null) 
 			{
