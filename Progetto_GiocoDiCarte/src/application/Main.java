@@ -17,19 +17,11 @@ public class Main extends Application
 		{
 			AnchorPane root = FXMLLoader.load(getClass().getResource("FormPrincipale.fxml"));
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UTILITY);
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			/*
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		        @Override
-		        public void handle(WindowEvent event) {
-		            // Mostra un avviso di conferma prima di chiudere la finestra
-		            event.consume();
-		            //Thread.currentThread().interrupt();
-		        }
-		    });*/
 		} 
 		catch(Exception e) 
 		{

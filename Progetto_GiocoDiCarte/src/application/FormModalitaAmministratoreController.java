@@ -33,12 +33,6 @@ public class FormModalitaAmministratoreController
 			alert.mostraErrore("Username e/o password errati","ERRORE");
 		}
 	}
-	@FXML void coloraBottone(MouseEvent event) {
-		btnAccedi.setStyle("-fx-background-color: black;-fx-border-color: transparent; -fx-border-width: 0; -fx-text-fill: white");
-	}
-	@FXML void pulisciBottone(MouseEvent event) {
-		btnAccedi.setStyle("-fx-background-color: white;-fx-border-color: black; -fx-border-width: 2");
-	}
 	public void btnTornaFormPrincipale(MouseEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormPrincipale.fxml", event);

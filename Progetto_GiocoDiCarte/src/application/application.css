@@ -1,8 +1,49 @@
-.colored-button {
-    -fx-background-color: lightblue;
+#button_principale{
+    -fx-background-color: transparent;
+    -fx-border-color: #2736b5;
+    -fx-border-width: 2;
+    -fx-text-fill: white;
+}
+#button_principale:hover{
+	-fx-background-color: #2736b5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+#button_admin {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-text-fill: black;
+}	
+#button_admin:hover {
+    -fx-background-color: black;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
 }
 
-	
-.colored-button:hover {
-    -fx-background-color: lightcoral;
+#button_admin_logout{
+	-fx-background-color: transparent;
+    -fx-border-color: #d02727;
+    -fx-border-width: 2;
+    -fx-text-fill: #d02727;
+}
+#button_admin_logout:hover{
+	-fx-background-color: #d02727;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+#button_player{
+	-fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-text-fill: black;
+}
+#button_player:hover{
+	-fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: black;
 }
