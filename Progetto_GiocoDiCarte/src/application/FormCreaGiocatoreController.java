@@ -184,6 +184,8 @@ public class FormCreaGiocatoreController implements Initializable
 		tableGiocatoriInseriti.getColumns().add(robot);
 
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
+		
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
 		for(Giocatore g : leaderboard.getPlayers()) 
@@ -203,6 +205,7 @@ public class FormCreaGiocatoreController implements Initializable
 				"@mail.com", 
 				"@gmx.com"};
 		ObservableList<String> items =FXCollections.observableArrayList(domini);
+		chbDominio.setStyle("-fx-background-color: white; -fx-font-size: 18;");
 		chbDominio.setItems(items);
 	}
 }
