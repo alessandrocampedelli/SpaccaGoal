@@ -1,10 +1,13 @@
 package classi;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+//classe Salvattagio per tutti i salvataggi sui file di testo del programma
 public class Salvataggio 
 {
 	Gara eventoDaSalvare;
