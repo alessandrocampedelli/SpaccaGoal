@@ -19,17 +19,17 @@
 				<Font name="System Bold" size="90.0" />
 			</font>
 		</Label>
-		<Button id="button_principale" defaultButton="true" layoutX="381.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="110.0" prefWidth="349.0" stylesheets="@application.css" text="VISUALIZZA LEADERBOARD">
+		<Button id="button_principale" defaultButton="true" layoutX="381.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="110.0" prefWidth="349.0" text="VISUALIZZA LEADERBOARD">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Button>
-		<Button id="button_principale" defaultButton="true" layoutX="379.0" layoutY="167.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="110.0" prefWidth="349.0" stylesheets="@application.css" text="MODALITA' AMMINISTRATORE">
+		<Button id="button_principale" defaultButton="true" layoutX="379.0" layoutY="167.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="110.0" prefWidth="349.0" text="MODALITA' AMMINISTRATORE">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Button>
-		<Button id="button_principale" defaultButton="true" layoutX="379.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="110.0" prefWidth="349.0" stylesheets="@application.css" text="MODALITA' GIOCATORE">
+		<Button id="button_principale" defaultButton="true" layoutX="379.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="110.0" prefWidth="349.0" text="MODALITA' GIOCATORE">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
