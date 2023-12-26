@@ -210,11 +210,12 @@ public class FormCreaPartitaController implements Initializable
 		//aggiungo le colonne
 		tableGiocatoriInseriti.getColumns().add(alias);
 		tableGiocatoriInseriti.getColumns().add(robot);
-
+		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
 
+		cmbSelectPlayer.setStyle("-fx-font-size: 18;");
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
 			if(g.isRobot())

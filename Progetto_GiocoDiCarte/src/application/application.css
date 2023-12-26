@@ -47,3 +47,51 @@
     -fx-border-width: 0;
     -fx-text-fill: black;
 }
+#button_giocaCarta{
+	-fx-background-color: transparent;
+    -fx-border-color: #0080ff;
+    -fx-border-width: 2;
+    -fx-text-fill: #0080ff;
+}
+#button_giocaCarta:hover{
+	-fx-background-color: #0080ff;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+#button_passaTurno{
+	-fx-background-color: transparent;
+    -fx-border-color: #ffb700;
+    -fx-border-width: 2;
+    -fx-text-fill: #ffb700;
+}
+#button_passaTurno:hover{
+	-fx-background-color: #ffb700;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+#button_rigore{
+	-fx-background-color: transparent;
+	-fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-text-fill: black;
+}
+#button_rigore:hover{
+	-fx-background-color: #d7d7d7;
+	-fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: black;
+}
+.comboBox{
+	-fx-background-color: white;
+	-fx-border-color: grey;
+    -fx-border-width: 1;
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+}
+.table-view {
+    -fx-background-image: url('C:/Users/User/Pictures/progetto/leaderboard.jpg');
+    -fx-background-size: cover; /* o usa 'contain' a seconda delle tue esigenze */
+    -fx-background-repeat: no-repeat;
+}
