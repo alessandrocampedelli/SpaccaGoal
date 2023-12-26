@@ -16,3 +16,5 @@ ccc,3,0,r,alessandro.campedelli15@gmail.com
 ddd,10,0,r,matteo.boscherini17@gmail.com
 simone,2,0,p,arimaplay05@gmail.com
 emil,1,0,p,peratomil@gmail.com
+stefano,0,0,p,stefano@gmail.com
+alessandro,0,0,p,ale.sher@gmail.com
