@@ -7,50 +7,73 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaTorneoController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaTorneoController">
 	<children>
+      <ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../admin1.png" />
+         </image>
+      </ImageView>
 		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
-		<Label layoutX="257.0" layoutY="36.0" text="CREA UN NUOVO TORNEO" />
-		<Button fx:id="btnAggiungiGiocatore" defaultButton="true" layoutX="259.0" layoutY="144.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" text="AGGIUNGI GIOCATORE" />
-		<Label fx:id="lblGiocatoriInseriti" layoutX="261.0" layoutY="186.0" text="Giocatori inseriti: 0 ">
+		<Label alignment="CENTER" layoutX="383.0" layoutY="41.0" prefHeight="45.0" prefWidth="358.0" text="CREA UN NUOVO TORNEO">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+		<Button id="button_admin" fx:id="btnAggiungiGiocatore" defaultButton="true" layoutX="214.0" layoutY="216.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" prefHeight="53.0" prefWidth="244.0" text="AGGIUNGI GIOCATORE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+		<Label fx:id="lblGiocatoriInseriti" layoutX="698.0" layoutY="92.0" prefHeight="37.0" prefWidth="157.0" text="Giocatori inseriti: 0 ">
 			<font>
-				<Font size="13.0" />
+				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="250.0" layoutY="70.0" text="Seleziona gli alias dei giocatori" />
-		<Label layoutX="217.0" layoutY="219.0" text="Giocatori che puoi ancora inserire: ">
+		<Label layoutX="698.0" layoutY="131.0" prefHeight="37.0" prefWidth="278.0" text="Giocatori che puoi ancora inserire: ">
 			<font>
-				<Font size="13.0" />
+				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblSemifinale" layoutX="209.0" layoutY="287.0" prefHeight="18.0" prefWidth="10.0" text="4" textFill="RED">
+		<Label fx:id="lblSemifinale" layoutX="924.0" layoutY="187.0" prefHeight="37.0" prefWidth="29.0" text="4">
 			<font>
-				<Font size="30.0" />
+				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuartiDiFinale" layoutX="428.0" layoutY="287.0" prefHeight="18.0" prefWidth="10.0" text="8" textFill="RED">
+		<Label fx:id="lblQuartiDiFinale" layoutX="924.0" layoutY="240.0" prefHeight="27.0" prefWidth="23.0" text="8">
 			<font>
-				<Font size="30.0" />
+				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="369.0" layoutY="256.0" text="QUARTI DI FINALE (8)">
+		<Label layoutX="698.0" layoutY="231.0" prefHeight="45.0" prefWidth="188.0" text="QUARTI DI FINALE">
 			<font>
-				<Font size="14.0" />
+				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="170.0" layoutY="256.0" text="SEMIFINALE (4)">
+		<Label layoutX="698.0" layoutY="187.0" prefHeight="37.0" prefWidth="134.0" text="SEMIFINALE">
 			<font>
-				<Font size="14.0" />
+				<Font size="18.0" />
 			</font>
 		</Label>
-		<Button fx:id="btnCreaTorneo" layoutX="280.0" layoutY="614.0" mnemonicParsing="false" onAction="#btnCreaTorneo" prefHeight="10.0" prefWidth="94.0" text="CREA TORNEO" visible="false" />
-		<ComboBox fx:id="cmbSelectPlayer" layoutX="252.0" layoutY="99.0" prefWidth="150.0" />
-		<TableView fx:id="tableGiocatoriInseriti" layoutX="231.0" layoutY="343.0" onMouseClicked="#eliminaGiocatore" prefHeight="252.0" prefWidth="200.0" />
+		<Button id="button_admin" fx:id="btnCreaTorneo" layoutX="407.0" layoutY="608.0" mnemonicParsing="false" onAction="#btnCreaTorneo" prefHeight="73.0" prefWidth="310.0" text="CREA TORNEO" visible="false">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Button>
+		<ComboBox fx:id="cmbSelectPlayer" layoutX="238.0" layoutY="153.0" prefHeight="45.0" prefWidth="196.0" styleClass="comboBox" />
+		<TableView fx:id="tableGiocatoriInseriti" layoutX="691.0" layoutY="282.0" onMouseClicked="#eliminaGiocatore" prefHeight="309.0" prefWidth="304.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000000d" height="182.0" layoutX="691.0" layoutY="96.0" stroke="#c6c6c6" strokeType="INSIDE" width="304.0" />
+      <Label layoutX="214.0" layoutY="108.0" text="Seleziona gli alias dei giocatori">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Line endX="1.0" endY="66.0" layoutX="885.0" layoutY="198.0" startX="1.0" stroke="#a8a8a8" />
+      <Line endX="93.0" layoutX="893.0" layoutY="231.0" startX="-194.0" stroke="#a8a8a8" />
 	</children>
 </AnchorPane>

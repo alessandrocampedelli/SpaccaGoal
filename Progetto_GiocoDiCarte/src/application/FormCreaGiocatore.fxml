@@ -45,6 +45,6 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-		<ComboBox fx:id="chbDominio" layoutX="554.0" layoutY="218.0" prefHeight="39.0" prefWidth="236.0" styleClass="comboBox" />
+		<ComboBox fx:id="chbDominio" layoutX="554.0" layoutY="218.0" prefHeight="39.0" prefWidth="236.0" promptText="\@example.com" styleClass="comboBox" />
 	</children>
 </AnchorPane>

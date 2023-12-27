@@ -231,6 +231,7 @@ public class FormCreaTorneoController implements Initializable
 		tableGiocatoriInseriti.getColumns().add(robot);
 
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
 		// TODO Auto-generated method stub
