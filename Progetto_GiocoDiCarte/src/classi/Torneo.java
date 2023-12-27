@@ -6,12 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 
+//la classe "Torneo" derivata dalla classe "Gara"
 public class Torneo extends Gara
 {	
+	//l'ArrayList di partite con tutte le partite già create da svolgere nel torneo
 	ArrayList<Partita> partite;
+	//l'ArrayList dei giocatori vincenti che proseguiranno il torneo e del tabellone dei giocatori per la stampa in output
 	private ArrayList<Giocatore> giocatoriVincenti;
 	private ArrayList<Giocatore> tabelloneGiocatori;
 	
+	//metodo costruttore della classe "Torneo"
 	public Torneo(ArrayList<Giocatore> giocatori, String codice) 
 	{
 		super(giocatori, codice);
@@ -28,23 +32,13 @@ public class Torneo extends Gara
 		this.giocatoriVincenti = giocatori;
 	}
 	
-	public void creazionePartite() 
-	{
-		for(int i = 0, k = 1; i < this.giocatori.length; i+=2,k++) 
-		{
-			ArrayList<Giocatore> g = new ArrayList<>();
-			g.add(giocatori[i]);
-			g.add(giocatori[i+1]);
-			Partita p = new Partita(g,this.codice+k);
-			partite.add(p);
-		}
-	}
-	
+	//proprietà che restituisce l'ArrayList di partite
 	public ArrayList<Partita> getPartite()
 	{
 		return this.partite;
 	}
 	
+	//metodo che permette di aggiungere una partita all'ArrayList di partite
 	public void aggiungiPartita(Partita p)
 	{
 		this.partite.add(p);
@@ -60,15 +54,43 @@ public class Torneo extends Gara
 		return this.tabelloneGiocatori;
 	}
 	
+	public void setTabelloneGiocatori(ArrayList<Giocatore> tabelloneGiocatori) 
+	{
+		this.tabelloneGiocatori = tabelloneGiocatori;
+	}
+	
+	//metodo che permette di restituire la prima partita da giocare del torneo
 	public Partita getPartitaTorneo()
 	{
 		return this.partite.get(0);
 	}
 
-	public void setTabelloneGiocatori(ArrayList<Giocatore> tabelloneGiocatori) 
+	//metodo che permette di trovare un giocatore dall'ArrayList dei giocatori vincenti dato l'alias
+	private Giocatore trovaGiocatore(String alias) 
 	{
-		this.tabelloneGiocatori = tabelloneGiocatori;
+		Giocatore trovato = null;
+		for(Giocatore g : this.giocatoriVincenti) 
+		{
+			if(g.getAlias().equals(alias))
+				trovato = g;
+		}
+		//ritorna un oggetto di tipo "Giocatore"
+		return trovato;
 	}
+	
+	//DA QUI
+	//metodo che permette la creazione delle partite di un torneo
+	public void creazionePartite() 
+	{
+		for(int i = 0, k = 1; i < this.giocatori.length; i+=2,k++) 
+		{
+			ArrayList<Giocatore> g = new ArrayList<>();
+			g.add(giocatori[i]);
+			g.add(giocatori[i+1]);
+			Partita p = new Partita(g,this.codice+k);
+			partite.add(p);
+		}
+	}	
 	
 	public String mostraRisultati() 
 	{
@@ -144,16 +166,5 @@ public class Torneo extends Gara
 			return true;	
 		}
 		return false;
-	}
-	
-	private Giocatore trovaGiocatore(String alias) 
-	{
-		Giocatore trovato = null;
-		for(Giocatore g : this.giocatoriVincenti) 
-		{
-			if(g.getAlias().equals(alias))
-				trovato = g;
-		}
-		return trovato;
 	}
 }
