@@ -11,65 +11,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0"
-	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
-	prefWidth="1098.0" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx/20"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormCreaGiocatoreController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaGiocatoreController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0"
-			pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
 			<image>
-				<Image url="@../../admin1.png" />
+				<Image url="@../../img/admin1.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="70.0" fitWidth="63.0"
-			onMouseClicked="#btnVaiIndietro1" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.png" />
+				<Image url="@../../img/frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
-		<Label layoutX="379.0" layoutY="63.0"
-			text="CREA UN NUOVO GIOCATORE">
+		<Label layoutX="379.0" layoutY="63.0" text="CREA UN NUOVO GIOCATORE">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Label>
-		<CheckBox fx:id="chbRobot" layoutX="766.0" layoutY="171.0"
-			mnemonicParsing="false" prefHeight="17.0" prefWidth="16.0"
-			scaleX="2.0" scaleY="2.0" />
+		<CheckBox fx:id="chbRobot" layoutX="766.0" layoutY="171.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="16.0" scaleX="2.0" scaleY="2.0" />
 		<Label layoutX="750.0" layoutY="133.0" text="Robot">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtAlias" layoutX="283.0" layoutY="160.0"
-			prefHeight="39.0" prefWidth="271.0" promptText="alias">
+		<TextField fx:id="txtAlias" layoutX="283.0" layoutY="160.0" prefHeight="39.0" prefWidth="271.0" promptText="alias">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</TextField>
-		<Button id="button_admin" fx:id="btnAggiungiGiocatore"
-			layoutX="397.0" layoutY="283.0" mnemonicParsing="false"
-			onAction="#btnAggiungiGiocatore" prefHeight="63.0" prefWidth="304.0"
-			text="AGGIUNGI GIOCATORE">
+		<Button id="button_admin" fx:id="btnAggiungiGiocatore" layoutX="397.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" prefHeight="63.0" prefWidth="304.0" text="AGGIUNGI GIOCATORE">
 			<font>
 				<Font name="System Bold" size="22.0" />
 			</font>
 		</Button>
-		<TableView fx:id="tableGiocatoriInseriti" layoutX="240.0"
-			layoutY="372.0" prefHeight="309.0" prefWidth="618.0" />
-		<TextField fx:id="txtUsermail" layoutX="283.0"
-			layoutY="218.0" prefHeight="39.0" prefWidth="271.0"
-			promptText="email">
+		<TableView fx:id="tableGiocatoriInseriti" layoutX="240.0" layoutY="372.0" prefHeight="309.0" prefWidth="618.0" />
+		<TextField fx:id="txtUsermail" layoutX="283.0" layoutY="218.0" prefHeight="39.0" prefWidth="271.0" promptText="email">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</TextField>
-		<ComboBox fx:id="chbDominio" layoutX="554.0" layoutY="218.0"
-			prefHeight="39.0" prefWidth="236.0" promptText="\@example.com"
-			styleClass="comboBox" />
+		<ComboBox fx:id="chbDominio" layoutX="554.0" layoutY="218.0" prefHeight="39.0" prefWidth="236.0" promptText="\@example.com" styleClass="comboBox" />
 	</children>
 </AnchorPane>
