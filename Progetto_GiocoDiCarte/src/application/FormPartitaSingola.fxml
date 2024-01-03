@@ -8,49 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0"
-	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
-	prefWidth="1098.0" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx/20"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormPartitaSingolaController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPartitaSingolaController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0"
-			pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
 			<image>
-				<Image url="@../../erba.jpg" />
+				<Image url="@../../img/erba.jpg" />
 			</image>
 		</ImageView>
-		<Button id="button_player" defaultButton="true" layoutX="391.0"
-			layoutY="434.0" mnemonicParsing="false"
-			onAction="#btnGiocaPartitaSingola" prefHeight="88.0"
-			prefWidth="350.0" text="GIOCA PARTITA SINGOLA">
+		<Button id="button_player" defaultButton="true" layoutX="391.0" layoutY="434.0" mnemonicParsing="false" onAction="#btnGiocaPartitaSingola" prefHeight="88.0" prefWidth="350.0" text="GIOCA PARTITA SINGOLA">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-		<Label layoutX="166.0" layoutY="232.0" prefHeight="74.0"
-			prefWidth="430.0" text="Inserire il codice della partita singola">
+		<Label layoutX="166.0" layoutY="232.0" prefHeight="74.0" prefWidth="430.0" text="Inserire il codice della partita singola">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtCodicePartitaSingola" layoutX="606.0"
-			layoutY="243.0" prefHeight="51.0" prefWidth="350.0">
+		<TextField fx:id="txtCodicePartitaSingola" layoutX="606.0" layoutY="243.0" prefHeight="51.0" prefWidth="350.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</TextField>
-		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="3.0"
-			onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fitHeight="70.0" fitWidth="63.0" layoutX="3.0" onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../../frecciaTornaIndietro.png" />
+				<Image url="@../../img/frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
-		<Label layoutX="365.0" layoutY="24.0" prefHeight="119.0"
-			prefWidth="402.0" text="PARTITA SINGOLA" textAlignment="CENTER"
-			textFill="WHITE" textOverrun="CLIP">
+		<Label layoutX="365.0" layoutY="24.0" prefHeight="119.0" prefWidth="402.0" text="PARTITA SINGOLA" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
 			<font>
 				<Font name="System Bold" size="44.0" />
 			</font>
