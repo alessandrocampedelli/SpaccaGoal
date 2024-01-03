@@ -72,6 +72,7 @@ public class Alert_cambiaForm
 			setRoot(form);
 		    setStage(event);
 		    this.scene = new Scene(getRoot());
+		    scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		    this.stage.setScene(this.scene);
 		    //permetto all'utente la visibilità del form successivo
 		    this.stage.show();
@@ -97,6 +98,7 @@ public class Alert_cambiaForm
 		    setStage(event);
 		    this.scene = new Scene(getRoot());
 		    this.stage.setScene(this.scene);
+		    scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 		    //permetto all'utente la visibilità del form successivo
 		    this.stage.show();
 		}
