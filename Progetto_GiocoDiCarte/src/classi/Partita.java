@@ -360,7 +360,14 @@ public class Partita extends Gara
                     }
                 });
 
-        try{
+        try{ 
+        	LocalDateTime dataEOra = LocalDateTime.now();
+        	LocalDate data = dataEOra.toLocalDate();
+        	LocalTime ora = dataEOra.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
+        	// Creazione di una parte per l'allegato
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            attachmentPart.attachFile(getPdf(data,ora));
+            
         	for(Giocatore g : giocatori) 
         	{
         		// Creazione del messaggio
@@ -368,23 +375,14 @@ public class Partita extends Gara
                 // Impostazione dell'indirizzo email del mittente
                 message.setFrom(new InternetAddress(username));
                 // Aggiunta degli indirizzi email dei destinatari
-                message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse(g.getEmail()));
+                message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(g.getEmail()));
                 // Oggetto della mail
                 message.setSubject("SPACCA GOAL - RISULTATI PARTITA");
 
-
-                LocalDateTime dataEOra = LocalDateTime.now();
-                LocalDate data = dataEOra.toLocalDate();
-                LocalTime ora = dataEOra.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
                 // Creazione di una parte di testo del messaggio
                 BodyPart messageBodyPart = new MimeBodyPart();
                 messageBodyPart.setText("Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
                 		+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n");
-
-                // Creazione di una parte per l'allegato
-                MimeBodyPart attachmentPart = new MimeBodyPart();
-                attachmentPart.attachFile(getPdf(data,ora));
 
                 // Creazione di un oggetto Multipart per contenere il testo e l'allegato
                 Multipart multipart = new MimeMultipart();
