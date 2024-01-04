@@ -1,6 +1,9 @@
 package application;
 
 import java.io.IOException;
+import java.awt.Desktop;
+import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.util.converter.IntegerStringConverter;
@@ -41,6 +44,41 @@ public class FormLeaderboardController implements Initializable
         	impostaRowFactorySelected();
         }
 	}
+	@FXML
+	public void apriPdf(MouseEvent event) {
+		try {
+			String path = System.getProperty("user.dir")+"/leaderboard.pdf";
+            File filePDF = new File(path);
+
+            // Verifica che il supporto Desktop sia disponibile (Desktop.isDesktopSupported())
+            if (Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+
+                // Verifica se l'azione OPEN sia supportata (Desktop.isSupported(Desktop.Action.OPEN))
+                if (desktop.isSupported(Desktop.Action.OPEN)) {
+                    desktop.open(filePDF);
+                } else {
+                    // L'apertura diretta non è supportata, prova ad aprire il browser con l'URL del file
+                    apriPDFConBrowser(filePDF.toURI());
+                }
+            } else {
+                // Desktop non è supportato, prova ad aprire il browser con l'URL del file
+                apriPDFConBrowser(filePDF.toURI());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void apriPDFConBrowser(URI uri) {
+        try {
+            // Apri l'URL nel browser predefinito
+            Desktop.getDesktop().browse(uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
 		//creo la colonna col nome
