@@ -51,6 +51,7 @@ public class FormTorneoController
 		}
 	}
 
+	//metodo che viene scatenato al click della freccia indietro sull'interfaccia grafica
 	@FXML
 	public void btnTornaFormModalitaGiocatore(MouseEvent event) throws IOException
 	{

@@ -8,34 +8,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormModalitaAmministratoreController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormModalitaAmministratoreController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0" layoutX="-3.0" layoutY="-4.0" pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0"
+			layoutX="-3.0" layoutY="-4.0" pickOnBounds="true">
 			<image>
 				<Image url="@../../img/admin1.png" />
 			</image>
 		</ImageView>
-		<TextField fx:id="txtUsername" focusTraversable="false" layoutX="374.0" layoutY="366.0" prefHeight="51.0" prefWidth="350.0" promptText="username">
+		<TextField fx:id="txtUsername" focusTraversable="false"
+			layoutX="374.0" layoutY="366.0" prefHeight="51.0" prefWidth="350.0"
+			promptText="username">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</TextField>
-		<PasswordField fx:id="txtPassword" focusTraversable="false" layoutX="374.0" layoutY="436.0" prefHeight="51.0" prefWidth="350.0" promptText="password">
+		<PasswordField fx:id="txtPassword"
+			focusTraversable="false" layoutX="374.0" layoutY="436.0"
+			prefHeight="51.0" prefWidth="350.0" promptText="password">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</PasswordField>
-		<Button id="button_admin" fx:id="btnAccedi" layoutX="374.0" layoutY="527.0" mnemonicParsing="false" onAction="#accedi" prefHeight="88.0" prefWidth="350.0" text="ACCEDI">
+		<Button id="button_admin" fx:id="btnAccedi" layoutX="374.0"
+			layoutY="527.0" mnemonicParsing="false" onAction="#accedi"
+			prefHeight="88.0" prefWidth="350.0" text="ACCEDI">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-		<ImageView fitHeight="70.0" fitWidth="63.0" onMouseClicked="#btnTornaFormPrincipale" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="70.0" fitWidth="63.0"
+			onMouseClicked="#btnTornaFormPrincipale" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@../../img/frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="243.0" fitWidth="250.0" layoutX="439.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="243.0" fitWidth="250.0"
+			layoutX="439.0" layoutY="97.0" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@../../img/admin2.png" />
 			</image>

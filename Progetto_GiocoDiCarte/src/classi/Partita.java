@@ -28,6 +28,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import javafx.event.ActionEvent;
 
+//la classe "Partita" derivata dalla classe "Gara"
 public class Partita extends Gara
 {
 	private final int N_CARTE_INIZIO = 5;
@@ -37,6 +38,7 @@ public class Partita extends Gara
 	private String nomeCarta;
 	private int cartePescate;
 	private Leaderboard tabella = new Leaderboard();
+	
 	public Partita(ArrayList<Giocatore> giocatori, String codice)
 	{
 		super(giocatori,codice);
@@ -86,7 +88,9 @@ public class Partita extends Gara
 	private void pulisciMani() 
 	{
 		for(Giocatore g : giocatori)
+		{
 			g.getMano().clear();
+		}
 	}
 	
 	public int getCartePescate() 
@@ -98,6 +102,7 @@ public class Partita extends Gara
 	{
 		this.cartePescate = cartePescate;
 	}
+	
 	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) 
 	{
 		dif.getMano().add(this.carte.pesca());
@@ -340,7 +345,9 @@ public class Partita extends Gara
 		}
 		fw.close();
 	}
-	public void inviaMail() {
+	
+	public void inviaMail() 
+	{
 		// Indirizzo email e password dell'account mittente
         final String username = "spaccagooal@gmx.com";
         final String password = "N2U73GGRZ2PFIIMBSSIX";
@@ -394,18 +401,24 @@ public class Partita extends Gara
                 // Invia il messaggio
                 //Transport.send(message);
         	}
-        } catch (MessagingException e) {
+        } 
+        catch (MessagingException e) 
+        {
         	e.printStackTrace();
-        } catch (IOException e) {
-			// TODO Auto-generated catch block
+        } 
+        catch (IOException e) 
+        {
 			e.printStackTrace();
 		}
 	}
-	public String getPdf(LocalDate date, LocalTime ora) {
+	
+	public String getPdf(LocalDate date, LocalTime ora) 
+	{
 		// Crea un nuovo documento PDF
         PDDocument document = new PDDocument();
         String path = "";
-		try { 
+		try 
+		{ 
 			String[][] data = tabella.toMatrix();
 	        // Aggiunge una nuova pagina al documento
 	        PDPage page = new PDPage(PDRectangle.A4);
@@ -422,13 +435,18 @@ public class Partita extends Gara
 
 	        // Chiude il documento
 	        document.close();
-		}catch(IOException e) {
+		}
+		catch(IOException e) 
+		{
 			e.getMessage();
 		}
         return path;
 	}
-	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream,LocalDate date, LocalTime ora) {
-		try {
+	
+	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream,LocalDate date, LocalTime ora) 
+	{
+		try 
+		{
 			float margin = 50;
             float yStart = page.getMediaBox().getHeight() - margin;
             float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
@@ -449,27 +467,37 @@ public class Partita extends Gara
             yPosition -= 20; // Aggiungi uno spazio tra la frase e la matrice
 
             // Stampa la matrice
-            for (int i = 0; i < data.length; i++) {
+            for (int i = 0; i < data.length; i++) 
+            {
                 float nextY = yPosition - rowHeight;
                 contentStream.beginText();
                 contentStream.newLineAtOffset(margin, yPosition);
 
-                for (int j = 0; j < data[i].length; j++) {
+                for (int j = 0; j < data[i].length; j++) 
+                {
                     contentStream.showText(data[i][j]);
                     contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
                 }
 
                 contentStream.endText();
                 if(i!=0)
-	            	yPosition = nextY - 10; // Aggiungi uno spazio di 10 punti tra le righe
+                {
+                	// Aggiungi uno spazio di 10 punti tra le righe
+	            	yPosition = nextY - 10; 
+                }
 	            else
+	            {
 	            	yPosition = nextY - 20;
+	            }
             }
 
-		}catch(IOException e) {
+		}
+		catch(IOException e) 
+		{
 			e.getMessage();
 		}
 	}
+	
 	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
 	{
 		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
