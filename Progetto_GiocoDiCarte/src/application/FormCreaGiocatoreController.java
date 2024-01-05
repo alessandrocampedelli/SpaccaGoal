@@ -41,13 +41,13 @@ public class FormCreaGiocatoreController implements Initializable
 	private Leaderboard leaderboard = new Leaderboard();
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	TableColumn<Giocatore, String> alias;
-	
+
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
 	{
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);	
 	}
-	
+
 	private boolean nomeGiaUsato(String nome) 
 	{
 		for(Giocatore g : leaderboard.getPlayers()) 
@@ -59,7 +59,7 @@ public class FormCreaGiocatoreController implements Initializable
 		}
 		return false;
 	}
-	
+
 	@FXML
 	public void btnAggiungiGiocatore(ActionEvent event) 
 	{
@@ -76,17 +76,20 @@ public class FormCreaGiocatoreController implements Initializable
 			}
 			String nome = txtAlias.getText();
 			String email = txtUsermail.getText() + chbDominio.getSelectionModel().getSelectedItem();
-			if(!checkCharacters(nome)) {
+			if(!checkCharacters(nome)) 
+			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IllegalStateException("Il nome utilizzato deve contenere solo lettere e/o numeri");
 			}
-			if(!isValidEmail(email)) {
+			if(!isValidEmail(email)) 
+			{
 				txtUsermail.clear();
 				chbDominio.setValue(null);
 				throw new IllegalStateException("La mail contiene caratteri non accettabili");
 			}
-			if(nome.length() > 13) {
+			if(nome.length() > 13) 
+			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IndexOutOfBoundsException();
@@ -129,6 +132,7 @@ public class FormCreaGiocatoreController implements Initializable
 			alert.mostraErrore("L'alias deve avere una lunghezza massima di 12 caratteri", "ERRORE");
 		}
 	}
+	
 	public String[] nomiGiocatori() 
 	{
 		String[] g = new String[leaderboard.getPlayers().size()];
@@ -138,34 +142,39 @@ public class FormCreaGiocatoreController implements Initializable
 		}
 		return g;
 	}
+	
 	//ritorna true se la stringa è corretta
-	public boolean checkCharacters(String input) {
-        // Utilizza un'espressione regolare per verificare se la stringa contiene solo lettere e numeri
-        String regex = "^[a-zA-Z0-9]+$";
-        return Pattern.matches(regex, input);
-    }
-	 public static boolean isValidEmail(String email) {
-	        // Definizione del pattern per l'indirizzo email
-	        String emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})+$";
+	public boolean checkCharacters(String input) 
+	{
+		// Utilizza un'espressione regolare per verificare se la stringa contiene solo lettere e numeri
+		String regex = "^[a-zA-Z0-9]+$";
+		return Pattern.matches(regex, input);
+	}
+	
+	public static boolean isValidEmail(String email) 
+	{
+		// Definizione del pattern per l'indirizzo email
+		String emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})+$";
 
-	        // Creazione dell'oggetto Pattern
-	        Pattern pattern = Pattern.compile(emailRegex);
+		// Creazione dell'oggetto Pattern
+		Pattern pattern = Pattern.compile(emailRegex);
 
-	        // Creazione dell'oggetto Matcher
-	        Matcher matcher = pattern.matcher(email);
+		// Creazione dell'oggetto Matcher
+		Matcher matcher = pattern.matcher(email);
 
-	        // Verifica della corrispondenza
-	        return matcher.matches();
-	    }
+		// Verifica della corrispondenza
+		return matcher.matches();
+	}
+	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
 		//creo la colonna col nome
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
-		
+
 		//creo la colonna con la mail
 		TableColumn<Giocatore, String> email = new TableColumn<>("E-MAIL");
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
@@ -177,7 +186,7 @@ public class FormCreaGiocatoreController implements Initializable
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
 		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
-		
+
 		//aggiungo le colonne
 		tableGiocatoriInseriti.getColumns().add(alias);
 		tableGiocatoriInseriti.getColumns().add(email);
@@ -185,7 +194,7 @@ public class FormCreaGiocatoreController implements Initializable
 
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
-		
+
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
 		for(Giocatore g : leaderboard.getPlayers()) 

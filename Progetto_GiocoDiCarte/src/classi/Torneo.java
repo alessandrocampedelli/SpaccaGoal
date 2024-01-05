@@ -18,18 +18,21 @@ public class Torneo extends Gara
 	//metodo costruttore della classe "Torneo"
 	public Torneo(ArrayList<Giocatore> giocatori, String codice) 
 	{
+		//viene ripreso il contenuto della classe "Gara"
 		super(giocatori, codice);
+		//l'ArrayList dei giocatori vincenti conterrà tutti i giocatori che stanno ancora partecipando al torneo
+		this.giocatoriVincenti = giocatori;
 		this.partite = new ArrayList<>();
 		Salvataggio s = new Salvataggio(this);
 		try 
 		{
+			//metodo che permette all'ArrayList l'ordine di tutti i giocatori del tabellone
 			this.tabelloneGiocatori = s.leggiTabelloneTorneo();
 		}
 		catch(FileNotFoundException e) 
 		{
 			System.out.println(e.getMessage());
 		}
-		this.giocatoriVincenti = giocatori;
 	}
 	
 	//proprietà che restituisce l'ArrayList di partite
@@ -117,45 +120,48 @@ public class Torneo extends Gara
 		return players;
 	}
 	
-	//MANCA QUESTO PEZZO
 	//metodo che permette di decretare la fine partita di una partita di un torneo o del torneo generale se le partite fossero finite
 	public void finePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
-	{	
+	{
+		//rimuovo il giocatore perdende dall'ArrayList contenente i giocatori vincenti
 		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
 		s = new Salvataggio(partite.get(0));
+		//elimino la cartella della partita appena terminata
 		s.deleteDirectory("tornei/"+this.getCodiceGara()+"/"+partite.get(0).codice);
-		//riscrivere il file di testo
 		Salvataggio s = new Salvataggio(this);
 		s.salvaGiocatoriTorneo();
 		for(Giocatore giocatoreVincente: this.tabelloneGiocatori)
 		{
 			if(giocatoreVincente.getAlias().equals(aliasVincente))
 			{
+				//aggiungo al tabellone dei giocatori una riga con il giocatore che ha vinto la partita del torneo
 				this.tabelloneGiocatori.add(giocatoreVincente);
 				break;
 			}
 		}
+		//salvo il tabellone dei giocatori del torneo
 		s.salvaTabelloneTorneo();
+		//controllo se è rimasto un solo giocatore vincente (significa che il giocatore ha vinto il torneo) altrimenti il giocatore ha vinto la partita
 		if(this.giocatoriVincenti.size() != 1)
 		{
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
-			//controllare se il turno è finito
+			//controllo se il turno è terminato
 			if(fineTurno()) 
 			{
-				//ricreare le partite--> sovrascrivere il torneo nell'arraylist di gara e ricrearlo solo con i giocatori vincenti
+				//ricreo le partite in gare, sovrascrivo il torneo nell'Arraylist di "Gara" e lo ricreo solo con i giocatori vincenti
 				Gare g = new Gare();
 				g.updateTorneo(giocatoriVincenti, codice);
 			}
 		}
 		else
 		{
+			//aggiungo la vittoria del torneo al giocatore e aggiorno la leaderboard
 			this.giocatoriVincenti.get(0).aggiungiVittoriaTorneo();
 			leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaTorneo();
-			//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
+			//salvo il file di testo con i valori aggiornati e mostro le informazioni all'utente in output
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO IL TORNEO");
 		}
-		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 	}
 	
