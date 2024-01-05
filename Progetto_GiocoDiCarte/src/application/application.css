@@ -1,11 +1,11 @@
 #button_principale{
     -fx-background-color: transparent;
-    -fx-border-color: #2736b5;
+    -fx-border-color: #004ba8;
     -fx-border-width: 2;
     -fx-text-fill: white;
 }
 #button_principale:hover,#button_principale:focus-visible{
-	-fx-background-color: #2736b5;
+	-fx-background-color: #004ba8;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-text-fill: white;

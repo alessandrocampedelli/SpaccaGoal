@@ -8,50 +8,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0"
-	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
-	prefWidth="1098.0" stylesheets="@application.css"
-	xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.FormTorneoController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormTorneoController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0"
-			pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
 			<image>
 				<Image url="@../../img/erba.jpg" />
 			</image>
 		</ImageView>
-		<Button id="button_player" defaultButton="true" layoutX="391.0"
-			layoutY="434.0" mnemonicParsing="false" onAction="#btnGiocaTorneo"
-			prefHeight="88.0" prefWidth="350.0" text="GIOCA TORNEO">
+		<Button id="button_player" defaultButton="true" layoutX="391.0" layoutY="434.0" mnemonicParsing="false" onAction="#btnGiocaTorneo" prefHeight="88.0" prefWidth="350.0" text="GIOCA TORNEO">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-		<Label alignment="CENTER" layoutX="365.0" layoutY="24.0"
-			prefHeight="119.0" prefWidth="397.0" text="TORNEO" textFill="WHITE">
+		<Label alignment="CENTER" layoutX="365.0" layoutY="24.0" prefHeight="119.0" prefWidth="397.0" text="TORNEO" textFill="WHITE">
 			<font>
 				<Font name="System Bold" size="44.0" />
 			</font>
 		</Label>
-		<Label layoutX="166.0" layoutY="232.0" prefHeight="74.0"
-			prefWidth="430.0" text="Inserire il codice del torneo">
+		<Label layoutX="166.0" layoutY="232.0" prefHeight="74.0" prefWidth="430.0" text="Inserire il codice del torneo">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtCodiceTorneo" layoutX="606.0"
-			layoutY="243.0" prefHeight="51.0" prefWidth="350.0">
+		<TextField fx:id="txtCodiceTorneo" layoutX="606.0" layoutY="243.0" prefHeight="51.0" prefWidth="350.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</TextField>
-		<ImageView id="freccia_indietro" fitHeight="70.0"
-			fitWidth="63.0" layoutX="2.0"
-			onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView id="freccia_indietro" fitHeight="38.0" fitWidth="58.0" layoutX="2.0" onMouseClicked="#btnTornaFormModalitaGiocatore" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../img/frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
+      <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/logo1.png" />
+         </image>
+      </ImageView>
 	</children>
 </AnchorPane>
