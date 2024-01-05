@@ -10,6 +10,9 @@ import javafx.util.converter.IntegerStringConverter;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Tooltip;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +30,9 @@ public class FormLeaderboardController implements Initializable
 	Leaderboard leaderboard = new Leaderboard();
 	Gare gare = new Gare();
 	Alert_cambiaForm alert = new Alert_cambiaForm();
+	Image img_Pdf = new Image(System.getProperty("user.dir")+"/img/icon_pdf.jpg");
+	@FXML
+    ImageView imgPdf = new ImageView(img_Pdf);
 	@FXML
 	private TableView<Giocatore> table = new TableView<Giocatore>();
 	
@@ -119,6 +125,11 @@ public class FormLeaderboardController implements Initializable
 		{
 			table.getItems().add(g);
 		}
+		// Crea un tooltip e assegna testo
+        Tooltip tooltip = new Tooltip("Apri la leaderboard aggiornata su file pdf");
+
+        // Associa il tooltip all'ImageView
+        Tooltip.install(imgPdf, tooltip);
 	}
 	private void impostaRowFactoryDefault() {
 		// Impostazione della RowFactory per colorare le righe con colori alternati
