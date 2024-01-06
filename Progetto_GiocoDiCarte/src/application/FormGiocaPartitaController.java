@@ -34,6 +34,7 @@ public class FormGiocaPartitaController implements Initializable
 	//creo un oggetto delle classi "gara", "leaderboard" e "alert"
 	Gare g = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 
 	Salvataggio s;

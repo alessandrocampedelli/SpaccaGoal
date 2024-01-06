@@ -27,6 +27,7 @@ public class FormEliminaEventoController implements Initializable
 	private TextArea txtInfo;
 	@FXML
 	private Button btnElimina;
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	
 	@FXML

@@ -6,32 +6,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormPrincipaleController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx/20"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormPrincipaleController">
 	<children>
-		<ImageView fitHeight="712.0" fitWidth="1113.0" layoutX="-5.0" pickOnBounds="true">
+		<ImageView fitHeight="712.0" fitWidth="1113.0"
+			layoutX="-5.0" pickOnBounds="true">
 			<image>
 				<Image url="@../../img/stadio.jpg" />
 			</image>
 		</ImageView>
-		<Button id="button_principale" defaultButton="true" layoutX="381.0" layoutY="580.0" mnemonicParsing="false" onAction="#btnVisualizzaLeaderboard" prefHeight="110.0" prefWidth="349.0" text="VISUALIZZA LEADERBOARD">
+		<Button id="button_principale" defaultButton="true"
+			layoutX="381.0" layoutY="580.0" mnemonicParsing="false"
+			onAction="#btnVisualizzaLeaderboard" prefHeight="110.0"
+			prefWidth="349.0" text="VISUALIZZA LEADERBOARD">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Button>
-		<Button id="button_principale" defaultButton="true" layoutX="381.0" layoutY="280.0" mnemonicParsing="false" onAction="#btnModalitaAmministratore" prefHeight="110.0" prefWidth="349.0" text="MODALITA' AMMINISTRATORE">
+		<Button id="button_principale" defaultButton="true"
+			layoutX="381.0" layoutY="280.0" mnemonicParsing="false"
+			onAction="#btnModalitaAmministratore" prefHeight="110.0"
+			prefWidth="349.0" text="MODALITA' AMMINISTRATORE">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Button>
-		<Button id="button_principale" defaultButton="true" layoutX="381.0" layoutY="430.0" mnemonicParsing="false" onAction="#btnModalitaGiocatore" prefHeight="110.0" prefWidth="349.0" text="MODALITA' GIOCATORE">
+		<Button id="button_principale" defaultButton="true"
+			layoutX="381.0" layoutY="430.0" mnemonicParsing="false"
+			onAction="#btnModalitaGiocatore" prefHeight="110.0" prefWidth="349.0"
+			text="MODALITA' GIOCATORE">
 			<font>
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Button>
-      <ImageView fitHeight="280.0" fitWidth="279.0" layoutX="416.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../img/logo1.png" />
-         </image>
-      </ImageView>
+		<ImageView fitHeight="280.0" fitWidth="279.0"
+			layoutX="416.0" layoutY="-12.0" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../../img/logo1.png" />
+			</image>
+		</ImageView>
 	</children>
 </AnchorPane>

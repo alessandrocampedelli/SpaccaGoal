@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 
 public class FormModalitaAdminMenuController 
 {
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	@FXML
 	public void btnCreaNewPartita(ActionEvent event) 

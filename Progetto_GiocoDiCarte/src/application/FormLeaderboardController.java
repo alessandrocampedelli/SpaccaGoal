@@ -29,6 +29,7 @@ public class FormLeaderboardController implements Initializable
 {
 	Leaderboard leaderboard = new Leaderboard();
 	Gare gare = new Gare();
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Image img_Pdf = new Image(System.getProperty("user.dir")+"/img/icon_pdf.jpg");
 	@FXML

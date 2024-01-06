@@ -47,7 +47,8 @@ public class FormCreaTorneoController implements Initializable
 	static Torneo t;
 	Gare gare = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
-
+	
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 
 	@FXML

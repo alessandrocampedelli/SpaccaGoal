@@ -13,6 +13,7 @@ public class FormPartitaSingolaController
 {
 	@FXML
 	private TextField txtCodicePartitaSingola;
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 	
