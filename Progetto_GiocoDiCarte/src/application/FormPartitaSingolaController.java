@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import classi.Alert_cambiaForm;
 import classi.Gare;
 
+//classe per inserire il codice di una partita singola
 public class FormPartitaSingolaController 
 {
 	@FXML

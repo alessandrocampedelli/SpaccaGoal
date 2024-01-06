@@ -2,6 +2,7 @@ package classi;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.io.*;
 import java.nio.file.Files;
@@ -190,6 +191,39 @@ public class Salvataggio
 		}
 		scan.close();
 	}
+	
+	//metodo che permette la lettura dei giocatori dal file della
+	private ArrayList<Giocatore> leggiGiocatori(File f) throws FileNotFoundException
+	{
+		ArrayList<Giocatore> giocatori = new ArrayList<>();
+		//l'oggetto che permette la lettura del file passato come parametro
+		Scanner scan = new Scanner(f);
+		while(scan.hasNextLine()) 
+		{
+			//leggo la riga del file di testo
+			String idGiocatore = scan.nextLine();
+			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
+			//controllo se il giocatore è un robot oppure no dall'asterisco per ricreare l'oggetto "Giocatore" in seguito
+			if(robot == '*') 
+			{
+				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
+				//ricavo la mail del giocatore dalla leaderboard perchè ogni giocatore ha la sua mail
+				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				//aggiungo all'ArrayList il giocatore appena ricreato con l'alias, la mail e come variabile booleana "true" perchè è un robot
+				giocatori.add(new Giocatore(idGiocatore,true,email));
+			}
+			else 
+			{
+				//ricavo la mail del giocatore dalla leaderboard perchè ogni giocatore ha la sua mail
+				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				//aggiungo all'ArrayList il giocatore appena ricreato con l'alias, la mail e come variabile booleana "false" perchè non è un robot
+				giocatori.add(new Giocatore(idGiocatore,false,email));
+			}
+		}
+		//chiudo l'oggetto in scrittura e ritorna un ArrayList di giocatori
+		scan.close();
+		return giocatori;
+	}
 
 	//metodo che permette il salvataggio di una partita passati come parametri l'oggetto "Partita" e il percorso
 	public void salvaPartita(Partita p,String percorso) throws IOException
@@ -205,27 +239,21 @@ public class Salvataggio
 		p.salvaTurno(percorso);
 	}
 
-	//DA QUI!
 	//metodo che permette il salvataggio dei nomi dei giocatori
 	public void salvaNomiGiocatori(String partitaTorneo) throws IOException
 	{
+		//creo le directory per ogni partita di un torneo
 		String path = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara();
 		Files.createDirectory(Paths.get(path));
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/"+partitaTorneo+"/"+eventoDaSalvare.getCodiceGara()+"/nomi.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
-		PrintWriter fw = new PrintWriter(absolutePath);
-		for(Giocatore player : eventoDaSalvare.giocatori) 
-		{
-			//controllo se il giocatore da salvare è un robot oppure no
-			if(player.isRobot())
-				fw.println(player.getAlias()+"*");
-			else
-				fw.println(player.getAlias());
-		}
-		fw.close();
+		//converto il vettore ad ArrayList per utilizzare il metodo comune
+		ArrayList<Giocatore> giocatori = new ArrayList<>(Arrays.asList(eventoDaSalvare.giocatori));
+		//richiamo l'utilizzo di un metodo per salvare il giocatore passando come parametro l'ArrayList di giocatori
+		salvaGiocatore(absolutePath, giocatori);
+		
 	}
 
 	//metodo che permette il salvataggio dei giocatori dei torneo vincenti
@@ -235,7 +263,9 @@ public class Salvataggio
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/giocatoriTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//converto l'oggetto "Gara" in tipo "Torneo"
 		Torneo t = (Torneo) eventoDaSalvare;
+		//richiamo l'utilizzo di un metodo per salvare il giocatore passando come parametro i giocatori vincenti del torneo
 		salvaGiocatore(absolutePath, t.getGiocatoreVincenti());
 	}
 
@@ -246,22 +276,26 @@ public class Salvataggio
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara()+"/tabelloneTorneo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//converto l'oggetto "Gara" in tipo "Torneo"
 		Torneo t = (Torneo) eventoDaSalvare;
+		//richiamo l'utilizzo di un metodo per salvare il giocatore passando come parametro il tabellone dei giocatori del torneo
 		salvaGiocatore(absolutePath, t.getTabelloneGiocatori());
 	}
 
 	//metodo che permette il salvataggio dei giocatori del torneo
 	public void salvaGiocatore(String absolutePath, ArrayList<Giocatore> players) throws FileNotFoundException 
 	{
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(Giocatore player : players) 
 		{
-			//controllo se il giocatore da salvare è un robot oppure no
+			//controllo se il giocatore da salvare è un robot oppure no, se lo è aggiungo un asterisco, altrimenti no
 			if(player.isRobot())
 				fw.println(player.getAlias()+"*");
 			else
 				fw.println(player.getAlias());
 		}
+		//chiudo il file di testo appena scritto
 		fw.close();
 	}
 
@@ -271,14 +305,17 @@ public class Salvataggio
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
+		//mi chiedo se ci stiamo riferendo ad una partita o ad un torneo per costruire il percorso relativo
 		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
 			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
 		else
 			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mazzo.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(int i = 0; i < eventoDaSalvare.getMazzo().getCarte().size(); i++)
 		{
+			//salvo nel file di testo "mazzo.txt" tutte le carte del mazzo
 			fw.println(eventoDaSalvare.getMazzo().getCarte().get(i));
 		}
 		fw.close();
@@ -290,28 +327,32 @@ public class Salvataggio
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
+		//mi chiedo se ci stiamo riferendo ad una partita o ad un torneo per costruire il percorso relativo
 		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
 			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
 		else
 			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/mani.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(int i = 0; i < eventoDaSalvare.getGiocatori().length; i++)
 		{
+			//l'ArrayList con la mano del giocatore da salvare nel file di testo
 			ArrayList<Carta> mano = eventoDaSalvare.getGiocatori()[i].getMano();
 			String riga = "";
 			for(Carta c: mano) 
 			{
-				riga += c.name()+",";
+				//aggiungo alla riga le varie carte separate da una virgola
+				riga += c.name() + ",";
 			}
-			//nel caso estremo il giocatore finisca le carte il gioco prevede il pescaggio di una carta perchè nessun giocatore puo rimanere senza
+			//nel caso estremo il giocatore finisca le carte il programma prevede il pescaggio di una carta extra perchè nessun giocatore può rimanere senza
 			if(riga.length() == 0)
 			{
 				Carta c = eventoDaSalvare.getMazzo().pesca(); 
 				mano.add(c);
 				riga += c.name()+",";
 			}
-			//cancello l'ultima virgola
+			//cancello l'ultima virgola e stampo la riga nel file di testo
 			riga = riga.substring(0, riga.length() - 1);
 			fw.println(riga);
 		}
@@ -324,58 +365,40 @@ public class Salvataggio
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
+		//mi chiedo se ci stiamo riferendo ad una partita o ad un torneo per costruire il percorso relativo
 		if(eventoDaSalvare.getCodiceGara().charAt(0) == 'p')
 			relativePath = "src/partite/"+eventoDaSalvare.getCodiceGara()+"/punteggi.txt";
 		else
 			relativePath = "src/tornei/"+eventoDaSalvare.getCodiceGara().substring(0, eventoDaSalvare.getCodiceGara().length() - 1)+"/"+eventoDaSalvare.getCodiceGara()+"/punteggi.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
 		for(int i = 0; i < eventoDaSalvare.getGiocatori().length; i++)
 		{
+			//salvo nel file di testo "punteggi.txt" tutte i punteggi dei giocatori della partita
 			fw.println(eventoDaSalvare.getGiocatori()[i].getPunteggio());
 		}
 		fw.close();
 	}
 
-	//metodo che permette la lettura dei giocatori
-	private ArrayList<Giocatore> leggiGiocatori(File f) throws FileNotFoundException
-	{
-		ArrayList<Giocatore> giocatori = new ArrayList<>();
-		Scanner scan = new Scanner(f);
-		while(scan.hasNextLine()) 
-		{
-			String idGiocatore = scan.nextLine();
-			char robot = idGiocatore.charAt(idGiocatore.length() - 1);
-			//carattere robot
-			if(robot == '*') 
-			{
-				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
-				String email = leaderboard.getPlayers(idGiocatore).getEmail();
-				giocatori.add(new Giocatore(idGiocatore,true,email));
-			}
-			else {
-				String email = leaderboard.getPlayers(idGiocatore).getEmail();
-				giocatori.add(new Giocatore(idGiocatore,false,email));
-			}
-		}
-		scan.close();
-		return giocatori;
-	}
-
 	//metodo che elimina la cartella della partita terminata
 	public void deleteDirectory(String percorso)
 	{
+		//il percorso della partita da eliminare
 		String path = "src/"+percorso;
+		//creo l'oggetto di tipo "File" con il percorso
 		File file = new File(path);
-		for (File subfile : file.listFiles()) 
+		for(File subfile : file.listFiles()) 
 		{
-			if (subfile.isDirectory()) 
+			if(subfile.isDirectory()) 
 			{	
+				//ricorsione del metodo per eliminare eventuali sottocartelle
 				deleteDirectory(percorso+"/"+subfile.getName());
 			}
+			//elimino le eventuali sottocartelle
 			subfile.delete();
 		}
+		//elimino la cartella principlae
 		file.delete();
 	}
 
