@@ -117,6 +117,12 @@ public class Alert_cambiaForm
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
+		
+		alert.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		alert.getDialogPane().getButtonTypes().forEach(buttonType -> {
+            alert.getDialogPane().lookupButton(buttonType).getStyleClass().add("button_alertError");
+        });
+		
 		alert.getDialogPane().setContentText(setContent);
 		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
 		alert.getDialogPane().setHeaderText(setHeader);
@@ -133,6 +139,12 @@ public class Alert_cambiaForm
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
+		
+		alert.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		alert.getDialogPane().getButtonTypes().forEach(buttonType -> {
+            alert.getDialogPane().lookupButton(buttonType).getStyleClass().add("button_alertInformation");
+        });
+		
 		alert.getDialogPane().setContentText(setContent);
 		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
 		alert.getDialogPane().setHeaderText(setHeader);
@@ -149,6 +161,12 @@ public class Alert_cambiaForm
 		Alert alert = new Alert(message, "");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.getDialogPane().setContentText(setContent);
+		
+		// Applicare stili CSS personalizzati solo al bottone "Yes"
+		alert.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+        alert.getDialogPane().lookupButton(ButtonType.OK).getStyleClass().add("button_alertConfirmYES");
+        alert.getDialogPane().lookupButton(ButtonType.CANCEL).getStyleClass().add("button_alertConfirmNO");
+		
 		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
 		alert.getDialogPane().setHeaderText(setHeader);
 		alert.getDialogPane().lookup(".header-panel").setStyle("-fx-font-size: 15;-fx-font-weight: bold;");

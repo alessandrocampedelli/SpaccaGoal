@@ -198,8 +198,9 @@ public class FormCreaTorneoController implements Initializable
 		String output = "";
 		for(Giocatore g: giocatori) 
 		{
-			output += g.getAlias() + "\n";
+			output += " "+g.getAlias() + ",";
 		}
+		output = output.substring(0, output.length()-1);
 		return output;
 	}
 

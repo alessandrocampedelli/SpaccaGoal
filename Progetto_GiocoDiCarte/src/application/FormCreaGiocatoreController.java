@@ -115,6 +115,8 @@ public class FormCreaGiocatoreController implements Initializable
 			txtUsermail.clear();
 			chbDominio.setValue(null);
 			chbRobot.setSelected(false);
+			//mostro graficamente che il giocatore è stato inserito
+			tableGiocatoriInseriti.scrollTo(nuovoGiocatore);
 		}
 		catch (IOException e) 
 		{
