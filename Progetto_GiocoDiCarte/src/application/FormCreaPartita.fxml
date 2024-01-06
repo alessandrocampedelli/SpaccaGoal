@@ -9,54 +9,79 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormCreaPartitaController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx/20"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormCreaPartitaController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0"
+			pickOnBounds="true">
 			<image>
 				<Image url="@../../img/admin1.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="38.0" fitWidth="58.0" onMouseClicked="#btnVaiIndietro1" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="38.0" fitWidth="58.0"
+			onMouseClicked="#btnVaiIndietro1" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@../../img/frecciaTornaIndietro.png" />
 			</image>
 		</ImageView>
-		<Label alignment="CENTER" layoutX="334.0" layoutY="63.0" prefHeight="39.0" prefWidth="436.0" text="CREA UNA NUOVA PARTITA">
+		<Label alignment="CENTER" layoutX="334.0" layoutY="63.0"
+			prefHeight="39.0" prefWidth="436.0" text="CREA UNA NUOVA PARTITA">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Label>
-		<ComboBox fx:id="cmbSelectPlayer" layoutX="191.0" layoutY="177.0" prefHeight="45.0" prefWidth="196.0" styleClass="comboBox" />
-		<Button id="button_admin" fx:id="btnAggiungiGiocatore" defaultButton="true" layoutX="167.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnAggiungiGiocatore" prefHeight="53.0" prefWidth="244.0" text="AGGIUNGI GIOCATORE">
+		<ComboBox fx:id="cmbSelectPlayer" layoutX="191.0"
+			layoutY="177.0" prefHeight="45.0" prefWidth="196.0"
+			styleClass="comboBox" />
+		<Button id="button_admin" fx:id="btnAggiungiGiocatore"
+			defaultButton="true" layoutX="167.0" layoutY="244.0"
+			mnemonicParsing="false" onAction="#btnAggiungiGiocatore"
+			prefHeight="53.0" prefWidth="244.0" text="AGGIUNGI GIOCATORE">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Button>
-		<Label fx:id="lblGiocatoriInseriti" layoutX="642.0" layoutY="142.0" prefHeight="32.0" prefWidth="301.0" text="Giocatori inseriti: 0 ">
+		<Label fx:id="lblGiocatoriInseriti" layoutX="642.0"
+			layoutY="142.0" prefHeight="32.0" prefWidth="301.0"
+			text="Giocatori inseriti: 0 ">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="167.0" layoutY="142.0" text="Seleziona gli alias dei giocatori">
+		<Label layoutX="167.0" layoutY="142.0"
+			text="Seleziona gli alias dei giocatori">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblGiocatoriDaInserire" layoutX="642.0" layoutY="167.0" prefHeight="32.0" prefWidth="301.0" text="Giocatori che puoi ancora inserire: 4">
+		<Label fx:id="lblGiocatoriDaInserire" layoutX="642.0"
+			layoutY="167.0" prefHeight="32.0" prefWidth="301.0"
+			text="Giocatori che puoi ancora inserire: 4">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Button id="button_admin" fx:id="btnCreaPartita" layoutX="397.0" layoutY="598.0" mnemonicParsing="false" onAction="#btnCreaPartita" prefHeight="73.0" prefWidth="310.0" text="CREA PARTITA" visible="false">
+		<Button id="button_admin" fx:id="btnCreaPartita"
+			layoutX="397.0" layoutY="598.0" mnemonicParsing="false"
+			onAction="#btnCreaPartita" prefHeight="73.0" prefWidth="310.0"
+			text="CREA PARTITA" visible="false">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-		<TableView fx:id="tableGiocatoriInseriti" layoutX="639.0" layoutY="205.0" onMouseClicked="#eliminaGiocatore" prefHeight="332.0" prefWidth="304.0" />
-      <ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../img/logo1.png" />
-         </image>
-      </ImageView>
+		<TableView fx:id="tableGiocatoriInseriti" layoutX="639.0"
+			layoutY="205.0" onMouseClicked="#eliminaGiocatore" prefHeight="332.0"
+			prefWidth="304.0" />
+		<ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0"
+			layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../../img/logo1.png" />
+			</image>
+		</ImageView>
 	</children>
 </AnchorPane>

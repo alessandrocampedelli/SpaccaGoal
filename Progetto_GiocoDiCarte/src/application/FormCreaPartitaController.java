@@ -38,6 +38,7 @@ public class FormCreaPartitaController implements Initializable
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	static Partita p;
 	Leaderboard leaderboard = new Leaderboard();

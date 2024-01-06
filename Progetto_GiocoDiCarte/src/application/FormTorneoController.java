@@ -9,10 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import classi.Gare;
 
+//classe per inserire il codice di un torneo per avviare un torneo
 public class FormTorneoController 
 {
+	//le "TextField" e "PasswordField" in cui andrà inserito l'username e la password dell'amministratore
 	@FXML
 	private TextField txtCodiceTorneo;
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 

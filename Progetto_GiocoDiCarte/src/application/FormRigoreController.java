@@ -26,6 +26,7 @@ public class FormRigoreController implements Initializable
 {
 	Leaderboard leaderboard = new Leaderboard();
 	Gare g = new Gare();
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Salvataggio s;
 	String turno;

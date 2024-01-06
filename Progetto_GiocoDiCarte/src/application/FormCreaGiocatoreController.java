@@ -39,6 +39,7 @@ public class FormCreaGiocatoreController implements Initializable
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 	private Leaderboard leaderboard = new Leaderboard();
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 	TableColumn<Giocatore, String> alias;
 

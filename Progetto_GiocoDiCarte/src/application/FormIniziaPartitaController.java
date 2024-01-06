@@ -21,6 +21,7 @@ import javafx.application.Platform;
 
 public class FormIniziaPartitaController implements Initializable
 {
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	Gare gare = new Gare();
 	@FXML
