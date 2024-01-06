@@ -136,7 +136,7 @@ public class FormCreaPartitaController implements Initializable
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
-		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) 
+		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori: "+getGiocatori(), "MESSAGGIO DI CONFERMA")) 
 		{
 			//salvo la leaderboard con gli eventuali nuovi giocatori creati
 			leaderboard.salvaPlayers();
@@ -167,8 +167,9 @@ public class FormCreaPartitaController implements Initializable
 		String output = "";
 		for(Giocatore g: giocatori) 
 		{
-			output += g.getAlias() + "\n";
+			output += " "+g.getAlias() + ",";
 		}
+		output = output.substring(0, output.length()-1);
 		return output;
 	}
 

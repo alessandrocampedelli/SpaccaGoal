@@ -10,27 +10,39 @@
     -fx-border-width: 0;
     -fx-text-fill: white;
 }
-#button_admin {
+#button_admin,.button_alertInformation {
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-border-width: 2;
     -fx-text-fill: black;
 }	
-#button_admin:hover,#button_admin:focus-visible {
+#button_admin:hover,#button_admin:focus-visible,.button_alertInformation:hover,.button_alertInformation:focus-visible{
     -fx-background-color: black;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-text-fill: white;
 }
 
-#button_admin_logout{
+#button_admin_logout, .button_alertError,.button_alertConfirmNO{
 	-fx-background-color: transparent;
     -fx-border-color: #d02727;
     -fx-border-width: 2;
     -fx-text-fill: #d02727;
 }
-#button_admin_logout:hover,#button_admin_logout:focus-visible{
+#button_admin_logout:hover,#button_admin_logout:focus-visible,.button_alertError:hover, .button_alertError:focus-visible,.button_alertConfirmNO:hover,.button_alertConfirmNO:focus-visible{
 	-fx-background-color: #d02727;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+.button_alertConfirmYES{
+	-fx-background-color: transparent;
+    -fx-border-color: #00A86B;
+    -fx-border-width: 2;
+    -fx-text-fill: #00A86B;
+}
+.button_alertConfirmYES:hover,.button_alertConfirmYES:focus-visible{
+    -fx-background-color: #00A86B;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-text-fill: white;
