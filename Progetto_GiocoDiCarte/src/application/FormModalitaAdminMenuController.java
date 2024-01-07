@@ -13,73 +13,41 @@ public class FormModalitaAdminMenuController
 
 	//il bottone per creare una nuovo giocatore
 	@FXML
-	public void btnCreaNewGiocatore(ActionEvent event) 
+	public void btnCreaNewGiocatore(ActionEvent event) throws IOException
 	{
-		try 
-		{
-			//passo al form di creazione di un nuovo giocatore
-			alert.passaAlForm("/application/FormCreaGiocatore.fxml",event);
-		}
-		catch (IOException e)
-		{
-			//mostro un errore all'utente 
-			alert.mostraErrore("Si è verificato un errore!","ERRORE");
-		}
+		//passo al form di creazione di un nuovo giocatore
+		alert.passaAlForm("/application/FormCreaGiocatore.fxml",event);
 	}
 
 	//il bottone per creare una nuova partita
 	@FXML
-	public void btnCreaNewPartita(ActionEvent event) 
+	public void btnCreaNewPartita(ActionEvent event) throws IOException
 	{
-		try 
-		{
-			//passo al form di avvio di una partita singola
-			alert.passaAlForm("/application/FormCreaPartita.fxml",event);
-		}
-		catch (IOException e)
-		{
-			//mostro un errore all'utente 
-			alert.mostraErrore("Si è verificato un errore!","ERRORE");
-		}
+		//passo al form di avvio di una partita singola
+		alert.passaAlForm("/application/FormCreaPartita.fxml",event);
 	}
 
 	//il bottone per creare un nuovo torneo
 	@FXML
-	public void btnCreaNewTorneo(ActionEvent event) 
+	public void btnCreaNewTorneo(ActionEvent event) throws IOException
 	{
-		try 
-		{
-			//passo al form di avvio di un torneo
-			alert.passaAlForm("/application/FormCreaTorneo.fxml",event);
-		}
-		catch (IOException e)
-		{
-			//mostro un errore all'utente 
-			alert.mostraErrore("Si è verificato un errore!","ERRORE");
-		}
+		//passo al form di avvio di un torneo
+		alert.passaAlForm("/application/FormCreaTorneo.fxml",event);
 	}
 
 	//il bottone per eliminare un evento
 	@FXML
 	public void btnEliminaEvento(ActionEvent event) throws IOException
 	{
-		//passo al form di avvio di una eliminazione evento
+		//passo al form di avvio di eliminazione evento
 		alert.passaAlForm("/application/FormEliminaEvento.fxml", event);
 	}
 
 	//il bottone per effettuare il ritorno alla pagina principale
 	@FXML
-	public void btnLogout(ActionEvent event) 
+	public void btnLogout(ActionEvent event) throws IOException
 	{
-		try 
-		{
-			//passo al form principale
-			alert.passaAlForm("/application/FormPrincipale.fxml",event);
-		}
-		catch (IOException e)
-		{
-			//mostro un errore all'utente 
-			alert.mostraErrore("Si è verificato un errore!","ERRORE");
-		}
+		//passo al form principale
+		alert.passaAlForm("/application/FormPrincipale.fxml",event);
 	}
 }

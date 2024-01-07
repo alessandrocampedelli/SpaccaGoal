@@ -11,6 +11,7 @@ public class FormPrincipaleController
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	
+	//bottone per passare alla modalità ammistratore al suo click
 	@FXML
 	public void btnModalitaAmministratore(ActionEvent event) throws IOException
 	{
@@ -18,6 +19,7 @@ public class FormPrincipaleController
 		alert.passaAlForm("/application/FormModalitaAmministratore.fxml",event);
 	}
 	
+	//bottone per passare alla modalità giocatore al suo click
 	@FXML
 	public void btnModalitaGiocatore(ActionEvent event) throws IOException 
 	{
@@ -25,6 +27,7 @@ public class FormPrincipaleController
 		alert.passaAlForm("/application/FormModalitaGiocatore.fxml",event);
 	}
 	
+	//bottone per passare alla visualizzazione della leaderboard al suo click
 	@FXML
 	public void btnVisualizzaLeaderboard(ActionEvent event) throws IOException
 	{
