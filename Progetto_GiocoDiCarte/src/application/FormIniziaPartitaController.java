@@ -23,7 +23,9 @@ public class FormIniziaPartitaController implements Initializable
 {
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
+	//creo un oggetto di classe "Gare" che permetterà di ricercare il codice della partita in tutte le gare presenti nel programma
 	Gare gare = new Gare();
+	//le label che conterranno i nomi dei giocatori della partita
 	@FXML
 	private Label lblNomeGiocatore1;
 	@FXML
@@ -32,42 +34,54 @@ public class FormIniziaPartitaController implements Initializable
 	private Label lblNomeGiocatore3;
 	@FXML
 	private Label lblNomeGiocatore4;
+	//la progressBar di caricamento per passare al form successivo
 	@FXML
 	private ProgressBar progressBar;
+	//la label con la percentuale della progressBar che verrà incrementata
 	@FXML
 	private Label lblPercentualeProgressBar = new Label();
+	//il bottone non visibile che, una volta terminata la progressBar, avvierà la partita
 	@FXML
 	private Button btnAvviaPartita = new Button();
+	//l'ArrayList che conterrà i giocatori che prendono parte alla partita
 	private ArrayList<String> giocatori;
-
+	//il codice dell'utente inserito nel form precedente
 	static String codiceUtente;
 
+	//metodo che permette il passaggio del codice da un form ad un altro
 	public void copiaInfo(String codice) 
 	{
 		codiceUtente = codice;
 	}
 
+	//il bottone non visibile all'utente che permette di avviare la partita
 	@FXML
 	public void btnAvviaPartita(ActionEvent event) throws IOException
 	{	
-		//classe da cui partono i dati
+		//classe che permette di passare il codice della partita inserito dall'utente al form "giocaPartita" 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("FormGiocaPartita.fxml"));
 		loader.load();
 		FormGiocaPartitaController form = loader.getController();
+		//copiaCodice è un metodo del form "giocaPartita"
 		form.copiaCodice(codiceUtente);
-		//alert.mostraInformazione(getGiocatoriString(), "TURNO DI GIOCO");
+		//passo al form gioca partita
 		alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
 	}
-
+	
+	//metodo che viene eseguito all'apertura del form
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
+		//controllo se il codice passato non sia null
 		if(!(codiceUtente == null)) 
 		{
+			//coloro la progressBar di verde
 			progressBar.setStyle("-fx-accent: green;");
 			try 
 			{
+				//restituisce l'oggetto "Gara" con il codice della partita
 				Gara p = (Partita) gare.getGara(codiceUtente);
 
+				//DA QUI!
 				if(codiceUtente.charAt(0) == 't') 
 				{
 					giocatori = new ArrayList<>();
@@ -84,10 +98,12 @@ public class FormIniziaPartitaController implements Initializable
 					lblNomeGiocatore1.setText(giocatori.get(0));
 					lblNomeGiocatore2.setText(giocatori.get(1));
 				}
+				
 				if(giocatori.size() >= 3)
 				{
 					lblNomeGiocatore3.setText(giocatori.get(2));
 				}
+				
 				if(giocatori.size() == 4)
 				{
 					lblNomeGiocatore4.setText(giocatori.get(3));

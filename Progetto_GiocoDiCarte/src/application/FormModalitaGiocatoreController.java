@@ -6,12 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import classi.Alert_cambiaForm;
 
-//classe del form modalità giocatore principale che contiene le due modalità che esso può scegliere, partita singola o torneo
+//classe del form modalità giocatore che contiene le due modalità che esso può scegliere, partita singola o torneo
 public class FormModalitaGiocatoreController
 {
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
 	
+	//bottone per passare all'inserimento del codice di una partita singola al suo click
 	@FXML
 	public void btnPartitaSingola(ActionEvent event) throws IOException
 	{
@@ -19,6 +20,7 @@ public class FormModalitaGiocatoreController
 		alert.passaAlForm("/application/FormPartitaSingola.fxml", event);
 	}
 
+	//bottone per passare all'inserimento del codice di un torneo al suo click
 	@FXML
 	public void btnTorneo(ActionEvent event) throws IOException
 	{
