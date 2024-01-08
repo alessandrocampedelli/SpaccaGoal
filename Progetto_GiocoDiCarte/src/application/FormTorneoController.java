@@ -17,7 +17,7 @@ public class FormTorneoController
 	private TextField txtCodiceTorneo;
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	//creo un oggetto di classe "Gare" che permetterà di ricercare il codice della partita in tutte le gare presenti nel programma
+	//creo un oggetto di classe "Gare" che permetterà di ricercare il codice del torneo in tutte le gare presenti nel programma
 	Gare gare = new Gare();
 
 	//il bottone che mi permette di cercare il codice del torneo

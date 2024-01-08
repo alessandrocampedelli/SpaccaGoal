@@ -103,9 +103,10 @@ public class FormEliminaEventoController implements Initializable
 		}
 	}
 	
-	@Override
+	//metodo che viene eseguito all'apertura del form
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		//aggiungo tutti i codici delle gare alla label. al click su di esse, il programma stamperà il contenuto di esse
 		for(Gara gara : g.getGare()) 
 		{
 			lblPartite.getItems().add(gara.getCodiceGara());
