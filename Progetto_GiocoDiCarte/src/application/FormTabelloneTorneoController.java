@@ -21,7 +21,7 @@ public class FormTabelloneTorneoController implements Initializable
 {
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	//creo un oggetto di classe "Gare" che permetterà di ricercare il codice della partita in tutte le gare presenti nel programma
+	//creo un oggetto di classe "Gare"
 	Gare gare = new Gare();
 
 	//tutte le 8 label relative ai quarti, se sono 8 giocatori che prendono parte al torneo saranno utilizzate

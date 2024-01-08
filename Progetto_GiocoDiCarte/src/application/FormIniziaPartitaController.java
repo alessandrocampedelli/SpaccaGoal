@@ -19,11 +19,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.application.Platform;
 
+//classe che mostra l'inizio della partita con una progressBar
 public class FormIniziaPartitaController implements Initializable
 {
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	Alert_cambiaForm alert = new Alert_cambiaForm();
-	//creo un oggetto di classe "Gare" che permetterà di ricercare il codice della partita in tutte le gare presenti nel programma
+	//creo un oggetto di classe "Gare"
 	Gare gare = new Gare();
 	//le label che conterranno i nomi dei giocatori della partita
 	@FXML
@@ -81,42 +82,46 @@ public class FormIniziaPartitaController implements Initializable
 				//restituisce l'oggetto "Gara" con il codice della partita
 				Gara p = (Partita) gare.getGara(codiceUtente);
 
-				//DA QUI!
+				//restituisce il primo carattere per capire se è una partita singola oppure se è una partita del torneo
 				if(codiceUtente.charAt(0) == 't') 
 				{
 					giocatori = new ArrayList<>();
+					//è una partita di un torneo, aggiungo i primi due giocatori che compaiono nell'ArrayList che si sfideranno
 					giocatori.add(p.getGiocatori()[0].getAlias());
 					giocatori.add(p.getGiocatori()[1].getAlias());
 				}
 				else
 				{
+					//è una partita singola, richiamo l'utilizzo del metodo che restituisce i giocatori che prenderanno parte alla partita
 					giocatori = gare.restituisciGiocatori(codiceUtente);
 				}
-
+				//mi chiedo se i giocatori sono maggiori o uguali a 2 per riempire le prime due label
 				if(giocatori.size() >= 2)
 				{
 					lblNomeGiocatore1.setText(giocatori.get(0));
 					lblNomeGiocatore2.setText(giocatori.get(1));
 				}
-				
+				//mi chiedo se i giocatori sono maggiori o uguali a 3 per riempire anche la terza label
 				if(giocatori.size() >= 3)
 				{
 					lblNomeGiocatore3.setText(giocatori.get(2));
 				}
-				
+				//mi chiedo se i giocatori sono uguali a 4 (massimo numero giocatori per una partita) per riempire anche la quarta label
 				if(giocatori.size() == 4)
 				{
 					lblNomeGiocatore4.setText(giocatori.get(3));
-				}
-
+				}	
+				
+				//Thread per creare l'animazione della progressBar
 				Thread taskThread = new Thread(() -> 
 				{
+					//il contatore "i" della percentuale
 					double[] i = new double[] {0.0};
 				    for (i[0] = 0; i[0] <= 1; i[0] = i[0] + 0.1) 
 				    {
 				        try 
 				        {
-				        	//simula un'attività di 0.2 secondi
+				        	//interrompe l'esecuzione del programma per 0.2 secondi
 				            Thread.sleep(200); 
 					        Platform.runLater(new Runnable() 
 					        {
@@ -125,13 +130,15 @@ public class FormIniziaPartitaController implements Initializable
 						        {
 						        	//la percentuale double del numero
 						        	double k = i[0]*100;
-						        	//arrotondo la percentuale double a due decimali e la converto in un numero intero (troncamento)
+						        	//arrotondo la percentuale double a due decimali e la converto in un numero intero (tramite il troncamento)
 						        	int percentualeIntera = (int)(Math.round(k * 100.0) / 100.0);
 						        	//stampo la percentuale in output nella label
 							        lblPercentualeProgressBar.setText(percentualeIntera+"%");
 						        }
 						    });
+					        //setto la percentuale aggiornata della progressBar
 					        progressBar.setProgress(i[0]);
+				        	//interrompe l'esecuzione del programma per 0.3 secondi
 					        Thread.sleep(300);
 				        } 
 				        catch (InterruptedException e) 
@@ -139,32 +146,24 @@ public class FormIniziaPartitaController implements Initializable
 				            e.printStackTrace();
 				        }
 				    }
+				    //una volta terminato il caricamento della progressBar avvio il bottone non visibile per avviare il gioco
 				    Platform.runLater(new Runnable() 
 				    {
 				        @Override
 				        public void run() 
 				        {
+				        	//esegue il bottone "avvia partita" come se l'utente avesse fatto un click su di esso
 							btnAvviaPartita.fire();
 				        }
 				    });
 				});
-				//avvia il thread
+				//avvia il thread per simulare il funzionamento della progressBar
 				taskThread.start();
 			}
 			catch(FileNotFoundException e) 
 			{
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		}
-	}
-
-	public String getGiocatoriString() 
-	{
-		String output = "";
-		for(int i = 0; i < this.giocatori.size(); i++) 
-		{
-			output += (i+1) +") "+giocatori.get(i)+"\n";
-		}
-		return output;
 	}
 }
