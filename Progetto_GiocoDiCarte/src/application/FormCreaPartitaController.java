@@ -92,9 +92,12 @@ public class FormCreaPartitaController implements Initializable
 			}
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
 			String subNome = "";
-			if(nome.contains("(Robot)")) {
+			if(nome.contains("(Robot)")) 
+			{
 				subNome = nome.substring(0,nome.indexOf('(')-1);
-			}else {
+			}
+			else 
+			{
 				subNome = nome;
 			}
 			if(nomeGiaUsato(subNome)) 
@@ -221,9 +224,13 @@ public class FormCreaPartitaController implements Initializable
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
 			if(g.isRobot())
+			{
 				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
+			}
 			else
+			{
 				cmbSelectPlayer.getItems().add(g.getAlias());
+			}
 		}
 	}
 }

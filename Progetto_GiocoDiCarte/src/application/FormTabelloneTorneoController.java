@@ -156,7 +156,7 @@ public class FormTabelloneTorneoController implements Initializable
 		}
 		catch(IOException e)
 		{
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

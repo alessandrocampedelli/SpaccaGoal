@@ -78,7 +78,9 @@ public class FormCreaTorneoController implements Initializable
 			giocatori.add(leaderboard.getPlayers().get(i));
 			setLabel();
 			cmbSelectPlayer.setValue(null);
-		}catch(IllegalArgumentException e){
+		}
+		catch(IllegalArgumentException e)
+		{
 			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
 		catch (IOException e) 
@@ -240,9 +242,13 @@ public class FormCreaTorneoController implements Initializable
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
 			if(g.isRobot())
+			{
 				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
+			}
 			else
+			{
 				cmbSelectPlayer.getItems().add(g.getAlias());
+			}
 		}
 	}
 }
