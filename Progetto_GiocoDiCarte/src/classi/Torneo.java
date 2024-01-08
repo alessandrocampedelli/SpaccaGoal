@@ -31,7 +31,7 @@ public class Torneo extends Gara
 		}
 		catch(FileNotFoundException e) 
 		{
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

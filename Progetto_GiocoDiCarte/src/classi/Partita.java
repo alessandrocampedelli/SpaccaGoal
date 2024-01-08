@@ -438,7 +438,7 @@ public class Partita extends Gara
 		}
 		catch(IOException e) 
 		{
-			e.getMessage();
+			e.printStackTrace();
 		}
         return path;
 	}
@@ -494,7 +494,7 @@ public class Partita extends Gara
 		}
 		catch(IOException e) 
 		{
-			e.getMessage();
+			e.printStackTrace();
 		}
 	}
 	

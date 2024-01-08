@@ -420,7 +420,7 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			catch(IOException e)
 			{
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 			
 			//metodo per stampare l'attuale punteggio della partita nella label
