@@ -25,6 +25,7 @@ import classi.Partita;
 import classi.Gare;
 import classi.Leaderboard;
 
+//classe che permette all'amministratore di creare un torneo 
 public class FormCreaTorneoController implements Initializable
 {
 	@FXML
@@ -62,9 +63,12 @@ public class FormCreaTorneoController implements Initializable
 			}
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
 			String subNome = "";
-			if(nome.contains("(Robot)")) {
+			if(nome.contains("(Robot)")) 
+			{
 				subNome = nome.substring(0,nome.indexOf('(')-1);
-			}else {
+			}
+			else 
+			{
 				subNome = nome;
 			}
 			if(nomeGiaUsato(subNome)) 
@@ -83,7 +87,7 @@ public class FormCreaTorneoController implements Initializable
 		{
 			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
-		catch (IOException e) 
+		catch(IOException e) 
 		{
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
 		}
@@ -217,8 +221,8 @@ public class FormCreaTorneoController implements Initializable
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub//creo la colonna col nome
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));

@@ -23,6 +23,7 @@ import classi.Partita;
 import classi.Gare;
 import classi.Leaderboard;
 
+//classe che permette all'amministratore di creare una partita 
 public class FormCreaPartitaController implements Initializable
 {
 	@FXML
@@ -126,11 +127,11 @@ public class FormCreaPartitaController implements Initializable
 			}
 			cmbSelectPlayer.setValue(null);
 		}
-		catch (IOException e) 
+		catch(IOException e) 
 		{
 			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
 		}
-		catch (IllegalArgumentException e) 
+		catch(IllegalArgumentException e) 
 		{
 			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
@@ -199,8 +200,8 @@ public class FormCreaPartitaController implements Initializable
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub//creo la colonna col nome
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
 		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));

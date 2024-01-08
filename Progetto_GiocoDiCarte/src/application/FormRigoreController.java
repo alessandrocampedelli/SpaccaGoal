@@ -207,9 +207,12 @@ public class FormRigoreController implements Initializable
 					}
 					Thread taskThread = new Thread(() -> 
 					{
-						try {
+						try 
+						{
 							Thread.sleep(3000);
-						} catch (InterruptedException e) {
+						} 
+						catch (InterruptedException e) 
+						{
 							e.printStackTrace();
 						}
 						Platform.runLater(new Runnable() 
