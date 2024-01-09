@@ -119,9 +119,7 @@ public class Alert_cambiaForm
 		alert.initOwner(stage);
 		
 		alert.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-		alert.getDialogPane().getButtonTypes().forEach(buttonType -> {
-            alert.getDialogPane().lookupButton(buttonType).getStyleClass().add("button_alertError");
-        });
+		alert.getDialogPane().lookupButton(ButtonType.OK).getStyleClass().add("button_alertError");
 		
 		alert.getDialogPane().setContentText(setContent);
 		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");
@@ -141,9 +139,7 @@ public class Alert_cambiaForm
 		alert.initOwner(stage);
 		
 		alert.getDialogPane().getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-		alert.getDialogPane().getButtonTypes().forEach(buttonType -> {
-            alert.getDialogPane().lookupButton(buttonType).getStyleClass().add("button_alertInformation");
-        });
+		alert.getDialogPane().lookupButton(ButtonType.OK).getStyleClass().add("button_alertInformation");
 		
 		alert.getDialogPane().setContentText(setContent);
 		alert.getDialogPane().lookup(".content").setStyle("-fx-font-size: 15;");

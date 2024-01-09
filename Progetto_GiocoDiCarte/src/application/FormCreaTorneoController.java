@@ -145,6 +145,7 @@ public class FormCreaTorneoController implements Initializable
 				tableGiocatoriInseriti.getItems().clear();
 				tableGiocatoriInseriti.getItems().addAll(giocatori);
 				setLabel();
+				btnAggiungiGiocatore.setVisible(true);
 			}	
 		}
 	}
