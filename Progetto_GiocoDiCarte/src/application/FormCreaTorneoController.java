@@ -48,7 +48,7 @@ public class FormCreaTorneoController implements Initializable
 	static Torneo t;
 	Gare gare = new Gare();
 	Leaderboard leaderboard = new Leaderboard();
-	
+
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
 
@@ -125,12 +125,6 @@ public class FormCreaTorneoController implements Initializable
 		}
 	}
 
-	@FXML
-	public void btnVaiIndietro1(MouseEvent event) throws IOException
-	{
-		giocatori.clear();
-		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-	}
 
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
@@ -150,20 +144,64 @@ public class FormCreaTorneoController implements Initializable
 		}
 	}
 
+	//metodo che viene scatenato al click della freccia indietro sull'interfaccia grafica
+	@FXML
+	public void btnVaiIndietro1(MouseEvent event) throws IOException
+	{
+		//elimino tutti i giocatori dall'arrayList
+		giocatori.clear();
+		//passo al form di modalità admin amministratore
+		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+	}
+
+	//metodo che permette di creare randomicamente il codice del torneo (il primo carattere di default visto che è un torneo è "t")
 	private String getRandomString(int len, char minChar, char maxChar) 
 	{
 		String s = "";
 		for (int i = 0; i < len; ++i)
 		{
+			//i caratteri vengono scelti randomicamente passando come parametro i codici ASCII in cui deve scegliere (tra 'a' e 'z')
 			s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
 		}
+		//ritorna il codice del torneo creato
 		return s;
 	}
+	
+	//metodo che restituisce con una stringa i giocatori che parteciperanno al torneo
+	public String getGiocatori() 
+	{
+		String output = "";
+		//stampo tutti i giocatori separati da virgola che parteciperanno al torneo
+		for(Giocatore g: giocatori) 
+		{
+			output += " " + g.getAlias() + ",";
+		}
+		//elimino l'ultima virgola di troppo
+		output = output.substring(0, output.length()-1);
+		//ritorna la stringa con i giocatori
+		return output;
+	}
 
+	//metodo che restituisce un vettore di stringhe con i giocatori che parteciperanno al torneo
+	public String[] nomiGiocatori() 
+	{
+		//il vettore di stringhe avrà la dimensione dell'arrayList "giocatori"
+		String[] g = new String[giocatori.size()];
+		//riempio il vettore con tutti i giocatori del torneo
+		for(int i = 0; i < g.length; i++) 
+		{
+			g[i] = giocatori.get(i).getAlias();
+		}
+		//restituisce il vettore di giocatori
+		return g;
+	}
+	
+	//metodo che restituisce un operatore booleano che controlla se il nome è gia stato inserito nell'arrayList giocatori
 	private boolean nomeGiaUsato(String nome) 
 	{
 		for(Giocatore g : giocatori) 
 		{
+			//se il nome è già stato inserito ritorna "true", altrimenti ritorna "false"
 			if(g.getAlias().equals(nome))	
 			{
 				return true;
@@ -172,10 +210,13 @@ public class FormCreaTorneoController implements Initializable
 		return false;
 	}
 
+	//metodo che permette di settare la label dei giocatori rimanenti da inserire per creare un torneo
 	private void setLabel() 
 	{
+		//stampo la label con il numero attuale di giocatori inseriti per avviare il torneo
 		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 
+		//controllo se i giocatori inseriti sono minori o uguali a 4 decrementando la label dei giocatori rimanenti per partire dalla semifinale
 		if(giocatori.size() <= 4)
 		{
 			lblSemifinale.setText("" + (4 - giocatori.size()));
@@ -184,12 +225,15 @@ public class FormCreaTorneoController implements Initializable
 		{
 			lblSemifinale.setText("");
 		}
+		//decremento la label dei giocatori rimanenti per partire il torneo dai quarti di finale
 		lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
-
+		
+		//i giocatori massimi da inserire sono 8, disabilito il bottone "aggiungi giocatore" per evitare che ne aggiunga altri
 		if(giocatori.size() == 8) 
 		{
 			btnAggiungiGiocatore.setVisible(false);
 		}
+		//se i giocatori inseriti sono 4 o 8 rendo visibile il bottone "crea torneo"
 		if(giocatori.size() == 4 || giocatori.size() == 8) 
 		{
 			btnCreaTorneo.setVisible(true);
@@ -200,52 +244,40 @@ public class FormCreaTorneoController implements Initializable
 		}
 	}
 
-	public String getGiocatori() 
-	{
-		String output = "";
-		for(Giocatore g: giocatori) 
-		{
-			output += " "+g.getAlias() + ",";
-		}
-		output = output.substring(0, output.length()-1);
-		return output;
-	}
-
-	public String[] nomiGiocatori() 
-	{
-		String[] g = new String[giocatori.size()];
-		for(int i = 0; i < g.length; i++) 
-		{
-			g[i] = giocatori.get(i).getAlias();
-		}
-		return g;
-	}
-
+	//metodo che verrà eseguito all'apertura del form
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		//creo la colonna con l'alias del giocatore (stringa)
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
-		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		//la colonna conterrà la proprietà di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
+		//stampo con una "textField" l'alias nella riga della colonna
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
 
-		//creo la colonna col nome
+		//creo la colonna con l'operatore booleano per sapere se il giocatore è un robot oppure no
 		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
-		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		//la colonna conterrà la proprietà di nome 'robot' della classe giocatore
 		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		//stampo con una "checkBox" con il baffo se il giocatore è un robot, altrimenti senza baffo se il giocatore non è un robot
 		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
-		
-		//aggiungo le colonne
+
+		//aggiungo le colonne alla "tableView"
 		tableGiocatoriInseriti.getColumns().add(alias);
 		tableGiocatoriInseriti.getColumns().add(robot);
 
+		//setto la visualizzazione della tableView
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+
+		//setto lo stile della tableView di una grandezza più grande e con allineamento delle colonne alias e robot centrale
 		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
-		// TODO Auto-generated method stub
+
+		//aggiungo alla comboBox tutti i giocatori presenti nella leaderboard
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
+			//se il giocatore è un robot gli aggiungo la parentesi del robot per farlo presente, in maniera diretta, all'utente
 			if(g.isRobot())
 			{
 				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");

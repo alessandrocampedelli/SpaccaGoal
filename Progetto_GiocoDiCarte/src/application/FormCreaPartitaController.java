@@ -26,6 +26,13 @@ import classi.Leaderboard;
 //classe che permette all'amministratore di creare una partita 
 public class FormCreaPartitaController implements Initializable
 {
+	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
+	private Alert_cambiaForm alert = new Alert_cambiaForm();
+	static Partita p;
+	Leaderboard leaderboard = new Leaderboard();
+	Gare gare = new Gare();
+	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+
 	@FXML
 	private Label lblGiocatoriInseriti;
 	@FXML
@@ -38,49 +45,6 @@ public class FormCreaPartitaController implements Initializable
 	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
-	private ArrayList<Giocatore> giocatori = new ArrayList<>();
-	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
-	private Alert_cambiaForm alert = new Alert_cambiaForm();
-	static Partita p;
-	Leaderboard leaderboard = new Leaderboard();
-	Gare gare = new Gare();
-
-	@FXML
-	public void btnVaiIndietro1(MouseEvent event) throws IOException
-	{
-		giocatori.clear();
-		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
-	}
-
-	@FXML
-	public void eliminaGiocatore(MouseEvent event) throws IOException 
-	{
-		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
-		if(indiceEliminato != -1) 
-		{
-			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
-			{
-				giocatori.remove(indiceEliminato);
-				tableGiocatoriInseriti.getItems().clear();
-				tableGiocatoriInseriti.getItems().addAll(giocatori);
-				lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-				lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
-				if(giocatori.size() != 4) 
-				{
-					btnAggiungiGiocatore.setVisible(true);
-				}
-				if(giocatori.size() >= 2) 
-				{
-					btnCreaPartita.setVisible(true);
-				}
-				else 
-				{
-					btnCreaPartita.setVisible(false);
-				}
-			}
-		}
-	}
 
 	@FXML
 	public void btnAggiungiGiocatore(ActionEvent event) 
@@ -155,42 +119,95 @@ public class FormCreaPartitaController implements Initializable
 			giocatori.clear();
 		}
 	}
-
+	
+	@FXML
+	public void eliminaGiocatore(MouseEvent event) throws IOException 
+	{
+		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		if(indiceEliminato != -1) 
+		{
+			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
+			{
+				giocatori.remove(indiceEliminato);
+				tableGiocatoriInseriti.getItems().clear();
+				tableGiocatoriInseriti.getItems().addAll(giocatori);
+				lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+				lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
+				if(giocatori.size() != 4) 
+				{
+					btnAggiungiGiocatore.setVisible(true);
+				}
+				if(giocatori.size() >= 2) 
+				{
+					btnCreaPartita.setVisible(true);
+				}
+				else 
+				{
+					btnCreaPartita.setVisible(false);
+				}
+			}
+		}
+	}
+	
+	//metodo che viene scatenato al click della freccia indietro sull'interfaccia grafica
+	@FXML
+	public void btnVaiIndietro1(MouseEvent event) throws IOException
+	{
+		//elimino tutti i giocatori dall'arrayList
+		giocatori.clear();
+		//passo al form di modalità admin amministratore
+		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+	}
+	
+	//metodo che permette di creare randomicamente il codice della partita (il primo carattere di default visto che è una partita è "p")
 	private String getRandomString(int len, char minChar, char maxChar) 
 	{
 		String s = "";
 		for (int i = 0; i < len; ++i)
 		{
+			//i caratteri vengono scelti randomicamente passando come parametro i codici ASCII in cui deve scegliere (tra 'a' e 'z')
 			s += (char) ((Math.random() * (maxChar - minChar)) + minChar);
 		}
+		//ritorna il codice della partita creato
 		return s;
 	}
-	
+
+	//metodo che restituisce con una stringa i giocatori che parteciperanno alla partita
 	public String getGiocatori() 
 	{
 		String output = "";
+		//stampo tutti i giocatori separati da virgola che parteciperanno alla partita
 		for(Giocatore g: giocatori) 
 		{
-			output += " "+g.getAlias() + ",";
+			output += " " + g.getAlias() + ",";
 		}
+		//elimino l'ultima virgola di troppo
 		output = output.substring(0, output.length()-1);
+		//ritorna la stringa con i giocatori
 		return output;
 	}
 
+	//metodo che restituisce un vettore di stringhe con i giocatori che parteciperanno alla partita
 	public String[] nomiGiocatori() 
 	{
+		//il vettore di stringhe avrà la dimensione dell'arrayList "giocatori"
 		String[] g = new String[giocatori.size()];
+		//riempio il vettore con tutti i giocatori della partita
 		for(int i = 0; i < g.length; i++) 
 		{
 			g[i] = giocatori.get(i).getAlias();
 		}
+		//restituisce il vettore di giocatori
 		return g;
 	}
-	
+
+	//metodo che restituisce un operatore booleano che controlla se il nome è gia stato inserito nell'arrayList giocatori
 	private boolean nomeGiaUsato(String nome) 
 	{
 		for(Giocatore g : giocatori) 
 		{
+			//se il nome è già stato inserito ritorna "true", altrimenti ritorna "false"
 			if(g.getAlias().equals(nome))
 			{
 				return true;
@@ -199,31 +216,40 @@ public class FormCreaPartitaController implements Initializable
 		return false;
 	}
 
+	//metodo che verrà eseguito all'apertura del form
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
+		//creo la colonna con l'alias del giocatore (stringa)
 		TableColumn<Giocatore, String> alias = new TableColumn<>("ALIAS");
-		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		//la colonna conterrà la proprietà di nome 'alias' della classe giocatore
 		alias.setCellValueFactory(new PropertyValueFactory<Giocatore, String>("alias"));
+		//stampo con una "textField" l'alias nella riga della colonna
 		alias.setCellFactory(TextFieldTableCell.forTableColumn());
 
-		//creo la colonna col nome
+		//creo la colonna con l'operatore booleano per sapere se il giocatore è un robot oppure no
 		TableColumn<Giocatore, Boolean> robot = new TableColumn<>("ROBOT");
-		//la colonna conterrà la proprieta di nome 'alias' della classe giocatore
+		//la colonna conterrà la proprietà di nome 'robot' della classe giocatore
 		robot.setCellValueFactory(cellData -> cellData.getValue().getRobot());
+		//stampo con una "checkBox" con il baffo se il giocatore è un robot, altrimenti senza baffo se il giocatore non è un robot
 		robot.setCellFactory(CheckBoxTableCell.forTableColumn(robot));
-		
-		//aggiungo le colonne
+
+		//aggiungo le colonne alla "tableView"
 		tableGiocatoriInseriti.getColumns().add(alias);
 		tableGiocatoriInseriti.getColumns().add(robot);
-		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
+
+		//setto la visualizzazione della tableView
 		tableGiocatoriInseriti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+
+		//setto lo stile della tableView di una grandezza più grande e con allineamento delle colonne alias e robot centrale
+		tableGiocatoriInseriti.setStyle("-fx-font-size: 18;");
 		alias.setStyle("-fx-alignment: CENTER;");
 		robot.setStyle("-fx-alignment: CENTER;");
 
-		cmbSelectPlayer.setStyle("-fx-font-size: 18;");
+		//aggiungo alla comboBox tutti i giocatori presenti nella leaderboard
 		for(Giocatore g : leaderboard.getPlayers()) 
 		{
+			//se il giocatore è un robot gli aggiungo la parentesi del robot per farlo presente, in maniera diretta, all'utente
 			if(g.isRobot())
 			{
 				cmbSelectPlayer.getItems().add(g.getAlias()+" (Robot)");
