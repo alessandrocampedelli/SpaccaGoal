@@ -28,41 +28,55 @@ import classi.Leaderboard;
 //classe che permette all'amministratore di creare un torneo 
 public class FormCreaTorneoController implements Initializable
 {
-	@FXML
-	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
-	@FXML
-	private Label lblGiocatoriInseriti;
-	@FXML
-	private Label lblSemifinale;
-	@FXML
-	private Label lblQuartiDiFinale;
-	@FXML
-	private Button btnAggiungiGiocatore = new Button();
-	@FXML
-	private Button btnCreaTorneo = new Button();
-	@FXML
-	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
-
-	private ArrayList<Giocatore> giocatori = new ArrayList<>();
-	private Salvataggio salvaGara;
-	static Torneo t;
-	Gare gare = new Gare();
-	Leaderboard leaderboard = new Leaderboard();
-
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
+	//il nuovo torneo che verrà creato e salvato nei file di testo
+	static Torneo t;
+	//creo l'oggetto della classe "Leaderboard"
+	Leaderboard leaderboard = new Leaderboard();
+	//creo l'oggetto della classe "Gare"
+	Gare gare = new Gare();
+	//l'arrayList dei giocatori che conterrà i giocatori che prenderanno parte alla partita
+	private ArrayList<Giocatore> giocatori = new ArrayList<>();
+	private Salvataggio salvaGara;
+	
+	//la label con il numero di giocatori inseriti nel programma
+	@FXML
+	private Label lblGiocatoriInseriti;
+	//la label con il numero di giocatori massimo che ancora puoi inserire per creare un torneo partendo dalle semifinali (massimo 4 giocatori)
+	@FXML
+	private Label lblSemifinale;
+	//la label con il numero di giocatori massimo che ancora puoi inserire per creare un torneo partendo dai quarti di finale (massimo 8 giocatori)
+	@FXML
+	private Label lblQuartiDiFinale;
+	//il bottone per aggiungere un giocatore alla tableView
+	@FXML
+	private Button btnAggiungiGiocatore = new Button();
+	//il bottone che permette di creare il torneo con codice e giocatori
+	@FXML
+	private Button btnCreaTorneo = new Button();
+	//la comboBox con tutti i giocatori presenti nella leaderboard (che sono stati creati nel form crea giocatore)
+	@FXML
+	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
+	//la tableView con i giocatori selezionati che prenderanno parte al torneo
+	@FXML
+	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 
+	//il bottone che permette di aggiungere un giocatore alla tableView
 	@FXML
 	public void btnAggiungiGiocatore(ActionEvent event) 
 	{
 		try 
 		{
+			//controllo che sia stato selezionato un giocatore nella comboBox, altrimenti genero l'eccezione
 			if(cmbSelectPlayer.getSelectionModel().getSelectedItem() == null) 
 			{
 				throw new IOException();
 			}
+			//il nome che l'utente ha inserito nella comboBox
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
 			String subNome = "";
+			//controllo se il giocatore selezionato contiene la parola robot, nel caso la elimino e mi memorizzo solo l'alias del giocatore
 			if(nome.contains("(Robot)")) 
 			{
 				subNome = nome.substring(0,nome.indexOf('(')-1);
@@ -71,28 +85,39 @@ public class FormCreaTorneoController implements Initializable
 			{
 				subNome = nome;
 			}
+			//controllo se il nome è già stato selezionato ed è già presente nell'arrayList "giocatori"
 			if(nomeGiaUsato(subNome)) 
 			{
+				//ripulisco la scelta dell'utente effettuata nella comboBox
 				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
+			//creo, attraberso l'utilizzo di un metodo della classe "Leaderboard", l'oggetto "Giocatore" aggiungendolo alla leaderboard 
 			Giocatore nuovoGiocatore = leaderboard.getPlayers(subNome);
+			//aggiungo alla tableview il nuovo giocatore appena creato
 			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
+			//mi ricavo l'indice del nuovo giocatore inserito all'interno della leaderboard
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
+			//aggiungo il giocatore all'arrayList "giocatori" del torneo
 			giocatori.add(leaderboard.getPlayers().get(i));
+			//richiamo l'utilizzo del metodo per settare le label di informazioni dei giocatori ancora da inserire
 			setLabel();
+			//ripulisco la comboBox come all'inizio (senza nessun giocatore selezionato)
 			cmbSelectPlayer.setValue(null);
-		}
-		catch(IllegalArgumentException e)
-		{
-			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
 		}
 		catch(IOException e) 
 		{
-			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
+			//mando un alert all'utente che non ha selezionato alcun giocatore nella comboBox
+			alert.mostraErrore("Il giocatore deve avere un nome" , "ERRORE");
+		}
+		catch(IllegalArgumentException e)
+		{
+			//mando un alert all'utente che il giocatore selezionato è già stato inserito (non possono esserci doppioni)
+			alert.mostraErrore("Il giocatore selezionato è gia stato inserito" , "ERRORE");
 		}
 	}
 
+	//il bottone per creare un torneo e salvarlo all'interno della classe "Salvataggio"
 	@FXML
 	public void btnCreaTorneo(ActionEvent event) throws IOException
 	{	
@@ -125,7 +150,7 @@ public class FormCreaTorneoController implements Initializable
 		}
 	}
 
-
+	//l'evento che permette di eliminare un giocatore cliccandolo dalla tableView
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{

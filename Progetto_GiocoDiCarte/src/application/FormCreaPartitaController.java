@@ -28,35 +28,49 @@ public class FormCreaPartitaController implements Initializable
 {
 	//l'oggetto "Alert_cambiaForm" per cambiare da un form all'altro
 	private Alert_cambiaForm alert = new Alert_cambiaForm();
+	//la nuova partita che verrà creata e salvata nei file di testo
 	static Partita p;
+	//creo l'oggetto della classe "Leaderboard"
 	Leaderboard leaderboard = new Leaderboard();
+	//creo l'oggetto della classe "Gare"
 	Gare gare = new Gare();
+	//l'arrayList dei giocatori che conterrà i giocatori che prenderanno parte alla partita
 	private ArrayList<Giocatore> giocatori = new ArrayList<>();
 
+	//la label con il numero di giocatori inseriti nel programma
 	@FXML
 	private Label lblGiocatoriInseriti;
+	//la label con il numero di giocatori massimo che ancora puoi inserire per creare una partita
 	@FXML
 	private Label lblGiocatoriDaInserire;
+	//il bottone per aggiungere un giocatore alla tableView
 	@FXML
 	private Button btnAggiungiGiocatore = new Button();
+	//il bottone che permette di creare la partita con codice e giocatori
 	@FXML
 	private Button btnCreaPartita = new Button();
+	//la comboBox con tutti i giocatori presenti nella leaderboard (che sono stati creati nel form crea giocatore)
 	@FXML
 	private ComboBox<String> cmbSelectPlayer = new ComboBox<>();
+	//la tableView con i giocatori selezionati che prenderanno parte alla partita
 	@FXML
 	private TableView<Giocatore> tableGiocatoriInseriti = new TableView<Giocatore>();
 
+	//il bottone che permette di aggiungere un giocatore alla tableView
 	@FXML
 	public void btnAggiungiGiocatore(ActionEvent event) 
 	{
 		try 
 		{
+			//controllo che sia stato selezionato un giocatore nella comboBox, altrimenti genero l'eccezione
 			if(cmbSelectPlayer.getSelectionModel().getSelectedItem() == null) 
 			{
 				throw new IOException();
 			}
+			//il nome che l'utente ha inserito nella comboBox
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
 			String subNome = "";
+			//controllo se il giocatore selezionato contiene la parola robot, nel caso la elimino e mi memorizzo solo l'alias del giocatore
 			if(nome.contains("(Robot)")) 
 			{
 				subNome = nome.substring(0,nome.indexOf('(')-1);
@@ -65,16 +79,23 @@ public class FormCreaPartitaController implements Initializable
 			{
 				subNome = nome;
 			}
+			//controllo se il nome è già stato selezionato ed è già presente nell'arrayList "giocatori"
 			if(nomeGiaUsato(subNome)) 
 			{
+				//ripulisco la scelta dell'utente effettuata nella comboBox
 				cmbSelectPlayer.setValue(null);
 				throw new IllegalArgumentException();
 			}
+			//creo, attraberso l'utilizzo di un metodo della classe "Leaderboard", l'oggetto "Giocatore" aggiungendolo alla leaderboard 
 			Giocatore nuovoGiocatore = leaderboard.getPlayers(subNome);
+			//aggiungo alla tableview il nuovo giocatore appena creato
 			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
+			//mi ricavo l'indice del nuovo giocatore inserito all'interno della leaderboard
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
+			//aggiungo il giocatore all'arrayList "giocatori" della partita
 			giocatori.add(leaderboard.getPlayers().get(i));
 
+			//DA QUI!
 			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
 			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
 			if(giocatori.size() == 4) 
@@ -89,18 +110,22 @@ public class FormCreaPartitaController implements Initializable
 			{
 				btnCreaPartita.setVisible(false);
 			}
+			//ripulisco la comboBox come all'inizio (senza nessun giocatore selezionato)
 			cmbSelectPlayer.setValue(null);
 		}
 		catch(IOException e) 
 		{
-			alert.mostraErrore("Il giocatore deve avere un nome","ERRORE");
+			//mando un alert all'utente che non ha selezionato alcun giocatore nella comboBox
+			alert.mostraErrore("Il giocatore deve avere un nome" , "ERRORE");
 		}
 		catch(IllegalArgumentException e) 
 		{
-			alert.mostraErrore("Il giocatore selezionato è gia stato inserito","ERRORE");
+			//mando un alert all'utente che il giocatore selezionato è già stato inserito (non possono esserci doppioni)
+			alert.mostraErrore("Il giocatore selezionato è gia stato inserito" , "ERRORE");
 		}
 	}
 	
+	//il bottone per creare una partita e salvarla all'interno della classe "Salvataggio"
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
@@ -120,6 +145,7 @@ public class FormCreaPartitaController implements Initializable
 		}
 	}
 	
+	//l'evento che permette di eliminare un giocatore cliccandolo dalla tableView
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{
