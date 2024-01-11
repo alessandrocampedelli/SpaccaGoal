@@ -121,18 +121,24 @@ public class FormCreaTorneoController implements Initializable
 	@FXML
 	public void btnCreaTorneo(ActionEvent event) throws IOException
 	{	
+		//chiedo all'utente se è sicuro di volere creare questo torneo, se risponde con il bottone "OK" eseguo questo codice
 		if(alert.chiediConferma("Sei sicuro di creare questo torneo con i seguenti giocatori:\n"+getGiocatori(), "MESSAGGIO DI CONFERMA")) 
 		{
-			String codice = getRandomString(6,'a', 'z');
+			//salvo la leaderboard con gli eventuali nuovi giocatori creati
 			leaderboard.salvaPlayers();
-			codice = "t"+codice;
-			//mischio l'ordine in cui i giocatori giocano la partita
+			//richiamo l'utilizzo del metodo che mi restituisce una stringa di 6 caratteri
+			String codice = getRandomString(6,'a','z');
+			//aggiungo al codice appena creato il carattere identificativo del torneo "t"
+			codice = "t" + codice;
+			//mischio l'ordine in cui i giocatori giocheranno le partite
 			Collections.shuffle(giocatori);
+			//creo un nuovo oggetto "Torneo" con i giocatori che parteciperanno e il codice identificativo del torneo
 			t = new Torneo(giocatori,codice);
-			//creazione delle partite
+			//creazione delle partite del torneo
 			t.creazionePartite();
+			//aggiungo il torneo all'arrayList di gara nella classe "Gare"
 			gare.aggiungiGara(t);
-			//creo la cartella del torneo
+			//salvo il torneo all'interno dei file di testo, salvo in un file i giocatori del torneo e nell'altro il tabellone del torneo
 			salvaGara = new Salvataggio(t);
 			salvaGara.createDirectory("tornei");
 			salvaGara.salvaGiocatoriTorneo();
@@ -141,11 +147,15 @@ public class FormCreaTorneoController implements Initializable
 			//dentro la cartella del torneo creo tante cartelle per ogni partita, ognuna con tutte le sue info
 			for(Partita p : t.getPartite()) 
 			{
+				//salvo le partite all'interno della cartella del torneo
 				Salvataggio salvaGara = new Salvataggio(p);
 				salvaGara.salvaPartita(p, "tornei/"+t.getCodiceGara());
 			}
+			//mando un alert all'utente informandolo che il torneo è stato creato con successo e gli mostro il codice del torneo
 			alert.mostraInformazione("Codice del torneo: "+codice,"TORNEO CREATO CON SUCCESSO");
+			//passo al form modalità admin amministratore
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+			//pulisco l'arrayList di giocatori
 			giocatori.clear();
 		}
 	}
@@ -154,16 +164,23 @@ public class FormCreaTorneoController implements Initializable
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{
+		//l'indice del giocatore selezionato nella tableView
 		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		//controllo se è stato selezionato un giocatore dalla tableView, altrimenti non eseguo nulla
 		if(indiceEliminato != -1) 
 		{
+			//il giocatore che è stato selezionato dalla tableView
 			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
+			//chiedo all'utente se è sicuro di volere eliminare il giocatore, se risponde con il bottone "OK" eseguo questo codice
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: " + g.getAlias(), "MESSAGGIO DI CONFERMA"))
 			{
+				//rimuovo il giocatore dall'arrayList giocatori dall'indice e aggiorno la tableView
 				giocatori.remove(indiceEliminato);
 				tableGiocatoriInseriti.getItems().clear();
 				tableGiocatoriInseriti.getItems().addAll(giocatori);
+				//aggiorno le label con il giocatore eliminato
 				setLabel();
+				//rendo visibile il bottone "aggiungi giocatore" perchè se ha eliminato un giocatore ci sarà sempre un altro giocatore da dover aggiungere
 				btnAggiungiGiocatore.setVisible(true);
 			}	
 		}
@@ -253,7 +270,7 @@ public class FormCreaTorneoController implements Initializable
 		//decremento la label dei giocatori rimanenti per partire il torneo dai quarti di finale
 		lblQuartiDiFinale.setText("" + (8 - giocatori.size()));
 		
-		//i giocatori massimi da inserire sono 8, disabilito il bottone "aggiungi giocatore" per evitare che ne aggiunga altri
+		//i giocatori massimi da inserire sono 8, disabilito il bottone "aggiungi giocatore" per evitare che l'utente ne aggiunga altri
 		if(giocatori.size() == 8) 
 		{
 			btnAggiungiGiocatore.setVisible(false);

@@ -94,22 +94,8 @@ public class FormCreaPartitaController implements Initializable
 			int i = leaderboard.getPlayers().indexOf(nuovoGiocatore);
 			//aggiungo il giocatore all'arrayList "giocatori" della partita
 			giocatori.add(leaderboard.getPlayers().get(i));
-
-			//DA QUI!
-			lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-			lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
-			if(giocatori.size() == 4) 
-			{
-				btnAggiungiGiocatore.setVisible(false);
-			}
-			if(giocatori.size() >= 2) 
-			{
-				btnCreaPartita.setVisible(true);
-			}
-			else 
-			{
-				btnCreaPartita.setVisible(false);
-			}
+			//aggiorno le label con il giocatore eliminato
+			setLabel();
 			//ripulisco la comboBox come all'inizio (senza nessun giocatore selezionato)
 			cmbSelectPlayer.setValue(null);
 		}
@@ -124,58 +110,62 @@ public class FormCreaPartitaController implements Initializable
 			alert.mostraErrore("Il giocatore selezionato è gia stato inserito" , "ERRORE");
 		}
 	}
-	
+
 	//il bottone per creare una partita e salvarla all'interno della classe "Salvataggio"
 	@FXML
 	public void btnCreaPartita(ActionEvent event) throws IOException
 	{	
+		//chiedo all'utente se è sicuro di volere creare questa partita, se risponde con il bottone "OK" eseguo questo codice
 		if(alert.chiediConferma("Sei sicuro di creare questa partita con i seguenti giocatori: "+getGiocatori(), "MESSAGGIO DI CONFERMA")) 
 		{
 			//salvo la leaderboard con gli eventuali nuovi giocatori creati
 			leaderboard.salvaPlayers();
-			String codice = getRandomString(6,'a', 'z');
+			//richiamo l'utilizzo del metodo che mi restituisce una stringa di 6 caratteri
+			String codice = getRandomString(6,'a','z');
+			//aggiungo al codice appena creato il carattere identificativo della partita "p"
 			codice = "p"+codice;
+			//creo un nuovo oggetto "Partita" con i giocatori che parteciperanno e il codice identificativo della partita
 			p = new Partita(giocatori,codice);
+			//aggiungo la partita all'arrayList di gara nella classe "Gare"
 			gare.aggiungiGara(p);
 			Salvataggio salvaGara = new Salvataggio(p);
+			//salvo la partita all'interno dei file di testo
 			salvaGara.salvaPartita(p, "partite");
+			//mando un alert all'utente informandolo che la partita è stata creata con successo e gli mostro il codice della partita
 			alert.mostraInformazione("Codice della partita: "+codice,"PARTITA CREATA CON SUCCESSO");
+			//passo al form modalità admin amministratore
 			alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
+			//pulisco l'arrayList di giocatori
 			giocatori.clear();
 		}
 	}
-	
+
 	//l'evento che permette di eliminare un giocatore cliccandolo dalla tableView
 	@FXML
 	public void eliminaGiocatore(MouseEvent event) throws IOException 
 	{
+		//l'indice del giocatore selezionato nella tableView
 		int indiceEliminato = tableGiocatoriInseriti.getSelectionModel().getSelectedIndex();
+		//controllo se è stato selezionato un giocatore dalla tableView, altrimenti non eseguo nulla
 		if(indiceEliminato != -1) 
 		{
+			//il giocatore che è stato selezionato dalla tableView
 			Giocatore g = tableGiocatoriInseriti.getSelectionModel().getSelectedItem();
-			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: "+g.getAlias(), "MESSAGGIO DI CONFERMA"))
+			//chiedo all'utente se è sicuro di volere eliminare il giocatore, se risponde con il bottone "OK" eseguo questo codice
+			if(alert.chiediConferma("Sei sicuro di voler eliminare il giocatore di nome: " + g.getAlias(), "MESSAGGIO DI CONFERMA"))
 			{
+				//rimuovo il giocatore dall'arrayList giocatori dall'indice e aggiorno la tableView
 				giocatori.remove(indiceEliminato);
 				tableGiocatoriInseriti.getItems().clear();
 				tableGiocatoriInseriti.getItems().addAll(giocatori);
-				lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
-				lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
-				if(giocatori.size() != 4) 
-				{
-					btnAggiungiGiocatore.setVisible(true);
-				}
-				if(giocatori.size() >= 2) 
-				{
-					btnCreaPartita.setVisible(true);
-				}
-				else 
-				{
-					btnCreaPartita.setVisible(false);
-				}
+				//aggiorno le label con il giocatore eliminato
+				setLabel();
+				//rendo visibile il bottone "aggiungi giocatore" perchè se ha eliminato un giocatore ci sarà sempre un altro giocatore da dover aggiungere
+				btnAggiungiGiocatore.setVisible(true);
 			}
 		}
 	}
-	
+
 	//metodo che viene scatenato al click della freccia indietro sull'interfaccia grafica
 	@FXML
 	public void btnVaiIndietro1(MouseEvent event) throws IOException
@@ -185,7 +175,7 @@ public class FormCreaPartitaController implements Initializable
 		//passo al form di modalità admin amministratore
 		alert.passaAlForm("/application/FormModalitaAdminMenu.fxml",event);
 	}
-	
+
 	//metodo che permette di creare randomicamente il codice della partita (il primo carattere di default visto che è una partita è "p")
 	private String getRandomString(int len, char minChar, char maxChar) 
 	{
@@ -240,6 +230,29 @@ public class FormCreaPartitaController implements Initializable
 			}
 		}
 		return false;
+	}
+
+	//metodo che permette di settare la label dei giocatori rimanenti da inserire per creare una partita
+	private void setLabel() 
+	{
+		//stampo la label con il numero attuale di giocatori inseriti per avviare la partita
+		lblGiocatoriInseriti.setText("Giocatori inseriti: "+giocatori.size());
+		//decremento la label dei giocatori rimanenti per avviare la partita (massimo 4 giocatori)
+		lblGiocatoriDaInserire.setText("Giocatori che puoi ancora inserire: "+(4 - giocatori.size()));
+		//i giocatori massimi da inserire sono 4, disabilito il bottone "aggiungi giocatore" per evitare che l'utente ne aggiunga altri
+		if(giocatori.size() == 4) 
+		{
+			btnAggiungiGiocatore.setVisible(false);
+		}
+		//se l'utente ha inserito almeno 2 giocatori rendo visibile il bottone "crea partita", altrimenti non lo rendo visibile
+		if(giocatori.size() >= 2) 
+		{
+			btnCreaPartita.setVisible(true);
+		}
+		else 
+		{
+			btnCreaPartita.setVisible(false);
+		}
 	}
 
 	//metodo che verrà eseguito all'apertura del form
