@@ -18,4 +18,5 @@ simone,0,0,p,arimaplay05@gmail.com
 emil,0,0,p,peratomil@gmail.com
 stefano,0,0,p,stefano@gmail.com
 alessandro,0,0,p,ale.sher@gmail.com
-ale,0,0,p,alessandrocampedelli89@gmail.com
+ale,0,2,p,alessandrocampedelli89@gmail.com
+campe,0,0,p,campedellicristian86@gmail.com

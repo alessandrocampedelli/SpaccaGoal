@@ -1,5 +1,4 @@
 package classi;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -8,7 +7,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -125,8 +123,21 @@ public abstract class Gara
 	
 				//creazione di una parte di testo del messaggio
 				BodyPart messageBodyPart = new MimeBodyPart();
-				messageBodyPart.setText("Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
-						+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n");
+				//caso di una partita singola
+				String txtEmail = "";
+				if(this.codice.charAt(0) == 'p')
+					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
+					+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
+				//caso di una partita del torneo diversa dalla finale
+				else if(this.giocatori.length != 2)
+					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita relativa al torneo '"+this.codice+"' "
+							+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
+				//caso finale del torneo
+				else {
+					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della FINALE del TORNEO '"+this.codice+"' "
+							+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
+				}
+				messageBodyPart.setText(txtEmail);
 	
 				//creazione di un oggetto Multipart per contenere il testo e l'allegato
 				Multipart multipart = new MimeMultipart();
@@ -136,7 +147,7 @@ public abstract class Gara
 				//impostazione del contenuto del messaggio come il Multipart
 				message.setContent(multipart);
 				//invia il messaggio
-				//Transport.send(message);
+				Transport.send(message);
 			}
 		} 
 		catch(MessagingException e) 
@@ -148,7 +159,6 @@ public abstract class Gara
 			e.printStackTrace();
 		}
 	}
-	
 	//metodo che permette di creare un file pdf
 	public String getPdf(LocalDate date, LocalTime ora) 
 	{
