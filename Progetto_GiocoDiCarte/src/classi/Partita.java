@@ -1,31 +1,11 @@
 package classi;
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.Scanner;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import javafx.event.ActionEvent;
 
 //la classe "Partita" derivata dalla classe "Gara"
@@ -39,8 +19,6 @@ public class Partita extends Gara
 	private int posizioneGiocatoreDifensore;
 	private String nomeCarta;
 	private int cartePescate;
-	//creo l'oggetto "Leaderboard" per creare la tabella
-	private Leaderboard tabella = new Leaderboard();
 
 	//metodo costruttore della classe "Partita"
 	public Partita(ArrayList<Giocatore> giocatori, String codice)
@@ -355,165 +333,6 @@ public class Partita extends Gara
 		}
 		fw.close();
 	}
-
-	//metodo per inviare la mail con i risultati della partita al termine di essa
-	public void inviaMail() 
-	{
-		//indirizzo email e password dell'account mittente
-		final String username = "spaccagooal@gmx.com";
-		final String password = "N2U73GGRZ2PFIIMBSSIX";
-
-		//proprietà per la configurazione del server di posta
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "mail.gmx.com");
-		props.put("mail.smtp.port", "587");
-
-		//crea un oggetto Session con l'autenticazione
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() 
-		{
-			protected PasswordAuthentication getPasswordAuthentication() 
-			{
-				return new PasswordAuthentication(username, password);
-			}
-		});
-
-		try
-		{ 
-			LocalDateTime dataEOra = LocalDateTime.now();
-			LocalDate data = dataEOra.toLocalDate();
-			LocalTime ora = dataEOra.toLocalTime().truncatedTo(ChronoUnit.SECONDS);
-			//creazione di una parte per l'allegato
-			MimeBodyPart attachmentPart = new MimeBodyPart();
-			attachmentPart.attachFile(getPdf(data,ora));
-
-			for(Giocatore g : giocatori) 
-			{
-				//creazione del messaggio
-				Message message = new MimeMessage(session);
-				//impostazione dell'indirizzo email del mittente
-				message.setFrom(new InternetAddress(username));
-				//aggiunta degli indirizzi email dei destinatari
-				message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(g.getEmail()));
-				//oggetto della mail
-				message.setSubject("SPACCA GOAL - RISULTATI PARTITA");
-
-				//creazione di una parte di testo del messaggio
-				BodyPart messageBodyPart = new MimeBodyPart();
-				messageBodyPart.setText("Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
-						+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n");
-
-				//creazione di un oggetto Multipart per contenere il testo e l'allegato
-				Multipart multipart = new MimeMultipart();
-				multipart.addBodyPart(messageBodyPart);
-				multipart.addBodyPart(attachmentPart);
-
-				//impostazione del contenuto del messaggio come il Multipart
-				message.setContent(multipart);
-				//invia il messaggio
-				//Transport.send(message);
-			}
-		} 
-		catch(MessagingException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	//metodo che permette di creare un file pdf
-	public String getPdf(LocalDate date, LocalTime ora) 
-	{
-		//crea un nuovo documento PDF
-		PDDocument document = new PDDocument();
-		String path = "";
-		try 
-		{ 
-			String[][] data = tabella.toMatrix();
-			//aggiunge una nuova pagina al documento
-			PDPage page = new PDPage(PDRectangle.A4);
-			document.addPage(page);
-
-			//crea un nuovo stream di contenuto per la pagina
-			PDPageContentStream contentStream = new PDPageContentStream(document, page);
-			drawTable(data, document, page, contentStream,date,ora);
-			//chiude lo stream di contenuto
-			contentStream.close();
-			path = System.getProperty("user.dir")+"/leaderboard.pdf";
-			//salva il documento su disco
-			document.save(path);
-
-			//chiude il documento
-			document.close();
-		}
-		catch(IOException e) 
-		{
-			e.printStackTrace();
-		}
-		return path;
-	}
-
-	public void drawTable(String[][] data,PDDocument document ,PDPage page, PDPageContentStream contentStream,LocalDate date, LocalTime ora) 
-	{
-		try 
-		{
-			float margin = 50;
-			float yStart = page.getMediaBox().getHeight() - margin;
-			float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
-			float yPosition = yStart;
-			//altezza delle celle
-			float tableHeight = 20f; 
-			float rowHeight = tableHeight / data.length;
-
-			String path = System.getProperty("user.dir") + "/Roboto-Regular.ttf";
-			PDType0Font font = PDType0Font.load(document, new FileInputStream(path));
-			contentStream.setFont(font, 12);
-
-			//aggiungi la frase prima della matrice
-			contentStream.beginText();
-			contentStream.newLineAtOffset(margin, yPosition);
-			contentStream.showText("Leaderboard aggiornata in data "+date+" - "+ora);
-			contentStream.newLine();
-			contentStream.endText();
-			//aggiungi uno spazio tra la frase e la matrice
-			yPosition -= 20; 
-
-			//stampa la matrice
-			for (int i = 0; i < data.length; i++) 
-			{
-				float nextY = yPosition - rowHeight;
-				contentStream.beginText();
-				contentStream.newLineAtOffset(margin, yPosition);
-
-				for (int j = 0; j < data[i].length; j++) 
-				{
-					contentStream.showText(data[i][j]);
-					contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
-				}
-
-				contentStream.endText();
-				if(i!=0)
-				{
-					//aggiungi uno spazio di 10 punti tra le righe
-					yPosition = nextY - 10; 
-				}
-				else
-				{
-					yPosition = nextY - 20;
-				}
-			}
-
-		}
-		catch(IOException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-
 	public boolean finePartita(int iPosAtt) 
 	{
 		boolean fine = false;
@@ -531,13 +350,13 @@ public class Partita extends Gara
 	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
 	{
 		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		leaderboard.getPlayers().get(leaderboard.indexPlayer(aliasVincente)).aggiungiVittoriaPartita();
+		leaderboard.getPlayers(aliasVincente).aggiungiVittoriaPartita();
 		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
-		inviaMail();
+		inviaMail(this.giocatori);
 		//s.deleteDirectory("partite");
 	}
 

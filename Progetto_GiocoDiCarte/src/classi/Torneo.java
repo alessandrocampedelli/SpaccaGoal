@@ -123,8 +123,10 @@ public class Torneo extends Gara
 	//metodo che permette di decretare la fine partita di una partita di un torneo o del torneo generale se le partite fossero finite
 	public void finePartita(ActionEvent event, String aliasVincente, String aliasPerdente, Alert_cambiaForm alert, Leaderboard leaderboard) throws IOException
 	{
+		Giocatore vincente = trovaGiocatore(aliasVincente);
+		Giocatore perdente = trovaGiocatore(aliasPerdente);
 		//rimuovo il giocatore perdende dall'ArrayList contenente i giocatori vincenti
-		this.giocatoriVincenti.remove(trovaGiocatore(aliasPerdente));
+		this.giocatoriVincenti.remove(perdente);
 		s = new Salvataggio(partite.get(0));
 		//elimino la cartella della partita appena terminata
 		s.deleteDirectory("tornei/"+this.getCodiceGara()+"/"+partite.get(0).codice);
@@ -162,6 +164,7 @@ public class Torneo extends Gara
 			leaderboard.salvaPlayers();
 			alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO IL TORNEO");
 		}
+		inviaMail(new Giocatore[] {vincente,perdente});
 		alert.passaAlForm("/application/FormTabelloneTorneo.fxml", event);
 	}
 	
