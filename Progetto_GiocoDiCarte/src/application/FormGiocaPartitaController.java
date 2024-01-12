@@ -319,6 +319,7 @@ public class FormGiocaPartitaController implements Initializable
 						cartaGiocata = robot.cartaGiocata('a');
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 						listCarte.setMouseTransparent(true);
+						listCarte.scrollTo(cartaGiocata.name());
 					}
 					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
@@ -351,7 +352,7 @@ public class FormGiocaPartitaController implements Initializable
 							//è possibile attaccare, attivo il bottone "gioca carta" e rimane disabilitato il bottone "passa turno"
 							btnGiocaCarta.setVisible(true);
 							btnGiocaCarta.setLayoutX(462);
-							btnGiocaCarta.setLayoutY(635);
+							btnGiocaCarta.setLayoutY(648);
 							btnSospendiGara.setVisible(true);
 						}
 					}
@@ -363,7 +364,7 @@ public class FormGiocaPartitaController implements Initializable
 						{
 							btnPassaTurno.setVisible(true);
 							btnPassaTurno.setLayoutX(462);
-							btnPassaTurno.setLayoutY(635);
+							btnPassaTurno.setLayoutY(648);
 							btnSospendiGara.setVisible(true);
 						}
 						listCarte.setDisable(true);
@@ -379,6 +380,7 @@ public class FormGiocaPartitaController implements Initializable
 						robot.setCartaGiocata(Carta.valueOf(nomeCarta));
 						cartaGiocata = robot.cartaGiocata('d');
 						listCarte.setMouseTransparent(true);
+						listCarte.scrollTo(cartaGiocata.name());
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
 					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
@@ -401,7 +403,7 @@ public class FormGiocaPartitaController implements Initializable
 								//il giocatore attaccante non ha attaccato, il difensore non si difende e attivo la visualizzazione del bottone "passa turno"
 								btnPassaTurno.setVisible(true);
 								btnPassaTurno.setLayoutX(462);
-								btnPassaTurno.setLayoutY(635);
+								btnPassaTurno.setLayoutY(648);
 								btnSospendiGara.setVisible(true);
 							}
 							listCarte.setDisable(true);
@@ -570,7 +572,7 @@ public class FormGiocaPartitaController implements Initializable
 				//non è possibile difendersi, non ha carte difensive in mano e attivo la visualizzazione del bottone "passa turno"
 				btnPassaTurno.setVisible(true);
 				btnPassaTurno.setLayoutX(462);
-				btnPassaTurno.setLayoutY(635);
+				btnPassaTurno.setLayoutY(648);
 				btnSospendiGara.setVisible(true);
 				listCarte.setDisable(true);
 			}

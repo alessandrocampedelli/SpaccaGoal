@@ -1,6 +1,6 @@
 a,2,0,p,alessandro.campedelli15@gmail.com
 b,0,0,p,matteo.boscherini17@gmail.com
-c,0,0,p,alessandro.campedelli15@gmail.com
+c,2,0,p,alessandro.campedelli15@gmail.com
 d,0,0,p,matteo.boscherini17@gmail.com
 e,0,0,p,alessandro.campedelli15@gmail.com
 f,0,0,p,alessandro.campedelli15@gmail.com
@@ -10,9 +10,9 @@ bb,0,0,r,matteo.boscherini17@gmail.com
 cc,0,0,r,alessandro.campedelli15@gmail.com
 ee,0,0,p,matteo.boscherini17@gmail.com
 qq,0,0,p,alessandro.campedelli15@gmail.com
-aaa,0,0,r,matteo.boscherini17@gmail.com
+aaa,1,0,r,matteo.boscherini17@gmail.com
 bbb,0,0,r,alessandro.campedelli15@gmail.com
-ccc,0,0,r,alessandro.campedelli15@gmail.com
+ccc,2,0,r,alessandro.campedelli15@gmail.com
 ddd,0,0,r,matteo.boscherini17@gmail.com
 simone,0,0,p,arimaplay05@gmail.com
 emil,0,0,p,peratomil@gmail.com
