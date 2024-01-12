@@ -1,5 +1,6 @@
 package classi;
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -125,19 +126,28 @@ public abstract class Gara
 				BodyPart messageBodyPart = new MimeBodyPart();
 				//caso di una partita singola
 				String txtEmail = "";
-				if(this.codice.charAt(0) == 'p')
-					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita '"+this.codice+"' "
-					+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata.\n"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
-				//caso di una partita del torneo diversa dalla finale
-				else if(this.giocatori.length != 2)
-					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della partita relativa al torneo '"+this.codice+"' "
-							+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
-				//caso finale del torneo
-				else {
-					txtEmail = "Ciao, "+g.getAlias()+"!\nEcco a te i risultati della FINALE del TORNEO '"+this.codice+"' "
-							+ "terminata in data "+data+" alle ore "+ora+".\n"+this.mostraRisultati()+"\nIn allegato il file pdf della leaderboard aggiornata"+"Grazie per aver giocato a SPACCA GOAL. A presto!\n";
+				if (this.codice.charAt(0) == 'p') {
+				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
+				            "<p>Ecco a te i <b>risultati della partita '" + this.codice + "'</b> " +
+				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
+				            "<p><b>" + this.mostraRisultati() + "</b></p>" +
+				            "<p>In allegato il file pdf della leaderboard aggiornata.</p>" +
+				            "<p>Grazie per aver giocato a SPACCA GOAL. A presto!</p>";
+				} else if (this.giocatori.length != 2) {
+				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
+				            "<p>Ecco a te i <b>risultati della partita relativa al torneo '" + this.codice + "'</b> " +
+				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
+				            "<p><b>" + this.mostraRisultati() + "</b></p>" +
+				            "<p>Grazie per aver giocato a SPACCA GOAL. A presto!</p>";
+				} else {
+				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
+				            "<p>Ecco a te i <b>risultati della FINALE del TORNEO '" + this.codice + "'</b> " +
+				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
+				            "<p><b>" + this.mostraRisultati() + "</b></p>" +
+				            "<p>In allegato il file pdf della leaderboard aggiornata.</p>" +
+				            "<p>Grazie per aver giocato a SPACCA GOAL. A presto!</p>";
 				}
-				messageBodyPart.setText(txtEmail);
+				messageBodyPart.setContent(txtEmail, "text/html; charset=utf-8");
 	
 				//creazione di un oggetto Multipart per contenere il testo e l'allegato
 				Multipart multipart = new MimeMultipart();
@@ -204,9 +214,10 @@ public abstract class Gara
 			float tableHeight = 20f; 
 			float rowHeight = tableHeight / data.length;
 	
-			String path = System.getProperty("user.dir") + "/Roboto-Regular.ttf";
-			PDType0Font font = PDType0Font.load(document, new FileInputStream(path));
-			contentStream.setFont(font, 12);
+			String path = System.getProperty("user.dir");
+			PDType0Font font_bold = PDType0Font.load(document, new FileInputStream(path+ "/Roboto-Bold.ttf"));
+			PDType0Font font_regular = PDType0Font.load(document, new FileInputStream(path+ "/Roboto-Regular.ttf"));
+			contentStream.setFont(font_bold, 12);
 	
 			//aggiungi la frase prima della matrice
 			contentStream.beginText();
@@ -216,7 +227,7 @@ public abstract class Gara
 			contentStream.endText();
 			//aggiungi uno spazio tra la frase e la matrice
 			yPosition -= 20; 
-	
+			contentStream.setFont(font_regular, 12);
 			//stampa la matrice
 			for (int i = 0; i < data.length; i++) 
 			{
@@ -226,6 +237,9 @@ public abstract class Gara
 	
 				for (int j = 0; j < data[i].length; j++) 
 				{
+					if(j == 0) {
+						
+					}
 					contentStream.showText(data[i][j]);
 					contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
 				}
