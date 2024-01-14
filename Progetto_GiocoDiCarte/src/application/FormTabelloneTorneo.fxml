@@ -7,105 +7,139 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormTabelloneTorneoController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx/20"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormTabelloneTorneoController">
 	<children>
-		<ImageView fitHeight="720.0" fitWidth="1104.0" pickOnBounds="true">
+		<ImageView fitHeight="720.0" fitWidth="1104.0"
+			pickOnBounds="true">
 			<image>
 				<Image url="@../../img/erba_sfocata.jpg" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="600.0" fitWidth="1001.0" layoutX="52.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="600.0" fitWidth="1001.0"
+			layoutX="52.0" layoutY="95.0" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@../../img/tabellone_torneo.png" />
 			</image>
 		</ImageView>
-		<Button id="button_player" fx:id="btnAvviaPartita" defaultButton="true" layoutX="439.0" layoutY="589.0" mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="82.0" prefWidth="244.0" text="AVVIA PARTITA">
+		<Button id="button_player" fx:id="btnAvviaPartita"
+			defaultButton="true" layoutX="439.0" layoutY="589.0"
+			mnemonicParsing="false" onAction="#btnAvviaPartita" prefHeight="82.0"
+			prefWidth="244.0" text="AVVIA PARTITA">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-		<Label fx:id="lblQuarto1" layoutX="106.0" layoutY="151.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblQuarto1" layoutX="106.0" layoutY="151.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto2" layoutX="106.0" layoutY="272.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblQuarto2" layoutX="106.0" layoutY="272.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto3" layoutX="106.0" layoutY="388.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblQuarto3" layoutX="106.0" layoutY="388.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto4" layoutX="106.0" layoutY="512.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblQuarto4" layoutX="106.0" layoutY="512.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto5" alignment="CENTER_RIGHT" layoutX="862.0" layoutY="151.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblQuarto5" alignment="CENTER_RIGHT"
+			layoutX="862.0" layoutY="151.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto6" alignment="BOTTOM_RIGHT" layoutX="862.0" layoutY="272.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblQuarto6" alignment="BOTTOM_RIGHT"
+			layoutX="862.0" layoutY="272.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto7" alignment="BOTTOM_RIGHT" layoutX="862.0" layoutY="388.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblQuarto7" alignment="BOTTOM_RIGHT"
+			layoutX="862.0" layoutY="388.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblQuarto8" alignment="BOTTOM_RIGHT" layoutX="862.0" layoutY="512.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblQuarto8" alignment="BOTTOM_RIGHT"
+			layoutX="862.0" layoutY="512.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblSemifinale1" layoutX="299.0" layoutY="212.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblSemifinale1" layoutX="299.0" layoutY="212.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblSemifinale2" layoutX="299.0" layoutY="451.0" prefHeight="30.0" prefWidth="137.0">
+		<Label fx:id="lblSemifinale2" layoutX="299.0" layoutY="451.0"
+			prefHeight="30.0" prefWidth="137.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblSemifinale3" alignment="BOTTOM_RIGHT" layoutX="677.0" layoutY="212.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblSemifinale3" alignment="BOTTOM_RIGHT"
+			layoutX="677.0" layoutY="212.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblSemifinale4" alignment="BOTTOM_RIGHT" layoutX="677.0" layoutY="451.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblSemifinale4" alignment="BOTTOM_RIGHT"
+			layoutX="677.0" layoutY="451.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblFinale1" layoutX="492.0" layoutY="393.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblFinale1" layoutX="492.0" layoutY="393.0"
+			prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblFinale2" alignment="BOTTOM_RIGHT" layoutX="484.0" layoutY="272.0" prefHeight="30.0" prefWidth="129.0">
+		<Label fx:id="lblFinale2" alignment="BOTTOM_RIGHT"
+			layoutX="484.0" layoutY="272.0" prefHeight="30.0" prefWidth="129.0">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Label fx:id="lblVincitore" alignment="CENTER" layoutX="481.0" layoutY="166.0" prefHeight="30.0" prefWidth="137.0" textFill="#bf8300">
+		<Label fx:id="lblVincitore" alignment="CENTER" layoutX="481.0"
+			layoutY="166.0" prefHeight="30.0" prefWidth="137.0"
+			textFill="#bf8300">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Label>
-		<Button id="button_player" fx:id="btnMostraLeaderboard" defaultButton="true" layoutX="439.0" layoutY="589.0" mnemonicParsing="false" onAction="#btnMostraLeaderboard" prefHeight="82.0" prefWidth="244.0" text="MOSTRA LEADERBOARD" visible="false" />
-		<ImageView fitHeight="141.0" fitWidth="137.0" layoutX="481.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+		<Button id="button_player" fx:id="btnMostraLeaderboard"
+			defaultButton="true" layoutX="439.0" layoutY="589.0"
+			mnemonicParsing="false" onAction="#btnMostraLeaderboard"
+			prefHeight="82.0" prefWidth="244.0" text="MOSTRA LEADERBOARD"
+			visible="false" />
+		<ImageView fitHeight="141.0" fitWidth="137.0"
+			layoutX="481.0" layoutY="27.0" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@../../img/coppa.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0"
+			layoutY="628.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../img/logo1.png" />
 			</image>
