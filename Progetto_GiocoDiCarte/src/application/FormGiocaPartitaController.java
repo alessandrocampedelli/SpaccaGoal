@@ -184,7 +184,6 @@ public class FormGiocaPartitaController implements Initializable
 			}
 			else
 			{
-				System.out.println("1");
 				//non è stata pescata la carta mister, quindi il difensore non si è potuto difendere e per questo motivo esso ha subito goal
 				players[posizioneGiocatoreAttaccante].aggiungiGoal();
 				//serve per label
@@ -198,7 +197,6 @@ public class FormGiocaPartitaController implements Initializable
 				//controllo l'unico caso in cui l'attaccante non sia riuscito ad attaccare, altrimenti il difensore ha subito goal
 				if(!(cartaAtt.equals(Carta.INDICATORE_GOAL) || cartaAtt.equals(Carta.MISTER)))
 				{
-					System.out.println("2");
 					players[posizioneGiocatoreAttaccante].aggiungiGoal();
 					partita.setCartePescate(1);
 				}

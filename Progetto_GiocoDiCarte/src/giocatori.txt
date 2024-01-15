@@ -1,7 +1,7 @@
 a,12,0,p,alessandro.campedelli15@gmail.com
 b,0,0,p,matteo.boscherini17@gmail.com
 c,2,0,p,alessandro.campedelli15@gmail.com
-d,0,0,p,matteo.boscherini17@gmail.com
+d,1,2,p,matteo.boscherini17@gmail.com
 e,0,0,p,alessandro.campedelli15@gmail.com
 f,0,0,p,alessandro.campedelli15@gmail.com
 g,0,0,p,matteo.boscherini17@gmail.com

@@ -73,29 +73,32 @@ public class FormLeaderboardController implements Initializable
 			//creo l'oggetto "File" con il percorso relativo
 			File filePDF = new File(path);
 
-			//verifico che il supporto Desktop sia disponibile
-			if(Desktop.isDesktopSupported()) 
-			{
-				//creo un oggetto "Desktop"
-				Desktop desktop = Desktop.getDesktop();
-
-				//verifico se l'azione OPEN sia supportata
-				if (desktop.isSupported(Desktop.Action.OPEN)) 
+			if(filePDF.exists()) {
+				//verifico che il supporto Desktop sia disponibile
+				if(Desktop.isDesktopSupported()) 
 				{
-					//è supportata, apro il file pdf
-					desktop.open(filePDF);
+					//creo un oggetto "Desktop"
+					Desktop desktop = Desktop.getDesktop();
+
+					//verifico se l'azione OPEN sia supportata
+					if (desktop.isSupported(Desktop.Action.OPEN)) 
+					{
+						//è supportata, apro il file pdf
+						desktop.open(filePDF);
+					} 
+					else 
+					{
+						//l'apertura diretta non è supportata, prova ad aprire il browser con l'URL del file
+						apriPDFConBrowser(filePDF.toURI());
+					}
 				} 
 				else 
 				{
-					//l'apertura diretta non è supportata, prova ad aprire il browser con l'URL del file
+					//Desktop non è supportato, prova ad aprire il browser con l'URL del file
 					apriPDFConBrowser(filePDF.toURI());
 				}
-			} 
-			else 
-			{
-				//Desktop non è supportato, prova ad aprire il browser con l'URL del file
-				apriPDFConBrowser(filePDF.toURI());
 			}
+			
 		} 
 		catch (IOException e) 
 		{

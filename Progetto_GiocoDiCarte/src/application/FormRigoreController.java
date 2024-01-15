@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Window;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import classi.Giocatore;
 import classi.Mazzo;
 import classi.Partita;
 import classi.Salvataggio;
+import classi.Torneo;
 import classi.Leaderboard;
 
 //classe che permette di gestire il calcio di rigore, sia offensivamente (tirandolo), sia difensivamente (parandolo)
@@ -34,6 +36,7 @@ public class FormRigoreController implements Initializable
 	//le variabili di tipo "Salvataggio", "Partita", "Mazzo" e il vettore di "Giocatore"
 	Salvataggio s;
 	Partita partita;
+	Torneo torneo;
 	Mazzo mazzo;
 	Giocatore[] players;
 	//il turno che gestisce se è un turno difensivo o offensivo
@@ -93,28 +96,7 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
-		//eseguo un salvataggio della partita delle mani dei giocatori, del mazzo, del loro punteggio e del turno
-		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani();
-		s.salvaMazzo();
-		s.salvaPunteggio();
-		partita.salvaTurnoRigore(cartaGiocata);
-		//controllo se la partita non fosse finita (l'attaccante non è arrivato a 5 goal)
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
-		{
-			Scene scene = btnSinistra.getScene();
-			//controllo che la scena del bottone di sinistra non sia nulla
-			if (scene != null) 
-			{
-				Window window = scene.getWindow();
-				//controllo che la window del bottone di sinistra non sia nulla
-				if (window != null) 
-				{
-					//passo al form gioca partita
-					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-				}
-			}
-		}
+		salvaTurnoCambiaForm(event,btnSinistra);
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore al centro
@@ -134,28 +116,7 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
-		//eseguo un salvataggio della partita delle mani dei giocatori, del mazzo, del loro punteggio e del turno
-		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani();
-		s.salvaMazzo();
-		s.salvaPunteggio();
-		partita.salvaTurnoRigore(cartaGiocata);
-		//controllo se la partita non fosse finita (l'attaccante non è arrivato a 5 goal)
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
-		{
-			Scene scene = btnCentro.getScene();
-			//controllo che la scena del bottone centrale non sia nulla
-			if (scene != null) 
-			{
-				Window window = scene.getWindow();
-				//controllo che la window del bottone centrale non sia nulla
-				if (window != null) 
-				{
-					//passo al form gioca partita
-					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-				}
-			}
-		}
+		salvaTurnoCambiaForm(event,btnCentro);
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore a destra
@@ -175,30 +136,8 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
-		//eseguo un salvataggio della partita delle mani dei giocatori, del mazzo, del loro punteggio e del turno
-		s = new Salvataggio(g.getGara(codicePartita));
-		s.salvaMani();
-		s.salvaMazzo();
-		s.salvaPunteggio();
-		partita.salvaTurnoRigore(cartaGiocata);
-		//controllo se la partita non fosse finita (l'attaccante non è arrivato a 5 goal)
-		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
-		{
-			Scene scene = btnDestra.getScene();
-			//controllo che la scena del bottone di destra non sia nulla
-			if (scene != null) 
-			{
-				Window window = scene.getWindow();
-				//controllo che la window del bottone di destra non sia nulla
-				if (window != null) 
-				{
-					//passo al form gioca partita
-					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
-				}
-			}
-		}
+		salvaTurnoCambiaForm(event,btnDestra);
 	}
-
 	//metodo che viene eseguito all'apertura del form
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
@@ -311,9 +250,18 @@ public class FormRigoreController implements Initializable
 			players[posizioneGiocatoreAttaccante].aggiungiGoal();
 			//questo metodo serve per aggiornare la label, il giocatore difensore avrà pescato solo una carta perchè ha subito goal
 			partita.setCartePescate(1);
-			//controllo se fosse finita la partita (attaccante ha fatto 5 goal), nel caso richiamo l'utilizzo del metodo "showFinePartita"
-			if(partita.finePartita(posizioneGiocatoreAttaccante))
-				partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+			//controllo se fosse finita la partita (attaccante ha fatto 5 goal), nel caso richiamo l'utilizzo del metodo "showFinePartita" o "finePartita"
+			if(partita.finePartita(posizioneGiocatoreAttaccante)) {
+				if(codicePartita.charAt(0) == 'p')
+				{
+					partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
+				}
+				else 
+				{
+					torneo = g.getTorneo(codicePartita);
+					torneo.finePartita(event, players[posizioneGiocatoreAttaccante].getAlias(), players[posizioneGiocatoreDifensore].getAlias(), alert, leaderboard);
+				}
+			}
 		}
 		else
 		{
@@ -323,7 +271,30 @@ public class FormRigoreController implements Initializable
 			partita.setCartePescate(2);
 		}
 	}
-
+	public void salvaTurnoCambiaForm(ActionEvent event, Button bottone) throws IOException {
+		//eseguo un salvataggio della partita delle mani dei giocatori, del mazzo, del loro punteggio e del turno
+		s = new Salvataggio(g.getGara(codicePartita));
+		s.salvaMani();
+		s.salvaMazzo();
+		s.salvaPunteggio();
+		partita.salvaTurnoRigore(cartaGiocata);
+		//controllo se la partita non fosse finita (l'attaccante non è arrivato a 5 goal)
+		if(!partita.finePartita(posizioneGiocatoreAttaccante)) 
+		{
+			Scene scene = bottone.getScene();
+			//controllo che la scena del bottone di destra non sia nulla
+			if (scene != null) 
+			{
+				Window window = scene.getWindow();
+				//controllo che la window del bottone di destra non sia nulla
+				if (window != null) 
+				{
+					//passo al form gioca partita
+					alert.passaAlForm("/application/FormGiocaPartita.fxml", event);
+				}
+			}
+		}
+	}
 	//metodo che permette di colorare il bottone con la direzione scelta randomicamente dal robot con il colore passato come parametro del metodo
 	private void coloraDirezioneRobot(int direzione, String colore)
 	{

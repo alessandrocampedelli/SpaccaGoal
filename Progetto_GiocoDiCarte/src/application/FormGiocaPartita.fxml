@@ -57,7 +57,7 @@
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Button>
-      <Rectangle fx:id="rettangoloCarta" arcHeight="5.0" arcWidth="5.0" height="253.0" layoutX="454.0" layoutY="84.0" opacity="0.16" stroke="BLACK" strokeType="INSIDE" width="201.0" />
+      <Rectangle fx:id="rettangoloCarta" arcHeight="5.0" arcWidth="5.0" fill="#0000002c" height="253.0" layoutX="454.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="201.0" />
       <Label alignment="CENTER" layoutX="454.0" layoutY="202.0" prefHeight="32.0" prefWidth="201.0" text="CARTA GIOCATA AVVERSARIO">
          <font>
             <Font name="System Bold" size="13.0" />
