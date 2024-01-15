@@ -96,6 +96,7 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
+		//richiamo l'utilizzo del metodo per salvare il turno
 		salvaTurnoCambiaForm(event,btnSinistra);
 	}
 
@@ -116,6 +117,7 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
+		//richiamo l'utilizzo del metodo per salvare il turno
 		salvaTurnoCambiaForm(event,btnCentro);
 	}
 
@@ -136,8 +138,10 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
+		//richiamo l'utilizzo del metodo per salvare il turno
 		salvaTurnoCambiaForm(event,btnDestra);
 	}
+	
 	//metodo che viene eseguito all'apertura del form
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{	
@@ -271,7 +275,10 @@ public class FormRigoreController implements Initializable
 			partita.setCartePescate(2);
 		}
 	}
-	public void salvaTurnoCambiaForm(ActionEvent event, Button bottone) throws IOException {
+	
+	//metodo che permette di salvare il turno uguale nei tre eventi bottone
+	public void salvaTurnoCambiaForm(ActionEvent event, Button bottone) throws IOException 
+	{
 		//eseguo un salvataggio della partita delle mani dei giocatori, del mazzo, del loro punteggio e del turno
 		s = new Salvataggio(g.getGara(codicePartita));
 		s.salvaMani();
@@ -295,6 +302,7 @@ public class FormRigoreController implements Initializable
 			}
 		}
 	}
+	
 	//metodo che permette di colorare il bottone con la direzione scelta randomicamente dal robot con il colore passato come parametro del metodo
 	private void coloraDirezioneRobot(int direzione, String colore)
 	{
