@@ -91,10 +91,10 @@ public class Partita extends Gara
 		carte.mischia();
 	}
 
-	//DA QUI!
 	//metodo che permette di giocare una carta
 	public void gioca(Giocatore att, Giocatore dif, Carta cartaAtt, Carta cartaDif) 
 	{
+		//il difensore pesca una carta (una carta viene pescata indipendemente se subisce goal oppure no)
 		dif.getMano().add(this.carte.pesca());
 		cartePescate = 1;
 		//attaccante
