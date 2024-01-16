@@ -229,9 +229,8 @@ public class FormCreaGiocatoreController implements Initializable
 		
 		//il vettore di tutti i domini possibili da inserire nella mail
 		String[] domini = new String[]
-				{"@gmail.com","@yahoo.com","@outlook.com","@icloud.com",
-				"@aol.com","@protonmail.com", "@yandex.com","@zoho.com",
-				"@mail.com","@gmx.com"};
+				{"@gmail.com","@unibo.it","@studio.unibo.it","@yahoo.com",
+			     "@outlook.com","@icloud.com","@aol.com","@mail.com","@gmx.com"};
 		//converto il vettore dei domini in una "ObservableList" di stringhe
 		ObservableList<String> items =FXCollections.observableArrayList(domini);
 		//setto il colore della comboBox a bianco e dimensione predefinita a 18
