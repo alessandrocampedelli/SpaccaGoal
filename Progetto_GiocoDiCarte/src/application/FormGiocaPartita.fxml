@@ -9,19 +9,27 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="712.0" maxWidth="1098.0" minHeight="712.0" minWidth="1098.0" prefHeight="712.0" prefWidth="1098.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FormGiocaPartitaController">
+<AnchorPane maxHeight="712.0" maxWidth="1098.0"
+	minHeight="712.0" minWidth="1098.0" prefHeight="712.0"
+	prefWidth="1098.0" stylesheets="@application.css"
+	xmlns="http://javafx.com/javafx/20"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.FormGiocaPartitaController">
 	<children>
-		<ImageView fitHeight="712.0" fitWidth="1101.0" pickOnBounds="true">
+		<ImageView fitHeight="712.0" fitWidth="1101.0"
+			pickOnBounds="true">
 			<image>
 				<Image url="@../../img/tavolo.jpeg" />
 			</image>
 		</ImageView>
-		<Label fx:id="lblTurnoAttacco" layoutX="453.0" layoutY="14.0" text="TURNO DI ATTACCO: " textAlignment="CENTER" textFill="#0006ff">
+		<Label fx:id="lblTurnoAttacco" layoutX="453.0" layoutY="14.0"
+			text="TURNO DI ATTACCO: " textAlignment="CENTER" textFill="#0006ff">
 			<font>
 				<Font name="System Bold" size="22.0" />
 			</font>
 		</Label>
-		<Label layoutX="113.0" layoutY="14.0" text="SCORE:" textFill="#039641">
+		<Label layoutX="113.0" layoutY="14.0" text="SCORE:"
+			textFill="#039641">
 			<font>
 				<Font name="System Bold" size="22.0" />
 			</font>
@@ -46,35 +54,54 @@
 				<Font size="22.0" />
 			</font>
 		</Label>
-		<ListView fx:id="listCarte" layoutX="119.0" layoutY="399.0" onMouseClicked="#selezionaCarta" orientation="HORIZONTAL" prefHeight="244.0" prefWidth="870.0" />
-		<Button id="button_giocaCarta" fx:id="btnGiocaCarta" alignment="CENTER" defaultButton="true" layoutX="621.0" layoutY="648.0" mnemonicParsing="false" onAction="#btnGiocaCarta" prefHeight="56.0" prefWidth="174.0" text="GIOCA CARTA" visible="false">
+		<ListView fx:id="listCarte" layoutX="119.0" layoutY="399.0"
+			onMouseClicked="#selezionaCarta" orientation="HORIZONTAL"
+			prefHeight="244.0" prefWidth="870.0" />
+		<Button id="button_giocaCarta" fx:id="btnGiocaCarta"
+			alignment="CENTER" defaultButton="true" layoutX="621.0"
+			layoutY="648.0" mnemonicParsing="false" onAction="#btnGiocaCarta"
+			prefHeight="56.0" prefWidth="174.0" text="GIOCA CARTA"
+			visible="false">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Button>
-		<Button id="button_admin_logout" fx:id="btnSospendiGara" defaultButton="true" layoutX="814.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnSospendiGara" prefHeight="66.0" prefWidth="174.0" text="SOSPENDI GARA" textAlignment="RIGHT">
+		<Button id="button_admin_logout" fx:id="btnSospendiGara"
+			defaultButton="true" layoutX="814.0" layoutY="187.0"
+			mnemonicParsing="false" onAction="#btnSospendiGara" prefHeight="66.0"
+			prefWidth="174.0" text="SOSPENDI GARA" textAlignment="RIGHT">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Button>
-      <Rectangle fx:id="rettangoloCarta" arcHeight="5.0" arcWidth="5.0" fill="#0000002c" height="253.0" layoutX="454.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="201.0" />
-      <Label alignment="CENTER" layoutX="454.0" layoutY="202.0" prefHeight="32.0" prefWidth="201.0" text="CARTA GIOCATA AVVERSARIO">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-		<ImageView fx:id="imgGiocata" fitHeight="253.0" fitWidth="201.0" layoutX="454.0" layoutY="84.0" pickOnBounds="true" />
-		<Button id="button_passaTurno" fx:id="btnPassaTurno" alignment="CENTER" defaultButton="true" layoutX="301.0" layoutY="648.0" mnemonicParsing="false" onAction="#btnPassaTurno" prefHeight="56.0" prefWidth="174.0" text="PASSA TURNO" textFill="#bc5b00" visible="false">
+		<Rectangle fx:id="rettangoloCarta" arcHeight="5.0"
+			arcWidth="5.0" fill="#0000002c" height="253.0" layoutX="454.0"
+			layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="201.0" />
+		<Label alignment="CENTER" layoutX="454.0" layoutY="202.0"
+			prefHeight="32.0" prefWidth="201.0" text="CARTA GIOCATA AVVERSARIO">
+			<font>
+				<Font name="System Bold" size="13.0" />
+			</font>
+		</Label>
+		<ImageView fx:id="imgGiocata" fitHeight="253.0"
+			fitWidth="201.0" layoutX="454.0" layoutY="84.0" pickOnBounds="true" />
+		<Button id="button_passaTurno" fx:id="btnPassaTurno"
+			alignment="CENTER" defaultButton="true" layoutX="301.0"
+			layoutY="648.0" mnemonicParsing="false" onAction="#btnPassaTurno"
+			prefHeight="56.0" prefWidth="174.0" text="PASSA TURNO"
+			textFill="#bc5b00" visible="false">
 			<font>
 				<Font name="System Bold" size="18.0" />
 			</font>
 		</Button>
-		<Label fx:id="lblInfoUtente" layoutX="119.0" layoutY="372.0" prefHeight="20.0" prefWidth="578.0">
+		<Label fx:id="lblInfoUtente" layoutX="119.0" layoutY="372.0"
+			prefHeight="20.0" prefWidth="578.0">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>
 		</Label>
-		<ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="88.0" fitWidth="88.0" layoutX="1013.0"
+			layoutY="628.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../../img/logo1.png" />
 			</image>
