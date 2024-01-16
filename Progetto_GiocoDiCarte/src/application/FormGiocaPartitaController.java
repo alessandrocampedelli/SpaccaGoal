@@ -322,7 +322,7 @@ public class FormGiocaPartitaController implements Initializable
 						cartaGiocata = robot.cartaGiocata('a');
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 						listCarte.setMouseTransparent(true);
-						listCarte.scrollTo(cartaGiocata.name());
+						listCarte.getSelectionModel().select(cartaGiocata.name());
 					}
 					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
@@ -383,7 +383,6 @@ public class FormGiocaPartitaController implements Initializable
 						robot.setCartaGiocata(Carta.valueOf(nomeCarta));
 						cartaGiocata = robot.cartaGiocata('d');
 						listCarte.setMouseTransparent(true);
-						listCarte.scrollTo(cartaGiocata.name());
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
 					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
@@ -480,6 +479,7 @@ public class FormGiocaPartitaController implements Initializable
 									setStyle("-fx-control-inner-background: red;");
 								}
 							}
+							listCarte.scrollTo(getIndex());
 						}
 					}
 				};

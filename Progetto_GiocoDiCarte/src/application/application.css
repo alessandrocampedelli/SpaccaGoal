@@ -73,12 +73,12 @@
 }
 #button_passaTurno{
 	-fx-background-color: transparent;
-    -fx-border-color: #ffb700;
+    -fx-border-color: #bc5b00;
     -fx-border-width: 2;
-    -fx-text-fill: #ffb700;
+    -fx-text-fill: #bc5b00;
 }
 #button_passaTurno:hover,#button_passaTurno:focus-visible{
-	-fx-background-color: #ffb700;
+	-fx-background-color: #bc5b00;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-text-fill: white;

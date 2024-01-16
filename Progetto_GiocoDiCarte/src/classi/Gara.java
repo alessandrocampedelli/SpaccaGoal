@@ -237,9 +237,6 @@ public abstract class Gara
 	
 				for (int j = 0; j < data[i].length; j++) 
 				{
-					if(j == 0) {
-						
-					}
 					contentStream.showText(data[i][j]);
 					contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
 				}
