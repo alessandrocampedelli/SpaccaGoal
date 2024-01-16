@@ -102,8 +102,3 @@
     -fx-text-fill: black;
     -fx-font-size: 18;
 }
-.table-view {
-    -fx-background-image: url('C:/Users/User/Pictures/progetto/leaderboard.jpg');
-    -fx-background-size: cover; /* o usa 'contain' a seconda delle tue esigenze */
-    -fx-background-repeat: no-repeat;
-}

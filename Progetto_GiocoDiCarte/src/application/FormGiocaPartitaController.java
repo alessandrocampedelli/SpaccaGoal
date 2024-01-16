@@ -316,6 +316,9 @@ public class FormGiocaPartitaController implements Initializable
 				//controllo se è un turno di attacco o di difesa
 				if(turno.equals("a")) 
 				{
+					//setto la label (colore e contenuto) al giocatore attaccante
+					lblTurnoAttacco.setTextFill(Color.BLUE);
+					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
 					if(players[posizioneGiocatoreAttaccante].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreAttaccante]);
@@ -324,10 +327,8 @@ public class FormGiocaPartitaController implements Initializable
 						listCarte.setMouseTransparent(true);
 						listCarte.getSelectionModel().select(cartaGiocata.name());
 					}
-					//restituisce la mano del giocatore attaccante e setto la label (colore e contenuto) al giocatore attaccante
+					//restituisce la mano del giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
-					lblTurnoAttacco.setTextFill(Color.BLUE);
-					lblTurnoAttacco.setText("TURNO DI ATTACCO: " + players[posizioneGiocatoreAttaccante].getAlias());
 					String c1;
 					String c2;
 					Carta cPescata1;
@@ -377,6 +378,9 @@ public class FormGiocaPartitaController implements Initializable
 				}
 				else 
 				{
+					//setto la label (colore e contenuto) al giocatore difendente
+					lblTurnoAttacco.setTextFill(Color.RED);
+					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
 					if(players[posizioneGiocatoreDifensore].isRobot()) 
 					{
 						Robot robot = new Robot(players[posizioneGiocatoreDifensore]);
@@ -385,10 +389,8 @@ public class FormGiocaPartitaController implements Initializable
 						listCarte.setMouseTransparent(true);
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 					}
-					//restituisce la mano del giocatore difendente e setto la label (colore e contenuto) al giocatore difendente
+					//restituisce la mano del giocatore difendente
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
-					lblTurnoAttacco.setTextFill(Color.RED);
-					lblTurnoAttacco.setText("TURNO DI DIFESA: " + players[posizioneGiocatoreDifensore].getAlias());
 					if(partita.checkGiocaTurno(players[posizioneGiocatoreAttaccante])) 
 					{
 						//metodo per salvare la carta giocata e controllare se il difensore può difendersi oppure no
@@ -470,6 +472,7 @@ public class FormGiocaPartitaController implements Initializable
 								if((players[posizioneGiocatoreAttaccante].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreAttaccante,items))) 
 								{
 									setStyle("-fx-control-inner-background: blue;");
+									listCarte.scrollTo(getIndex());
 								}
 							}
 							else 
@@ -477,9 +480,9 @@ public class FormGiocaPartitaController implements Initializable
 								if((players[posizioneGiocatoreDifensore].isRobot() && this.getIndex() == getIndexCartaGiocata(posizioneGiocatoreDifensore,items))) 
 								{ 
 									setStyle("-fx-control-inner-background: red;");
+									listCarte.scrollTo(getIndex());
 								}
 							}
-							listCarte.scrollTo(getIndex());
 						}
 					}
 				};

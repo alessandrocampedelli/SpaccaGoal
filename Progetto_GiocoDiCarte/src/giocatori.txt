@@ -1,5 +1,5 @@
 a,12,0,p,alessandro.campedelli15@gmail.com
-b,0,0,p,matteo.boscherini17@gmail.com
+b,0,1,p,matteo.boscherini17@gmail.com
 c,2,0,p,alessandro.campedelli15@gmail.com
 d,1,2,p,matteo.boscherini17@gmail.com
 e,0,0,p,alessandro.campedelli15@gmail.com
@@ -22,3 +22,6 @@ ale,0,2,p,alessandrocampedelli89@gmail.com
 campe,0,0,p,campedellicristian86@gmail.com
 vitto,1,0,p,vittoria.campedelli.07@gmail.com
 rora,0,0,p,aurora.campedelli.07@gmail.com
+alias,0,0,p,alias@gmail.com
+alias2,0,0,p,alias@gmail.com
+alias1,0,0,p,alias@example.com

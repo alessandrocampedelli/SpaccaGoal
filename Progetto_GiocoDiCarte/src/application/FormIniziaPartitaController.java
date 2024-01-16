@@ -98,18 +98,18 @@ public class FormIniziaPartitaController implements Initializable
 				//mi chiedo se i giocatori sono maggiori o uguali a 2 per riempire le prime due label
 				if(giocatori.size() >= 2)
 				{
-					lblNomeGiocatore1.setText(giocatori.get(0));
-					lblNomeGiocatore2.setText(giocatori.get(1));
+					lblNomeGiocatore1.setText(p.getGiocatori()[0].isRobot() ? p.getGiocatori()[0].getAlias(): p.getGiocatori()[0].getAlias()+"*");
+					lblNomeGiocatore2.setText(p.getGiocatori()[1].isRobot() ? p.getGiocatori()[1].getAlias(): p.getGiocatori()[1].getAlias()+"*");
 				}
 				//mi chiedo se i giocatori sono maggiori o uguali a 3 per riempire anche la terza label
 				if(giocatori.size() >= 3)
 				{
-					lblNomeGiocatore3.setText(giocatori.get(2));
+					lblNomeGiocatore3.setText(p.getGiocatori()[2].isRobot() ? p.getGiocatori()[2].getAlias(): p.getGiocatori()[2].getAlias()+"*");
 				}
 				//mi chiedo se i giocatori sono uguali a 4 (massimo numero giocatori per una partita) per riempire anche la quarta label
 				if(giocatori.size() == 4)
 				{
-					lblNomeGiocatore4.setText(giocatori.get(3));
+					lblNomeGiocatore4.setText(p.getGiocatori()[3].isRobot() ? p.getGiocatori()[3].getAlias(): p.getGiocatori()[3].getAlias()+"*");
 				}	
 				
 				//Thread per creare l'animazione della progressBar

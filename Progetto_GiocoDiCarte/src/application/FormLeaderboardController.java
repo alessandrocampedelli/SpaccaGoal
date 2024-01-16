@@ -49,19 +49,6 @@ public class FormLeaderboardController implements Initializable
 		alert.passaAlForm("/application/FormPrincipale.fxml", event);
 	}
 
-	//metodo che permette di evidenziare la riga
-	@FXML
-	public void evidenziaRiga(MouseEvent event) 
-	{
-		//l'indice della riga selezionata
-		int selectedIndex = table.getSelectionModel().getSelectedIndex();
-		if(selectedIndex >= 0) 
-		{
-			//richiamo l'utilizzo del metodo per settare il colore di sfondo giallo per la riga selezionata
-			impostaRowFactorySelected();
-		}
-	}
-
 	//metodo che permette di aprire il file al click sull'imageView del pdf
 	@FXML
 	public void apriPdf(MouseEvent event) 
@@ -205,29 +192,5 @@ public class FormLeaderboardController implements Initializable
 			}
 		});
 
-	}
-	//metodo che permette di colorare la riga selezionata di giallo
-	private void impostaRowFactorySelected() 
-	{
-		//impostazione della RowFactory per colorare l'elemento selezionaato
-		table.setRowFactory(row -> new TableRow<Giocatore>() 
-		{
-			@Override
-			protected void updateItem(Giocatore item, boolean empty) 
-			{
-				super.updateItem(item, empty);
-				//controllo se l'elemento è stato selezionato
-				if(isSelected()) 
-				{
-					//l'elemento è stato selezionato, lo coloro di giallo
-					setStyle("-fx-background-color: yellow;");
-				} 
-				else 
-				{
-					//l'elemento non è stato selezionato, non lo coloro
-					setStyle("");
-				}
-			}
-		});
 	}
 }

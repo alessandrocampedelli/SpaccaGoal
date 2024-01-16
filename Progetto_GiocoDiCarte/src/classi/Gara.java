@@ -157,7 +157,7 @@ public abstract class Gara
 				//impostazione del contenuto del messaggio come il Multipart
 				message.setContent(multipart);
 				//invia il messaggio
-				//Transport.send(message);
+				Transport.send(message);
 			}
 		} 
 		catch(MessagingException e) 

@@ -69,7 +69,7 @@
 			</font>
 		</Button>
 		<ComboBox fx:id="cmbSelectPlayer" layoutX="238.0" layoutY="153.0" prefHeight="45.0" prefWidth="196.0" styleClass="comboBox" />
-		<TableView fx:id="tableGiocatoriInseriti" layoutX="691.0" layoutY="282.0" onMouseClicked="#eliminaGiocatore" prefHeight="309.0" prefWidth="304.0" />
+		<TableView fx:id="tableGiocatoriInseriti" layoutX="691.0" layoutY="282.0" onMouseClicked="#eliminaGiocatore" prefHeight="321.0" prefWidth="304.0" />
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000000d" height="182.0" layoutX="691.0" layoutY="96.0" stroke="#c6c6c6" strokeType="INSIDE" width="304.0" />
 		<Label layoutX="214.0" layoutY="108.0" text="Seleziona gli alias dei giocatori">
 			<font>

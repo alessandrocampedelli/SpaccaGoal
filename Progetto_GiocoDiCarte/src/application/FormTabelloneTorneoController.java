@@ -135,7 +135,7 @@ public class FormTabelloneTorneoController implements Initializable
 					//controllo se il giocatore in questione è un robot oppure no, se fosse aggiungo l'informazione nella stampa
 					if(giocatori.get(i).isRobot())
 					{
-						labels[i].setText(giocatori.get(i).getAlias() + " (Robot)");
+						labels[i].setText(giocatori.get(i).getAlias() + "*");
 					}
 					else
 					{
