@@ -108,7 +108,7 @@ public class FormCreaTorneoController implements Initializable
 		catch(IOException e) 
 		{
 			//mando un alert all'utente che non ha selezionato alcun giocatore nella comboBox
-			alert.mostraErrore("Il giocatore deve avere un nome" , "ERRORE");
+			alert.mostraErrore("Devi selezionare prima un giocatore prima di aggiungerlo" , "ERRORE");
 		}
 		catch(IllegalArgumentException e)
 		{

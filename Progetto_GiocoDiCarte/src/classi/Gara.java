@@ -157,7 +157,7 @@ public abstract class Gara
 				//impostazione del contenuto del messaggio come il Multipart
 				message.setContent(multipart);
 				//invia il messaggio
-				//Transport.send(message);
+				Transport.send(message);
 			}
 		} 
 		catch(MessagingException e) 
@@ -237,9 +237,6 @@ public abstract class Gara
 	
 				for (int j = 0; j < data[i].length; j++) 
 				{
-					if(j == 0) {
-						
-					}
 					contentStream.showText(data[i][j]);
 					contentStream.newLineAtOffset(tableWidth / data[i].length, 0);
 				}
