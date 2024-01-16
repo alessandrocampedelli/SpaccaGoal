@@ -97,9 +97,10 @@ public class Partita extends Gara
 		//il difensore pesca una carta (una carta viene pescata indipendemente se subisce goal oppure no)
 		dif.getMano().add(this.carte.pesca());
 		cartePescate = 1;
-		//attaccante
+		//se la carta giocata è l'attaccante
 		if(cartaAtt.equals(Carta.ATTACCANTE)) 
 		{
+			
 			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA)))
 			{
 				att.aggiungiGoal();
@@ -168,34 +169,59 @@ public class Partita extends Gara
 			}
 		}
 	}
+	
+	//metodo che controlla se si può giocare un turno di attacco
+	public boolean checkGiocaTurno(Giocatore att) 
+	{
+		for(Carta c : att.getMano()) 
+		{
+			//controllo se c'è almeno una carta di attacco nella mano dell'attaccante
+			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
+				//c'è almeno una carta, ritorna "true" perchè il turno offensivo si può giocare
+				return true;
+		}
+		//non c'è nessuna carta di attacco, ritorna "false" perchè l'attaccante non può attaccare
+		return false;
+	}
 
+	//metodo che controlla se si può giocare il turno difensivo
 	public boolean checkGiocaTurno(Carta cartaGiocata, ArrayList<Carta> manoAvversario) 
 	{
+		//controllo se l'attaccante ha giocato una carta non difendibile
 		if(cartaGiocata.equals(Carta.ROVESCIATA_DELLANNO) || cartaGiocata.equals(Carta.TIRO_DOMENICA) || cartaGiocata.equals(Carta.MISTER)) 
 		{
+			//ritorna "false" perchè il difensore non si puà difendere anche se ha una carta difensiva
 			return false;
 		}
 		else 
 		{
 			for(Carta c : manoAvversario) 
 			{
+				//controllo se c'è almeno una carta di difesa nella mano del difensore
 				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.VAR) || c.equals(Carta.FUORIGIOCO))
+					//c'è almeno una carta, ritorna "true" perchè il turno difensivo si può giocare
 					return true;
 			}
+			//non c'è nessuna carta di difesa, ritorna "false" perchè il difensore non si puà difendere
 			return false;
 		}
 	}
-
-	public boolean checkGiocaTurno(Giocatore att) 
+	
+	//metodo che permette di salvare il turno di default appena viene creata una partita
+	public void salvaTurno(String partitaTorneo) throws IOException
 	{
-		for(Carta c : att.getMano()) 
-		{
-			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
-				return true;
-		}
-		return false;
+		String currentDirectory = System.getProperty("user.dir");
+		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
+		String absolutePath = currentDirectory + File.separator + relativePath;
+		PrintWriter pw = new PrintWriter(absolutePath);
+		pw.println("a");
+		pw.println(0);
+		pw.println(1);
+		pw.println(1);
+		pw.close();
 	}
 
+	//metodo che permette di leggere il turno dal file di testo
 	public void leggiTurno() throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -223,19 +249,7 @@ public class Partita extends Gara
 		scan.close();
 	}
 
-	public void salvaTurno(String partitaTorneo) throws IOException
-	{
-		String currentDirectory = System.getProperty("user.dir");
-		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
-		String absolutePath = currentDirectory + File.separator + relativePath;
-		PrintWriter pw = new PrintWriter(absolutePath);
-		pw.println("a");
-		pw.println(0);
-		pw.println(1);
-		pw.println(1);
-		pw.close();
-	}
-
+	//metodo che permette di salvare il turno della partita in corso
 	public void salvaTurnoGara(Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -294,6 +308,7 @@ public class Partita extends Gara
 		fw.close();
 	}
 
+	//metodo che permette di salvare il turno del rigore
 	public void salvaTurnoRigore(Carta cartaGiocata) throws IOException
 	{
 		String currentDirectory = System.getProperty("user.dir");
@@ -333,16 +348,25 @@ public class Partita extends Gara
 		}
 		fw.close();
 	}
+	
+	//metodo che permette di verificare se la partita è terminata (l'attaccante ha segnato 5 goal)
 	public boolean finePartita(int iPosAtt) 
 	{
 		boolean fine = false;
+		//controllo se il giocatore ha segnato 5 goal
 		if(giocatori[iPosAtt].getPunteggio() == 5)
+		{
+			//il giocatore ha segnato 5 goal, ritorna la variabile booleana "true" e la partita sarà terminata
 			fine = true;
+		}
+		//il giocatore non ha segnato 5 goal, ritorna la variabile booleana "false" e la partita non sarà terminata
 		return fine;
 	}
 	
+	//metodo che permette di mostrare la classifica finale con i punteggi dei giocatori
 	public String mostraRisultati() 
 	{
+		//richiamo il metodo dalla classe padre "Gara"
 		return super.mostraRisultati();
 	}
 	
@@ -353,21 +377,24 @@ public class Partita extends Gara
 		leaderboard.getPlayers(aliasVincente).aggiungiVittoriaPartita();
 		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
-		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+" HA VINTO LA PARTITA");
+		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+ " HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		inviaMail(this.giocatori);
 		//s.deleteDirectory("partite");
 	}
 
-	
+	//metodo che permette di creare la stampa con le informazioni dei giocatori (alias, robot, punteggio e mano)
 	public String toString() 
 	{
 		String info = "";
+		//creo la stringa con le informazioni dei giocatori
 		for(Giocatore p: this.getGiocatori()) 
 		{
-			info += "Giocatore "+p.getAlias() +(p.isRobot() ? " (Robot)" : "") + "\n Punteggio: "+p.getPunteggio()+"\n Mano: "+p.getMano().toString()+"\n\n";
+			//aggiungo alla stringa l'alias del giocatore, se è un robot oppure no, il punteggio attuale e la mano che possiede
+			info += "Giocatore " + p.getAlias() + (p.isRobot() ? " (Robot)" : "") + "\n Punteggio: " + p.getPunteggio() + "\n Mano: " + p.getMano().toString() + "\n\n";
 		}
+		//ritorna la stringa appena creata
 		return info;
 	}
 }
