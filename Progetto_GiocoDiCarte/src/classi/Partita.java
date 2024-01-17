@@ -96,71 +96,88 @@ public class Partita extends Gara
 	{
 		//il difensore pesca una carta (una carta viene pescata indipendemente se subisce goal oppure no)
 		dif.getMano().add(this.carte.pesca());
+		//il numero di carte pescate sarà sempre almeno una
 		cartePescate = 1;
-		//se la carta giocata è l'attaccante
+		
+		//se il giocatore offensivo ha giocato l'attaccante, il difensore potrà difendersi con il difensore e con il difensore roccia
 		if(cartaAtt.equals(Carta.ATTACCANTE)) 
 		{
-			
+			//se il giocatore difendente non ha giocato il difensore o il difensore roccia
 			if(!(cartaDif.equals(Carta.DIFENSORE) || cartaDif.equals(Carta.DIFENSORE_ROCCIA)))
 			{
+				//aggiungo un goal all'attaccante
 				att.aggiungiGoal();
 			}
 			else 
 			{
+				//il difensore pesca un'altra carta in quanto non ha subito goal
 				dif.getMano().add(this.carte.pesca());
+				//il numero di carte pescate viene incrementato a 2
 				cartePescate++;
 			}
 		}
 		else 
 		{
-			//bomber vero
+			//se il giocatore offensivo ha giocato il bomber vero, il difensore potrà difendersi solamente con il difensore roccia
 			if(cartaAtt.equals(Carta.BOMBER_VERO)) 
 			{
+				//se il giocatore difendente non ha giocato il difensore roccia
 				if(!cartaDif.equals(Carta.DIFENSORE_ROCCIA)) 
 				{
+					//aggiungo un goal all'attaccante
 					att.aggiungiGoal();
 				}
 				else 
 				{
+					//il difensore pesca un'altra carta in quanto non ha subito goal
 					dif.getMano().add(this.carte.pesca());
+					//il numero di carte pescate viene incrementato a 2
 					cartePescate++;
 				}
 			}
 			else 
 			{
-				//rovesciata dell'anno e tiro della domenica
+				//se il giocatore offensivo ha giocato la rovesciata dell'anno o il tiro della domenica farà goal sicuramente perchè sono carte non difendibili
 				if(cartaAtt.equals(Carta.ROVESCIATA_DELLANNO) || cartaAtt.equals(Carta.TIRO_DOMENICA))
 				{
+					//aggiungo un goal all'attaccante
 					att.aggiungiGoal();
 				}
 				else 
 				{
-					//goal
+					//se il giocatore offensivo ha giocato il goal, il difensore potrà difendersi con il var e con il fuorigioco
 					if(cartaAtt.equals(Carta.GOAL)) 
 					{
+						//se il giocatore difendente non ha giocato il var o il fuorigioco
 						if(!(cartaDif.equals(Carta.VAR) || cartaDif.equals(Carta.FUORIGIOCO))) 
 						{
+							//aggiungo un goal all'attaccante
 							att.aggiungiGoal();
 						}
 						else 
 						{
+							//il difensore pesca un'altra carta in quanto non ha subito goal
 							dif.getMano().add(this.carte.pesca());
+							//il numero di carte pescate viene incrementato a 2
 							cartePescate++;
 						}
 					}
 					else 
 					{
+						//se il giocatore offensivo ha giocato la carta mister, il difensore non si difenderà e l'attaccante pescherà due carte
 						if(cartaAtt.equals(Carta.MISTER)) 
 						{
+							//aggiungo due carte alla mano dell'attaccante e il numero di carte pescate passa a 2
 							att.getMano().add(this.carte.pesca());
 							att.getMano().add(this.carte.pesca());
 							cartePescate = 2;
 						}
 						else 
 						{
-							//caso del rigore
+							//se il giocatore difensivo non ha giocato il portiere (l'attaccante ha giocato la carta rigore per esclusione)
 							if(!cartaDif.equals(Carta.PORTIERE)) 
 							{
+								//aggiungo un goal all'attaccante
 								att.aggiungiGoal();
 							}
 						}
@@ -177,8 +194,10 @@ public class Partita extends Gara
 		{
 			//controllo se c'è almeno una carta di attacco nella mano dell'attaccante
 			if(c.getTipologia().equals(Tipologia.ATTACCO) || c.equals(Carta.GOAL) || c.equals(Carta.MISTER))
+			{				
 				//c'è almeno una carta, ritorna "true" perchè il turno offensivo si può giocare
 				return true;
+			}
 		}
 		//non c'è nessuna carta di attacco, ritorna "false" perchè l'attaccante non può attaccare
 		return false;
@@ -199,8 +218,10 @@ public class Partita extends Gara
 			{
 				//controllo se c'è almeno una carta di difesa nella mano del difensore
 				if(c.getTipologia().equals(Tipologia.DIFESA) || c.equals(Carta.VAR) || c.equals(Carta.FUORIGIOCO))
+				{
 					//c'è almeno una carta, ritorna "true" perchè il turno difensivo si può giocare
 					return true;
+				}
 			}
 			//non c'è nessuna carta di difesa, ritorna "false" perchè il difensore non si puà difendere
 			return false;
@@ -210,14 +231,19 @@ public class Partita extends Gara
 	//metodo che permette di salvare il turno di default appena viene creata una partita
 	public void salvaTurno(String partitaTorneo) throws IOException
 	{
+		//salvo il turno all'interno della cartella della partita
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//creo l'oggetto "PrintWriter" con il percorso assoluto
 		PrintWriter pw = new PrintWriter(absolutePath);
+		//salvo di default che il primo turno sarà un turno di attacco con le posizioni del primo giocatore (attaccante) e del secondo giocatore (difensivo)
 		pw.println("a");
 		pw.println(0);
 		pw.println(1);
+		//numero di carte pescate per il salvataggio nella label
 		pw.println(1);
+		//chiudo il file di testo in scrittura
 		pw.close();
 	}
 
