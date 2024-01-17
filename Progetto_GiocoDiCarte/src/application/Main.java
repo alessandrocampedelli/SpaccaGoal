@@ -22,8 +22,6 @@ public class Main extends Application
 			//aggiungo lo stile css creato esternamente al form
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			//fisso la stage in primo piano sullo schermo
-			primaryStage.setAlwaysOnTop(true);
 			//determino il tipo di form scelto, abbiamo scelto un form in cui non è possibile modificare le dimensioni prescelte
 			primaryStage.initStyle(StageStyle.UTILITY);
 			primaryStage.setResizable(false);
