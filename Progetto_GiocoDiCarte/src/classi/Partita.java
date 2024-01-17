@@ -231,7 +231,7 @@ public class Partita extends Gara
 	//metodo che permette di salvare il turno di default appena viene creata una partita
 	public void salvaTurno(String partitaTorneo) throws IOException
 	{
-		//salvo il turno all'interno della cartella della partita
+		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
@@ -250,6 +250,7 @@ public class Partita extends Gara
 	//metodo che permette di leggere il turno dal file di testo
 	public void leggiTurno() throws IOException
 	{
+		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "";
 		if(codice.charAt(0) == 'p')
@@ -278,6 +279,7 @@ public class Partita extends Gara
 	//metodo che permette di salvare il turno della partita in corso
 	public void salvaTurnoGara(Carta cartaGiocata, Carta cartaAtt) throws IOException
 	{
+		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
 		if(this.getCodiceGara().charAt(0) == 'p')
@@ -337,6 +339,7 @@ public class Partita extends Gara
 	//metodo che permette di salvare il turno del rigore
 	public void salvaTurnoRigore(Carta cartaGiocata) throws IOException
 	{
+		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath;
 		if(this.getCodiceGara().charAt(0) == 'p')
@@ -399,15 +402,18 @@ public class Partita extends Gara
 	//metodo che viene eseguito quando la partita termina
 	public void showFinePartita(ActionEvent event, String aliasVincente, Leaderboard leaderboard, Alert_cambiaForm alert) throws IOException
 	{
+		//aggiungo la vittoria della partita al giocatore
 		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
 		leaderboard.getPlayers(aliasVincente).aggiungiVittoriaPartita();
 		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
+		//mostro con un alert il vincitore della partita con i risultati della partita
 		alert.mostraInformazione(mostraRisultati(), aliasVincente.toUpperCase()+ " HA VINTO LA PARTITA");
 		//la partita è terminata, mostro all'utente la leaderboard e elimino la cartella della partita
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		inviaMail(this.giocatori);
-		//s.deleteDirectory("partite");
+		//elimino la partita appena giocata visto che è terminata
+		s.deleteDirectory("partite");
 	}
 
 	//metodo che permette di creare la stampa con le informazioni dei giocatori (alias, robot, punteggio e mano)

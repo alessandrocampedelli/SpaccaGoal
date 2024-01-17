@@ -75,7 +75,7 @@ public abstract class Gara
 		String output = "CLASSIFICA FINALE:\n";
 		for(Giocatore g : giocatori) 
 		{
-			output += g.getAlias()+": "+g.getPunteggio()+"\n";
+			output += g.getAlias()+ ": " + g.getPunteggio() + "\n";
 		}
 		return output;
 	}
@@ -126,20 +126,25 @@ public abstract class Gara
 				BodyPart messageBodyPart = new MimeBodyPart();
 				//caso di una partita singola
 				String txtEmail = "";
-				if (this.codice.charAt(0) == 'p') {
+				if (this.codice.charAt(0) == 'p') 
+				{
 				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
 				            "<p>Ecco a te i <b>risultati della partita '" + this.codice + "'</b> " +
 				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
 				            "<p><b>" + this.mostraRisultati() + "</b></p>" +
 				            "<p>In allegato il file pdf della leaderboard aggiornata.</p>" +
 				            "<p>Grazie per aver giocato a SPACCA GOAL. A presto!</p>";
-				} else if (this.giocatori.length != 2) {
+				} 
+				else if (this.giocatori.length != 2) 
+				{
 				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
 				            "<p>Ecco a te i <b>risultati della partita relativa al torneo '" + this.codice + "'</b> " +
 				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
 				            "<p><b>" + this.mostraRisultati() + "</b></p>" +
 				            "<p>Grazie per aver giocato a SPACCA GOAL. A presto!</p>";
-				} else {
+				} 
+				else 
+				{
 				    txtEmail = "Ciao, " + g.getAlias() + "!</p>" +
 				            "<p>Ecco a te i <b>risultati della FINALE del TORNEO '" + this.codice + "'</b> " +
 				            "terminata in data " + data + " alle ore " + ora + ".</p>" +
