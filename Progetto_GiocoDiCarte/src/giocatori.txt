@@ -2,7 +2,7 @@ matteo,2,1,p,matteo.boscherini17@gmail.com
 alessandro,4,0,p,alessandro.campedelli15@gmail.com
 roberto,0,1,p,roberto.amadini@unibo.it
 angelo,0,0,p,angelo.diiorio@unibo.it
-francesca,3,0,r,francesca.rossi@outlook.com
+francesca,3,1,r,francesca.rossi@outlook.com
 lucia,3,1,r,luciaverdi@yahoo.com
 cristian,0,2,r,campedellicristian86@gmail.com
 mattia,0,1,r,mbirrina01@gmail.com

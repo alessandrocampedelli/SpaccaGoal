@@ -235,7 +235,7 @@ public class Partita extends Gara
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "src/"+partitaTorneo+"/"+this.codice+"/turno.txt";
 		String absolutePath = currentDirectory + File.separator + relativePath;
-		//creo l'oggetto "PrintWriter" con il percorso assoluto
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter pw = new PrintWriter(absolutePath);
 		//salvo di default che il primo turno sarà un turno di attacco con le posizioni del primo giocatore (attaccante) e del secondo giocatore (difensivo)
 		pw.println("a");
@@ -243,7 +243,6 @@ public class Partita extends Gara
 		pw.println(1);
 		//numero di carte pescate per il salvataggio nella label
 		pw.println(1);
-		//chiudo il file di testo in scrittura
 		pw.close();
 	}
 
@@ -253,22 +252,29 @@ public class Partita extends Gara
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath = "";
+		//cambia il percorso relativo se stiamo leggendo un turno di una partita o di un torneo
 		if(codice.charAt(0) == 'p')
 		{
 			relativePath = "src/partite/"+codice+"/turno.txt";
 		}
 		else
 		{
-			relativePath = "src/tornei/"+codice.substring(0,codice.length() - 1)+"/"+codice+"/turno.txt";
+			relativePath = "src/tornei/"+codice.substring(0,codice.length() - 1) + "/"+codice+"/turno.txt";
 		}
 		String absolutePath = currentDirectory + File.separator + relativePath;
+		//creo il file con il percorso assoluto
 		File f = new File(absolutePath);
+		//creo l'oggetto per leggere le righe del file di testo
 		Scanner scan = new Scanner(f);
+		//la prima riga indica se è un turno di attacco ("a") o di difesa ("d")
 		turno = scan.nextLine();
+		//la seconda riga indica la posizione del giocatore che sta attaccando
 		posizioneGiocatoreAttaccante = scan.nextInt();
+		//la terza riga indica la posizione del giocatore che sta difendendo (il successivo)
 		posizioneGiocatoreDifensore = scan.nextInt();
+		//la quarta riga indica il numero di carte per la stampa delle carte pescate nella label
 		cartePescate = scan.nextInt();
-		//devo dire che se va nel form rigore deve leggere anche la carta giocata
+		//se è un turno difensivo leggiamo anche la carta giocata dall'attaccante
 		if(turno.equals("d"))
 		{
 			nomeCarta = scan.next();
@@ -282,6 +288,7 @@ public class Partita extends Gara
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath; 
+		//cambia il percorso relativo se stiamo salvando un turno di una partita o di un torneo
 		if(this.getCodiceGara().charAt(0) == 'p')
 		{
 			relativePath = "src/partite/"+this.getCodiceGara()+"/turno.txt";
@@ -291,10 +298,12 @@ public class Partita extends Gara
 			relativePath = "src/tornei/"+this.getCodiceGara().substring(0, this.getCodiceGara().length() - 1)+"/"+this.getCodiceGara()+"/turno.txt";
 		}
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
+		//mi chiedo se è un turno di attacco o di difesa
 		if(turno.equals("a")) 
 		{
+			//se l'attaccante ha giocato la carta rigore sarà ancora un turno di attacco in quanto cambiamo form, altrimenti passeremo ad un turno difensivo
 			if(cartaGiocata.equals(Carta.RIGORE)) 
 			{
 				fw.println("a");
@@ -303,13 +312,17 @@ public class Partita extends Gara
 			{
 				fw.println("d");
 			}
+			//salvo nel file di testo la posizione del giocatore attaccante, la posizione dei giocatore difensivo e il numero di carte pescate
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
 			fw.println(cartePescate);
+			//salvo la carta giocata dall'attaccante
 			fw.println(cartaGiocata.name());
 		}
 		else 
 		{
+			//TERMINARE DA QUI!
+			//siamo in un turno difensivo
 			if(!(cartaGiocata == null)) 
 			{
 				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
@@ -342,6 +355,7 @@ public class Partita extends Gara
 		//queste righe permettono di determinare il percorso assoluto del file che ci interessa
 		String currentDirectory = System.getProperty("user.dir");
 		String relativePath;
+		//cambia il percorso relativo se stiamo salvando un turno di una partita o di un torneo
 		if(this.getCodiceGara().charAt(0) == 'p')
 		{
 			relativePath = "src/partite/"+this.getCodiceGara()+"/turno.txt";
@@ -351,14 +365,18 @@ public class Partita extends Gara
 			relativePath = "src/tornei/"+this.getCodiceGara().substring(0, this.getCodiceGara().length() - 1)+"/"+this.getCodiceGara()+"/turno.txt";
 		}
 		String absolutePath = currentDirectory + File.separator + relativePath;
-
+		//creo un oggetto "PrintWriter" con il percorso assoluto come parametro
 		PrintWriter fw = new PrintWriter(absolutePath);
+		//mi chiedo se è un turno di attacco o di difesa
 		if(turno.equals("a")) 
 		{
+			//passiamo ad un turno difensivo in quanto è stata scelta una direzione in cui calciare il rigore
 			fw.println("d");
+			//salvo nel file di testo la posizione del giocatore attaccante, la posizione dei giocatore difensivo e il numero di carte pescate
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
 			fw.println(cartePescate);
+			//salvo la carta giocata dall'attaccante
 			fw.println(cartaGiocata.name());
 		}
 		else 
