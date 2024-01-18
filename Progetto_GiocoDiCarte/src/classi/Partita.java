@@ -312,38 +312,46 @@ public class Partita extends Gara
 			{
 				fw.println("d");
 			}
-			//salvo nel file di testo la posizione del giocatore attaccante, la posizione dei giocatore difensivo e il numero di carte pescate
+			//salvo nel file di testo le stesse posizioni del giocatore attaccante e del giocatore difensivo
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
+			//salvo lo stesso numero di carte pescate
 			fw.println(cartePescate);
 			//salvo la carta giocata dall'attaccante
 			fw.println(cartaGiocata.name());
 		}
 		else 
 		{
-			//TERMINARE DA QUI!
-			//siamo in un turno difensivo
+			//siamo in un turno difensivo, mi chiedo se è stata giocata una carta di attacco
 			if(!(cartaGiocata == null)) 
 			{
+				//se è stata giocata da parte dell'attaccante una carta rigore (con direzione sinistra, centro e destra) e da parte del difensore la carta portiere
 				if((cartaAtt.equals(Carta.RIGORE_SX)||cartaAtt.equals(Carta.RIGORE_C)||cartaAtt.equals(Carta.RIGORE_DX)) && (cartaGiocata.equals(Carta.PORTIERE ))) 
 				{
+					//salvo nel file di testo che il prossimo turno sarà un turno difensivo (passeremo al form del rigore)
 					fw.println("d");
+					//salvo nel file di testo le stesse posizioni del giocatore attaccante e del giocatore difensivo
 					fw.println(posizioneGiocatoreAttaccante);
 					fw.println(posizioneGiocatoreDifensore);
+					//salvo lo stesso numero di carte pescate
 					fw.println(cartePescate);
+					//salvo la carta giocata dall'attaccante con la direzione in cui calcerà il rigore
 					fw.println(cartaAtt.name());
 				}
 			}
+			//non è stata giocata la carta portiere, allora passiamo ad un form offensivo scambiando le posizioni dei giocatori (offensive e difensive)
 			fw.println("a");
+			//il giocatore che attaccherà sarà il successivo, se terminati i giocatori riparteremo dal primo giocatore in posizione 0
 			if((giocatori.length-1) != posizioneGiocatoreAttaccante)
 				fw.println(posizioneGiocatoreAttaccante+1);
 			else
 				fw.println(0);
-
+			//il giocatore che difenderà sarà il successivo, se terminati i giocatori riparteremo dal primo giocatore in posizione 0
 			if((giocatori.length-1) != posizioneGiocatoreDifensore)
 				fw.println(posizioneGiocatoreDifensore+1);
 			else
 				fw.println(0);
+			//stampo nel file di testo il numero di carte pescate
 			fw.println(cartePescate);
 		}
 		fw.close();
@@ -372,7 +380,7 @@ public class Partita extends Gara
 		{
 			//passiamo ad un turno difensivo in quanto è stata scelta una direzione in cui calciare il rigore
 			fw.println("d");
-			//salvo nel file di testo la posizione del giocatore attaccante, la posizione dei giocatore difensivo e il numero di carte pescate
+			//salvo nel file di testo la posizione del giocatore attaccante, la posizione del giocatore difensivo e il numero di carte pescate
 			fw.println(posizioneGiocatoreAttaccante);
 			fw.println(posizioneGiocatoreDifensore);
 			fw.println(cartePescate);
@@ -381,16 +389,19 @@ public class Partita extends Gara
 		}
 		else 
 		{
+			//non è stata giocata la carta portiere, allora passiamo ad un form offensivo scambiando le posizioni dei giocatori (offensive e difensive)
 			fw.println("a");
+			//il giocatore che attaccherà sarà il successivo, se terminati i giocatori riparteremo dal primo giocatore in posizione 0
 			if((giocatori.length-1) != posizioneGiocatoreAttaccante)
 				fw.println(posizioneGiocatoreAttaccante+1);
 			else
 				fw.println(0);
-
+			//il giocatore che difenderà sarà il successivo, se terminati i giocatori riparteremo dal primo giocatore in posizione 0
 			if((giocatori.length-1) != posizioneGiocatoreDifensore)
 				fw.println(posizioneGiocatoreDifensore+1);
 			else
 				fw.println(0);
+			//stampo nel file di testo il numero di carte pescate
 			fw.println(cartePescate);
 		}
 		fw.close();
