@@ -566,7 +566,7 @@ public class FormGiocaPartitaController implements Initializable
 									//imposto lo sfondo della carta giocata dal robot di blu perchè un turno offensivo
 									setStyle("-fx-control-inner-background: blue;");
 									//scrollo la listView fino all'indice della carta giocata
-									listCarte.scrollTo(getIndex());
+									listCarte.scrollTo(this.getIndex());
 								}
 							}
 							else 
@@ -576,7 +576,7 @@ public class FormGiocaPartitaController implements Initializable
 									//imposto lo sfondo della carta giocata dal robot di rosso perchè un turno difensivo
 									setStyle("-fx-control-inner-background: red;");
 									//scrollo la listView fino all'indice della carta giocata
-									listCarte.scrollTo(getIndex());
+									listCarte.scrollTo(this.getIndex());
 								}
 							}
 						}

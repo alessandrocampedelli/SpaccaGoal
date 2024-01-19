@@ -95,7 +95,7 @@
 			</font>
 		</Button>
 		<Label fx:id="lblInfoUtente" layoutX="119.0" layoutY="372.0"
-			prefHeight="20.0" prefWidth="578.0">
+			prefHeight="20.0" prefWidth="870.0">
 			<font>
 				<Font name="System Bold" size="14.0" />
 			</font>

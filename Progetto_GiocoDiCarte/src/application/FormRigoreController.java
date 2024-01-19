@@ -167,7 +167,7 @@ public class FormRigoreController implements Initializable
 					//visualizzazione del pallone ma non del portiere e scrittura label di attacco del rigore
 					imgPallone.setVisible(true);
 					imgPortiere.setVisible(false);
-					lblRigore.setText(players[posizioneGiocatoreAttaccante].getAlias() +" dove vuoi tirare il rigore?");
+					lblRigore.setText(players[posizioneGiocatoreAttaccante].getAlias() + " dove vuoi tirare il rigore?");
 				}
 				else
 				{
