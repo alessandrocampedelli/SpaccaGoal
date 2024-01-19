@@ -79,6 +79,7 @@ public abstract class Gara
 		}
 		return output;
 	}
+	
 	//metodo per inviare la mail con i risultati della partita al termine di essa
 	public void inviaMail(Giocatore[] giocatori) 
 	{
@@ -174,6 +175,7 @@ public abstract class Gara
 			e.printStackTrace();
 		}
 	}
+	
 	//metodo che permette di creare un file pdf
 	public String getPdf(LocalDate date, LocalTime ora) 
 	{
