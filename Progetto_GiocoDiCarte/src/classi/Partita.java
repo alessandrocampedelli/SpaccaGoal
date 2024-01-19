@@ -433,7 +433,7 @@ public class Partita extends Gara
 	{
 		//aggiungo la vittoria della partita al giocatore
 		giocatori[posizioneGiocatoreAttaccante].aggiungiVittoriaPartita();
-		leaderboard.getPlayers(aliasVincente).aggiungiVittoriaPartita();
+		leaderboard.getPlayer(aliasVincente).aggiungiVittoriaPartita();
 		//aggiornata una vittoria nella leaderboard, risalvo il file di testo con i valori aggiornati
 		leaderboard.salvaPlayers();
 		//mostro con un alert il vincitore della partita con i risultati della partita

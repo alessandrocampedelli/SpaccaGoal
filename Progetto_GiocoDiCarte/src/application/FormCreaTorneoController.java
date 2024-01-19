@@ -93,7 +93,7 @@ public class FormCreaTorneoController implements Initializable
 				throw new IllegalArgumentException();
 			}
 			//creo, attraberso l'utilizzo di un metodo della classe "Leaderboard", l'oggetto "Giocatore" aggiungendolo alla leaderboard 
-			Giocatore nuovoGiocatore = leaderboard.getPlayers(subNome);
+			Giocatore nuovoGiocatore = leaderboard.getPlayer(subNome);
 			//aggiungo alla tableview il nuovo giocatore appena creato
 			tableGiocatoriInseriti.getItems().add(nuovoGiocatore);
 			//mi ricavo l'indice del nuovo giocatore inserito all'interno della leaderboard
