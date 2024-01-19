@@ -208,14 +208,14 @@ public class Salvataggio
 			{
 				idGiocatore = idGiocatore.substring(0, idGiocatore.length() - 1);
 				//ricavo la mail del giocatore dalla leaderboard perchè ogni giocatore ha la sua mail
-				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				String email = leaderboard.getPlayer(idGiocatore).getEmail();
 				//aggiungo all'ArrayList il giocatore appena ricreato con l'alias, la mail e come variabile booleana "true" perchè è un robot
 				giocatori.add(new Giocatore(idGiocatore,true,email));
 			}
 			else 
 			{
 				//ricavo la mail del giocatore dalla leaderboard perchè ogni giocatore ha la sua mail
-				String email = leaderboard.getPlayers(idGiocatore).getEmail();
+				String email = leaderboard.getPlayer(idGiocatore).getEmail();
 				//aggiungo all'ArrayList il giocatore appena ricreato con l'alias, la mail e come variabile booleana "false" perchè non è un robot
 				giocatori.add(new Giocatore(idGiocatore,false,email));
 			}

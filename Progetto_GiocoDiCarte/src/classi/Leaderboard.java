@@ -47,7 +47,7 @@ public class Leaderboard
 	}
 
 	//metodo che restituisce l'oggetto "Giocatore" dal suo alias passato come parametro
-	public Giocatore getPlayers(String alias) 
+	public Giocatore getPlayer(String alias) 
 	{
 		for(Giocatore g : players) 
 		{
@@ -88,14 +88,7 @@ public class Leaderboard
 			String[] infoPlayer = riga.split(",");
 			Giocatore g;
 			//se il giocatore restituisce la 'p' significa che non è un robot, se restituisce una 'r' vuole dire che è un robot
-			if(infoPlayer[3].equals("p"))
-			{
-				g = new Giocatore(infoPlayer[0],false,infoPlayer[4]);
-			}
-			else
-			{
-				g = new Giocatore(infoPlayer[0],true,infoPlayer[4]);
-			}
+			g = new Giocatore(infoPlayer[0], infoPlayer[3].equals("p") ? false : true, infoPlayer[4]);
 			//tramite le proprietà della classe "Giocatore" setto il numero di partite e tornei vinti dal giocatore
 			g.setVittoriePartite(Integer.parseInt(infoPlayer[1]));
 			g.setVittorieTornei(Integer.parseInt(infoPlayer[2]));
@@ -113,19 +106,8 @@ public class Leaderboard
 		//con un ciclo for scrivo nel file di testo tutte le informazioni dei giocatori 
 		for(Giocatore g: players) 
 		{
-			String riga = g.getAlias() + "," + g.getNPartiteVinte() + "," + g.getNTorneiVinti();
-			//controllo se il giocatore è un robot oppure no
-			if(g.isRobot())
-			{
-				//il giocatore è un robot e per riconoscerlo nel file scrivo una 'r'
-				riga += ",r";
-			}
-			else
-			{
-				//il giocatore non è un robot e per riconoscerlo nel file scrivo una 'p'
-				riga += ",p";
-			}
-			riga += "," + g.getEmail();
+			//compongo la riga con le info del giocatore
+			String riga = g.getAlias() + "," + g.getNPartiteVinte() + "," + g.getNTorneiVinti()+"," + (g.isRobot() ? "r" : "p")+"," + g.getEmail();
 			//stampo la riga appena creata andando a capo per il giocatore successivo
 			fw.println(riga);
 		}
