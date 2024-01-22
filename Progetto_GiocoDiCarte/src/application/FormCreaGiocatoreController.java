@@ -55,13 +55,13 @@ public class FormCreaGiocatoreController implements Initializable
 	{
 		try 
 		{
-			//controllo che l'alias inserito abbia almeno un carattere, altrimenti faccio saltare l'eccezione
+			//controllo che l'alias inserito abbia almeno un carattere, altrimenti faccio sollevare l'eccezione
 			if(txtAlias.getText().trim().equals("")) 
 			{
 				chbRobot.setSelected(false);
 				throw new IOException("Il giocatore deve avere un nome");
 			}
-			//controllo che la usermail e il dominio siano stati inseriti, altrimenti faccio saltare l'eccezione
+			//controllo che la usermail e il dominio siano stati inseriti, altrimenti faccio sollevare l'eccezione
 			if(txtUsermail.getText().trim().equals("") || chbDominio.getSelectionModel().getSelectedItem() == null) 
 			{
 				throw new IOException("Il giocatore deve avere una mail");
@@ -70,28 +70,28 @@ public class FormCreaGiocatoreController implements Initializable
 			String nome = txtAlias.getText();
 			//la usermail inserita nella textField e il dominio scelto dalla comboBox
 			String email = txtUsermail.getText() + chbDominio.getSelectionModel().getSelectedItem();
-			//controllo che l'alias sia stato inserito correttamente tramite l'utilizzo del metodo, se non fosse corretto faccio saltare l'eccezione
+			//controllo che l'alias sia stato inserito correttamente tramite l'utilizzo del metodo, se non fosse corretto faccio sollevare l'eccezione
 			if(!checkCharacters(nome)) 
 			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IllegalStateException("Il nome utilizzato deve contenere solo lettere e/o numeri");
 			}
-			//controllo che la mail sia stata inserita correttamente tramite l'utilizzo del metodo, se non fosse corretta faccio saltare l'eccezione
+			//controllo che la mail sia stata inserita correttamente tramite l'utilizzo del metodo, se non fosse corretta faccio sollevare l'eccezione
 			if(!isValidEmail(email)) 
 			{
 				txtUsermail.clear();
 				chbDominio.setValue(null);
 				throw new IllegalStateException("La mail contiene caratteri non accettabili");
 			}
-			//controllo che l'alias abbia massimo 12 caratteri, se non fosse così faccio saltare l'eccezione
+			//controllo che l'alias abbia massimo 12 caratteri, se non fosse così faccio sollevare l'eccezione
 			if(nome.length() > 13) 
 			{
 				txtAlias.clear();
 				chbRobot.setSelected(false);
 				throw new IndexOutOfBoundsException();
 			}
-			//controllo che l'alias sia già stato utilizzato tramite l'utilizzo del metodo, se fosse così faccio saltare l'eccezione
+			//controllo che l'alias sia già stato utilizzato tramite l'utilizzo del metodo, se fosse così faccio sollevare l'eccezione
 			if(nomeGiaUsato(nome)) 
 			{
 				txtAlias.clear();
@@ -175,7 +175,7 @@ public class FormCreaGiocatoreController implements Initializable
 	}
 
 	//metodo che controlla se la mail inserita è corretta tramite un espressione regolare
-	public static boolean isValidEmail(String email) 
+	public boolean isValidEmail(String email) 
 	{
 		//definizione del pattern per l'indirizzo mail corretto
 		String emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})+$";
