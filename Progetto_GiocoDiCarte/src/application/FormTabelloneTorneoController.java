@@ -94,8 +94,6 @@ public class FormTabelloneTorneoController implements Initializable
 	@FXML
 	public void btnMostraLeaderboard(ActionEvent event) throws IOException
 	{	
-		//SCOMMENTARE!!!!!!!!!!!!!!!!!!!!!!!
-		
 		//il torneo è terminato, eliminazione della cartella del torneo dalla cartella "tornei"
 		Salvataggio s = new Salvataggio(t);
 		s.deleteDirectory("tornei");
