@@ -179,6 +179,10 @@ public class FormRigoreController implements Initializable
 				//eseguo il codice se siamo in un turno di attacco e l'attaccante è un robot o se siamo in un turno di difesa e il difensore è un robot
 				if((turno.equals("a") && players[posizioneGiocatoreAttaccante].isRobot()) ||  (turno.equals("d") && players[posizioneGiocatoreDifensore].isRobot()))
 				{
+					//rendo trasparenti i bottoni
+					btnCentro.setMouseTransparent(true);
+					btnDestra.setMouseTransparent(true);
+					btnSinistra.setMouseTransparent(true);
 					Robot robot;
 					int direzione;
 					//controllo se è un turno di attacco o difesa

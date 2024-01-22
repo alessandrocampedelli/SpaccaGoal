@@ -71,14 +71,7 @@ public class FormCreaPartitaController implements Initializable
 			String nome = cmbSelectPlayer.getSelectionModel().getSelectedItem();
 			String subNome = "";
 			//controllo se il giocatore selezionato contiene la parola robot, nel caso la elimino e mi memorizzo solo l'alias del giocatore
-			if(nome.contains("(Robot)")) 
-			{
-				subNome = nome.substring(0,nome.indexOf('(')-1);
-			}
-			else 
-			{
-				subNome = nome;
-			}
+			subNome = nome.contains("(Robot)") ? nome.substring(0, nome.indexOf('(') - 1) : nome;
 			//controllo se il nome è già stato selezionato ed è già presente nell'arrayList "giocatori"
 			if(nomeGiaUsato(subNome)) 
 			{

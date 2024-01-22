@@ -442,7 +442,7 @@ public class Partita extends Gara
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 		inviaMail(this.giocatori);
 		//elimino la partita appena giocata visto che è terminata
-		s.deleteDirectory("partite");
+		s.deleteDirectory("partite/"+this.codice);
 	}
 
 	//metodo che permette di creare la stampa con le informazioni dei giocatori (alias, robot, punteggio e mano)

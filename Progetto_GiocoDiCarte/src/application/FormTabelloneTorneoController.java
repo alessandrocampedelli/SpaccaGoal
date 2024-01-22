@@ -94,12 +94,6 @@ public class FormTabelloneTorneoController implements Initializable
 	@FXML
 	public void btnMostraLeaderboard(ActionEvent event) throws IOException
 	{	
-		//SCOMMENTARE!!!!!!!!!!!!!!!!!!!!!!!
-		
-		//il torneo è terminato, eliminazione della cartella del torneo dalla cartella "tornei"
-		//Salvataggio s = new Salvataggio(t);
-		//s.deleteDirectory("tornei");
-		
 		//passo al form di visualizzazione della leaderboard
 		alert.passaAlForm("/application/FormLeaderboard.fxml", event);
 	}
@@ -148,7 +142,7 @@ public class FormTabelloneTorneoController implements Initializable
 					//mostro il bottone leaderboard all'utente e non mostro il bottone "avvia partita"
 					btnMostraLeaderboard.setVisible(true);
 					btnAvviaPartita.setVisible(false);
-					//elimino la cartella della partita del torneo appena giocata con il metodo della classe "Salvataggio"
+					//elimino la cartella del torneo con il metodo della classe "Salvataggio"
 					Salvataggio elimina = new Salvataggio(t);
 					elimina.deleteDirectory("tornei/"+t.getCodiceGara());
 				}
