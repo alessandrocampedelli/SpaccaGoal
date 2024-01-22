@@ -388,18 +388,20 @@ public class Salvataggio
 		String path = "src/"+percorso;
 		//creo l'oggetto di tipo "File" con il percorso
 		File file = new File(path);
-		for(File subfile : file.listFiles()) 
-		{
-			if(subfile.isDirectory()) 
-			{	
-				//ricorsione del metodo per eliminare eventuali sottocartelle
-				deleteDirectory(percorso+"/"+subfile.getName());
+		if(file.exists()) {
+			for(File subfile : file.listFiles()) 
+			{
+				if(subfile.isDirectory()) 
+				{	
+					//ricorsione del metodo per eliminare eventuali sottocartelle
+					deleteDirectory(percorso+"/"+subfile.getName());
+				}
+				//elimino le eventuali sottocartelle
+				subfile.delete();
 			}
-			//elimino le eventuali sottocartelle
-			subfile.delete();
+			//elimino la cartella principlae
+			file.delete();
 		}
-		//elimino la cartella principlae
-		file.delete();
 	}
 
 	//metodo che permette di creare delle cartelle per le partite dei tornei identificati da un numero
