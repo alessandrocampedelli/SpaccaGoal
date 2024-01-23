@@ -79,7 +79,15 @@ public abstract class Gara
 		}
 		return output;
 	}
-	
+
+	//metodo che mi controlla se una partita possiede almeno un robot
+	public boolean presenzaRobot() {
+		for(Giocatore g: this.giocatori) {
+			if(g.isRobot())
+				return true;
+		}
+		return false;
+	}
 	//metodo per inviare la mail con i risultati della partita al termine di essa
 	public void inviaMail(Giocatore[] giocatori) 
 	{
