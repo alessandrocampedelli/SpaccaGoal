@@ -58,6 +58,8 @@ public class FormTabelloneTorneoController implements Initializable
 	//la label del vincitore della partita
 	@FXML
 	private Label lblVincitore;
+	@FXML
+	private Label labelRobot;
 	//il bottone utile per mostrare la leaderboard
 	@FXML
 	private Button btnMostraLeaderboard = new Button();
@@ -108,6 +110,8 @@ public class FormTabelloneTorneoController implements Initializable
 			{				
 				//restituisce l'oggetto "Torneo" con il codice del torneo
 				t = gare.getTorneo(codiceUtente);
+				if(!t.presenzaRobot())
+					labelRobot.setVisible(false);
 				Salvataggio s = new Salvataggio(t);
 				//mi restituisce i giocatori che andranno inseriti nel tabellone
 				giocatori = s.leggiTabelloneTorneo();

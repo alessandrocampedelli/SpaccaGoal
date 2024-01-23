@@ -35,6 +35,8 @@ public class FormIniziaPartitaController implements Initializable
 	private Label lblNomeGiocatore3;
 	@FXML
 	private Label lblNomeGiocatore4;
+	@FXML
+	private Label lblRobot;
 	//la progressBar di caricamento per passare al form successivo
 	@FXML
 	private ProgressBar progressBar;
@@ -81,7 +83,8 @@ public class FormIniziaPartitaController implements Initializable
 			{
 				//restituisce l'oggetto "Gara" con il codice della partita
 				Gara p = (Partita) gare.getGara(codiceUtente);
-
+				if(!p.presenzaRobot())
+					lblRobot.setVisible(false);
 				//restituisce il primo carattere per capire se è una partita singola oppure se è una partita del torneo
 				if(codiceUtente.charAt(0) == 't') 
 				{

@@ -395,6 +395,7 @@ public class FormGiocaPartitaController implements Initializable
 						listCarte.setMouseTransparent(true);
 						//seleziono la carta che giocherà il robot
 						listCarte.getSelectionModel().select(cartaGiocata.name());
+						btnSospendiGara.setVisible(false);
 					}
 					//restituisce la mano del giocatore attaccante
 					nomiCarte = players[posizioneGiocatoreAttaccante].getManoNomi();
@@ -468,6 +469,7 @@ public class FormGiocaPartitaController implements Initializable
 						//stampo nella label che il giocatore stampato è un robot
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 						listCarte.setMouseTransparent(true);
+						btnSospendiGara.setVisible(false);
 					}
 					//restituisce la mano del giocatore difendente
 					nomiCarte = players[posizioneGiocatoreDifensore].getManoNomi();
