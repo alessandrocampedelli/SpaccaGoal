@@ -110,8 +110,11 @@ public class FormTabelloneTorneoController implements Initializable
 			{				
 				//restituisce l'oggetto "Torneo" con il codice del torneo
 				t = gare.getTorneo(codiceUtente);
+				//controllo se c'è almeno un giocatore robot, se non ci fosse disabilito la visualizzazione label 
 				if(!t.presenzaRobot())
+				{
 					labelRobot.setVisible(false);
+				}
 				Salvataggio s = new Salvataggio(t);
 				//mi restituisce i giocatori che andranno inseriti nel tabellone
 				giocatori = s.leggiTabelloneTorneo();

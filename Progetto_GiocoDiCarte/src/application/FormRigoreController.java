@@ -98,9 +98,12 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
+		//controllo se la partita non è terminata, se è terminata non salvo più nulla e la partita verrà eliminata
 		if(!finePartita)
+		{
 			//richiamo l'utilizzo del metodo per salvare il turno
 			salvaTurnoCambiaForm(event,btnSinistra);
+		}
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore al centro
@@ -120,9 +123,12 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
+		//controllo se la partita non è terminata, se è terminata non salvo più nulla e la partita verrà eliminata
 		if(!finePartita)
+		{
 			//richiamo l'utilizzo del metodo per salvare il turno
 			salvaTurnoCambiaForm(event,btnCentro);
+		}
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore a destra
@@ -142,9 +148,12 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
+		//controllo se la partita non è terminata, se è terminata non salvo più nulla e la partita verrà eliminata
 		if(!finePartita)
+		{
 			//richiamo l'utilizzo del metodo per salvare il turno
 			salvaTurnoCambiaForm(event,btnDestra);
+		}
 	}
 	
 	//metodo che viene eseguito all'apertura del form

@@ -83,8 +83,11 @@ public class FormIniziaPartitaController implements Initializable
 			{
 				//restituisce l'oggetto "Gara" con il codice della partita
 				Gara p = (Partita) gare.getGara(codiceUtente);
+				//controllo se c'è almeno un giocatore robot, se non ci fosse disabilito la visualizzazione label 
 				if(!p.presenzaRobot())
+				{
 					lblRobot.setVisible(false);
+				}
 				//restituisce il primo carattere per capire se è una partita singola oppure se è una partita del torneo
 				if(codiceUtente.charAt(0) == 't') 
 				{
