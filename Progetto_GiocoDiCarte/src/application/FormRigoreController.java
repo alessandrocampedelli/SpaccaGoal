@@ -48,6 +48,8 @@ public class FormRigoreController implements Initializable
 	String nomeCarta;
 	//permette il settaggio del numero di carte da pescare
 	int cartePescate;
+	//variabile che mi dice se la partita è finita o no
+	boolean finePartita = false;
 	//l'immagine del pallone e del portiere mostrate all'utente
 	@FXML
 	private ImageView imgPortiere;
@@ -96,8 +98,9 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
-		//richiamo l'utilizzo del metodo per salvare il turno
-		salvaTurnoCambiaForm(event,btnSinistra);
+		if(!finePartita)
+			//richiamo l'utilizzo del metodo per salvare il turno
+			salvaTurnoCambiaForm(event,btnSinistra);
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore al centro
@@ -117,8 +120,9 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata, event);
 		}
-		//richiamo l'utilizzo del metodo per salvare il turno
-		salvaTurnoCambiaForm(event,btnCentro);
+		if(!finePartita)
+			//richiamo l'utilizzo del metodo per salvare il turno
+			salvaTurnoCambiaForm(event,btnCentro);
 	}
 
 	//il bottone che viene eseguito se viene calciato/parato un rigore a destra
@@ -138,8 +142,9 @@ public class FormRigoreController implements Initializable
 			//controllo con il metodo se il rigore è stato segnato oppure no
 			rigoreSegnato(Carta.valueOf(nomeCarta), cartaGiocata,event);
 		}
-		//richiamo l'utilizzo del metodo per salvare il turno
-		salvaTurnoCambiaForm(event,btnDestra);
+		if(!finePartita)
+			//richiamo l'utilizzo del metodo per salvare il turno
+			salvaTurnoCambiaForm(event,btnDestra);
 	}
 	
 	//metodo che viene eseguito all'apertura del form
@@ -260,6 +265,7 @@ public class FormRigoreController implements Initializable
 			partita.setCartePescate(1);
 			//controllo se fosse finita la partita (attaccante ha fatto 5 goal), nel caso richiamo l'utilizzo del metodo "showFinePartita" o "finePartita"
 			if(partita.finePartita(posizioneGiocatoreAttaccante)) {
+				finePartita=true;
 				if(codicePartita.charAt(0) == 'p')
 				{
 					partita.showFinePartita(event,players[posizioneGiocatoreAttaccante].getAlias(),leaderboard,alert);
