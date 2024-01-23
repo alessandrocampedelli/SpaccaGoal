@@ -46,5 +46,6 @@ public class FormPrincipaleController implements Initializable
 		FormRigoreController.codicePartita=null;
 		FormRigoreController.cartaGiocata=null;
 		FormGiocaPartitaController.codicePartita=null;
+		FormIniziaPartitaController.codiceUtente=null;
 	}
 }
