@@ -80,11 +80,15 @@ public abstract class Gara
 		return output;
 	}
 
-	//metodo che mi controlla se una partita possiede almeno un robot
-	public boolean presenzaRobot() {
-		for(Giocatore g: this.giocatori) {
+	//metodo che controlla se una partita possiede almeno un robot
+	public boolean presenzaRobot() 
+	{
+		for(Giocatore g: this.giocatori) 
+		{
 			if(g.isRobot())
+			{
 				return true;
+			}
 		}
 		return false;
 	}

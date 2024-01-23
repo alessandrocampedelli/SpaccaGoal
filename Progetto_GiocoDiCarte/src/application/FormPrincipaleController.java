@@ -41,7 +41,8 @@ public class FormPrincipaleController implements Initializable
 	}
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
 		//imposto a null il valore delle variabili statiche dei form relativi allo svolgimento della partita
 		FormRigoreController.codicePartita=null;
 		FormRigoreController.cartaGiocata=null;

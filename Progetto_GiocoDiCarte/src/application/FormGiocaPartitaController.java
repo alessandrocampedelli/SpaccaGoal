@@ -395,6 +395,7 @@ public class FormGiocaPartitaController implements Initializable
 						listCarte.setMouseTransparent(true);
 						//seleziono la carta che giocherà il robot
 						listCarte.getSelectionModel().select(cartaGiocata.name());
+						//la partita nel turno del robot non può essere sospesa, rendo non visibile il bottone di sospensione della gara
 						btnSospendiGara.setVisible(false);
 					}
 					//restituisce la mano del giocatore attaccante
@@ -469,6 +470,7 @@ public class FormGiocaPartitaController implements Initializable
 						//stampo nella label che il giocatore stampato è un robot
 						lblTurnoAttacco.setText(lblTurnoAttacco.getText()+" (Robot)");
 						listCarte.setMouseTransparent(true);
+						//la partita nel turno del robot non può essere sospesa, rendo non visibile il bottone di sospensione della gara
 						btnSospendiGara.setVisible(false);
 					}
 					//restituisce la mano del giocatore difendente
