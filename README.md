@@ -1,32 +1,32 @@
-# Spacca Goal ⚽
+# Spacca Goal
 
-Gioco di carte a tema calcistico sviluppato in **Java** con interfaccia grafica **JavaFX**.
-Progetto del corso di Programmazione Internet, Laurea Triennale in Informatica per il Management, Università di Bologna (2023). Voto: **30/30**.
+Football-themed card game developed in **Java** with a **JavaFX** graphical interface.
+Project for the Internet Programming course, BSc in Computer Science for Management, University of Bologna (2023). Grade: **30/30**.
 
-## Come si gioca
+## How to play
 
-Due giocatori si sfidano a turni, umano contro umano oppure contro il computer.
-Il mazzo contiene tre tipi di carte:
+Two players take turns, human vs human or human vs computer.
+The deck has three types of cards (card names are in Italian):
 
-- **Attacco:** Attaccante, Bomber Vero, Rigore, Rovesciata dell'Anno, Tiro della Domenica
-- **Difesa:** Difensore, Difensore Roccia, Portiere
-- **Speciali:** Goal, Fuorigioco, VAR, Mister
+- **Attack:** Attaccante, Bomber Vero, Rigore, Rovesciata dell'Anno, Tiro della Domenica
+- **Defence:** Difensore, Difensore Roccia, Portiere
+- **Special:** Goal, Fuorigioco, VAR, Mister
 
-## Funzionalità
+## Features
 
-- **Partita singola** e **torneo a eliminazione diretta** con tabellone
-- **Avversario controllato dal computer**
-- **Salvataggio e caricamento** delle partite
-- **Classifica** dei giocatori, esportabile in PDF
-- **Invio dei risultati via email** a fine partita
-- **Modalità amministratore** per gestire giocatori, partite e tornei
+- **Single match** and **knockout tournament** with a bracket
+- **Computer-controlled opponent**
+- **Save and load** games
+- **Player leaderboard**, exportable to PDF
+- **Match results sent by email** at the end of each game
+- **Admin mode** to manage players, matches and tournaments
 
-## Come avviarlo
+## How to run it
 
-1. Importa la cartella `Progetto_GiocoDiCarte` in Eclipse (o in un altro IDE Java) con Java 16 o superiore.
-2. Configura le librerie **JavaFX**, **JavaMail** e **Apache PDFBox**.
-3. Avvia la classe `application.Main`.
+1. Import the `Progetto_GiocoDiCarte` folder into Eclipse (or another Java IDE) with Java 16 or later.
+2. Set up the **JavaFX**, **JavaMail** and **Apache PDFBox** libraries.
+3. Run the `application.Main` class.
 
-## Gruppo
+## Team
 
-Progetto realizzato in gruppo da Alessandro Campedelli e Matteo Boscherini.
+Alessandro Campedelli, Matteo Boscherini
