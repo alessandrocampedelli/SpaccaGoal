@@ -29,4 +29,4 @@ Il mazzo contiene tre tipi di carte:
 
 ## Gruppo
 
-Progetto realizzato in gruppo da Alessandro Campedelli, Matteo Boscherini e colleghi.
+Progetto realizzato in gruppo da Alessandro Campedelli e Matteo Boscherini.
